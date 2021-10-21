@@ -14,7 +14,12 @@
 </div>
 @endif
 @if(session("Delete"))
-<div class="alert alert-info w-100 text-center" role="alert">
+<div class="alert alert-warning w-100 text-center" role="alert">
   <div>{{session('Delete')}}</div>
+</div>
+@endif
+@if(session("Info"))
+<div class="alert alert-info w-100 text-center" role="alert">
+  <div>{{session('Info')}}</div>
 </div>
 @endif

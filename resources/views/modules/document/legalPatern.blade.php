@@ -5,8 +5,12 @@
   <h6>MATRIZ LEGAL</h6>
   @include('partials.alerts')
   <div class="container-fluid">
-    <div class="w-100 justify-content-center d-flex">
+    <div class="w-100 justify-content-around d-flex">
       <button class="btn btn-outline-primary btn-navbar" id="Create">{{ucwords('crear matriz legal')}}</button>
+      <form action="{{route('PDFMatriz')}}" method="post">
+        @csrf
+        <button class="btn btn-outline-danger btn-docs" id="PDF">{{ucwords('PDF matriz legal')}}</button>
+      </form>
     </div>
     <hr>
     <table id="tableDatatable" class="w-100 table table-bordered table-striped text-center" style="font-size: 0.45cm">
@@ -113,8 +117,8 @@
 @section('scripts')
 <script>
   // ?edita el registro de matriz legal seleccionado
-  $('.editLegalParent').click(() => {
-    const id = $('.editLegalParent').find('span:nth-child(2)').text();
+  $('.editLegalParent').click(function() {
+    const id = $(this).find('span:nth-child(2)').text();
     $.ajax({
       "_token": "{{csrf_token()}}",
       type: "POST",
@@ -143,8 +147,8 @@
   });
 
   // !elimina el registro seleccionado de la matriz legal
-  $('.deleteLegalParent').click(() => {
-    const id = $('.editLegalParent').find('span:nth-child(2)').text();
+  $('.deleteLegalParent').click(function() {
+    const id = $(this).find('span:nth-child(2)').text();
     $.ajax({
       "_token": "{{csrf_token()}}",
       type: "POST",

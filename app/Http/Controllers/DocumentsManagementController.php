@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Collaborator;
 use App\Models\LegalParent;
+use App\Models\Settingtechnical;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class DocumentsManagementController extends Controller
 {
@@ -76,6 +80,22 @@ class DocumentsManagementController extends Controller
     DB::statement("ALTER TABLE legal_parents AUTO_INCREMENT=1");
 
     return back()->with('Delete', 'Registro de titulo ' . strtoupper($title) . ' eliminado');
+  }
+
+  public function legalpdf(Request $request)
+  {
+    $pdfs = LegalParent::select('legal_parents.*', 'collaborators.*')
+      ->join('collaborators', 'collaborators.coId', 'legal_parents.lp_collaborator')->get();
+
+    if (!$pdfs) {
+      return back()->with('Info', "No hay registros para descargar");
+    }
+    $day = Carbon::today('America/Bogota')->locale('es')->isoFormat('D-M-Y');
+    $technical = Settingtechnical::first();
+    $pdf = App::make('dompdf.wrapper');
+    $name = "Listado Matriz Legal " . $day . ".pdf";
+    $pdf = PDF::loadview('modules.document.PDF.legalPDF', compact('technical', 'day', 'pdfs', 'name'));
+    return $pdf->download($name);
   }
 
   function analysisindex()

@@ -322,6 +322,7 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   Route::post('/managerial/document/legal-parent/save', 'DocumentsManagementController@legalsave')->name('legal.save');
   Route::patch('/managerial/document/legal-parent/update', 'DocumentsManagementController@legalupdate')->name('legal.update');
   Route::delete('/managerial/document/legal-parent/destroy', 'DocumentsManagementController@legaldestroy')->name('legal.destroy');
+  Route::post('/managerial/document/legal-parent/PDF', 'DocumentsManagementController@legalpdf')->name('PDFMatriz');
   Route::get('/managerial/document/analysis-matrix', 'DocumentsManagementController@analysisindex')->name('analysis.index');
   Route::get('/managerial/document/matrix-epp', 'DocumentsManagementController@matrixindex')->name('matriz.index');
   Route::get('/managerial/document/accountability', 'DocumentsManagementController@accountabilityindex')->name('accountability.index');
