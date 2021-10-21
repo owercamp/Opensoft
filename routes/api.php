@@ -6,6 +6,7 @@ use App\Models\BidirectionalCommunicationSystem;
 use App\Models\Commitee;
 use App\Models\Configdocumentlogistic;
 use App\Models\Configdocumentmanagerial;
+use App\Models\LegalParent;
 use App\Models\PreventiveMaintenanceReview;
 use App\Models\Procedure;
 use App\Models\TrafficRegulationsViolation;
@@ -1117,3 +1118,10 @@ Route::post("getMaintenance", function (Request $request) {
     ->join('documentslogistic', 'documentslogistic.dolId', 'configdocumentslogistic.cdlDocument_id')->get();
   return response()->json($query);
 })->name("getMaintenance");
+
+// ?consulta para edita la matriz legal
+Route::post("apiLegal", function (Request $request) {
+  $query = LegalParent::where("lp_id", $request->data)
+    ->join('collaborators', 'collaborators.coId', "lp_collaborator")->get();
+  return response()->json($query);
+})->name("apiLegal");

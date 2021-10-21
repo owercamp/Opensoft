@@ -8,3 +8,13 @@
   <div>{{session('Error')}}</div>
 </div>
 @endif
+@if(session("Update"))
+<div class="alert alert-primary w-100 text-center" role="alert">
+  <div>{{session('Update')}}</div>
+</div>
+@endif
+@if(session("Delete"))
+<div class="alert alert-info w-100 text-center" role="alert">
+  <div>{{session('Delete')}}</div>
+</div>
+@endif
