@@ -15,6 +15,7 @@ class CreateLegalParentsTable extends Migration
   {
     Schema::create('legal_parents', function (Blueprint $table) {
       $table->Increments('lp_id');
+      $table->integer('lp_fDoc')->unsigned();
       $table->string('lp_typeDoc', 80);
       $table->string('lp_Num', 30);
       $table->string('lp_year', 10);
@@ -25,6 +26,7 @@ class CreateLegalParentsTable extends Migration
       $table->string('lp_evidence', 30);
       $table->integer('lp_collaborator')->unsigned();
       $table->enum('lp_meet', ['Si', 'No']);
+      $table->foreign('lp_fDoc')->references('domId')->on('documentsmanagerial');
       $table->foreign('lp_collaborator')->references('coId')->on('collaborators');
       $table->timestamps();
     });

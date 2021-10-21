@@ -2,6 +2,17 @@
 <div class="col-lg-12 row">
   <div class="col-lg-3">
     <div class="form-group">
+      <small class="text-muted">{{ucwords('documento')}}</small>
+      <select name="mlfDoc" id="" class="form-control form-control-sm">
+        <option value="">{{ucfirst('seleccione...')}}</option>
+        @foreach($DocumentMNG as $item)
+        <option value="{{$item->domId}}">{{$item->domName}}</option>
+        @endforeach
+      </select>
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <div class="form-group">
       <small class="text-muted">{{ucwords('tipo de documento')}}</small>
       <select name="mlDoc" class="form-control form-control-sm" required>
         <option value="">{{ucfirst('seleccione...')}}</option>
@@ -32,14 +43,14 @@
       <select name="mlYear" id="" class="form-control form-control-sm" required></select>
     </div>
   </div>
+</div>
+<div class="col-lg-12 row">
   <div class="col-lg-3">
     <div class="form-group">
       <small class="text-muted">{{ucwords('titulo')}}</small>
       <input name="mltitle" type="text" class="form-control form-control-sm" maxlength="30" required>
     </div>
   </div>
-</div>
-<div class="col-lg-12 row">
   <div class="col-lg-3">
     <div class="form-group">
       <small class="text-muted">{{ucwords('articulos que aplican')}}</small>
@@ -58,14 +69,14 @@
       <input name="mlArea" type="text" class="form-control form-control-sm" maxlength="30" required>
     </div>
   </div>
+</div>
+<div class="col-lg-12 row justify-content-around">
   <div class="col-lg-3">
     <div class="form-group">
       <small class="text-muted">{{ucwords('evidencia de cumplimiento')}}</small>
       <input name="mlEvidence" type="text" class="form-control form-control-sm" maxlength="30" required>
     </div>
   </div>
-</div>
-<div class="col-lg-12 row justify-content-around">
   <div class="col-lg-3">
     <div class="form-group">
       <small class="text-muted">{{ucwords('responsable')}}</small>

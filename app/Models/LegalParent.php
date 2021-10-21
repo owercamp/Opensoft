@@ -18,4 +18,9 @@ class LegalParent extends Model
   {
     return $this->hasMany(Collaborator::class, "lp_collaborator");
   }
+
+  public function document()
+  {
+    return $this->hasMany(Documentmanagerial::class, "lp_fDoc");
+  }
 }

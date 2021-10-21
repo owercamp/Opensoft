@@ -16,17 +16,19 @@
     <table id="tableDatatable" class="w-100 table table-bordered table-striped text-center" style="font-size: 0.45cm">
       <thead>
         <tr>
-          <th>{{ucwords('documento')}}</th>
-          <th>{{ucwords('titulo')}}</th>
-          <th>{{ucwords('articulo')}}</th>
-          <th>{{ucwords('año')}}</th>
-          <th>{{ucwords('Colaborador')}}</th>
-          <th>{{ucwords('acciones')}}</th>
+          <th class="align-middle">{{ucwords('documento')}}</th>
+          <th class="align-middle">{{ucwords('tipo documento')}}</th>
+          <th class="align-middle">{{ucwords('titulo')}}</th>
+          <th class="align-middle">{{ucwords('articulo')}}</th>
+          <th class="align-middle">{{ucwords('año')}}</th>
+          <th class="align-middle">{{ucwords('Colaborador')}}</th>
+          <th class="align-middle">{{ucwords('acciones')}}</th>
         </tr>
       </thead>
       <tbody>
         @foreach($legals as $legal)
         <tr>
+          <td class="align-middle">{{$legal->domName}}</td>
           <td class="align-middle">{{$legal->lp_typeDoc}}</td>
           <td class="align-middle">{{$legal->lp_title}}</td>
           <td class="align-middle">{{$legal->lp_article}}</td>
@@ -128,6 +130,7 @@
         data: id
       },
       success(response) {
+        $('select[name=mlfDoc]').val(response[0]['lp_fDoc']);
         $('select[name=mlDoc]').val(response[0]['lp_typeDoc']);
         $('input[name=mlNum]').val(response[0]['lp_Num']);
         $('select[name=mlYear]').val(response[0]['lp_year']);
@@ -158,6 +161,7 @@
         data: id
       },
       success(response) {
+        $('select[name=mlfDoc]').val(response[0]['lp_fDoc']);
         $('select[name=mlDoc]').val(response[0]['lp_typeDoc']);
         $('input[name=mlNum]').val(response[0]['lp_Num']);
         $('select[name=mlYear]').val(response[0]['lp_year']);
@@ -171,6 +175,7 @@
         $('input[name=legalIdDelete]').val(response[0]['lp_id']);
       },
       complete() {
+        $('select[name=mlfDoc]').prop("disabled", true);
         $('select[name=mlDoc]').prop("disabled", true);
         $('input[name=mlNum]').prop("disabled", true);
         $('select[name=mlYear]').prop("disabled", true);

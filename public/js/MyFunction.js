@@ -685,7 +685,7 @@ function seeDirection($direction = '/home') {
 
 
 function loadDatatables() {
-  $('#tableDatatable').css('font-size', '0.45cm');
+  $('#tableDatatable').css('font-size', '15px');
   $('#tableDatatable').DataTable({
     language: {
       processing: "Procesamiento en curso...",

@@ -63,19 +63,21 @@
     </table>
   </header>
   <main>
-    <table class="table border border-secondary table-striped w-100 text-center">
+    <table class="table border border-secondary table-striped w-100 text-center" style="font-size: 15px;">
       <thead class="text-white" style="background-color: #B0B0B0;">
         <tr>
-          <th>{{ucwords('documento')}}</th>
-          <th>{{ucwords('titulo')}}</th>
-          <th>{{ucwords('articulo')}}</th>
-          <th>{{ucwords('año')}}</th>
-          <th>{{ucwords('Colaborador')}}</th>
+          <th class="align-middle">{{ucwords('documento')}}</th>
+          <th class="align-middle">{{ucwords('tipo documento')}}</th>
+          <th class="align-middle">{{ucwords('titulo')}}</th>
+          <th class="align-middle">{{ucwords('articulo')}}</th>
+          <th class="align-middle">{{ucwords('año')}}</th>
+          <th class="align-middle">{{ucwords('Colaborador')}}</th>
         </tr>
       </thead>
       <tbody>
         @foreach($pdfs as $item)
         <tr>
+          <td class="align-middle">{{$item->domName}}</td>
           <td class="align-middle">{{$item->lp_typeDoc}}</td>
           <td class="align-middle">{{$item->lp_title}}</td>
           <td class="align-middle">{{$item->lp_article}}</td>
