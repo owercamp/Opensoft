@@ -195,7 +195,8 @@
   </div>
 
   <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
-  <script src="{{asset('js/MyFunction.js')}}"></script>
+  <script src="{{ asset('js/jQuery.Mask.js') }}"></script>
+  <script src="{{ asset('js/MyFunction.js') }}"></script>
   <script src="{{ asset('fontawesome/js/all.js') }}"></script>
 
   <!-- Bootstrap 4 -->

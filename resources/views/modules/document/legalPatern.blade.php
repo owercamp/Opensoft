@@ -13,7 +13,7 @@
       </form>
     </div>
     <hr>
-    <table id="tableDatatable" class="w-100 table table-bordered table-striped text-center" style="font-size: 0.45cm">
+    <table id="tableDatatable" class="w-100 table table-striped text-center">
       <thead>
         <tr>
           <th class="align-middle">{{ucwords('documento')}}</th>
@@ -47,11 +47,11 @@
 
 <!-- formularo de creación -->
 <div class="fade modal" id="createLegalParent">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="text-muted">{{ucwords('creación matriz legal')}}</h5>
-        <button class="btn-outline-dark btn-sm mr-1" data-dismiss="modal">&because;</button>
+        <button class="btn-outline-dark btn-sm mr-1 dismiss" data-dismiss="modal">&because;</button>
       </div>
       <div class="modal-body">
         <form action="{{route('legal.save')}}" method="post">
@@ -68,11 +68,11 @@
 
 <!-- formulario de edición -->
 <div class="fade modal" id="editLegalParent">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="text-muted">{{ucwords('edición matriz legal')}}</h5>
-        <button class="btn-outline-dark btn-sm mr-1" data-dismiss="modal">&bemptyv;</button>
+        <button class="btn-outline-dark btn-sm mr-1 dismiss" data-dismiss="modal">&bemptyv;</button>
       </div>
       <div class="modal-body">
         <form action="{{route('legal.update')}}" method="post">
@@ -82,7 +82,7 @@
           <hr>
           <div class="d-flex justify-content-around w-100">
             <button class="btn btn-success">{{ucwords('actualizar')}}</button>
-            <button type="button" class="btn btn-dark" data-dismiss="modal">{{ucwords('cancelar')}}</button>
+            <button type="button" class="btn btn-dark dismiss" data-dismiss="modal">{{ucwords('cancelar')}}</button>
           </div>
         </form>
       </div>
@@ -92,11 +92,11 @@
 
 <!-- formulario de eliminación -->
 <div class="fade modal" id="deleteLegalParent">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="text-muted">{{ucwords('eliminación matriz legal')}}</h5>
-        <button class="btn-outline-dark btn-sm mr-1" data-dismiss="modal">&bemptyv;</button>
+        <button class="btn-outline-dark btn-sm mr-1 dismiss" data-dismiss="modal">&bemptyv;</button>
       </div>
       <div class="modal-body">
         <form action="{{route('legal.destroy')}}" method="post">
@@ -106,7 +106,7 @@
           <hr>
           <div class="d-flex justify-content-around w-100">
             <button class="btn btn-danger">{{ucwords('eliminar')}}</button>
-            <button type="button" class="btn btn-dark" data-dismiss="modal">{{ucwords('cancelar')}}</button>
+            <button type="button" class="btn btn-dark dismiss" data-dismiss="modal">{{ucwords('cancelar')}}</button>
           </div>
         </form>
       </div>
@@ -144,6 +144,17 @@
         $('input[name=legalIdUpdate]').val(response[0]['lp_id']);
       },
       complete() {
+        $('select[name=mlfDoc]').prop("disabled", false);
+        $('select[name=mlDoc]').prop("disabled", false);
+        $('input[name=mlNum]').prop("disabled", false);
+        $('select[name=mlYear]').prop("disabled", false);
+        $('input[name=mltitle]').prop("disabled", false);
+        $('input[name=mlArticle]').prop("disabled", false);
+        $('input[name=mlDescription]').prop("disabled", false);
+        $('input[name=mlArea]').prop("disabled", false);
+        $('input[name=mlEvidence]').prop("disabled", false);
+        $('select[name=mlCollaborator]').prop("disabled", false);
+        $('select[name=mlMeet]').prop("disabled", false);
         $('#editLegalParent').modal();
       }
     })
@@ -193,8 +204,33 @@
 
   // *muestra el modal del creación de matriz legal
   $('#Create').click(() => {
+    $('select[name=mlfDoc]').prop("disabled", false);
+    $('select[name=mlDoc]').prop("disabled", false);
+    $('input[name=mlNum]').prop("disabled", false);
+    $('select[name=mlYear]').prop("disabled", false);
+    $('input[name=mltitle]').prop("disabled", false);
+    $('input[name=mlArticle]').prop("disabled", false);
+    $('input[name=mlDescription]').prop("disabled", false);
+    $('input[name=mlArea]').prop("disabled", false);
+    $('input[name=mlEvidence]').prop("disabled", false);
+    $('select[name=mlCollaborator]').prop("disabled", false);
+    $('select[name=mlMeet]').prop("disabled", false);
     $("#createLegalParent").modal();
   });
+
+  $(".dismiss").click(() => {
+    $('select[name=mlfDoc]').val("");
+    $('select[name=mlDoc]').val("");
+    $('input[name=mlNum]').val("");
+    $('select[name=mlYear]').val("");
+    $('input[name=mltitle]').val("");
+    $('input[name=mlArticle]').val("");
+    $('input[name=mlDescription]').val("");
+    $('input[name=mlArea]').val("");
+    $('input[name=mlEvidence]').val("");
+    $('select[name=mlCollaborator]').val("");
+    $('select[name=mlMeet]').val("");
+  })
 
   // *realiza la carga de los años desde 1960 hasta el año actual
   const year = () => {

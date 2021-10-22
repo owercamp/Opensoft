@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnalysisMatrix;
 use App\Models\Collaborator;
 use App\Models\Documentmanagerial;
 use App\Models\LegalParent;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Arr;
 
 class DocumentsManagementController extends Controller
 {
@@ -111,7 +113,48 @@ class DocumentsManagementController extends Controller
 
   function analysisindex()
   {
-    return view('modules.document.analysisMatrix');
+    $analysis = AnalysisMatrix::select('analysis_matrices.*', 'documentsmanagerial.*')
+      ->join('documentsmanagerial', 'documentsmanagerial.domId', 'analysis_matrices.amDoc')->get();
+    $DocumentMNG = Documentmanagerial::all();
+    return view('modules.document.analysisMatrix', compact('DocumentMNG', 'analysis'));
+  }
+
+  function analysissave(Request $request)
+  {
+    AnalysisMatrix::create($request->all());
+    return back()->with('Success', 'Registro de analisis de matriz creado Correctamente');
+  }
+
+  function analysisupdate(Request $request)
+  {
+    $search = AnalysisMatrix::where('am_id', $request->analysisIdUpdate)
+      ->join('documentsmanagerial', 'documentsmanagerial.domId', 'analysis_matrices.amDoc')->get();
+
+    if (!$search) {
+      return back()->with("Error", "Registro no Encontrado");
+    }
+
+    $data = Arr::except($request->all(), ['_method', '_token', 'analysisIdUpdate']);
+
+    $datas = AnalysisMatrix::where('am_id', $request->analysisIdUpdate)
+      ->update($data);
+
+    return back()->with("Update", "Registro de Documento " . strtoupper($search[0]['domName']) . " Actualizado ");
+  }
+
+  function analysisdestroy(Request $request)
+  {
+    $search = AnalysisMatrix::where('am_id', $request->analysisIdDelete)
+      ->join('documentsmanagerial', 'documentsmanagerial.domId', 'analysis_matrices.amDoc')->get();
+
+    if (!$search) {
+      return back()->with("Error", "Registro no Encontrado");
+    }
+
+    AnalysisMatrix::destroy($request->analysisIdDelete);
+    DB::statement("ALTER TABLE analysis_matrices AUTO_INCREMENT=1");
+
+    return back()->with("Delete", "Registro de Documento " . strtoupper($search[0]['domName']) . " Eliminado ");
   }
 
   function matrixindex()

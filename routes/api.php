@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\AccidentControlAndAnalysis;
+use App\Models\AnalysisMatrix;
 use App\Models\AutoMotiveFleet;
 use App\Models\BidirectionalCommunicationSystem;
 use App\Models\Commitee;
@@ -1119,9 +1120,16 @@ Route::post("getMaintenance", function (Request $request) {
   return response()->json($query);
 })->name("getMaintenance");
 
-// ?consulta para edita la matriz legal
+// ?consulta para edita y eliminar la matriz legal
 Route::post("apiLegal", function (Request $request) {
   $query = LegalParent::where("lp_id", $request->data)
     ->join('collaborators', 'collaborators.coId', "lp_collaborator")->get();
   return response()->json($query);
 })->name("apiLegal");
+
+// ?consulta para editar y eliminar analisis de matriz
+Route::post('apiAnalysis', function (Request $request) {
+  $query = AnalysisMatrix::where('am_id', $request->data)
+    ->join('documentsmanagerial', 'documentsmanagerial.domId', 'analysis_matrices.amDoc')->get();
+  return response()->json($query);
+})->name('apiAnalysis');
