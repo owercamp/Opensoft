@@ -6,7 +6,11 @@
   @include('partials.alerts')
   <div class="container-fluid">
     <div class="w-100 justify-content-around d-flex">
-      <button class="btn btn-outline-primary btn-navbar" id="Create">{{ucwords('crear analisis')}}</button>
+      <button class="btn btn-outline-primary btn-navbar" id="Create">{{ucwords('crear analisis de matriz')}}</button>
+      <form action="{{route('PDFAnalisis')}}" method="post">
+        @csrf
+        <button class="btn btn-outline-danger btn-docs" id="PDF">{{ucwords('PDF analisis de matriz')}}</button>
+      </form>
     </div>
     <hr>
     <table id="tableDatatable" class="w-100 table table-striped text-center">

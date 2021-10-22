@@ -157,6 +157,23 @@ class DocumentsManagementController extends Controller
     return back()->with("Delete", "Registro de Documento " . strtoupper($search[0]['domName']) . " Eliminado ");
   }
 
+  function analysispdf(Request $request)
+  {
+    $pdfs = AnalysisMatrix::select('analysis_matrices.*', 'documentsmanagerial.*')
+      ->join('documentsmanagerial', 'documentsmanagerial.domId', 'analysis_matrices.amDoc')->get();
+
+    if (!$pdfs) {
+      return back()->with('Info', "No hay registros para descargar");
+    }
+
+    $day = Carbon::today('America/Bogota')->locale('es')->isoFormat('D-M-Y');
+    $technical = Settingtechnical::first();
+    $pdf = App::make('dompdf.wrapper');
+    $name = "Analisis de Matriz " . $day . ".pdf";
+    $pdf = PDF::loadview('modules.document.PDF.matrixPDF', compact('technical', 'day', 'pdfs', 'name'));
+    return $pdf->download($name);
+  }
+
   function matrixindex()
   {
     return view('modules.document.matrizEPP');

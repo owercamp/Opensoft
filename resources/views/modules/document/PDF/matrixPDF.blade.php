@@ -50,7 +50,7 @@
       </tr>
       <tr>
         <td class="border" rowspan="2">
-          {{ucwords('listado matrices legales')}}
+          {{ucwords('listado analisis de matrices')}}
         </td>
         <td class="border">Fecha</td>
         <td class="border">{{$day}}</td>
@@ -67,22 +67,20 @@
       <thead class="text-white" style="background-color: #B0B0B0;">
         <tr>
           <th class="align-middle">{{ucwords('documento')}}</th>
-          <th class="align-middle">{{ucwords('tipo documento')}}</th>
-          <th class="align-middle">{{ucwords('titulo')}}</th>
-          <th class="align-middle">{{ucwords('articulo')}}</th>
-          <th class="align-middle">{{ucwords('año')}}</th>
-          <th class="align-middle">{{ucwords('Colaborador')}}</th>
+          <th class="align-middle">{{ucwords('actividad')}}</th>
+          <th class="align-middle">{{ucwords('riesgo')}}</th>
+          <th class="align-middle">{{ucwords('tipo de riesgo')}}</th>
+          <th class="align-middle">{{ucwords('grado de riesgo')}}</th>
         </tr>
       </thead>
       <tbody>
         @foreach($pdfs as $item)
         <tr>
           <td class="align-middle">{{$item->domName}}</td>
-          <td class="align-middle">{{$item->lp_typeDoc}}</td>
-          <td class="align-middle">{{$item->lp_title}}</td>
-          <td class="align-middle">{{$item->lp_article}}</td>
-          <td class="align-middle">{{$item->lp_year}}</td>
-          <td class="align-middle">{{ucwords($item->coNames)}}</td>
+          <td class="align-middle">{{$item->amActivity}}</td>
+          <td class="align-middle">{{$item->amRick}}</td>
+          <td class="align-middle">{{$item->amTypeRick}}</td>
+          <td class="align-middle">{{$item->amGradeRick}}</td>
         </tr>
         @endforeach
       </tbody>
