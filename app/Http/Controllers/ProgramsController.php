@@ -85,7 +85,6 @@ class ProgramsController extends Controller
     $all = AutoMotiveFleet::where('amf_id', $request->pdf)
       ->join('configdocumentslogistic', 'configdocumentslogistic.cdlId', 'auto_motive_fleets.amf_config')
       ->join('documentslogistic', 'documentslogistic.dolId', 'configdocumentslogistic.cdlDocument_id')->get();
-    $nameProjects = config('app.name');
     $content = $all[0]['amf_Content'];
 
     $pdf = App::make('dompdf.wrapper');
@@ -155,16 +154,17 @@ class ProgramsController extends Controller
 
   function controlPDF(Request $request)
   {
+    $day = Carbon::today('America/Bogota')->locale('es')->isoFormat('D-M-Y');
+    $technical = Settingtechnical::first();
     $all = TrafficRegulationsViolation::where('trv_id', $request->pdf)
       ->join('configdocumentslogistic', 'configdocumentslogistic.cdlId', 'traffic_regulations_violations.trv_config')
       ->join('documentslogistic', 'documentslogistic.dolId', 'configdocumentslogistic.cdlDocument_id')->get();
-    $nameProjects = config('app.name');
     $content = $all[0]['trv_content'];
 
     $pdf = App::make('dompdf.wrapper');
     $name = $all[0]['dolName'] . ' - ' . $all[0]['dolCode'] . '.pdf';
-    $pdf = PDF::loadview("modules.programs.partials.programsPDF", compact("nameProjects", "content", "all"));
-    return $pdf->stream();
+    $pdf = PDF::loadview("modules.programs.partials.programsPDF", compact("content", "all", "day", "technical", "name"));
+    return $pdf->download($name);
   }
 
   /* ===============================================================================================
