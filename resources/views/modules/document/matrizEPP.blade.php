@@ -7,7 +7,7 @@
   <div class="contaider fluid">
     <div class="w-100 justify-content-around d-flex">
       <button class="btn btn-outline-primary btn-navbar" id="Create">{{ucwords('crear analisis de matriz')}}</button>
-      <form action="#" method="post">
+      <form action="{{route('PDFepp')}}" method="post">
         @csrf
         <button class="btn btn-outline-danger btn-docs" id="PDF">{{ucwords('PDF analisis de matriz')}}</button>
       </form>

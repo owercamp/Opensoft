@@ -11,7 +11,6 @@ class DatabaseSeeder extends Seeder
    */
   public function run()
   {
-
     $this->troncateTable([
       "users",
       "permissions",
@@ -25,7 +24,6 @@ class DatabaseSeeder extends Seeder
 
   function troncateTable(array $tables)
   {
-
     DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
 
     foreach ($tables as $table) {

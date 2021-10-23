@@ -247,6 +247,23 @@ class DocumentsManagementController extends Controller
     return back()->with("Error", "registro no Encontrado");
   }
 
+  function matrixpdf()
+  {
+    $pdfs = MatrixEPP::select('matrix_e_p_p_s.*', 'documentsmanagerial.*')
+      ->join('documentsmanagerial', 'documentsmanagerial.domId', 'matrix_e_p_p_s.meDoc')->get();
+
+    if (!$pdfs) {
+      return back()->with('Info', "No hay registros para descargar");
+    }
+
+    $day = Carbon::today('America/Bogota')->locale('es')->isoFormat('D-M-Y');
+    $technical = Settingtechnical::first();
+    $pdf = App::make('dompdf.wrapper');
+    $name = "Matriz EPP " . $day . ".pdf";
+    $pdf = PDF::loadview('modules.document.PDF.eppPDF', compact('technical', 'day', 'pdfs', 'name'));
+    return $pdf->download($name);
+  }
+
   function accountabilityindex()
   {
     return view('modules.document.accountability');

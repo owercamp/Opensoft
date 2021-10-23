@@ -332,6 +332,7 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   Route::post('/managerial/document/matrix-epp/save', 'DocumentsManagementController@matrixsave')->name('matriz.save');
   Route::patch('/managerial/document/matrix-epp/update', 'DocumentsManagementController@matrixupdate')->name('matriz.update');
   Route::delete('/managerial/document/matrix-epp/delete', 'DocumentsManagementController@matrixdelete')->name('matriz.delete');
+  Route::post('/managerial/document/matrix-epp/PDF', 'DocumentsManagementController@matrixpdf')->name('PDFepp');
   Route::get('/managerial/document/accountability', 'DocumentsManagementController@accountabilityindex')->name('accountability.index');
   Route::get('/managerial/document/programs', 'DocumentsManagementController@programsindex')->name('program.index');
 });

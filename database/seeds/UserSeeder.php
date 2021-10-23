@@ -24,14 +24,6 @@ class UserSeeder extends Seeder
       "password" => bcrypt('LoreCamiJuli1')
     ])->assignRole('ADMINISTRADOR SISTEMA');
 
-    // User::create([
-    //   "id" => "1024537577",
-    //   "firstname" => "BRAYAN JULIAN",
-    //   "lastname" => "RODRIGUEZ MORENO",
-    //   "email" => "brayanjulianrodriguezmoreno23@gmail.com",
-    //   "password" => bcrypt('bjrodriguemo')
-    // ])->assignRole('ADMINISTRADOR SISTEMA');
-
     User::create([
       "id" => "80503717",
       "firstname" => "JAVIER",
