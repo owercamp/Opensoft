@@ -5,167 +5,85 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{$name}}</title>
+  <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}">
   <style>
     @page {
-      margin: 100px 25px;
+      margin: 180px 70px 50px 70px;
     }
 
-    header {
+    #header {
       position: fixed;
-      top: -60px;
       left: 0px;
+      top: -150px;
       right: 0px;
-      height: 10%;
-
-      background-color: rgba(0, 123, 255, 0.4);
-      color: white;
-      text-align: center;
-      line-height: 50px;
-      border-radius: 7px;
-      -webkit-border-radius: 7px;
-      -moz-border-radius: 7px;
-      -ms-border-radius: 7px;
-      -o-border-radius: 7px;
-      font-size: 1.8rem;
-    }
-
-    .one {
-      width: 120px;
-      height: 120px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 320%;
-      -webkit-border-radius: 320%;
-      -moz-border-radius: 320%;
-      -ms-border-radius: 320%;
-      -o-border-radius: 320%;
-      position: relative;
-      margin-left: 33%;
-      margin-top: -6%;
-    }
-
-    .two {
-      width: 150px;
       height: 150px;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 500%;
-      -webkit-border-radius: 500%;
-      -moz-border-radius: 500%;
-      -ms-border-radius: 500%;
-      -o-border-radius: 500%;
-      position: relative;
-      margin-left: 90%;
-      margin-top: -17%;
-    }
-
-    .three {
-      width: 210px;
-      height: 210px;
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 620%;
-      -webkit-border-radius: 620%;
-      -moz-border-radius: 620%;
-      -ms-border-radius: 620%;
-      -o-border-radius: 620%;
-      position: relative;
-      margin-left: 55%;
-      margin-top: -15%;
-    }
-
-    footer {
-      position: fixed;
-      bottom: -60px;
-      left: 0px;
-      right: 0px;
-      height: 50px;
-
-      background-color: rgba(0, 123, 255, 0.4);
-      color: white;
+      background-color: transparent;
       text-align: center;
-      line-height: 35px;
-      border-radius: 7px;
-      -webkit-border-radius: 7px;
-      -moz-border-radius: 7px;
-      -ms-border-radius: 7px;
-      -o-border-radius: 7px;
-    }
-
-    section {
-      height: 50px !important;
-    }
-
-    .px-1 {
-      padding-right: .25rem !important;
-      padding-left: .25rem !important;
-    }
-
-    .py-4 {
-      padding-top: 1.5rem !important;
-      padding-bottom: 1.5rem !important;
-    }
-
-    .px-2 {
-      padding-right: .5rem !important;
-      padding-left: .5rem !important;
-    }
-
-    .px-4 {
-      padding-right: 1.5rem !important;
-      padding-left: 1.5rem !important;
-    }
-
-    .border-dark {
-      border-color: #343a40 !important;
-    }
-
-    .border {
-      border: 1px solid #dee2e6 !important;
-    }
-
-    .my-1 {
-      margin-top: .25rem !important;
-      margin-bottom: .25rem !important;
-    }
-
-    .my-n1 {
-      margin-top: 0;
-      margin-bottom: 0;
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <h3 style="margin-top: 20px;"><img src="{{ asset('img/shortlogo.gif') }}" alt="{{$nameProjects}}"> {{$nameProjects}}</h3>
-    <div class="one"></div>
-    <div class="two"></div>
-    <div class="three"></div>
+  <header id="header">
+    <table class="border" width="100%" style="text-align: center;">
+      <tr>
+        <td class="border" rowspan="4" style="width: 20%; padding: 2px; align-items: center; vertical-align: middle;">
+          <div style="align-items: center; display: flex; flex-flow: column; align-items: center; justify-content: center;">
+            @if(asset('storage/infoCompany/technical/company/'.$technical->teLogocompany))
+            <img style="width: 70px; height: auto;" src="{{ asset('storage/infoCompany/technical/company/'.$technical->teLogocompany) }}">
+            @else
+            {{ __('LOGO') }}
+            @endif
+          </div>
+        </td>
+        <td class="border" rowspan="2" style="width: 40%;">
+          SISTEMA DE GESTION DE CALIDAD Y CONTROL INTERNO
+        </td>
+        <td class="border">Código</td>
+        <td class="border" style="font-size: 0.89rem;">{{$allPDF[0]['domCode']}}</td>
+      </tr>
+      <tr>
+        <td class="border">Versión</td>
+        <td class="border">{{$allPDF[0]['domVersion']}}</td>
+      </tr>
+      <tr>
+        <td class="border" rowspan="2">
+          {{ucwords('acta de comite')}}
+        </td>
+        <td class="border">Fecha</td>
+        <td class="border">{{$day}}</td>
+      </tr>
+      <tr>
+        <td class="border">Página</td>
+        <td class="border">
+        </td>
+      </tr>
+    </table>
   </header>
-  <footer>{{$nameProjects}} - Copyright &copy; {{date('Y')}}</footer>
-  <div style="margin-top: 3.5rem; text-align: right; position: absolute; right: 1.5rem;" class="px-4">
-    <div class="border border-dark" style="max-width:200px;">
-      <small class="my-n1">CODIGO DOCUMENTO</small>
-      <p class="my-n1" style="margin-right: .25rem;">{{$allPDF[0]['domCode']}}</p>
+  <main>
+    <div class="w-100">
+      <p class="px-3 py-1">{{$allPDF[0]['comtext']}}</p>
     </div>
-  </div>
-  <div style="margin-top: 9rem; position: absolute; left: 1.5rem;" class="px-4">
-    <small class="my-n1">Versión Documento</small>
-    <p class="my-n1">{{$allPDF[0]['domVersion']}}</p>
-  </div>
-  <div class="py-4" style="margin: 0rem 2rem; margin-top: 14rem;">
-    <p>{{$allPDF[0]['comtext']}}</p>
-  </div>
-  <section style="width: 100%;">
-    <div class="px-4" style="position: relative; width: 25%; height: 30%;">
+    <table class="w-25">
       @for ($i = 0; $i < count($matriz[1]); $i++) <img class="my-1 border border-dark" src="{{asset('storage/collaboratorsFirms/'.$matriz[0][$i])}}" alt="{{ucwords($matriz[1][$i])}}" height="60rem" width="100rem">
         <p class="my-n1" style="width: 100rem;">{{ucwords($matriz[1][$i])}}</p>
         <p class="my-n1" style="width: 100rem;">{{ucwords($matriz[2][$i])}}</p>
         <p class="my-n1" style="width: 100rem;">{{ucwords($matriz[3][$i])}}</p>
         <p class="my-n1" style="width: 100rem;">{{ucwords($matriz[4][$i])}}</p>
         @endfor
-    </div>
-  </section>
-  <!-- <section class="px-4">
-  </section> -->
+    </table>
+  </main>
+  <script type="text/php">
+    if ( isset($pdf) ) {
+            $pdf->page_script('
+                $font = $fontMetrics->get_font("Arial, Helvetica, sans-serif", "normal");
+                $pdf->text(480, 90, "$PAGE_NUM de $PAGE_COUNT", $font, 10);
+            ');
+        }
+	</script>
+  <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
+  <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 </body>
 
 </html>

@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Collaborator;
 use App\Models\Commitee;
 use App\Models\Configdocumentmanagerial;
+use App\Models\Settingtechnical;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
@@ -101,13 +103,15 @@ class CommiteeController extends Controller
     $firmPosts = [];
     $firmFirms = [];
     $matriz = [];
+    $day = Carbon::today('America/Bogota')->locale('es')->isoFormat('D-M-Y');
+    $technical = Settingtechnical::first();
     $allPDF = Commitee::where("comid", $request->idPDF)
       ->join('configdocumentsmanagerial', 'configdocumentsmanagerial.cdmId', 'commitees.comconf')
       ->join('documentsmanagerial', 'documentsmanagerial.domId', 'configdocumentsmanagerial.cdmDocument_id')->get();
+
     $pdf = App::make("dompdf.wrapper");
     $datafirms = mb_split(",", $allPDF[0]["comfir"]);
 
-    // dd($datafirms);
     foreach ($datafirms as $name) {
       $firmName = explode('-', $name);
       array_push($firmNames, $firmName[0]);
@@ -134,11 +138,10 @@ class CommiteeController extends Controller
     array_push($matriz, $firmPosts);
     array_push($matriz, $firmFirms);
 
-    $nameProjects = config('app.name');
-    $name = "Actas de Comite.pdf";
+    $name = "Actas de Comite " . ucwords($allPDF[0]['domName']) . ".pdf";
     $pdf = App::make('dompdf.wrapper');
-    $pdf = PDF::loadview("modules.commitee.pdf.commiteePDF", compact("nameProjects", "allPDF", "matriz"));
-    return $pdf->stream();
+    $pdf = PDF::loadview("modules.commitee.pdf.commiteePDF", compact("allPDF", "matriz", 'day', 'technical', "name"));
+    return $pdf->download($name);
   }
 
   function commiteesave(Request $request)
