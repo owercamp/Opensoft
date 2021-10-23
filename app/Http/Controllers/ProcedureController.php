@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Configdocumentmanagerial;
 use App\Models\Procedure;
+use App\Models\Settingtechnical;
 use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -95,16 +97,15 @@ class ProcedureController extends Controller
 
   function pdfimplementation(Request $request)
   {
-    $all = Procedure::where("pro_id", $request->idPDF)
+    $day = Carbon::today('America/Bogota')->locale('es')->isoFormat('D-M-Y');
+    $technical = Settingtechnical::first();
+    $allPDF = Procedure::where("pro_id", $request->idPDF)
       ->join("configdocumentsmanagerial", "configdocumentsmanagerial.cdmId", "procedures.pro_doc")
       ->join("documentsmanagerial", "documentsmanagerial.domId", "configdocumentsmanagerial.cdmDocument_id")->get();
 
-    // return $all;
-
-    $nameProjects = config('app.name');
     $pdf = App::make('dompdf.wrapper');
-    $name = "Implementación de proceso.pdf";
-    $pdf = PDF::loadview("modules.procedure.pdf.procedurePDF", compact("nameProjects", "all"));
-    return $pdf->stream();
+    $name = "Implementación de proceso " . ucwords($allPDF[0]['domName']) . ".pdf";
+    $pdf = PDF::loadview("modules.procedure.pdf.procedurePDF", compact("allPDF", "day", "technical", "name"));
+    return $pdf->download($name);
   }
 }
