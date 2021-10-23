@@ -7,6 +7,7 @@ use App\Models\AutoMotiveFleet;
 use App\Models\BidirectionalCommunicationSystem;
 use App\Models\Configdocumentlogistic;
 use App\Models\PreventiveMaintenanceReview;
+use App\Models\Settingtechnical;
 use App\Models\TrafficRegulationsViolation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,7 @@ use App\Models\User;
 use App\Models\UserServiceProcedures;
 use Illuminate\Support\Facades\App;
 use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
 
 class ProgramsController extends Controller
 {
@@ -78,6 +80,8 @@ class ProgramsController extends Controller
 
   function replacementPDF(Request $request)
   {
+    $day = Carbon::today('America/Bogota')->locale('es')->isoFormat('D-M-Y');
+    $technical = Settingtechnical::first();
     $all = AutoMotiveFleet::where('amf_id', $request->pdf)
       ->join('configdocumentslogistic', 'configdocumentslogistic.cdlId', 'auto_motive_fleets.amf_config')
       ->join('documentslogistic', 'documentslogistic.dolId', 'configdocumentslogistic.cdlDocument_id')->get();
@@ -86,8 +90,8 @@ class ProgramsController extends Controller
 
     $pdf = App::make('dompdf.wrapper');
     $name = $all[0]['dolName'] . ' - ' . $all[0]['dolCode'] . '.pdf';
-    $pdf = PDF::loadview("modules.programs.partials.programsPDF", compact("nameProjects", "content", "all"));
-    return $pdf->stream();
+    $pdf = PDF::loadview("modules.programs.partials.programsPDF", compact("content", "all", "day", "technical", "name"));
+    return $pdf->download($name);
   }
 
   /* ===============================================================================================
