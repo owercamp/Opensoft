@@ -6,6 +6,7 @@ use App\Models\AnalysisMatrix;
 use App\Models\Collaborator;
 use App\Models\Documentmanagerial;
 use App\Models\LegalParent;
+use App\Models\MatrixEPP;
 use App\Models\Settingtechnical;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentsManagementController extends Controller
 {
@@ -136,7 +138,7 @@ class DocumentsManagementController extends Controller
 
     $data = Arr::except($request->all(), ['_method', '_token', 'analysisIdUpdate']);
 
-    $datas = AnalysisMatrix::where('am_id', $request->analysisIdUpdate)
+    AnalysisMatrix::where('am_id', $request->analysisIdUpdate)
       ->update($data);
 
     return back()->with("Update", "Registro de Documento " . strtoupper($search[0]['domName']) . " Actualizado ");
@@ -176,7 +178,73 @@ class DocumentsManagementController extends Controller
 
   function matrixindex()
   {
-    return view('modules.document.matrizEPP');
+    $DocumentMNG = Documentmanagerial::all();
+    $epps = MatrixEPP::select('matrix_e_p_p_s.*', 'documentsmanagerial.*')
+      ->join('documentsmanagerial', 'documentsmanagerial.domId', 'matrix_e_p_p_s.meDoc')->get();
+    return view('modules.document.matrizEPP', compact('DocumentMNG', "epps"));
+  }
+
+  function matrixsave(Request $request)
+  {
+    if ($request->hasfile('meFil')) {
+      $file = $request->file('meFil');
+      $nameFile = $file->getClientOriginalName();
+      $name = str_replace(" ", "", $nameFile);
+      Storage::disk('opensoft')->putFileAs(DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "MatrixEPP" . DIRECTORY_SEPARATOR, $request->file('meFil'), $name);
+    }
+
+    MatrixEPP::create([
+      "meDoc" => $request->meDoc,
+      "meEPP" => $request->meEPP,
+      "meDes" => $request->meDes,
+      "meNor" => $request->meNor,
+      "meObs" => $request->meObs,
+      "meFil" => $name
+    ]);
+    return back()->with('Success', "Creación de matriz del EPP " . strtoupper($request->meEPP) . " fue exitoso");
+  }
+
+  function matrixupdate(Request $request)
+  {
+    $search = MatrixEPP::where('me_id', $request->matrixIdUpdate)
+      ->join('documentsmanagerial', 'documentsmanagerial.domId', 'matrix_e_p_p_s.meDoc')->get();
+
+    if ($search) {
+      if ($request->hasfile('meFil')) {
+        Storage::disk('opensoft')->delete(DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "MatrixEPP" . DIRECTORY_SEPARATOR . $search[0]['meFil']);
+        $file = $request->file('meFil');
+        $nameFile = $file->getClientOriginalName();
+        $name = str_replace(" ", "", $nameFile);
+        Storage::disk('opensoft')->putFileAs(DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "MatrixEPP" . DIRECTORY_SEPARATOR, $request->file('meFil'), $name);
+      }
+
+      MatrixEPP::where('me_id', $request->matrixIdUpdate)
+        ->update([
+          "meDoc" => $request->meDoc,
+          "meEPP" => $request->meEPP,
+          "meDes" => $request->meDes,
+          "meNor" => $request->meNor,
+          "meObs" => $request->meObs,
+          "meFil" => $name
+        ]);
+      return back()->with("Update", "Matriz de EPP " . strtoupper($search[0]['meEPP']) . " y Documento " . strtoupper($search[0]['domName']) . " actualizado");
+    }
+    return back()->with("Error", "registro no Encontrado");
+  }
+
+  function matrixdelete(Request $request)
+  {
+    $search = MatrixEPP::where('me_id', $request->matrixIdDelete)
+      ->join('documentsmanagerial', 'documentsmanagerial.domId', 'matrix_e_p_p_s.meDoc')->get();
+
+    if ($search) {
+      Storage::disk('opensoft')->delete(DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "MatrixEPP" . DIRECTORY_SEPARATOR . $search[0]['meFil']);
+
+      MatrixEPP::destroy($request->matrixIdDelete);
+      DB::statement("ALTER TABLE matrix_e_p_p_s AUTO_INCREMENT=1");
+      return back()->with("Delete", "Registro del elemento de protección " . strtoupper($search[0]['meEPP']) . " eliminado satisfactoriamente");
+    }
+    return back()->with("Error", "registro no Encontrado");
   }
 
   function accountabilityindex()

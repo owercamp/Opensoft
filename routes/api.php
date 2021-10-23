@@ -8,6 +8,7 @@ use App\Models\Commitee;
 use App\Models\Configdocumentlogistic;
 use App\Models\Configdocumentmanagerial;
 use App\Models\LegalParent;
+use App\Models\MatrixEPP;
 use App\Models\PreventiveMaintenanceReview;
 use App\Models\Procedure;
 use App\Models\TrafficRegulationsViolation;
@@ -1133,3 +1134,11 @@ Route::post('apiAnalysis', function (Request $request) {
     ->join('documentsmanagerial', 'documentsmanagerial.domId', 'analysis_matrices.amDoc')->get();
   return response()->json($query);
 })->name('apiAnalysis');
+
+// ?consulta para editar y eliminar matriz EPP
+Route::post("apiMatrix", function (Request $request) {
+  $query = MatrixEPP::where('me_id', $request->id)
+    ->join('documentsmanagerial', 'documentsmanagerial.domId', 'matrix_e_p_p_s.meDoc')
+    ->get();
+  return response()->json($query);
+})->name("apiMatrix");
