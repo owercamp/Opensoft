@@ -228,16 +228,17 @@ class ProgramsController extends Controller
 
   function reportPDF(Request $request)
   {
+    $day = Carbon::today('America/Bogota')->locale('es')->isoFormat('D-M-Y');
+    $technical = Settingtechnical::first();
     $all = AccidentControlAndAnalysis::where('aca_id', $request->pdf)
       ->join('configdocumentslogistic', 'configdocumentslogistic.cdlId', 'accident_control_and_analyses.aca_config')
       ->join('documentslogistic', 'documentslogistic.dolId', 'configdocumentslogistic.cdlDocument_id')->get();
-    $nameProjects = config('app.name');
     $content = $all[0]['aca_content'];
 
     $pdf = App::make('dompdf.wrapper');
     $name = $all[0]['dolName'] . ' - ' . $all[0]['dolCode'] . '.pdf';
-    $pdf = PDF::loadview("modules.programs.partials.programsPDF", compact("nameProjects", "content", "all"));
-    return $pdf->stream();
+    $pdf = PDF::loadview("modules.programs.partials.programsPDF", compact("content", "all", "day", "technical", "name"));
+    return $pdf->download($name);
   }
 
   /* ===============================================================================================
@@ -301,16 +302,17 @@ class ProgramsController extends Controller
 
   function proceduresPDF(Request $request)
   {
+    $day = Carbon::today('America/Bogota')->locale('es')->isoFormat('D-M-Y');
+    $technical = Settingtechnical::first();
     $all = UserServiceProcedures::where('usp_id', $request->pdf)
       ->join('configdocumentslogistic', 'configdocumentslogistic.cdlId', 'user_service_procedures.usp_config')
       ->join('documentslogistic', 'documentslogistic.dolId', 'configdocumentslogistic.cdlDocument_id')->get();
-    $nameProjects = config('app.name');
     $content = $all[0]['usp_content'];
 
     $pdf = App::make('dompdf.wrapper');
     $name = $all[0]['dolName'] . ' - ' . $all[0]['dolCode'] . '.pdf';
-    $pdf = PDF::loadview("modules.programs.partials.programsPDF", compact("nameProjects", "content", "all"));
-    return $pdf->stream();
+    $pdf = PDF::loadview("modules.programs.partials.programsPDF", compact("content", "all", "day", "technical", "name"));
+    return $pdf->download($name);
   }
 
   /* ===============================================================================================
@@ -374,16 +376,17 @@ class ProgramsController extends Controller
 
   function comunicationsPDF(Request $request)
   {
+    $day = Carbon::today('America/Bogota')->locale('es')->isoFormat('D-M-Y');
+    $technical = Settingtechnical::first();
     $all = BidirectionalCommunicationSystem::where('bcs_id', $request->pdf)
       ->join('configdocumentslogistic', 'configdocumentslogistic.cdlId', 'bidirectional_communication_systems.bcs_config')
       ->join('documentslogistic', 'documentslogistic.dolId', 'configdocumentslogistic.cdlDocument_id')->get();
-    $nameProjects = config('app.name');
     $content = $all[0]['bcs_content'];
 
     $pdf = App::make('dompdf.wrapper');
     $name = $all[0]['dolName'] . ' - ' . $all[0]['dolCode'] . '.pdf';
-    $pdf = PDF::loadview("modules.programs.partials.programsPDF", compact("nameProjects", "content", "all"));
-    return $pdf->stream();
+    $pdf = PDF::loadview("modules.programs.partials.programsPDF", compact("content", "all", "day", "technical", "name"));
+    return $pdf->download($name);
   }
 
   /* ===============================================================================================
@@ -447,15 +450,16 @@ class ProgramsController extends Controller
 
   function maintenancePDF(Request $request)
   {
+    $day = Carbon::today('America/Bogota')->locale('es')->isoFormat('D-M-Y');
+    $technical = Settingtechnical::first();
     $all = PreventiveMaintenanceReview::where('pmr_id', $request->pdf)
       ->join('configdocumentslogistic', 'configdocumentslogistic.cdlId', 'preventive_maintenance_reviews.pmr_config')
       ->join('documentslogistic', 'documentslogistic.dolId', 'configdocumentslogistic.cdlDocument_id')->get();
-    $nameProjects = config('app.name');
     $content = $all[0]['pmr_content'];
 
     $pdf = App::make('dompdf.wrapper');
     $name = $all[0]['dolName'] . ' - ' . $all[0]['dolCode'] . '.pdf';
-    $pdf = PDF::loadview("modules.programs.partials.programsPDF", compact("nameProjects", "content", "all"));
-    return $pdf->stream();
+    $pdf = PDF::loadview("modules.programs.partials.programsPDF", compact("content", "all", "day", "technical", "name"));
+    return $pdf->download($name);
   }
 }
