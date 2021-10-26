@@ -70,6 +70,7 @@
           <th class="align-middle">{{ucwords('elemento de protección')}}</th>
           <th class="align-middle">{{ucwords('norma')}}</th>
           <th class="align-middle">{{ucwords('observaciones')}}</th>
+          <th class="align-middle">{{ucwords('imagen')}}</th>
         </tr>
       </thead>
       <tbody>
@@ -79,6 +80,7 @@
           <td class="align-middle">{{$item->meEPP}}</td>
           <td class="align-middle">{{$item->meNor}}</td>
           <td class="align-middle">{{$item->meObs}}</td>
+          <td class="align-middle"><img class="py-2 px-1 bg-white border border-secondary rounded" src="{{asset('storage/MatrixEPP/'.$item->meFil)}}" alt="{{$item->meFil}}" width="90cm" height="90cm"></td>
         </tr>
         @endforeach
       </tbody>
