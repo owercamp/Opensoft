@@ -210,6 +210,7 @@ class DocumentsManagementController extends Controller
       ->join('documentsmanagerial', 'documentsmanagerial.domId', 'matrix_e_p_p_s.meDoc')->get();
 
     if ($search) {
+      $name = $search[0]['meFil'];
       if ($request->hasfile('meFil')) {
         Storage::disk('opensoft')->delete(DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "MatrixEPP" . DIRECTORY_SEPARATOR . $search[0]['meFil']);
         $file = $request->file('meFil');
