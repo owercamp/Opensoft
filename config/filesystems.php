@@ -57,7 +57,7 @@ return [
 
     'opensoft' => [
       'driver' => 'local',
-      'root' => dirname(base_path('public/storage')),
+      'root' => dirname('public'),
       'url' => env('APP_URL') . '/storage',
       'visibility' => 'public',
     ],
