@@ -9,7 +9,19 @@ window._ = require('lodash');
 try {
   window.Popper = require('popper.js').default;
   window.$ = window.jQuery = require('jquery');
+  window.mask = require('jquery-mask-plugin');
+  window.datatable = require('datatables.net-dt');
+  window.Swal = require('sweetalert2');
 
+  require('../fontawesome/js/v4-shims');
+  require('../fontawesome/js/solid');
+  require('../fontawesome/js/regular');
+  require('../fontawesome/js/fontawesome');
+  require('../fontawesome/js/brands');
+  require('../fontawesome/js/all');
+  require('../datapicker/js/bootstrap-datepicker');
+  require('../datapicker/locales/bootstrap-datepicker.es.min');
+  require('./MyFunction');
   require('bootstrap');
 } catch (e) { }
 

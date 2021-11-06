@@ -7,7 +7,7 @@
       <h6>CONFIGURACION DE DOCUMENTOS</h6>
     </div>
     <div class="col-md-4">
-      <button type="button" title="Registrar" class="bj-btn-table-add form-control-sm newDocument-link">NUEVO</button>
+      <button type="button" title="Registrar" class="btn btn-outline-success form-control-sm newDocument-link">NUEVO</button>
     </div>
     <div class="col-md-4">
       @if(session('SuccessDocument'))
@@ -55,13 +55,13 @@
           @endif
         </td>
         <td>
-          <a href="#" title="Editar" class="bj-btn-table-edit form-control-sm editDocument-link">
+          <a href="#" title="Editar" class="btn btn-outline-primary rounded-circle form-control-sm editDocument-link">
             <i class="fas fa-edit"></i>
             <span hidden>{{ $configuration->cdlId }}</span>
             <span hidden>{{ $configuration->cdlDocument_id }}</span>
             <span hidden>{{ $configuration->cdlContent }}</span>
           </a>
-          <a href="#" title="Eliminar" class="bj-btn-table-delete form-control-sm deleteDocument-link">
+          <a href="#" title="Eliminar" class="btn btn-outline-tertiary rounded-circle form-control-sm deleteDocument-link">
             <i class="fas fa-trash-alt"></i>
             <span hidden>{{ $configuration->cdlId }}</span>
             <span hidden>{{ $configuration->document->dolName }}</span>
@@ -135,7 +135,7 @@ $yearfutureSeven = date('Y') + 7;
                 </div>
                 <div class="col-md-3">
                   <br>
-                  <a href="#" class="bj-btn-table-add form-control-sm addVariable_new" title="Agregar Variable"><i class="fas fa-plus-circle"></i></a>
+                  <a href="#" class="btn btn-outline-success form-control-sm addVariable_new" title="Agregar Variable"><i class="fas fa-plus-circle"></i></a>
                 </div>
               </div>
               <div class="row">
@@ -177,7 +177,7 @@ $yearfutureSeven = date('Y') + 7;
             </div>
           </div>
           <div class="form-group text-center mt-3">
-            <button type="submit" class="bj-btn-table-add form-control-sm btn-saveDefinitive">GUARDAR</button>
+            <button type="submit" class="btn btn-outline-success form-control-sm btn-saveDefinitive">GUARDAR</button>
           </div>
         </form>
       </div>
@@ -235,7 +235,7 @@ $yearfutureSeven = date('Y') + 7;
                 </div>
                 <div class="col-md-3">
                   <br>
-                  <a href="#" class="bj-btn-table-add form-control-sm addVariable_edit" title="Agregar Variable"><i class="fas fa-plus-circle"></i></a>
+                  <a href="#" class="btn btn-outline-success form-control-sm addVariable_edit" title="Agregar Variable"><i class="fas fa-plus-circle"></i></a>
                 </div>
               </div>
               <div class="row">
@@ -279,10 +279,10 @@ $yearfutureSeven = date('Y') + 7;
           <div class="row border-top mt-3 text-center">
             <div class="col-md-6">
               <input type="hidden" class="form-control form-control-sm" name="cdlId_Edit" readonly required>
-              <button type="submit" class="bj-btn-table-add form-control-sm my-3">GUARDAR CAMBIOS</button>
+              <button type="submit" class="btn btn-outline-success form-control-sm my-3">GUARDAR CAMBIOS</button>
             </div>
             <div class="col-md-6">
-              <button type="button" class="bj-btn-table-delete mx-3 form-control-sm my-3" data-dismiss="modal">CANCELAR</button>
+              <button type="button" class="btn btn-outline-tertiary mx-3 form-control-sm my-3" data-dismiss="modal">CANCELAR</button>
             </div>
           </div>
         </form>
@@ -314,10 +314,10 @@ $yearfutureSeven = date('Y') + 7;
           <form action="{{ route('logistic.configuration.delete') }}" method="POST" class="col-md-6">
             @csrf
             <input type="hidden" class="form-control form-control-sm" name="cdlId_Delete" readonly required>
-            <button type="submit" class="bj-btn-table-add form-control-sm my-3">ELIMINAR</button>
+            <button type="submit" class="btn btn-outline-success form-control-sm my-3">ELIMINAR</button>
           </form>
           <div class="col-md-6">
-            <button type="button" class="bj-btn-table-delete mx-3 form-control-sm my-3" data-dismiss="modal">CANCELAR</button>
+            <button type="button" class="btn btn-outline-tertiary mx-3 form-control-sm my-3" data-dismiss="modal">CANCELAR</button>
           </div>
         </div>
       </div>

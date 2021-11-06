@@ -23,9 +23,9 @@
         <td class="align-middle">{{$item->dolName}}</td>
         <td class="align-middle">{{substr($item->trv_content,0,70).'...'}}</td>
         <td>
-          <button class="btn btn-outline-primary showEdit"><i class="fas fa-edit"></i><span hidden>{{$item->trv_id}}</span></button>
-          <button class="btn btn-outline-danger mx-2 Delete-register"><i class="fas fa-eraser"></i><span hidden aria-hidden="true">{{$item->trv_id}}</span><span hidden aria-hidden="true">{{$row-1}}</span></button>
-          <button class="btn btn-outline-secondary PDF-programs"><i class="far fa-file-pdf"></i><span hidden>{{$item->trv_id}}</span></button>
+          <button class="btn btn-outline-primary rounded-circle showEdit"><i class="fas fa-edit"></i><span hidden>{{$item->trv_id}}</span></button>
+          <button class="btn btn-outline-danger rounded-circle mx-2 Delete-register"><i class="fas fa-eraser"></i><span hidden aria-hidden="true">{{$item->trv_id}}</span><span hidden aria-hidden="true">{{$row-1}}</span></button>
+          <button class="btn btn-outline-secondary rounded-circle PDF-programs"><i class="far fa-file-pdf"></i><span hidden>{{$item->trv_id}}</span></button>
         </td>
       </tr>
       @endforeach
@@ -38,7 +38,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5>EDICION CONTROL DE INFRACCIONES A LAS NORMAS DE TRANSITO</h5>
-        <button class="btn-close btn-danger rounded" role="button" data-dismiss="modal">&xoplus;</button>
+        <button class="btn-close btn-outline-danger rounded" role="button" data-dismiss="modal">&xoplus;</button>
       </div>
       <div class="modal-body">
         <form action="{{route('update.control')}}" method="post">
@@ -46,8 +46,8 @@
           @include('modules.programs.partials.programs')
           <input type="hidden" name="idhidden">
           <div class="d-flex justify-content-around">
-            <button class="btn btn-primary px-auto" id="btn-save">ACTUALIZAR</button>
-            <button class="btn btn-secondary px-auto" data-dismiss="modal">CANCELAR</button>
+            <button class="btn btn-outline-primary px-auto" id="btn-save">ACTUALIZAR</button>
+            <button class="btn btn-outline-secondary px-auto" data-dismiss="modal">CANCELAR</button>
           </div>
         </form>
       </div>

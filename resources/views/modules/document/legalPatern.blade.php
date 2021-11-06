@@ -35,8 +35,8 @@
           <td class="align-middle">{{$legal->lp_year}}</td>
           <td class="align-middle">{{ucwords($legal->coNames)}}</td>
           <td>
-            <button class="btn btn-secondary editLegalParent"><i class="far fa-keyboard"></i><span hidden>{{$legal->lp_id}}</span></button>
-            <button class="btn btn-dark deleteLegalParent"><i class="fas fa-eraser"></i><span hidden>{{$legal->lp_id}}</span></button>
+            <button class="btn btn-outline-secondary rounded-circle editLegalParent"><i class="far fa-keyboard"></i><span hidden>{{$legal->lp_id}}</span></button>
+            <button class="btn btn-dark rounded-circle deleteLegalParent"><i class="fas fa-eraser"></i><span hidden>{{$legal->lp_id}}</span></button>
           </td>
         </tr>
         @endforeach
@@ -58,7 +58,7 @@
           @include('modules.document.partial.formLegal')
           <hr>
           <div class="d-flex justify-content-center w-100">
-            <button class="btn btn-success">{{ucwords('guardar')}}</button>
+            <button class="btn btn-outline-success">{{ucwords('guardar')}}</button>
           </div>
         </form>
       </div>
@@ -81,7 +81,7 @@
           <input type="hidden" name="legalIdUpdate">
           <hr>
           <div class="d-flex justify-content-around w-100">
-            <button class="btn btn-success">{{ucwords('actualizar')}}</button>
+            <button class="btn btn-outline-success">{{ucwords('actualizar')}}</button>
             <button type="button" class="btn btn-dark dismiss" data-dismiss="modal">{{ucwords('cancelar')}}</button>
           </div>
         </form>
@@ -105,7 +105,7 @@
           <input type="hidden" name="legalIdDelete">
           <hr>
           <div class="d-flex justify-content-around w-100">
-            <button class="btn btn-danger">{{ucwords('eliminar')}}</button>
+            <button class="btn btn-outline-danger">{{ucwords('eliminar')}}</button>
             <button type="button" class="btn btn-dark dismiss" data-dismiss="modal">{{ucwords('cancelar')}}</button>
           </div>
         </form>
