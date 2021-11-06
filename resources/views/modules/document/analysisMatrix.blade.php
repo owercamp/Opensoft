@@ -33,8 +33,8 @@
           <td class="align-middle">{{$item->amTypeRick}}</td>
           <td class="align-middle">{{$item->amGradeRick}}</td>
           <td>
-            <button class="btn btn-primary editAnalysisMatrix"><i class="fas fa-pen-square"></i><span hidden>{{$item->am_id}}</span></button>
-            <button class="btn btn-danger deleteAnalysisMatrix"><i class="fas fa-ban"></i><span hidden>{{$item->am_id}}</span></button>
+            <button class="btn btn-outline-primary rounded-circle editAnalysisMatrix"><i class="fas fa-pen-square"></i><span hidden>{{$item->am_id}}</span></button>
+            <button class="btn btn-outline-danger rounded-circle deleteAnalysisMatrix"><i class="fas fa-ban"></i><span hidden>{{$item->am_id}}</span></button>
         </tr>
         @endforeach
       </tbody>
@@ -55,7 +55,7 @@
           @include('modules.document.partial.formMatrix')
           <hr>
           <div class="d-flex justify-content-center w-100">
-            <button class="btn btn-success">{{ucwords('guardar')}}</button>
+            <button class="btn btn-outline-success">{{ucwords('guardar')}}</button>
           </div>
         </form>
       </div>
@@ -78,7 +78,7 @@
           <input type="hidden" name="analysisIdUpdate">
           <hr>
           <div class="d-flex justify-content-around w-100">
-            <button class="btn btn-success">{{ucwords('actualizar')}}</button>
+            <button class="btn btn-outline-success">{{ucwords('actualizar')}}</button>
             <button type="button" class="btn btn-dark dismiss" data-dismiss="modal">{{ucwords('cancelar')}}</button>
           </div>
         </form>
@@ -102,7 +102,7 @@
           <input type="hidden" name="analysisIdDelete">
           <hr>
           <div class="d-flex justify-content-around w-100">
-            <button class="btn btn-danger">{{ucwords('eliminar')}}</button>
+            <button class="btn btn-outline-danger">{{ucwords('eliminar')}}</button>
             <button type="button" class="btn btn-dark dismiss" data-dismiss="modal">{{ucwords('cancelar')}}</button>
           </div>
         </form>

@@ -22,11 +22,11 @@
         <td class="align-middle">{{ $item->domName }}</td>
         <td class="align-middle">{{ substr($item->comtext,0,70)."..."}}</td>
         <td>
-          <button title="EDITAR" class="btn btn-outline-info showForm"><i class="fas fa-indent"></i><span hidden>{{$item->comid}}</span>
+          <button title="EDITAR" class="btn btn-outline-info rounded-circle showForm"><i class="fas fa-indent"></i><span hidden>{{$item->comid}}</span>
           </button>
-          <button title="ELIMINAR" class="btn btn-outline-danger showDelete"><i class="fas fa-folder-minus"></i><span hidden>{{$item->comid}}</span><span hidden>{{$row-1}}</span>
+          <button title="ELIMINAR" class="btn btn-outline-danger rounded-circle showDelete"><i class="fas fa-folder-minus"></i><span hidden>{{$item->comid}}</span><span hidden>{{$row-1}}</span>
           </button>
-          <button title="APROBAR" class="btn btn-outline-primary showApproved"><i class="far fa-thumbs-up"></i><span hidden>{{$item->comid}}</span><span hidden>{{$row-1}}</span></button>
+          <button title="APROBAR" class="btn btn-outline-primary rounded-circle showApproved"><i class="far fa-thumbs-up"></i><span hidden>{{$item->comid}}</span><span hidden>{{$row-1}}</span></button>
         </td>
       </tr>
       @endif
@@ -40,7 +40,7 @@
     <div class="modal-content">
       <div class="modal-header justify-content-between">
         <h5 class="my-auto mx-auto">Edición Actas de Comite</h5>
-        <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger rounded left"><i class="fas fa-times-circle"></i></button>
+        <button type="button" data-dismiss="modal" class="btn btn-sm btn-outline-danger rounded left"><i class="fas fa-times-circle"></i></button>
       </div>
       <div class="modal-body">
         <form action="{{route('commitee.update')}}" method="post" id="FormUpdate">
@@ -48,8 +48,8 @@
           @include('modules.commitee.partials.formcommitee')
           <input type="hidden" name="UpdateId">
           <div class="d-flex justify-content-around">
-            <button class="btn btn-primary px-auto" id="btn-save">ACTUALIZAR</button>
-            <button class="btn btn-secondary px-auto" data-dismiss="modal">CANCELAR</button>
+            <button class="btn btn-outline-primary px-auto" id="btn-save">ACTUALIZAR</button>
+            <button class="btn btn-outline-secondary px-auto" data-dismiss="modal">CANCELAR</button>
           </div>
         </form>
       </div>

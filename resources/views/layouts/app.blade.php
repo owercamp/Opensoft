@@ -11,36 +11,19 @@
 
   <title>{{ config('app.name', 'opensoft') }}</title>
 
-  <!-- Scripts -->
-  <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
-
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Ubuntu&family=Allison&family=Glory" rel="stylesheet" type="text/css">
 
-  <!-- Para bootstrap -->
-  <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}">
-
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
 
-  <!-- Para plugin de datatable -->
-  <link rel="stylesheet" href="{{ asset('datatables/cdn/dataTables.bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('datatables/cdn/dataTables.bootstrap4.min.css') }}">
-
-  <!-- Datepicker Files -->
-  <link rel="stylesheet" href="{{asset('datapicker/css/bootstrap-datepicker3.css')}}">
-  <link rel="stylesheet" href="{{asset('datapicker/css/bootstrap-datepicker.standalone.css')}}">
   <!-- Fullcalendar -->
   <link rel="stylesheet" href="{{asset('plugins/fullcalendar/packages/core/main.min.css')}}">
   <link rel="stylesheet" href="{{asset('plugins/fullcalendar/packages/daygrid/main.min.css')}}">
   <link rel="stylesheet" href="{{asset('plugins/fullcalendar/packages/timegrid/main.min.css')}}">
   <!-- ChartJs -->
   <link rel="stylesheet" href="{{asset('plugins/chartJS/Chart.min.css')}}">
-  {{-- pasar de CDN a archivo CSS --}}
-  <link rel="stylesheet" href="{{asset('css/animate.css')}}">
-
 </head>
 
 <body>
@@ -194,24 +177,8 @@
     </main>
   </div>
 
-  <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
-  <script src="{{ asset('js/jQuery.Mask.js') }}"></script>
-  <script src="{{ asset('js/MyFunction.js') }}"></script>
-  <script src="{{ asset('fontawesome/js/all.js') }}"></script>
-
-  <!-- Bootstrap 4 -->
-  <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
-
-  <!-- Datatables -->
-  <script type="text/javascript" src="{{ asset('datatables/cdn/datatables.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('datatables/cdn/jquery.dataTables.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('datatables/cdn/dataTables.bootstrap.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('datatables/cdn/dataTables.bootstrap4.min.js') }}"></script>
-
-  <!-- Datapicker -->
-  <script src="{{asset('datapicker/js/bootstrap-datepicker.js')}}"></script>
-  <!-- Languaje datapicker-->
-  <script src="{{asset('datapicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
+  <!-- Scripts -->
+  <script src="{{ asset('js/app.js') }}"></script>
 
   <!-- Fullcalendar-->
   <script src="{{asset('plugins/fullcalendar/moment/main.js')}}"></script>
@@ -229,8 +196,6 @@
   <script src="{{asset('plugins/jsPDF-1.3.2/dist/jspdf.min.js')}}"></script>
   <!-- Plugin de html2canvas para reportes -->
   <script src="{{asset('plugins/html2canvas/html2canvas.min.js')}}"></script>
-  <!-- Plugin de sweetalert -->
-  <script src="{{asset('js/Sweetalert.min.js')}}"></script>
   @yield('scripts')
 </body>
 

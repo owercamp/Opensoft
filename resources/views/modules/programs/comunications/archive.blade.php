@@ -23,9 +23,9 @@
         <td class="align-middle">{{$item->dolName}}</td>
         <td class="align-middle">{{substr($item->bcs_content,0,70).'...'}}</td>
         <td>
-          <button class="btn btn-outline-primary showEdit"><i class="fas fa-edit"></i><span hidden aria-hidden="true">{{$item->bcs_id}}</span></button>
-          <button class="btn btn-outline-danger mx-2 Delete-register"><i class="fas fa-eraser"></i><span hidden aria-hidden="true">{{$item->bcs_id}}</span><span hidden aria-hidden="true">{{$row-1}}</span></button>
-          <button class="btn btn-outline-secondary PDF-programs"><i class="far fa-file-pdf"></i><span hidden aria-hidden="true">{{$item->bcs_id}}</span></button>
+          <button class="btn btn-outline-primary rounded-circle showEdit"><i class="fas fa-edit"></i><span hidden aria-hidden="true">{{$item->bcs_id}}</span></button>
+          <button class="btn btn-outline-danger rounded-circle mx-2 Delete-register"><i class="fas fa-eraser"></i><span hidden aria-hidden="true">{{$item->bcs_id}}</span><span hidden aria-hidden="true">{{$row-1}}</span></button>
+          <button class="btn btn-outline-secondary rounded-circle PDF-programs"><i class="far fa-file-pdf"></i><span hidden aria-hidden="true">{{$item->bcs_id}}</span></button>
         </td>
       </tr>
       @endforeach
@@ -46,8 +46,8 @@
           @include('modules.programs.partials.programs')
           <input type="hidden" name="idhidden">
           <div class="d-flex justify-content-around">
-            <button class="btn btn-primary px-auto" id="btn-save">ACTUALIZAR</button>
-            <button class="btn btn-secondary px-auto" data-dismiss="modal">CANCELAR</button>
+            <button class="btn btn-outline-primary px-auto" id="btn-save">ACTUALIZAR</button>
+            <button class="btn btn-outline-secondary px-auto" data-dismiss="modal">CANCELAR</button>
           </div>
         </form>
       </div>

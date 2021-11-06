@@ -21,9 +21,9 @@
           <td class="align-middle">{{$item->domName}}</td>
           <td class="align-middle">{{substr($item->pro_content,0,80)."..."}}</td>
           <td>
-            <button class="btn btn-outline-primary btn-edit" title="EDITAR"><i class="fas fa-keyboard"></i><span hidden>{{$item->pro_id}}</span></button>
-            <button title="ELIMINAR" class="btn btn-outline-danger mx-2 btn-delete"><i class="fas fa-minus-square"></i><span hidden>{{$item->pro_id}}</span><span hidden>{{$row-1}}</span></button>
-            <button title="APROBAR" class="btn btn-outline-secondary btn-approved"><i class="fas fa-check-double"></i></i><span hidden>{{$item->pro_id}}</span><span hidden>{{$row-1}}</span></button>
+            <button class="btn btn-outline-primary rounded-circle btn-edit" title="EDITAR"><i class="fas fa-keyboard"></i><span hidden>{{$item->pro_id}}</span></button>
+            <button title="ELIMINAR" class="btn btn-outline-danger rounded-circle mx-2 btn-delete"><i class="fas fa-minus-square"></i><span hidden>{{$item->pro_id}}</span><span hidden>{{$row-1}}</span></button>
+            <button title="APROBAR" class="btn btn-outline-secondary rounded-circle btn-approved"><i class="fas fa-check-double"></i></i><span hidden>{{$item->pro_id}}</span><span hidden>{{$row-1}}</span></button>
           </td>
         </tr>
         @endif
@@ -38,7 +38,7 @@
     <div class="modal-content">
       <div class="modal-header justify-content-between">
         <h5 class="my-auto mx-auto">Edición Implementación Procedimientos</h5>
-        <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger rounded left"><i class="fas fa-times-circle"></i></button>
+        <button type="button" data-dismiss="modal" class="btn btn-sm btn-outline-danger rounded left"><i class="fas fa-times-circle"></i></button>
       </div>
       <div class="modal-body">
         <form action="{{route('implementation.update')}}" method="post" id="FormUpdate">
@@ -46,8 +46,8 @@
           @include('modules.procedure.partials.formProcedure')
           <input type="hidden" name="UpdateId">
           <div class="d-flex justify-content-around">
-            <button class="btn btn-primary px-auto" id="btn-save">ACTUALIZAR</button>
-            <button class="btn btn-secondary px-auto" data-dismiss="modal">CANCELAR</button>
+            <button class="btn btn-outline-primary px-auto" id="btn-save">ACTUALIZAR</button>
+            <button class="btn btn-outline-secondary px-auto" data-dismiss="modal">CANCELAR</button>
           </div>
         </form>
       </div>
@@ -72,15 +72,15 @@
     let id = $(this).find("span:nth-child(2)").text();
     let number = $(this).find("span:nth-child(3)").text();
     Swal.fire({
-      icon: "question"
-      , title: "Eliminación Registro"
-      , html: `Desea eliminar el registro N°: <b>${number}<b>`
-      , showConfirmButton: true
-      , showCancelButton: true
-      , confirmButtonColor: '#007bff'
-      , cancelButtonColor: '#dc3545'
-      , confirmButtonText: '¡Sí, bórralo!'
-      , cancelButtonText: "¡No lo Elimines!"
+      icon: "question",
+      title: "Eliminación Registro",
+      html: `Desea eliminar el registro N°: <b>${number}<b>`,
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: '#007bff',
+      cancelButtonColor: '#dc3545',
+      confirmButtonText: '¡Sí, bórralo!',
+      cancelButtonText: "¡No lo Elimines!"
     }).then((result) => {
       if (result.isConfirmed) {
         $('input[name=idDelete]').val(id);
@@ -93,15 +93,15 @@
     let id = $(this).find("span:nth-child(2)").text();
     let number = $(this).find("span:nth-child(3)").text();
     Swal.fire({
-      icon: "question"
-      , title: "Aprobación Registro"
-      , html: `Desea aprobar el registro N°: <b>${number}<b>`
-      , showConfirmButton: true
-      , showCancelButton: true
-      , confirmButtonColor: '#007bff'
-      , cancelButtonColor: '#dc3545'
-      , confirmButtonText: '¡Sí, Aprobar!'
-      , cancelButtonText: "¡No lo Apruebes!"
+      icon: "question",
+      title: "Aprobación Registro",
+      html: `Desea aprobar el registro N°: <b>${number}<b>`,
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: '#007bff',
+      cancelButtonColor: '#dc3545',
+      confirmButtonText: '¡Sí, Aprobar!',
+      cancelButtonText: "¡No lo Apruebes!"
     }).then((response) => {
       if (response.isConfirmed) {
         $('input[name=idApproved]').val(id);
@@ -113,30 +113,30 @@
   $('select[name=SelectDocument]').change(function() {
     let id = $('select[name=SelectDocument]').val();
     $.ajax({
-      "_token": "{{ csrf_token() }}"
-      , url: "{{route('getConfig')}}"
-      , type: "POST"
-      , data: {
+      "_token": "{{ csrf_token() }}",
+      url: "{{route('getConfig')}}",
+      type: "POST",
+      data: {
         id: id
-      }
-      , beforeSend() {
+      },
+      beforeSend() {
         Swal.fire({
-          icon: 'info'
-          , title: 'Consulting'
-          , text: 'Consultando el contenido'
-          , showConfirmButton: false
+          icon: 'info',
+          title: 'Consulting',
+          text: 'Consultando el contenido',
+          showConfirmButton: false
         })
-      }
-      , success(response) {
+      },
+      success(response) {
         $('textarea[name=TextContent]').val(response[0]['cdmContent']);
-      }
-      , complete() {
+      },
+      complete() {
         Swal.fire({
-          icon: 'success'
-          , title: 'Success'
-          , text: 'Consulta terminada'
-          , timer: 1500
-          , showConfirmButton: false
+          icon: 'success',
+          title: 'Success',
+          text: 'Consulta terminada',
+          timer: 1500,
+          showConfirmButton: false
         })
       }
     })
@@ -146,22 +146,21 @@
     let select = $(this).find("span:nth-child(2)").text();
     $("input[name=UpdateId]").val(select);
     $.ajax({
-      "_token": "{{csrf_token()}}"
-      , url: "{{route('getRegister')}}"
-      , type: "POST"
-      , dataType: "json"
-      , data: {
+      "_token": "{{csrf_token()}}",
+      url: "{{route('getRegister')}}",
+      type: "POST",
+      dataType: "json",
+      data: {
         data: select
-      }
-      , success(objectRegister) {
+      },
+      success(objectRegister) {
         $("select[name=SelectDocument]").val(objectRegister[0]['pro_doc']);
         $("textarea[name=TextContent]").val(objectRegister[0]['pro_content']);
-      }
-      , complete() {
+      },
+      complete() {
         $("#formProcedure").modal();
       }
     })
   });
-
 </script>
 @endsection

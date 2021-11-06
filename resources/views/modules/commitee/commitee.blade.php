@@ -7,7 +7,7 @@
   <form action="{{route('commitee.save')}}" method="post" class="shadow p-3 rounded">
     @include('modules.commitee.partials.formcommitee')
     <div class="d-flex justify-content-center">
-      <button class="btn btn-primary px-auto">GUARDAR</button>
+      <button class="btn btn-outline-primary px-auto">GUARDAR</button>
     </div>
   </form>
 </div>
