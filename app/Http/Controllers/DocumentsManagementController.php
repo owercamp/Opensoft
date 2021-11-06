@@ -190,7 +190,7 @@ class DocumentsManagementController extends Controller
       $file = $request->file('meFil');
       $nameFile = $file->getClientOriginalName();
       $name = str_replace(" ", "", $nameFile);
-      Storage::disk('opensoft')->putFileAs(DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "MatrixEPP" . DIRECTORY_SEPARATOR, $request->file('meFil'), $name);
+      Storage::disk('opensoft')->putFileAs( DIRECTORY_SEPARATOR . "MatrixEPP" . DIRECTORY_SEPARATOR, $request->file('meFil'), $name);
     }
 
     MatrixEPP::create([
@@ -212,11 +212,11 @@ class DocumentsManagementController extends Controller
     if ($search) {
       $name = $search[0]['meFil'];
       if ($request->hasfile('meFil')) {
-        Storage::disk('opensoft')->delete(DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "MatrixEPP" . DIRECTORY_SEPARATOR . $search[0]['meFil']);
+        Storage::disk('opensoft')->delete( DIRECTORY_SEPARATOR . "MatrixEPP" . DIRECTORY_SEPARATOR . $search[0]['meFil']);
         $file = $request->file('meFil');
         $nameFile = $file->getClientOriginalName();
         $name = str_replace(" ", "", $nameFile);
-        Storage::disk('opensoft')->putFileAs(DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "MatrixEPP" . DIRECTORY_SEPARATOR, $request->file('meFil'), $name);
+        Storage::disk('opensoft')->putFileAs( DIRECTORY_SEPARATOR . "MatrixEPP" . DIRECTORY_SEPARATOR, $request->file('meFil'), $name);
       }
 
       MatrixEPP::where('me_id', $request->matrixIdUpdate)
@@ -239,7 +239,7 @@ class DocumentsManagementController extends Controller
       ->join('documentsmanagerial', 'documentsmanagerial.domId', 'matrix_e_p_p_s.meDoc')->get();
 
     if ($search) {
-      Storage::disk('opensoft')->delete(DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "MatrixEPP" . DIRECTORY_SEPARATOR . $search[0]['meFil']);
+      Storage::disk('opensoft')->delete( DIRECTORY_SEPARATOR . "MatrixEPP" . DIRECTORY_SEPARATOR . $search[0]['meFil']);
 
       MatrixEPP::destroy($request->matrixIdDelete);
       DB::statement("ALTER TABLE matrix_e_p_p_s AUTO_INCREMENT=1");
