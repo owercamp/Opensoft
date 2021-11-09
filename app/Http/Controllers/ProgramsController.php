@@ -74,7 +74,6 @@ class ProgramsController extends Controller
     }
     $code = $search[0]['dolName'] . ' N° ' . $search[0]['dolCode'];
     AutoMotiveFleet::destroy($request->idDelete);
-    DB::statement("ALTER TABLE auto_motive_fleets AUTO_INCREMENT=1");
     return back()->with("Success", $code . " Eliminado");
   }
 
@@ -148,7 +147,6 @@ class ProgramsController extends Controller
     }
     $code = $search[0]['dolName'] . ' N° ' . $search[0]['dolCode'];
     TrafficRegulationsViolation::destroy($request->idDelete);
-    DB::statement("ALTER TABLE traffic_regulations_violations AUTO_INCREMENT=1");
     return back()->with("Success", $code . " Eliminado");
   }
 
@@ -222,7 +220,6 @@ class ProgramsController extends Controller
     }
     $code = $search[0]['dolName'] . ' N° ' . $search[0]['dolCode'];
     AccidentControlAndAnalysis::destroy($request->idDelete);
-    DB::statement("ALTER TABLE accident_control_and_analyses AUTO_INCREMENT=1");
     return back()->with("Success", $code . " Eliminado");
   }
 
@@ -296,7 +293,6 @@ class ProgramsController extends Controller
     }
     $code = $search[0]['dolName'] . ' N° ' . $search[0]['dolCode'];
     UserServiceProcedures::destroy($request->idDelete);
-    DB::statement("ALTER TABLE user_service_procedures AUTO_INCREMENT=1");
     return back()->with("Success", $code . " Eliminado");
   }
 
@@ -370,7 +366,6 @@ class ProgramsController extends Controller
     }
     $code = $search[0]['dolName'] . ' N° ' . $search[0]['dolCode'];
     BidirectionalCommunicationSystem::destroy($request->idDelete);
-    DB::statement("ALTER TABLE user_service_procedures AUTO_INCREMENT=1");
     return back()->with("Success", $code . " Eliminado");
   }
 
@@ -444,7 +439,6 @@ class ProgramsController extends Controller
     }
     $code = $search[0]['dolName'] . ' N° ' . $search[0]['dolCode'];
     PreventiveMaintenanceReview::destroy($request->idDelete);
-    DB::statement("ALTER TABLE preventive_maintenance_reviews AUTO_INCREMENT=1");
     return back()->with("Success", $code . " Eliminado");
   }
 
