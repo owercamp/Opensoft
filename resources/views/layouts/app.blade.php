@@ -177,6 +177,8 @@
     </main>
   </div>
 
+  <!-- ckeditor5 -->
+  <script src="{{asset('plugins/ckeditor/build/ckeditor.js')}}"></script>
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}"></script>
 
