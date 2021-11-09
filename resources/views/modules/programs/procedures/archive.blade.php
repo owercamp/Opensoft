@@ -21,7 +21,7 @@
       <tr>
         <td class="align-middle">{{$row++}}</td>
         <td class="align-middle">{{$item->dolName}}</td>
-        <td class="align-middle">{{substr($item->usp_content,0,70).'...'}}</td>
+        <td class="align-middle">{!!substr($item->usp_content,0,70).'...'!!}</td>
         <td>
           <button class="btn btn-outline-primary rounded-circle showEdit"><i class="fas fa-edit"></i><span hidden aria-hidden="true">{{$item->usp_id}}</span></button>
           <button class="btn btn-outline-danger rounded-circle mx-2 Delete-register"><i class="fas fa-eraser"></i><span hidden aria-hidden="true">{{$item->usp_id}}</span><span hidden aria-hidden="true">{{$row-1}}</span></button>
@@ -68,6 +68,70 @@
 
 @section('scripts')
 <script>
+  let MyEditor;
+  ClassicEditor
+    .create(document.querySelector('#TextContent'), {
+      fontColor: {
+        colors: [{
+            color: '#000000',
+            label: 'Black',
+            hasBorder: true
+          },
+          {
+            color: '#4D4D4D',
+            label: 'Dim grey',
+            hasBorder: true
+          },
+          {
+            color: '#999999',
+            label: 'Grey',
+            hasBorder: true
+          },
+          {
+            color: '#E6E6E6',
+            label: 'Light grey',
+            hasBorder: true
+          },
+          {
+            color: '#FFFFFF',
+            label: 'White',
+            hasBorder: true
+          },
+          {
+            color: '#e3342f',
+            label: 'Red',
+            hasBorder: true
+          },
+          {
+            color: '#0086f9',
+            label: 'Blue',
+            hasBorder: true
+          },
+          {
+            color: '#ffed4a',
+            label: 'Yellow',
+            hasBorder: true
+          },
+          {
+            color: '#fd8701',
+            label: 'Orange',
+            hasBorder: true
+          },
+          {
+            color: '#627700',
+            label: 'Green',
+            hasBorder: true
+          }
+        ]
+      },
+    })
+    .then(editor => {
+      MyEditor = editor;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
   $('.PDF-programs').click(function() {
     let id = $(this).find('span:nth-child(2)').text();
     $('input[name=pdf]').val(id);
@@ -104,7 +168,7 @@
       },
       success(response) {
         $('Select[name=SelectDocument]').val(response[0]['usp_config']);
-        $('textarea[name=TextContent]').val(response[0]['usp_content']);
+        MyEditor.setData(response[0]['usp_content']);
         $('input[name=idhidden]').val(response[0]['usp_id']);
       },
       complete() {
@@ -133,7 +197,7 @@
         })
       },
       success(objectSearch) {
-        $("textarea[name=TextContent]").val(objectSearch[0]['cdlContent']);
+        MyEditor.setData(objectSearch[0]['cdlContent']);
         name = objectSearch[0]['dolName'];
       },
       complete(objectSearch) {

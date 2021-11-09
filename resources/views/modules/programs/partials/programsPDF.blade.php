@@ -62,7 +62,7 @@
     </table>
   </header>
   <main>
-    <p>{{$content}}</p>
+    {!!$content!!}
   </main>
   <script type="text/php">
     if ( isset($pdf) ) {
