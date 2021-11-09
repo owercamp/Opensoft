@@ -15,6 +15,16 @@
 
 @section('scripts')
 <script>
+  let MyEditor;
+  ClassicEditor
+    .create(document.querySelector('#TextContent'))
+    .then(editor => {
+      MyEditor = editor;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
   $("select[name=SelectDocument]").change(function() {
     let select = $(this).val();
     let name = "";
@@ -35,7 +45,7 @@
         })
       },
       success(objectSearch) {
-        $("textarea[name=TextContent]").val(objectSearch[0]['cdlContent']);
+        MyEditor.setData(objectSearch[0]['cdlContent']);
         name = objectSearch[0]['dolName'];
       },
       complete(objectSearch) {
