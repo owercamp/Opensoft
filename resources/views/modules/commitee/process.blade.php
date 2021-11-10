@@ -20,7 +20,7 @@
       <tr>
         <td class="align-middle">{{ $row++ }}</td>
         <td class="align-middle">{{ $item->domName }}</td>
-        <td class="align-middle">{{ substr($item->comtext,0,70)."..."}}</td>
+        <td class="align-middle">{!! substr($item->comtext,0,70)."..."!!}</td>
         <td>
           <button title="EDITAR" class="btn btn-outline-info rounded-circle showForm"><i class="fas fa-indent"></i><span hidden>{{$item->comid}}</span>
           </button>
@@ -70,6 +70,70 @@
 
 @section('scripts')
 <script>
+  let MyEditor;
+  ClassicEditor
+    .create(document.querySelector('#TextContent'), {
+      fontColor: {
+        colors: [{
+            color: '#000000',
+            label: 'Black',
+            hasBorder: true
+          },
+          {
+            color: '#4D4D4D',
+            label: 'Dim grey',
+            hasBorder: true
+          },
+          {
+            color: '#999999',
+            label: 'Grey',
+            hasBorder: true
+          },
+          {
+            color: '#E6E6E6',
+            label: 'Light grey',
+            hasBorder: true
+          },
+          {
+            color: '#FFFFFF',
+            label: 'White',
+            hasBorder: true
+          },
+          {
+            color: '#e3342f',
+            label: 'Red',
+            hasBorder: true
+          },
+          {
+            color: '#0086f9',
+            label: 'Blue',
+            hasBorder: true
+          },
+          {
+            color: '#ffed4a',
+            label: 'Yellow',
+            hasBorder: true
+          },
+          {
+            color: '#fd8701',
+            label: 'Orange',
+            hasBorder: true
+          },
+          {
+            color: '#627700',
+            label: 'Green',
+            hasBorder: true
+          }
+        ]
+      },
+    })
+    .then(editor => {
+      MyEditor = editor;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
   let all = [];
   $("#btn-save").click(function(e) {
     e.preventDefault();
@@ -141,7 +205,7 @@
         })
       },
       success(response) {
-        $('textarea[name=TextContent]').val(response[0]['cdmContent']);
+        MyEditor.setData(response[0]['cdmContent']);
       },
       complete() {
         Swal.fire({
@@ -168,7 +232,6 @@
       },
       beforeSend() {
         $("select[name=SelectDocument]").val("");
-        $("textarea[name=TextContent]").val("");
         $("textarea[name=DataCollaborators]").val("");
         $("#List input").each(function(index, element) {
           $(element).prop("checked", false);
@@ -176,7 +239,7 @@
       },
       success(response) {
         $("select[name=SelectDocument]").val(response[0]["comconf"]);
-        $("textarea[name=TextContent]").val(response[0]["comtext"]);
+        MyEditor.setData(response[0]["comtext"]);
         $("textarea[name=DataCollaborators]").val(response[0]["comfir"]);
         let data = response[0]["comfir"];
         let separateData = data.split(",");

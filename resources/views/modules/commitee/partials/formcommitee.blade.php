@@ -17,7 +17,7 @@
   </div>
   <div class="col-8">
     <div class="form-group">
-      <small class="text-muted d-block">PARTICIPANTES</small>
+      <small class="text-muted d-block text-center">PARTICIPANTES</small>
       @foreach($Collaborators as $Collaborator)
       <div class="formgroup d-inline-flex" id="List">
         <input type="checkbox" class="m-auto" value="{{ $Collaborator->coFirm.'-'.$Collaborator->coNames.'-'.$Collaborator->perName.'-'.$Collaborator->coNumberdocument.'-'.$Collaborator->coPosition}}">

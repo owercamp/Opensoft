@@ -63,7 +63,7 @@
   </header>
   <main>
     <div class="w-100">
-      <p class="px-3 py-1">{{$allPDF[0]['comtext']}}</p>
+      <p class="px-3 py-1">{!!$allPDF[0]['comtext']!!}</p>
     </div>
     <table class="w-25">
       @for ($i = 0; $i < count($matriz[1]); $i++) <img class="my-1 border border-dark" src="{{asset('storage/collaboratorsFirms/'.$matriz[0][$i])}}" alt="{{ucwords($matriz[1][$i])}}" height="60rem" width="100rem">
