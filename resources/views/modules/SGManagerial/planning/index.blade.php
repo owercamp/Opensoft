@@ -47,13 +47,7 @@
       <tr>
         <td>{{$row++}}</td>
         <td>{{$config->document->domName}}</td>
-        <td>
-          @if (strlen($config->cdmContent) > 50)
-          {{substr($config->cdmContent,0,50).'..'}}
-          @else
-          {{$config->cdmContent}}
-          @endif
-        </td>
+        <td>{!!substr($config->cdmContent,0,50).'...'!!}</td>
         <td>
           <a href="#" title="Editar" class="btn btn-outline-primary rounded-circle form-control-sm editDocument-link">
             <i class="fas fa-edit"></i>
@@ -153,24 +147,10 @@ $yearfutureSeven = date('Y') + 7;
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
                     <small class="text-muted">ESCRIBA CONTENIDO AQUI:</small>
-                    <textarea name="cdmContent_example" rows="10" class="form-control form-control-sm text-justify" required></textarea>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <small class="text-muted">CONTENIDO FINAL:</small>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12 p-2 border cdmContent_final" style="font-size: 12px; text-align: justify;">
-
-                    </div>
+                    <textarea name="cdmContent" id="TextContent" cols="30" rows="10"></textarea>
                   </div>
                 </div>
               </div>
@@ -254,24 +234,10 @@ $yearfutureSeven = date('Y') + 7;
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
                     <small class="text-muted">ESCRIBA CONTENIDO AQUI:</small>
-                    <textarea name="cdmContent_example_Edit" rows="10" class="form-control form-control-sm text-justify" required></textarea>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <small class="text-muted">CONTENIDO FINAL:</small>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12 p-2 border cdmContent_final_Edit" style="font-size: 12px; text-align: justify;">
-
-                    </div>
+                    <textarea name="cdmContent_Edit" id="TextContentEdit" cols="30" rows="10"></textarea>
                   </div>
                 </div>
               </div>
@@ -331,15 +297,74 @@ $yearfutureSeven = date('Y') + 7;
 
 @section('scripts')
 <script>
+  // !implementación ckeditor
+  let MyEditor;
+  ClassicEditor
+    .create(document.querySelector('#TextContent'), {
+      fontColor: {
+        colors: [{
+            color: '#000000',
+            label: 'Black',
+            hasBorder: true
+          },
+          {
+            color: '#4D4D4D',
+            label: 'Dim grey',
+            hasBorder: true
+          },
+          {
+            color: '#999999',
+            label: 'Grey',
+            hasBorder: true
+          },
+          {
+            color: '#E6E6E6',
+            label: 'Light grey',
+            hasBorder: true
+          },
+          {
+            color: '#FFFFFF',
+            label: 'White',
+            hasBorder: true
+          },
+          {
+            color: '#e3342f',
+            label: 'Red',
+            hasBorder: true
+          },
+          {
+            color: '#0086f9',
+            label: 'Blue',
+            hasBorder: true
+          },
+          {
+            color: '#ffed4a',
+            label: 'Yellow',
+            hasBorder: true
+          },
+          {
+            color: '#fd8701',
+            label: 'Orange',
+            hasBorder: true
+          },
+          {
+            color: '#627700',
+            label: 'Green',
+            hasBorder: true
+          }
+        ]
+      },
+    })
+    .then(editor => {
+      MyEditor = editor;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
   // Lanza formulario de creación
   $('.newDocument-link').on('click', function() {
     $('#newDocumentMNG-modal').modal();
-  });
-  // Escribe en mi textarea
-  $('textarea[name=cdmContent_example]').on('keyup', function(e) {
-    var writed = e.target.value;
-    var contentfinal = showContent(writed);
-    $('div.cdmContent_final').html(contentfinal);
   });
 
   // seleccion de mi campo Documento y carga info en codigo y version, carga lista tipo de variable
@@ -397,31 +422,92 @@ $yearfutureSeven = date('Y') + 7;
       switch (type) {
         case 'Texto':
           var add = "<input type='text' placeholder='Campo de texto' maxlength='" + long + "' disabled>";
-          var content_example = $('textarea[name=cdmContent_example]').val();
-          $('textarea[name=cdmContent_example]').val(content_example + '¡¡¡Texto dinámico!!!');
-          $('div.cdmContent_final').append(add);
+          var content_example = MyEditor.getData();
+          MyEditor.setData(`${content_example} <u><i><b>¡¡¡Texto dinámico!!!</b></i></u>`);
           break;
         case 'Numérico':
           var add = "<input type='text' maxlength='2' pattern='[0-9]{1," + long + "}' placeholder='Campo de número' disabled>";
-          var content_example = $('textarea[name=cdmContent_example]').val();
-          $('textarea[name=cdmContent_example]').val(content_example + '¡¡¡Número dinámico!!!');
-          $('div.cdmContent_final').append(add);
+          var content_example = MyEditor.getData();
+          MyEditor.setData(`${content_example} <u><i><b>¡¡¡Número dinámico!!!</b></i></u>`);
           break;
         case 'Moneda':
           var add = "<input type='text' maxlength='10' pattern='[0-9]{1," + long + "}' placeholder='Campo de móneda' disabled>";
-          var content_example = $('textarea[name=cdmContent_example]').val();
-          $('textarea[name=cdmContent_example]').val(content_example + '¡¡¡Moneda dinámica!!!');
-          $('div.cdmContent_final').append(add);
+          var content_example = MyEditor.getData();
+          MyEditor.setData(`${content_example} <u><i><b>¡¡¡Moneda dinámica!!!</b></i></u>`);
           break;
         case 'Calendario':
           var add = "<input type='text' maxlength='" + long + "' placeholder='Campo de fecha' disabled>";
-          var content_example = $('textarea[name=cdmContent_example]').val();
-          $('textarea[name=cdmContent_example]').val(content_example + '¡¡¡Calendario dinámico!!!');
-          $('div.cdmContent_final').append(add);
+          var content_example = MyEditor.getData();
+          MyEditor.setData(`${content_example} <u><i><b>¡¡¡Calendario dinámico!!!</b></i></u>`);
           break;
       }
     }
   });
+
+  let MyEditorEdit;
+  ClassicEditor
+    .create(document.querySelector('#TextContentEdit'), {
+      fontColor: {
+        colors: [{
+            color: '#000000',
+            label: 'Black',
+            hasBorder: true
+          },
+          {
+            color: '#4D4D4D',
+            label: 'Dim grey',
+            hasBorder: true
+          },
+          {
+            color: '#999999',
+            label: 'Grey',
+            hasBorder: true
+          },
+          {
+            color: '#E6E6E6',
+            label: 'Light grey',
+            hasBorder: true
+          },
+          {
+            color: '#FFFFFF',
+            label: 'White',
+            hasBorder: true
+          },
+          {
+            color: '#e3342f',
+            label: 'Red',
+            hasBorder: true
+          },
+          {
+            color: '#0086f9',
+            label: 'Blue',
+            hasBorder: true
+          },
+          {
+            color: '#ffed4a',
+            label: 'Yellow',
+            hasBorder: true
+          },
+          {
+            color: '#fd8701',
+            label: 'Orange',
+            hasBorder: true
+          },
+          {
+            color: '#627700',
+            label: 'Green',
+            hasBorder: true
+          }
+        ]
+      },
+    })
+    .then(editor => {
+      MyEditorEdit = editor;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
 
   // Lanza mi formulario de edición 
   $('.editDocument-link').on('click', function(e) {
@@ -468,18 +554,10 @@ $yearfutureSeven = date('Y') + 7;
             }
           }
         });
-        $('textarea[name=cdmContent_example_Edit]').val(cdmContent);
-        var contentFinal = showContent(cdmContent);
-        $('div.cdmContent_final_Edit').html(contentFinal);
+        MyEditorEdit.setData(cdmContent);
         $('#editDocumentMNG-modal').modal();
       }
     })
-  });
-
-  $('textarea[name=cdmContent_example_Edit]').on('keyup', function(e) {
-    var writed = e.target.value;
-    var contentFinal = showContent(writed);
-    $('div.cdmContent_final_Edit').html(contentFinal);
   });
 
   // seleccion de mi campo Documento y carga info en codigo y version, carga lista tipo de variable
@@ -537,27 +615,24 @@ $yearfutureSeven = date('Y') + 7;
       switch (type) {
         case 'Texto':
           var add = "<input type='text' placeholder='Campo de texto' maxlength='" + long + "' disabled>";
-          var content_example = $('textarea[name=cdmContent_example_Edit]').val();
-          $('textarea[name=cdmContent_example_Edit]').val(content_example + '¡¡¡Texto dinámico!!!');
-          $('div.cdmContent_final_Edit').append(add);
+          var content_example = MyEditorEdit.getData();
+          console.log(content_example);
+          MyEditorEdit.setData(`${content_example} <u><i><b>¡¡¡Texto dinámico!!!</b></i></u>`);
           break;
         case 'Numérico':
           var add = "<input type='text' maxlength='2' pattern='[0-9]{1," + long + "}' placeholder='Campo de número' disabled>";
-          var content_example = $('textarea[name=cdmContent_example_Edit]').val();
-          $('textarea[name=cdmContent_example_Edit]').val(content_example + '¡¡¡Número dinámico!!!');
-          $('div.cdmContent_final_Edit').append(add);
+          var content_example = MyEditorEdit.getData();
+          MyEditorEdit.setData(`${content_example} <u><i><b>¡¡¡Número dinámico!!!</b></i></u>`);
           break;
         case 'Moneda':
           var add = "<input type='text' maxlength='10' pattern='[0-9]{1," + long + "}' placeholder='Campo de móneda' disabled>";
-          var content_example = $('textarea[name=cdmContent_example_Edit]').val();
-          $('textarea[name=cdmContent_example_Edit]').val(content_example + '¡¡¡Moneda dinámica!!!');
-          $('div.cdmContent_final_Edit').append(add);
+          var content_example = MyEditorEdit.getData();
+          MyEditorEdit.setData(`${content_example} <u><i><b>¡¡¡Moneda dinámica!!!</b></i></u>`);
           break;
         case 'Calendario':
           var add = "<input type='text' maxlength='" + long + "' placeholder='Campo de fecha' disabled>";
-          var content_example = $('textarea[name=cdmContent_example_Edit]').val();
-          $('textarea[name=cdmContent_example_Edit]').val(content_example + '¡¡¡Calendario dinámico!!!');
-          $('div.cdmContent_final_Edit').append(add);
+          var content_example = MyEditorEdit.getData();
+          MyEditorEdit.setData(`${content_example} <u><i><b>¡¡¡Calendario dinámico!!!</b></i></u>`);
           break;
       }
     }

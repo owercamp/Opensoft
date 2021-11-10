@@ -163,12 +163,12 @@ class SGManagerialController extends Controller
   function saveConfigMNG(Request $request)
   {
     $myValidate = Configdocumentmanagerial::where('cdmDocument_id', trim($request->cdmDocument_id))
-      ->where('cdmContent', $this->fu($request->cdmContent_example))
+      ->where('cdmContent', $this->fu($request->cdmContent))
       ->first();
     if ($myValidate == null) {
       Configdocumentmanagerial::create([
         'cdmDocument_id' => trim($request->cdmDocument_id),
-        'cdmContent' => $this->fu($request->cdmContent_example)
+        'cdmContent' => $this->fu($request->cdmContent)
       ]);
       $documentos = Documentmanagerial::find(trim($request->cdmDocument_id));
       return redirect()->route('managerial.planing')->with('SuccessDocument', 'Registro Configuración del Documento: ' . $documentos->domName);
@@ -180,7 +180,7 @@ class SGManagerialController extends Controller
   function updateConfigMNG(Request $request)
   {
     $ValidateEdit = Configdocumentmanagerial::where('cdmDocument_id', trim($request->cdmDocument_id_Edit))
-      ->where('cdmContent', $this->fu($request->cdmContent_example_Edit))
+      ->where('cdmContent', $this->fu($request->cdmContent_Edit))
       ->where('cdmId', '!=', trim($request->cdmId_Edit))
       ->first();
     if ($ValidateEdit == null) {
@@ -188,7 +188,7 @@ class SGManagerialController extends Controller
       if ($validate != null) {
         $documents = $validate->document->domName;
         $validate->cdmDocument_id = trim($request->cdmDocument_id_Edit);
-        $validate->cdmContent = $this->fu($request->cdmContent_example_Edit);
+        $validate->cdmContent = $this->fu($request->cdmContent_Edit);
         $validate->save();
         return redirect()->route('managerial.planing')->with('PrimaryDocument', 'Actualización Configuración del Documento: ' . $documents);
       } else {
