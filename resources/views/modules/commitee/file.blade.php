@@ -20,7 +20,7 @@
         <tr>
           <td class="align-middle">{{ $row++ }}</td>
           <td class="align-middle">{{ $archive->domName }}</td>
-          <td class="align-middle">{{ substr($archive->comtext,0,50)."..." }}</td>
+          <td class="align-middle">{!! substr($archive->comtext,0,70)."..."!!}</td>
           <td>
             <button class="btn btn-outline-danger rounded-circle btnPDF"><i class="far fa-file-pdf"></i><span hidden>{{ $archive->comid }}</span></button>
           </td>
