@@ -70,6 +70,7 @@
 
 @section('scripts')
 <script>
+  // ?implementación de ckeditor
   let MyEditor;
   ClassicEditor
     .create(document.querySelector('#TextContent'), {
