@@ -19,7 +19,7 @@
         <tr>
           <td class="align-middle">{{$row++}}</td>
           <td class="align-middle">{{$item->domName}}</td>
-          <td class="align-middle">{{substr($item->pro_content,0,80)."..."}}</td>
+          <td class="align-middle">{!!substr($item->pro_content,0,80)."..."!!}</td>
           <td>
             <button class="btn btn-outline-primary rounded-circle btn-edit" title="EDITAR"><i class="fas fa-keyboard"></i><span hidden>{{$item->pro_id}}</span></button>
             <button title="ELIMINAR" class="btn btn-outline-danger rounded-circle mx-2 btn-delete"><i class="fas fa-minus-square"></i><span hidden>{{$item->pro_id}}</span><span hidden>{{$row-1}}</span></button>
@@ -68,6 +68,71 @@
 
 @section('scripts')
 <script>
+  // ?implementación de ckeditor
+  let MyEditor;
+  ClassicEditor
+    .create(document.querySelector('#TextContent'), {
+      fontColor: {
+        colors: [{
+            color: '#000000',
+            label: 'Black',
+            hasBorder: true
+          },
+          {
+            color: '#4D4D4D',
+            label: 'Dim grey',
+            hasBorder: true
+          },
+          {
+            color: '#999999',
+            label: 'Grey',
+            hasBorder: true
+          },
+          {
+            color: '#E6E6E6',
+            label: 'Light grey',
+            hasBorder: true
+          },
+          {
+            color: '#FFFFFF',
+            label: 'White',
+            hasBorder: true
+          },
+          {
+            color: '#e3342f',
+            label: 'Red',
+            hasBorder: true
+          },
+          {
+            color: '#0086f9',
+            label: 'Blue',
+            hasBorder: true
+          },
+          {
+            color: '#ffed4a',
+            label: 'Yellow',
+            hasBorder: true
+          },
+          {
+            color: '#fd8701',
+            label: 'Orange',
+            hasBorder: true
+          },
+          {
+            color: '#627700',
+            label: 'Green',
+            hasBorder: true
+          }
+        ]
+      },
+    })
+    .then(editor => {
+      MyEditor = editor;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
   $(".btn-delete").click(function() {
     let id = $(this).find("span:nth-child(2)").text();
     let number = $(this).find("span:nth-child(3)").text();
@@ -128,7 +193,7 @@
         })
       },
       success(response) {
-        $('textarea[name=TextContent]').val(response[0]['cdmContent']);
+        MyEditor.setData(response[0]['cdmContent']);
       },
       complete() {
         Swal.fire({
@@ -155,7 +220,7 @@
       },
       success(objectRegister) {
         $("select[name=SelectDocument]").val(objectRegister[0]['pro_doc']);
-        $("textarea[name=TextContent]").val(objectRegister[0]['pro_content']);
+        MyEditor.setData(objectRegister[0]['pro_content']);
       },
       complete() {
         $("#formProcedure").modal();
