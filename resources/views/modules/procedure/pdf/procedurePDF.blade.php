@@ -63,7 +63,7 @@
   </header>
   <main>
     <div class="w-100">
-      <p class="px-3 py-1">{{$allPDF[0]['pro_content']}}</p>
+      <p class="px-3 py-1">{!!$allPDF[0]['pro_content']!!}</p>
     </div>
   </main>
   <script type="text/php">

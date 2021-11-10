@@ -19,7 +19,7 @@
       <tr>
         <td class="align-middle">{{ $row++ }}</td>
         <td class="align-middle">{{ $file->domName}}</td>
-        <td class="align-middle">{{ substr($file->pro_content,0,80)."..."}}</td>
+        <td class="align-middle">{!! substr($file->pro_content,0,80)."..."!!}</td>
         <td><button class="btn btn-outline-danger rounded-circle btn-PDF" title="PDF"><i class="far fa-file-pdf"></i><span hidden>{{$file->pro_id}}</span></button></td>
       </tr>
       @endif
