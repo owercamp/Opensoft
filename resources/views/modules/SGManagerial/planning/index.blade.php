@@ -616,7 +616,6 @@ $yearfutureSeven = date('Y') + 7;
         case 'Texto':
           var add = "<input type='text' placeholder='Campo de texto' maxlength='" + long + "' disabled>";
           var content_example = MyEditorEdit.getData();
-          console.log(content_example);
           MyEditorEdit.setData(`${content_example} <u><i><b>¡¡¡Texto dinámico!!!</b></i></u>`);
           break;
         case 'Numérico':

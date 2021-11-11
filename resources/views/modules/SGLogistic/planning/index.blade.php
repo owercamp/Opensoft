@@ -47,13 +47,7 @@
       <tr>
         <td>{{ $row++ }}</td>
         <td>{{ $configuration->document->dolName }}</td>
-        <td>
-          @if(strlen($configuration->cdlContent) > 50)
-          {{ substr($configuration->cdlContent,0,50) . ' ... ' }}
-          @else
-          {{ $configuration->cdlContent }}
-          @endif
-        </td>
+        <td>{!!substr($configuration->cdlContent,0,50).'...'!!}</td>
         <td>
           <a href="#" title="Editar" class="btn btn-outline-primary rounded-circle form-control-sm editDocument-link">
             <i class="fas fa-edit"></i>
@@ -153,24 +147,10 @@ $yearfutureSeven = date('Y') + 7;
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
                     <small class="text-muted">ESCRIBA CONTENIDO AQUI:</small>
-                    <textarea name="cdlContent_example" rows="10" class="form-control form-control-sm text-justify" required></textarea>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <small class="text-muted">CONTENIDO FINAL:</small>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12 p-2 border cdlContent_final" style="font-size: 12px; text-align: justify;">
-
-                    </div>
+                    <textarea name="cdlContent" id="TextContent" cols="30" rows="10"></textarea>
                   </div>
                 </div>
               </div>
@@ -253,24 +233,10 @@ $yearfutureSeven = date('Y') + 7;
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
                     <small class="text-muted">ESCRIBA CONTENIDO AQUI:</small>
-                    <textarea name="cdlContent_example_Edit" rows="10" class="form-control form-control-sm text-justify" required></textarea>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <small class="text-muted">CONTENIDO FINAL:</small>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12 p-2 border cdlContent_final_Edit" style="font-size: 12px; text-align: justify;">
-
-                    </div>
+                    <textarea name="cdlContent_Edit" id="TextContentEdit" cols="30" rows="10"></textarea>
                   </div>
                 </div>
               </div>
@@ -328,20 +294,76 @@ $yearfutureSeven = date('Y') + 7;
 
 @section('scripts')
 <script>
-  $(function() {
-
-  });
+  // !implementación ckeditor
+  let MyEditor;
+  ClassicEditor
+    .create(document.querySelector('#TextContent'), {
+      fontColor: {
+        colors: [{
+            color: '#000000',
+            label: 'Black',
+            hasBorder: true
+          },
+          {
+            color: '#4D4D4D',
+            label: 'Dim grey',
+            hasBorder: true
+          },
+          {
+            color: '#999999',
+            label: 'Grey',
+            hasBorder: true
+          },
+          {
+            color: '#E6E6E6',
+            label: 'Light grey',
+            hasBorder: true
+          },
+          {
+            color: '#FFFFFF',
+            label: 'White',
+            hasBorder: true
+          },
+          {
+            color: '#e3342f',
+            label: 'Red',
+            hasBorder: true
+          },
+          {
+            color: '#0086f9',
+            label: 'Blue',
+            hasBorder: true
+          },
+          {
+            color: '#ffed4a',
+            label: 'Yellow',
+            hasBorder: true
+          },
+          {
+            color: '#fd8701',
+            label: 'Orange',
+            hasBorder: true
+          },
+          {
+            color: '#627700',
+            label: 'Green',
+            hasBorder: true
+          }
+        ]
+      },
+    })
+    .then(editor => {
+      MyEditor = editor;
+    })
+    .catch(error => {
+      console.error(error);
+    });
 
   $('.newDocument-link').on('click', function() {
     $('#newDocument-modal').modal();
   });
 
-  $('textarea[name=cdlContent_example]').on('keyup', function(e) {
-    var writed = e.target.value;
-    var contentFinal = showContent(writed);
-    $('div.cdlContent_final').html(contentFinal);
-  });
-
+  // seleccion de mi campo Documento y carga info en codigo y version, carga lista tipo de variable
   $('select[name=cdlDocument_id]').on('change', function(e) {
     var selected = e.target.value;
     $('input[name=dolCode]').val('');
@@ -393,69 +415,139 @@ $yearfutureSeven = date('Y') + 7;
       switch (type) {
         case 'Texto':
           var add = "<input type='text' placeholder='Campo de texto' maxlength='" + long + "' disabled>";
-          var content_example = $('textarea[name=cdlContent_example]').val();
-          $('textarea[name=cdlContent_example]').val(content_example + '¡¡¡Texto dinámico!!!');
-          $('div.cdlContent_final').append(add);
+          var content_example = MyEditor.getData();
+          MyEditor.setData(`${content_example} <u><i><b>¡¡¡Texto dinámico!!!</b></i></u>`);
           break;
         case 'Numérico':
           var add = "<input type='text' maxlength='2' pattern='[0-9]{1," + long + "}' placeholder='Campo de número' disabled>";
-          var content_example = $('textarea[name=cdlContent_example]').val();
-          $('textarea[name=cdlContent_example]').val(content_example + '¡¡¡Número dinámico!!!');
-          $('div.cdlContent_final').append(add);
+          var content_example = MyEditor.getData();
+          MyEditor.setData(`${content_example} <u><i><b>¡¡¡Número dinámico!!!</b></i></u>`);
           break;
         case 'Moneda':
           var add = "<input type='text' maxlength='10' pattern='[0-9]{1," + long + "}' placeholder='Campo de móneda' disabled>";
-          var content_example = $('textarea[name=cdlContent_example]').val();
-          $('textarea[name=cdlContent_example]').val(content_example + '¡¡¡Moneda dinámica!!!');
-          $('div.cdlContent_final').append(add);
+          var content_example = MyEditor.getData();
+          MyEditor.setData(`${content_example} <u><i><b>¡¡¡Moneda dinámica!!!</b></i></u>`);
           break;
         case 'Calendario':
           var add = "<input type='text' maxlength='" + long + "' placeholder='Campo de fecha' disabled>";
-          var content_example = $('textarea[name=cdlContent_example]').val();
-          $('textarea[name=cdlContent_example]').val(content_example + '¡¡¡Calendario dinámico!!!');
-          $('div.cdlContent_final').append(add);
+          var content_example = MyEditor.getData();
+          MyEditor.setData(`${content_example} <u><i><b>¡¡¡Calendario dinámico!!!</b></i></u>`);
           break;
       }
     }
   });
 
-  $('.editDocument-link').on('click', function(e) {
-    e.preventDefault();
-    var cdlId = $(this).find('span:nth-child(2)').text();
-    var cdlDocument_id = $(this).find('span:nth-child(3)').text();
-    var cdlContent = $(this).find('span:nth-child(4)').text();
-    $('input[name=cdlId_Edit]').val(cdlId);
-    $('select[name=cdlDocument_id_Edit]').val(cdlDocument_id);
-    var code = $('select[name=cdlDocument_id_Edit] option:selected').attr('data-code');
-    var version = $('select[name=cdlDocument_id_Edit] option:selected').attr('data-version');
-    $('input[name=dolCode_Edit]').val(code);
-    $('input[name=dolVersion_Edit]').val(version);
-    $('select[name=valId_Edit]').empty();
-    $('select[name=valId_Edit]').append("<option value=''>Seleccione ...</option>");
-    $.get("{{ route('getVariablesFromDocumentLogistic') }}", {
-      dolId: cdlDocument_id
-    }, function(objectVariables) {
-      var count = Object.keys(objectVariables).length;
-      if (count > 0) {
-        for (var i = 0; i < count; i++) {
-          $('select[name=valId_Edit]').append(
-            "<option value='" + objectVariables[i]['valId'] + "' data-type='" + objectVariables[i]['valType'] + "' data-longitud='" + objectVariables[i]['valLongitud'] + "'>" +
-            objectVariables[i]['valName'] +
-            "</option>"
-          );
-        }
-      }
+  let MyEditorEdit;
+  ClassicEditor
+    .create(document.querySelector('#TextContentEdit'), {
+      fontColor: {
+        colors: [{
+            color: '#000000',
+            label: 'Black',
+            hasBorder: true
+          },
+          {
+            color: '#4D4D4D',
+            label: 'Dim grey',
+            hasBorder: true
+          },
+          {
+            color: '#999999',
+            label: 'Grey',
+            hasBorder: true
+          },
+          {
+            color: '#E6E6E6',
+            label: 'Light grey',
+            hasBorder: true
+          },
+          {
+            color: '#FFFFFF',
+            label: 'White',
+            hasBorder: true
+          },
+          {
+            color: '#e3342f',
+            label: 'Red',
+            hasBorder: true
+          },
+          {
+            color: '#0086f9',
+            label: 'Blue',
+            hasBorder: true
+          },
+          {
+            color: '#ffed4a',
+            label: 'Yellow',
+            hasBorder: true
+          },
+          {
+            color: '#fd8701',
+            label: 'Orange',
+            hasBorder: true
+          },
+          {
+            color: '#627700',
+            label: 'Green',
+            hasBorder: true
+          }
+        ]
+      },
+    })
+    .then(editor => {
+      MyEditorEdit = editor;
+    })
+    .catch(error => {
+      console.error(error);
     });
-    $('textarea[name=cdlContent_example_Edit]').val(cdlContent);
-    var contentFinal = showContent(cdlContent);
-    $('div.cdlContent_final_Edit').html(contentFinal);
-    $('#editDocument-modal').modal();
-  });
 
-  $('textarea[name=cdlContent_example_Edit]').on('keyup', function(e) {
-    var writed = e.target.value;
-    var contentFinal = showContent(writed);
-    $('div.cdlContent_final_Edit').html(contentFinal);
+  $('.editDocument-link').on('click', function(e) {
+    Swal.fire({
+      title: 'Desea editar este registro?',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#f58f4d',
+      confirmButtonText: 'Si, editar',
+      cancelButtonText: 'No',
+      showClass: {
+        popup: 'animate__animated animate__flipInX'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__flipOutX'
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        e.preventDefault();
+        var cdlId = $(this).find('span:nth-child(2)').text();
+        var cdlDocument_id = $(this).find('span:nth-child(3)').text();
+        var cdlContent = $(this).find('span:nth-child(4)').text();
+        $('input[name=cdlId_Edit]').val(cdlId);
+        $('select[name=cdlDocument_id_Edit]').val(cdlDocument_id);
+        var code = $('select[name=cdlDocument_id_Edit] option:selected').attr('data-code');
+        var version = $('select[name=cdlDocument_id_Edit] option:selected').attr('data-version');
+        $('input[name=dolCode_Edit]').val(code);
+        $('input[name=dolVersion_Edit]').val(version);
+        $('select[name=valId_Edit]').empty();
+        $('select[name=valId_Edit]').append("<option value=''>Seleccione ...</option>");
+        $.get("{{ route('getVariablesFromDocumentLogistic') }}", {
+          dolId: cdlDocument_id
+        }, function(objectVariables) {
+          var count = Object.keys(objectVariables).length;
+          if (count > 0) {
+            for (var i = 0; i < count; i++) {
+              $('select[name=valId_Edit]').append(
+                "<option value='" + objectVariables[i]['valId'] + "' data-type='" + objectVariables[i]['valType'] + "' data-longitud='" + objectVariables[i]['valLongitud'] + "'>" +
+                objectVariables[i]['valName'] +
+                "</option>"
+              );
+            }
+          }
+        });
+        MyEditorEdit.setData(cdlContent);
+        $('#editDocument-modal').modal();
+      }
+    })
   });
 
   $('select[name=cdlDocument_id_Edit]').on('change', function(e) {
@@ -510,27 +602,23 @@ $yearfutureSeven = date('Y') + 7;
       switch (type) {
         case 'Texto':
           var add = "<input type='text' placeholder='Campo de texto' maxlength='" + long + "' disabled>";
-          var content_example = $('textarea[name=cdlContent_example_Edit]').val();
-          $('textarea[name=cdlContent_example_Edit]').val(content_example + '¡¡¡Texto dinámico!!!');
-          $('div.cdlContent_final_Edit').append(add);
+          var content_example = MyEditorEdit.getData();
+          MyEditorEdit.setData(`${content_example} <u><i><b>¡¡¡Texto dinámico!!!</b></i></u>`);
           break;
         case 'Numérico':
           var add = "<input type='text' maxlength='" + long + "' pattern='[0-9]{1," + long + "}' placeholder='Campo de número' disabled>";
-          var content_example = $('textarea[name=cdlContent_example_Edit]').val();
-          $('textarea[name=cdlContent_example_Edit]').val(content_example + '¡¡¡Número dinámico!!!');
-          $('div.cdlContent_final_Edit').append(add);
+          var content_example = MyEditorEdit.getData();
+          MyEditorEdit.setData(`${content_example} <u><i><b>¡¡¡Número dinámico!!!</b></i></u>`);
           break;
         case 'Moneda':
           var add = "<input type='text' maxlength='10' pattern='[0-9]{1," + long + "}' placeholder='Campo de móneda' disabled>";
-          var content_example = $('textarea[name=cdlContent_example_Edit]').val();
-          $('textarea[name=cdlContent_example_Edit]').val(content_example + '¡¡¡Moneda dinámica!!!');
-          $('div.cdlContent_final_Edit').append(add);
+          var content_example = MyEditorEdit.getData();
+          MyEditorEdit.setData(`${content_example} <u><i><b>¡¡¡Moneda dinámica!!!</b></i></u>`);
           break;
         case 'Calendario':
           var add = "<input type='text' maxlength='" + long + "' placeholder='Campo de fecha' disabled>";
-          var content_example = $('textarea[name=cdlContent_example_Edit]').val();
-          $('textarea[name=cdlContent_example_Edit]').val(content_example + '¡¡¡Calendario dinámico!!!');
-          $('div.cdlContent_final_Edit').append(add);
+          var content_example = MyEditorEdit.getData();
+          MyEditorEdit.setData(`${content_example} <u><i><b>¡¡¡Calendario dinámico!!!</b></i></u>`);
           break;
       }
     }
@@ -559,5 +647,116 @@ $yearfutureSeven = date('Y') + 7;
     $('div.cdlContent_final_Delete').html(contentFinal);
     $('#deleteDocument-modal').modal();
   });
+  // envio formulario de eliminación
+  $('.DeleteSend').submit('click', function(e) {
+    e.preventDefault();
+    Swal.fire({
+      title: '¡¡Eliminación!!',
+      text: "Desea continuar con la eliminación",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#f58f4d',
+      confirmButtonText: 'Si, Eliminar',
+      cancelButtonText: 'No',
+      showClass: {
+        popup: 'animate__animated animate__flipInX'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__flipOutX'
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.submit();
+      }
+    })
+  })
 </script>
+@if(session('SuccessDocument'))
+<script>
+  Swal.fire({
+    icon: 'success',
+    title: '¡creado con exito!',
+    timer: 3000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    showClass: {
+      popup: 'animate__animated animate__flipInX'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__flipOutX'
+    }
+  })
+</script>
+@endif
+@if(session('SecondaryDocument'))
+<script>
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops..',
+    text: '¡configuración del documento existente!',
+    timer: 3000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    showClass: {
+      popup: 'animate__animated animate__flipInX'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__flipOutX'
+    }
+  })
+</script>
+@endif
+@if(session('PrimaryDocument'))
+<script>
+  Swal.fire({
+    icon: 'success',
+    title: '¡configuración de documento actualizada!',
+    timer: 3000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    showClass: {
+      popup: 'animate__animated animate__flipInX'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__flipOutX'
+    }
+  })
+</script>
+@endif
+@if(session('SecondaryDocument') == "Configuración no encontrada")
+<script>
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops..',
+    text: '¡configuración del documento no encontrada!',
+    timer: 3000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    showClass: {
+      popup: 'animate__animated animate__flipInX'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__flipOutX'
+    }
+  })
+</script>
+@endif
+@if(session('WarningDocument'))
+<script>
+  Swal.fire({
+    icon: 'success',
+    title: '¡eliminado con exito!',
+    timer: 3000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    showClass: {
+      popup: 'animate__animated animate__flipInX'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__flipOutX'
+    }
+  })
+</script>
+@endif
 @endsection
