@@ -47,7 +47,19 @@
       <tr>
         <td>{{ $row++ }}</td>
         <td>{{ $configuration->document->dolName }}</td>
-        <td>{!!substr($configuration->cdlContent,0,50).'...'!!}</td>
+        <td>
+          @php
+          $data = str_split($configuration->cdlContent);
+          $num=0;
+          foreach($data as $key => $item){
+          if($key >= 70 & $item == " "){
+          break;
+          }
+          print($item);
+          }
+          @endphp
+          ...
+        </td>
         <td>
           <a href="#" title="Editar" class="btn btn-outline-primary rounded-circle form-control-sm editDocument-link">
             <i class="fas fa-edit"></i>
@@ -277,7 +289,7 @@ $yearfutureSeven = date('Y') + 7;
           </div>
         </div>
         <div class="row mt-3 border-top text-center">
-          <form action="{{ route('logistic.configuration.delete') }}" method="POST" class="col-md-6">
+          <form action="{{ route('logistic.configuration.delete') }}" method="POST" class="col-md-6 DeleteSend">
             @csrf
             <input type="hidden" class="form-control form-control-sm" name="cdlId_Delete" readonly required>
             <button type="submit" class="btn btn-outline-success form-control-sm my-3">ELIMINAR</button>

@@ -47,7 +47,19 @@
       <tr>
         <td>{{$row++}}</td>
         <td>{{$config->document->domName}}</td>
-        <td>{!!substr($config->cdmContent,0,50).'...'!!}</td>
+        <td>
+          @php
+          $data = str_split($config->cdmContent);
+          $num=0;
+          foreach($data as $key => $item){
+          if($key >= 70 & $item == " "){
+          break;
+          }
+          print($item);
+          }
+          @endphp
+          ...
+        </td>
         <td>
           <a href="#" title="Editar" class="btn btn-outline-primary rounded-circle form-control-sm editDocument-link">
             <i class="fas fa-edit"></i>

@@ -45,14 +45,20 @@
       @php $row = 1; @endphp
       @foreach($configurations as $configuration)
       <tr>
-        <td>{{ $row++ }}</td>
+        <td>{{$row++}}</td>
         <td>{{ $configuration->document->docName }}</td>
         <td>
-          @if(strlen($configuration->cdoContent) > 50)
-          {{ substr($configuration->cdoContent,0,50) . ' ... ' }}
-          @else
-          {{ $configuration->cdoContent }}
-          @endif
+          @php
+          $data = str_split($configuration->cdoContent);
+          $num=0;
+          foreach($data as $key => $item){
+          if($key >= 70 & $item == " "){
+          break;
+          }
+          print($item);
+          }
+          @endphp
+          ...
         </td>
         <td>
           <a href="#" title="Editar" class="btn btn-outline-primary rounded-circle form-control-sm editDocument-link">
@@ -153,24 +159,10 @@ $yearfutureSeven = date('Y') + 7;
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
                     <small class="text-muted">ESCRIBA CONTENIDO AQUI:</small>
-                    <textarea name="cdoContent_example" rows="10" class="form-control form-control-sm text-justify" required></textarea>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <small class="text-muted">CONTENIDO FINAL:</small>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12 p-2 border cdoContent_final" style="font-size: 12px; text-align: justify;">
-
-                    </div>
+                    <textarea name="cdoContent" id="TextContent" cols="30" rows="10"></textarea>
                   </div>
                 </div>
               </div>
@@ -253,24 +245,10 @@ $yearfutureSeven = date('Y') + 7;
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
                     <small class="text-muted">ESCRIBA CONTENIDO AQUI:</small>
-                    <textarea name="cdoContent_example_Edit" rows="10" class="form-control form-control-sm text-justify" required></textarea>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <small class="text-muted">CONTENIDO FINAL:</small>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12 p-2 border cdoContent_final_Edit" style="font-size: 12px; text-align: justify;">
-
-                    </div>
+                    <textarea name="cdoContent_Edit" id="TextContentEdit" cols="30" rows="10"></textarea>
                   </div>
                 </div>
               </div>
@@ -311,7 +289,7 @@ $yearfutureSeven = date('Y') + 7;
           </div>
         </div>
         <div class="row mt-3 border-top text-center">
-          <form action="{{ route('commercial.configuration.delete') }}" method="POST" class="col-md-6">
+          <form action="{{ route('commercial.configuration.delete') }}" method="POST" class="col-md-6 DeleteSend">
             @csrf
             <input type="hidden" class="form-control form-control-sm" name="cdoId_Delete" readonly required>
             <button type="submit" class="btn btn-outline-success form-control-sm my-3">ELIMINAR</button>
@@ -328,18 +306,73 @@ $yearfutureSeven = date('Y') + 7;
 
 @section('scripts')
 <script>
-  $(function() {
-
-  });
+  // !implementación ckeditor
+  let MyEditor;
+  ClassicEditor
+    .create(document.querySelector('#TextContent'), {
+      fontColor: {
+        colors: [{
+            color: '#000000',
+            label: 'Black',
+            hasBorder: true
+          },
+          {
+            color: '#4D4D4D',
+            label: 'Dim grey',
+            hasBorder: true
+          },
+          {
+            color: '#999999',
+            label: 'Grey',
+            hasBorder: true
+          },
+          {
+            color: '#E6E6E6',
+            label: 'Light grey',
+            hasBorder: true
+          },
+          {
+            color: '#FFFFFF',
+            label: 'White',
+            hasBorder: true
+          },
+          {
+            color: '#e3342f',
+            label: 'Red',
+            hasBorder: true
+          },
+          {
+            color: '#0086f9',
+            label: 'Blue',
+            hasBorder: true
+          },
+          {
+            color: '#ffed4a',
+            label: 'Yellow',
+            hasBorder: true
+          },
+          {
+            color: '#fd8701',
+            label: 'Orange',
+            hasBorder: true
+          },
+          {
+            color: '#627700',
+            label: 'Green',
+            hasBorder: true
+          }
+        ]
+      },
+    })
+    .then(editor => {
+      MyEditor = editor;
+    })
+    .catch(error => {
+      console.error(error);
+    });
 
   $('.newDocument-link').on('click', function() {
     $('#newDocument-modal').modal();
-  });
-
-  $('textarea[name=cdoContent_example]').on('keyup', function(e) {
-    var writed = e.target.value;
-    var contentFinal = showContent(writed);
-    $('div.cdoContent_final').html(contentFinal);
   });
 
   $('select[name=cdoDocument_id]').on('change', function(e) {
@@ -392,69 +425,140 @@ $yearfutureSeven = date('Y') + 7;
       switch (type) {
         case 'Texto':
           var add = "<input type='text' placeholder='Campo de texto' disabled>";
-          var content_example = $('textarea[name=cdoContent_example]').val();
-          $('textarea[name=cdoContent_example]').val(content_example + '¡¡¡Texto dinámico!!!');
-          $('div.cdoContent_final').append(add);
+          var content_example = MyEditor.getData();
+          MyEditor.setData(`${content_example} <u><i><b>¡¡¡Texto dinámico!!!</b></i></u>`);
           break;
         case 'Numérico':
           var add = "<input type='text' maxlength='2' pattern='[0-9]{1,2}' placeholder='Campo de número' disabled>";
-          var content_example = $('textarea[name=cdoContent_example]').val();
-          $('textarea[name=cdoContent_example]').val(content_example + '¡¡¡Número dinámico!!!');
-          $('div.cdoContent_final').append(add);
+          var content_example = MyEditor.getData();
+          MyEditor.setData(`${content_example} <u><i><b>¡¡¡Número dinámico!!!</b></i></u>`);
           break;
         case 'Moneda':
           var add = "<input type='text' maxlength='10' pattern='[0-9]{1,10}' placeholder='Campo de móneda' disabled>";
-          var content_example = $('textarea[name=cdoContent_example]').val();
-          $('textarea[name=cdoContent_example]').val(content_example + '¡¡¡Moneda dinámica!!!');
-          $('div.cdoContent_final').append(add);
+          var content_example = MyEditor.getData();
+          MyEditor.setData(`${content_example} <u><i><b>¡¡¡Moneda dinámica!!!</b></i></u>`);
           break;
         case 'Calendario':
           var add = "<input type='text' maxlength='10' pattern='[0-9]{1,10}' placeholder='Campo de fecha' disabled>";
-          var content_example = $('textarea[name=cdoContent_example]').val();
-          $('textarea[name=cdoContent_example]').val(content_example + '¡¡¡Calendario dinámico!!!');
-          $('div.cdoContent_final').append(add);
+          var content_example = MyEditor.getData();
+          MyEditor.setData(`${content_example} <u><i><b>¡¡¡Calendario dinámico!!!</b></i></u>`);
           break;
       }
     }
   });
 
-  $('.editDocument-link').on('click', function(e) {
-    e.preventDefault();
-    var cdoId = $(this).find('span:nth-child(2)').text();
-    var cdoDocument_id = $(this).find('span:nth-child(3)').text();
-    var cdoContent = $(this).find('span:nth-child(4)').text();
-    $('input[name=cdoId_Edit]').val(cdoId);
-    $('select[name=cdoDocument_id_Edit]').val(cdoDocument_id);
-    var code = $('select[name=cdoDocument_id_Edit] option:selected').attr('data-code');
-    var version = $('select[name=cdoDocument_id_Edit] option:selected').attr('data-version');
-    $('input[name=docCode_Edit]').val(code);
-    $('input[name=docVersion_Edit]').val(version);
-    $('select[name=varId_Edit]').empty();
-    $('select[name=varId_Edit]').append("<option value=''>Seleccione ...</option>");
-    $.get("{{ route('getVariablesFromDocument') }}", {
-      docId: cdoDocument_id
-    }, function(objectVariables) {
-      var count = Object.keys(objectVariables).length;
-      if (count > 0) {
-        for (var i = 0; i < count; i++) {
-          $('select[name=varId_Edit]').append(
-            "<option value='" + objectVariables[i]['varId'] + "' data-type='" + objectVariables[i]['varType'] + "' data-longitud='" + objectVariables[i]['varLongitud'] + "'>" +
-            objectVariables[i]['varName'] +
-            "</option>"
-          );
-        }
-      }
+  let MyEditorEdit;
+  ClassicEditor
+    .create(document.querySelector('#TextContentEdit'), {
+      fontColor: {
+        colors: [{
+            color: '#000000',
+            label: 'Black',
+            hasBorder: true
+          },
+          {
+            color: '#4D4D4D',
+            label: 'Dim grey',
+            hasBorder: true
+          },
+          {
+            color: '#999999',
+            label: 'Grey',
+            hasBorder: true
+          },
+          {
+            color: '#E6E6E6',
+            label: 'Light grey',
+            hasBorder: true
+          },
+          {
+            color: '#FFFFFF',
+            label: 'White',
+            hasBorder: true
+          },
+          {
+            color: '#e3342f',
+            label: 'Red',
+            hasBorder: true
+          },
+          {
+            color: '#0086f9',
+            label: 'Blue',
+            hasBorder: true
+          },
+          {
+            color: '#ffed4a',
+            label: 'Yellow',
+            hasBorder: true
+          },
+          {
+            color: '#fd8701',
+            label: 'Orange',
+            hasBorder: true
+          },
+          {
+            color: '#627700',
+            label: 'Green',
+            hasBorder: true
+          }
+        ]
+      },
+    })
+    .then(editor => {
+      MyEditorEdit = editor;
+    })
+    .catch(error => {
+      console.error(error);
     });
-    $('textarea[name=cdoContent_example_Edit]').val(cdoContent);
-    var contentFinal = showContent(cdoContent);
-    $('div.cdoContent_final_Edit').html(contentFinal);
-    $('#editDocument-modal').modal();
-  });
 
-  $('textarea[name=cdoContent_example_Edit]').on('keyup', function(e) {
-    var writed = e.target.value;
-    var contentFinal = showContent(writed);
-    $('div.cdoContent_final_Edit').html(contentFinal);
+
+  $('.editDocument-link').on('click', function(e) {
+    Swal.fire({
+      title: 'Desea editar este registro?',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#f58f4d',
+      confirmButtonText: 'Si, editar',
+      cancelButtonText: 'No',
+      showClass: {
+        popup: 'animate__animated animate__flipInX'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__flipOutX'
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        e.preventDefault();
+        var cdoId = $(this).find('span:nth-child(2)').text();
+        var cdoDocument_id = $(this).find('span:nth-child(3)').text();
+        var cdoContent = $(this).find('span:nth-child(4)').text();
+        $('input[name=cdoId_Edit]').val(cdoId);
+        $('select[name=cdoDocument_id_Edit]').val(cdoDocument_id);
+        var code = $('select[name=cdoDocument_id_Edit] option:selected').attr('data-code');
+        var version = $('select[name=cdoDocument_id_Edit] option:selected').attr('data-version');
+        $('input[name=docCode_Edit]').val(code);
+        $('input[name=docVersion_Edit]').val(version);
+        $('select[name=varId_Edit]').empty();
+        $('select[name=varId_Edit]').append("<option value=''>Seleccione ...</option>");
+        $.get("{{ route('getVariablesFromDocument') }}", {
+          docId: cdoDocument_id
+        }, function(objectVariables) {
+          var count = Object.keys(objectVariables).length;
+          if (count > 0) {
+            for (var i = 0; i < count; i++) {
+              $('select[name=varId_Edit]').append(
+                "<option value='" + objectVariables[i]['varId'] + "' data-type='" + objectVariables[i]['varType'] + "' data-longitud='" + objectVariables[i]['varLongitud'] + "'>" +
+                objectVariables[i]['varName'] +
+                "</option>"
+              );
+            }
+          }
+        });
+        MyEditorEdit.setData(cdoContent);
+        $('#editDocument-modal').modal();
+      }
+    })
   });
 
   $('select[name=cdoDocument_id_Edit]').on('change', function(e) {
@@ -508,27 +612,23 @@ $yearfutureSeven = date('Y') + 7;
       switch (type) {
         case 'Texto':
           var add = "<input type='text' placeholder='Campo de texto' disabled>";
-          var content_example = $('textarea[name=cdoContent_example_Edit]').val();
-          $('textarea[name=cdoContent_example_Edit]').val(content_example + '¡¡¡Texto dinámico!!!');
-          $('div.cdoContent_final_Edit').append(add);
+          var content_example = MyEditorEdit.getData();
+          MyEditorEdit.setData(`${content_example} <u><i><b>¡¡¡Texto dinámico!!!</b></i></u>`);
           break;
         case 'Numérico':
           var add = "<input type='text' maxlength='2' pattern='[0-9]{1,2}' placeholder='Campo de número' disabled>";
-          var content_example = $('textarea[name=cdoContent_example_Edit]').val();
-          $('textarea[name=cdoContent_example_Edit]').val(content_example + '¡¡¡Número dinámico!!!');
-          $('div.cdoContent_final_Edit').append(add);
+          var content_example = MyEditorEdit.getData();
+          MyEditorEdit.setData(`${content_example} <u><i><b>¡¡¡Número dinámico!!!</b></i></u>`);
           break;
         case 'Moneda':
           var add = "<input type='text' maxlength='10' pattern='[0-9]{1,10}' placeholder='Campo de móneda' disabled>";
-          var content_example = $('textarea[name=cdoContent_example_Edit]').val();
-          $('textarea[name=cdoContent_example_Edit]').val(content_example + '¡¡¡Moneda dinámica!!!');
-          $('div.cdoContent_final_Edit').append(add);
+          var content_example = MyEditorEdit.getData();
+          MyEditorEdit.setData(`${content_example} <u><i><b>¡¡¡Moneda dinámica!!!</b></i></u>`);
           break;
         case 'Calendario':
           var add = "<input type='text' maxlength='10' pattern='[0-9]{1,10}' placeholder='Campo de fecha' disabled>";
-          var content_example = $('textarea[name=cdoContent_example_Edit]').val();
-          $('textarea[name=cdoContent_example_Edit]').val(content_example + '¡¡¡Calendario dinámico!!!');
-          $('div.cdoContent_final_Edit').append(add);
+          var content_example = MyEditorEdit.getData();
+          MyEditorEdit.setData(`${content_example} <u><i><b>¡¡¡Calendario dinámico!!!</b></i></u>`);
           break;
       }
     }
@@ -557,5 +657,116 @@ $yearfutureSeven = date('Y') + 7;
     $('div.cdoContent_final_Delete').html(contentFinal);
     $('#deleteDocument-modal').modal();
   });
+  // envio formulario de eliminación
+  $('.DeleteSend').submit('click', function(e) {
+    e.preventDefault();
+    Swal.fire({
+      title: '¡¡Eliminación!!',
+      text: "Desea continuar con la eliminación",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#f58f4d',
+      confirmButtonText: 'Si, Eliminar',
+      cancelButtonText: 'No',
+      showClass: {
+        popup: 'animate__animated animate__flipInX'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__flipOutX'
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.submit();
+      }
+    })
+  })
 </script>
+@if(session('SuccessDocument'))
+<script>
+  Swal.fire({
+    icon: 'success',
+    title: '¡creado con exito!',
+    timer: 3000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    showClass: {
+      popup: 'animate__animated animate__flipInX'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__flipOutX'
+    }
+  })
+</script>
+@endif
+@if(session('SecondaryDocument'))
+<script>
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops..',
+    text: '¡configuración del documento existente!',
+    timer: 3000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    showClass: {
+      popup: 'animate__animated animate__flipInX'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__flipOutX'
+    }
+  })
+</script>
+@endif
+@if(session('PrimaryDocument'))
+<script>
+  Swal.fire({
+    icon: 'success',
+    title: '¡configuración de documento actualizada!',
+    timer: 3000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    showClass: {
+      popup: 'animate__animated animate__flipInX'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__flipOutX'
+    }
+  })
+</script>
+@endif
+@if(session('SecondaryDocument') == "Configuración no encontrada")
+<script>
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops..',
+    text: '¡configuración del documento no encontrada!',
+    timer: 3000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    showClass: {
+      popup: 'animate__animated animate__flipInX'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__flipOutX'
+    }
+  })
+</script>
+@endif
+@if(session('WarningDocument'))
+<script>
+  Swal.fire({
+    icon: 'success',
+    title: '¡eliminado con exito!',
+    timer: 3000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    showClass: {
+      popup: 'animate__animated animate__flipInX'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__flipOutX'
+    }
+  })
+</script>
+@endif
 @endsection

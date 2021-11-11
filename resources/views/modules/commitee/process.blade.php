@@ -20,7 +20,20 @@
       <tr>
         <td class="align-middle">{{ $row++ }}</td>
         <td class="align-middle">{{ $item->domName }}</td>
-        <td class="align-middle">{!! substr($item->comtext,0,70)."..."!!}</td>
+        <td class="align-middle">
+          @php
+          $data = str_split($item->comtext);
+          $num=0;
+          foreach($data as $key => $items){
+          if($key >= 50 & $items == " "){
+          break;
+          }
+          print($items);
+          }
+          @endphp
+          ...
+        </td>
+        <!-- <td class="align-middle">{!! substr($item->comtext,0,70)."..."!!}</td> -->
         <td>
           <button title="EDITAR" class="btn btn-outline-info rounded-circle showForm"><i class="fas fa-indent"></i><span hidden>{{$item->comid}}</span>
           </button>
