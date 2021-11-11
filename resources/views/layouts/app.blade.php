@@ -84,6 +84,7 @@
               <li><a href="{{ route('providers.products') }}">CREACION PROVEEDORES</a></li>
               <li><a href="{{ route('allies.messengers') }}">CREACION EMPRESAS ALIADAS</a></li>
               <li><a href="{{ route('automotors.messengers') }}">CREACION PARQUE AUTOMOTOR</a></li>
+              <li><a href="{{ route('training.planing') }}">CREACION DE CAPACITACIONES</a></li>
             </ul>
           </li>
           @endhasanyrole
