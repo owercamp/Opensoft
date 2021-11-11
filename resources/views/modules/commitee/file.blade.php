@@ -20,7 +20,19 @@
         <tr>
           <td class="align-middle">{{ $row++ }}</td>
           <td class="align-middle">{{ $archive->domName }}</td>
-          <td class="align-middle">{!! substr($archive->comtext,0,70)."..."!!}</td>
+          <td class="align-middle">
+            @php
+            $data = str_split($archive->comtext);
+            $num=0;
+            foreach($data as $key => $item){
+            if($key >= 70 & $item == " "){
+            break;
+            }
+            print($item);
+            }
+            @endphp
+            ...
+          </td>
           <td>
             <button class="btn btn-outline-danger rounded-circle btnPDF"><i class="far fa-file-pdf"></i><span hidden>{{ $archive->comid }}</span></button>
           </td>

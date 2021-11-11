@@ -19,7 +19,19 @@
         <tr>
           <td class="align-middle">{{$row++}}</td>
           <td class="align-middle">{{$item->domName}}</td>
-          <td class="align-middle">{!!substr($item->pro_content,0,80)."..."!!}</td>
+          <td class="align-middle">
+            @php
+            $data = str_split($item->pro_content);
+            $num=0;
+            foreach($data as $key => $items){
+            if($key >= 70 & $items == " "){
+            break;
+            }
+            print($items);
+            }
+            @endphp
+            ...
+          </td>
           <td>
             <button class="btn btn-outline-primary rounded-circle btn-edit" title="EDITAR"><i class="fas fa-keyboard"></i><span hidden>{{$item->pro_id}}</span></button>
             <button title="ELIMINAR" class="btn btn-outline-danger rounded-circle mx-2 btn-delete"><i class="fas fa-minus-square"></i><span hidden>{{$item->pro_id}}</span><span hidden>{{$row-1}}</span></button>

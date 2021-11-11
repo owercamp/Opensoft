@@ -21,7 +21,19 @@
       <tr>
         <td class="align-middle">{{$row++}}</td>
         <td class="align-middle">{{$item->dolName}}</td>
-        <td class="align-middle">{!!substr($item->trv_content,0,70).'...'!!}</td>
+        <td class="align-middle">
+          @php
+          $data = str_split($item->trv_content);
+          $num=0;
+          foreach($data as $key => $items){
+          if($key >= 70 & $items == " "){
+          break;
+          }
+          print($items);
+          }
+          @endphp
+          ...
+        </td>
         <td>
           <button class="btn btn-outline-primary rounded-circle showEdit"><i class="fas fa-edit"></i><span hidden>{{$item->trv_id}}</span></button>
           <button class="btn btn-outline-danger rounded-circle mx-2 Delete-register"><i class="fas fa-eraser"></i><span hidden aria-hidden="true">{{$item->trv_id}}</span><span hidden aria-hidden="true">{{$row-1}}</span></button>

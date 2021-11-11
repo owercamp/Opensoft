@@ -19,7 +19,19 @@
       <tr>
         <td class="align-middle">{{ $row++ }}</td>
         <td class="align-middle">{{ $file->domName}}</td>
-        <td class="align-middle">{!! substr($file->pro_content,0,80)."..."!!}</td>
+        <td class="align-middle">
+          @php
+          $data = str_split($file->pro_content);
+          $num=0;
+          foreach($data as $key => $item){
+          if($key >= 70 & $item == " "){
+          break;
+          }
+          print($item);
+          }
+          @endphp
+          ...
+        </td>
         <td><button class="btn btn-outline-danger rounded-circle btn-PDF" title="PDF"><i class="far fa-file-pdf"></i><span hidden>{{$file->pro_id}}</span></button></td>
       </tr>
       @endif
