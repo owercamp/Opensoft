@@ -299,6 +299,12 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
 
   // *Plan de Capacitaciones
   Route::get('administrative/training/planing', 'TrainingController@planingTo')->name('training.planing');
+  // *Soporte de Capacitaciones
+  Route::get('administrative/training/support', 'TrainingController@supportTo')->name('training.support');
+  // *Eficiencia Capacitaciones
+  Route::get('administrative/training/effectiveness', 'TrainingController@effectivenessTo')->name('training.effectiveness');
+  // *Indicadores Correspondientes
+  Route::get('administrative/training/indicators', 'TrainingController@indicatorsTo')->name('training.indicators');
 });
 
 // !RUTAS DEL MODULO GERENCIAL

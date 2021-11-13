@@ -1,7 +1,7 @@
 @extends('modules.trainingMenu')
 
 @section('space')
-<h2>PLAN DE CAPACITACIONES</h2>
+<h2>SOPORTE DE CUMPLIMIENTO</h2>
 @endsection
 
 @section('scripts')

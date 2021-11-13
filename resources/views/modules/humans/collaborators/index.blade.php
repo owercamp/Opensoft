@@ -72,6 +72,36 @@
             <span hidden>{{ $collaborator->coEmail }}</span>
             <span hidden>{{ $collaborator->coMovil }}</span>
             <span hidden>{{ $collaborator->coWhatsapp }}</span>
+            <span hidden>{{ $collaborator->colRef1 }}</span>
+            <span hidden>{{ $collaborator->cedRef1 }}</span>
+            <span hidden>{{ $collaborator->numRef1 }}</span>
+            <span hidden>{{ $collaborator->colRef2 }}</span>
+            <span hidden>{{ $collaborator->cedRef2 }}</span>
+            <span hidden>{{ $collaborator->numRef2 }}</span>
+            <span hidden>{{ $collaborator->rsRef1 }}</span>
+            <span hidden>{{ $collaborator->nitRef1 }}</span>
+            <span hidden>{{ $collaborator->addRef1 }}</span>
+            <span hidden>{{ $collaborator->phoRef1 }}</span>
+            <span hidden>{{ $collaborator->ciuRef1 }}</span>
+            <span hidden>{{ $collaborator->rsRef2 }}</span>
+            <span hidden>{{ $collaborator->nitRef2 }}</span>
+            <span hidden>{{ $collaborator->addRef2 }}</span>
+            <span hidden>{{ $collaborator->phoRef2 }}</span>
+            <span hidden>{{ $collaborator->ciuRef2 }}</span>
+            <span hidden>{{ $collaborator->titlePrimary }}</span>
+            <span hidden>{{ $collaborator->acaPrimary }}</span>
+            <span hidden>{{ $collaborator->dePrimary }}</span>
+            <span hidden>{{ $collaborator->iniPrimary }}</span>
+            <span hidden>{{ $collaborator->finPrimary }}</span>
+            <span hidden>{{ $collaborator->titleSecondary }}</span>
+            <span hidden>{{ $collaborator->acaSecondary }}</span>
+            <span hidden>{{ $collaborator->deSecondary }}</span>
+            <span hidden>{{ $collaborator->iniSecondary }}</span>
+            <span hidden>{{ $collaborator->finSecondary }}</span>
+            <span hidden>{{ $collaborator->academics }}</span>
+            <span hidden>{{ $collaborator->titles }}</span>
+            <span hidden>{{ $collaborator->initials }}</span>
+            <span hidden>{{ $collaborator->finals }}</span>
             <img src="{{ asset('storage/collaboratorsPhotos/'.$collaborator->coPhoto) }}" hidden>
             @if($collaborator->coFirm != null)
             <img src="{{ asset('storage/collaboratorsFirms/'.$collaborator->coFirm) }}" hidden>
@@ -115,237 +145,16 @@
   </table>
 </div>
 
+<!-- formulario de creación -->
 <div class="modal fade" id="newCollaborator-modal">
-  <div class="modal-dialog modal-lg" style="font-size: 12px;">
+  <div class="modal-dialog modal-dialog-scrollable modal-xl" style="font-size: 12px;">
     <div class="modal-content">
       <div class="modal-header">
         <h4>NUEVO COLABORADOR:</h4>
       </div>
       <div class="modal-body">
         <form action="{{ route('collaborator.save') }}" method="POST" enctype="multipart/form-data">
-          @csrf
-          <div class="row">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <small class="text-muted">FOTOGRAFIA:</small>
-                    <div class="custom-file">
-                      <input type="file" name="coPhoto" lang="es" placeholder="Unicamente con extensión .jpg .jpeg o .png" accept="image/jpg,image/jpeg,image/png">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <small class="text-muted">FIRMA DIGITAL:</small>
-                    <div class="custom-file">
-                      <input type="file" name="coFirm" lang="es" placeholder="Unicamente con extensión .jpg .jpeg o .png" accept="image/jpg,image/jpeg,image/png">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <small class="text-muted">NOMBRES COMPLETOS:</small>
-                    <input type="text" name="coNames" maxlength="50" class="form-control form-control-sm" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <small class="text-muted">TIPO DE IDENTIFICACION:</small>
-                    <select name="coPersonal_id" class="form-control form-control-sm" required>
-                      <option value="">Seleccione identificación ...</option>
-                      @foreach($personals as $personal)
-                      <option value="{{ $personal->perId }}">{{ $personal->perName }}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <small class="text-muted">NUMERO DE DOCUMENTO:</small>
-                    <input type="text" name="coNumberdocument" maxlength="15" pattern="[0-9]{1,15}" class="form-control form-control-sm" placeholder="Ej. 000000000000" required>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <small class="text-muted">CARGO:</small>
-                    <input type="text" name="coPosition" maxlength="50" class="form-control form-control-sm" placeholder="Ej. Mensajero/Secretaria/Conductor" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row py-4">
-                <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">DEPARTAMENTO:</small>
-                        <select name="coDeparment_id" class="form-control form-control-sm" required>
-                          <option value="">Seleccione departamento ...</option>
-                          @foreach($deparments as $deparment)
-                          <option value="{{ $deparment->depId }}">{{ $deparment->depName }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">CIUDAD/MUNICIPIO:</small>
-                        <select name="coMunicipality_id" class="form-control form-control-sm" required>
-                          <option value="">Seleccione ciudad/municipio ...</option>
-                          <!-- munId - munName - munDepartment_id -->
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <small class="text-muted">LOCALIDAD/ZONA:</small>
-                        <select name="coZoning_id" class="form-control form-control-sm" required>
-                          <option value="">Seleccione localidad/zona ...</option>
-                          <!-- zonId - zonName - zonMunicipality_id -->
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <small class="text-muted">BARRIO:</small>
-                        <select name="coNeighborhood_id" class="form-control form-control-sm" required>
-                          <option value="">Seleccione barrio ...</option>
-                          <!-- neId - neName - neZoning_id -->
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <small class="text-muted">CODIGO POSTAL:</small>
-                        <input type="text" name="coCode" maxlength="10" class="form-control form-control-sm" placeholder="Código postal" readonly required>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row py-2 border-top border-bottom">
-                <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <small class="text-muted">DIRECCION:</small>
-                        <input type="text" name="coAddress" maxlength="50" class="form-control form-control-sm" placeholder="Ej. Cra./Cll/Trans./Diag. 00 # 00J - 00Z sur/Norte" required>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <small class="text-muted">CORREO ELECTRONICO:</small>
-                        <input type="email" name="coEmail" maxlength="50" class="form-control form-control-sm" placeholder="Ej. direcciondecorreo@teminacion.com" required>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">TELEFONO CELULAR:</small>
-                        <input type="text" name="coMovil" maxlength="10" pattern="[0-9]{1,10}" class="form-control form-control-sm" placeholder="Campo numérico" required>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">LINEA WHATSAPP:</small>
-                        <input type="text" name="coWhatsapp" maxlength="10" pattern="[0-9]{1,10}" class="form-control form-control-sm" placeholder="Campo numérico" required>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row py-4">
-                <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">TIPO SANGUINEO:</small>
-                        <select name="coBloodtype" class="form-control form-control-sm" required>
-                          <option value="">Seleccione tipo de sangre ...</option>
-                          <option value="A POSITIVO">A POSITIVO</option>
-                          <option value="A NEGATIVO">A NEGATIVO</option>
-                          <option value="B POSITIVO">B POSITIVO</option>
-                          <option value="B NEGATIVO">B NEGATIVO</option>
-                          <option value="O POSITIVO">O POSITIVO</option>
-                          <option value="O NEGATIVO">O NEGATIVO</option>
-                          <option value="AB POSITIVO">AB POSITIVO</option>
-                          <option value="AB NEGATIVO">AB NEGATIVO</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">ENTIDAD PROMOTORA DE SALUD:</small>
-                        <select name="coHealths_id" class="form-control form-control-sm" required>
-                          <option value="">Seleccione entidad de salud ...</option>
-                          @foreach($healths as $health)
-                          <option value="{{ $health->heaId }}">{{ $health->heaName }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">ADMINISTRADORA DE RIESGOS LABORALES:</small>
-                        <select name="coRisk_id" class="form-control form-control-sm" required>
-                          <option value="">Seleccione entidad de riesgos ...</option>
-                          @foreach($risks as $risk)
-                          <option value="{{ $risk->risId }}">{{ $risk->risName }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">CAJA DE COMPENSACION:</small>
-                        <select name="coCompensation_id" class="form-control form-control-sm" required>
-                          <option value="">Seleccione caja ...</option>
-                          @foreach($compensations as $compensation)
-                          <option value="{{ $compensation->comId }}">{{ $compensation->comName }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">FONDO DE PENSION:</small>
-                        <select name="coPension_id" class="form-control form-control-sm" required>
-                          <option value="">Seleccione fondo de pensión ...</option>
-                          @foreach($pensions as $pension)
-                          <option value="{{ $pension->penId }}">{{ $pension->penName }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">FONDE CESANTIAS:</small>
-                        <select name="coLayoff_id" class="form-control form-control-sm" required>
-                          <option value="">Seleccione fondo de cesantías ...</option>
-                          @foreach($layoffs as $layoff)
-                          <option value="{{ $layoff->layId }}">{{ $layoff->layName }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          @include('modules.humans.partials.formCollaborator')
           <div class="form-group text-center pt-2 border-top">
             <button type="submit" class="btn btn-outline-success form-control-sm">GUARDAR</button>
           </div>
@@ -355,249 +164,38 @@
   </div>
 </div>
 
+<!-- formualrio de edición -->
 <div class="modal fade" id="editCollaborator-modal">
-  <div class="modal-dialog modal-lg" style="font-size: 12px;">
+  <div class="modal-dialog modal-dialog-scrollable modal-xl" style="font-size: 12px;">
     <div class="modal-content">
       <div class="modal-header">
         <h5>EDITAR COLABORADOR:</h5>
       </div>
       <div class="modal-body">
         <form action="{{ route('collaborator.update') }}" method="POST" enctype="multipart/form-data">
-          @csrf
-          <div class="row">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <small class="text-muted">FOTOGRAFIA:</small>
-                    <div class="custom-file">
-                      <input type="file" name="coPhoto_Edit" lang="es" placeholder="Unicamente con extensión .jpg .jpeg o .png" accept="image/jpg,image/jpeg,image/png">
-                    </div>
-                    <small class="text-muted">FOTO ACTUAL:</small><br>
-                    <img src="" class="img-responsive img-thumbnail text-center coPhotonow_Edit" style="width: 150px; height: auto;"><br>
-                    <small class="text-muted coPhotonot_Edit">
-                      <input type="checkbox" name="coPhotonot_Edit" value="SIN FOTO">
-                      Dejar sin fotografia
-                    </small>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <small class="text-muted">FIRMA DIGITAL:</small>
-                    <div class="custom-file">
-                      <input type="file" name="coFirm_Edit" lang="es" placeholder="Unicamente con extensión .jpg .jpeg o .png" accept="image/jpg,image/jpeg,image/png">
-                    </div>
-                    <small class="text-muted">FIRMA ACTUAL:</small><br>
-                    <img src="" class="img-responsive img-thumbnail text-center coFirmnow_Edit" style="width: 150px; height: auto;"><br>
-                    <small class="text-muted coFirmnot_Edit">
-                      <input type="checkbox" name="coFirmnot_Edit" value="SIN FIRMA">
-                      Dejar sin firma
-                    </small>
-                  </div>
-                </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6 row justify-content-center">
+              <div class="form-group">
+                <small class="text-muted">FOTO ACTUAL:</small><br>
+                <img src="" class="img-thumbnail text-center coPhotonow_Edit" style="width: 3cm!important; height: 4cm!important;"><br>
+                <small class="text-muted coPhotonot_Edit d-flex justify-content-center my-2">
+                  <input type="checkbox" name="coPhotonot_Edit" value="SIN FOTO">
+                  <b class="ml-1">Dejar sin fotografia</b>
+                </small>
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <small class="text-muted">NOMBRES COMPLETOS:</small>
-                    <input type="text" name="coNames_Edit" maxlength="50" class="form-control form-control-sm" placeholder="Ej. Transportes Operalo" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <small class="text-muted">TIPO DE IDENTIFICACION:</small>
-                    <select name="coPersonal_id_Edit" class="form-control form-control-sm" required>
-                      <option value="">Seleccione identificación ...</option>
-                      @foreach($personals as $personal)
-                      <option value="{{ $personal->perId }}">{{ $personal->perName }}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <small class="text-muted">NUMERO DE DOCUMENTO:</small>
-                    <input type="text" name="coNumberdocument_Edit" maxlength="15" pattern="[0-9]{1,15}" class="form-control form-control-sm" placeholder="Ej. 000000000000" required>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <small class="text-muted">CARGO:</small>
-                    <input type="text" name="coPosition_Edit" maxlength="50" class="form-control form-control-sm" placeholder="Ej. Mensajero/Secretaria/Conductor" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row py-4">
-                <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">DEPARTAMENTO:</small>
-                        <select name="coDeparment_id_Edit" class="form-control form-control-sm" required>
-                          <option value="">Seleccione departamento ...</option>
-                          @foreach($deparments as $deparment)
-                          <option value="{{ $deparment->depId }}">{{ $deparment->depName }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">CIUDAD/MUNICIPIO:</small>
-                        <select name="coMunicipality_id_Edit" class="form-control form-control-sm" required>
-                          <option value="">Seleccione ciudad/municipio ...</option>
-                          <!-- munId - munName - munDepartment_id -->
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <small class="text-muted">LOCALIDAD/ZONA:</small>
-                        <select name="coZoning_id_Edit" class="form-control form-control-sm" required>
-                          <option value="">Seleccione localidad/zona ...</option>
-                          <!-- zonId - zonName - zonMunicipality_id -->
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <small class="text-muted">BARRIO:</small>
-                        <select name="coNeighborhood_id_Edit" class="form-control form-control-sm" required>
-                          <option value="">Seleccione barrio ...</option>
-                          <!-- neId - neName - neZoning_id -->
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <small class="text-muted">CODIGO POSTAL:</small>
-                        <input type="text" name="coCode_Edit" maxlength="10" class="form-control form-control-sm" placeholder="Código postal" readonly required>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row py-2 border-top border-bottom">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <small class="text-muted">DIRECCION:</small>
-                    <input type="text" name="coAddress_Edit" maxlength="50" class="form-control form-control-sm" placeholder="Ej. Cra./Cll/Trans./Diag. 00 # 00J - 00Z sur/Norte" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row py-2 border-top border-bottom">
-                <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <small class="text-muted">CORREO ELECTRONICO:</small>
-                        <input type="email" name="coEmail_Edit" maxlength="50" class="form-control form-control-sm" placeholder="Ej. direcciondecorreo@teminacion.com" required>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">TELEFONO CELULAR:</small>
-                        <input type="text" name="coMovil_Edit" maxlength="10" pattern="[0-9]{1,10}" class="form-control form-control-sm" placeholder="Campo numérico" required>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">LINEA WHATSAPP:</small>
-                        <input type="text" name="coWhatsapp_Edit" maxlength="10" pattern="[0-9]{1,10}" class="form-control form-control-sm" placeholder="Campo numérico" required>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row py-4">
-                <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">TIPO SANGUINEO:</small>
-                        <select name="coBloodtype_Edit" class="form-control form-control-sm" required>
-                          <option value="">Seleccione tipo de sangre ...</option>
-                          <option value="A POSITIVO">A POSITIVO</option>
-                          <option value="A NEGATIVO">A NEGATIVO</option>
-                          <option value="B POSITIVO">B POSITIVO</option>
-                          <option value="B NEGATIVO">B NEGATIVO</option>
-                          <option value="O POSITIVO">O POSITIVO</option>
-                          <option value="O NEGATIVO">O NEGATIVO</option>
-                          <option value="AB POSITIVO">AB POSITIVO</option>
-                          <option value="AB NEGATIVO">AB NEGATIVO</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">ENTIDAD PROMOTORA DE SALUD:</small>
-                        <select name="coHealths_id_Edit" class="form-control form-control-sm" required>
-                          <option value="">Seleccione entidad de salud ...</option>
-                          @foreach($healths as $health)
-                          <option value="{{ $health->heaId }}">{{ $health->heaName }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">ADMINISTRADORA DE RIESGOS LABORALES:</small>
-                        <select name="coRisk_id_Edit" class="form-control form-control-sm" required>
-                          <option value="">Seleccione entidad de riesgos ...</option>
-                          @foreach($risks as $risk)
-                          <option value="{{ $risk->risId }}">{{ $risk->risName }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">CAJA DE COMPENSACION:</small>
-                        <select name="coCompensation_id_Edit" class="form-control form-control-sm" required>
-                          <option value="">Seleccione caja ...</option>
-                          @foreach($compensations as $compensation)
-                          <option value="{{ $compensation->comId }}">{{ $compensation->comName }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">FONDO DE PENSION:</small>
-                        <select name="coPension_id_Edit" class="form-control form-control-sm" required>
-                          <option value="">Seleccione fondo de pensión ...</option>
-                          @foreach($pensions as $pension)
-                          <option value="{{ $pension->penId }}">{{ $pension->penName }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <small class="text-muted">FONDE CESANTIAS:</small>
-                        <select name="coLayoff_id_Edit" class="form-control form-control-sm" required>
-                          <option value="">Seleccione fondo de cesantías ...</option>
-                          @foreach($layoffs as $layoff)
-                          <option value="{{ $layoff->layId }}">{{ $layoff->layName }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            </div>
+            <div class="col-md-6 row justify-content-center">
+              <div class="form-group">
+                <small class="text-muted">FIRMA ACTUAL:</small><br>
+                <img src="" class="img-thumbnail text-center coFirmnow_Edit" style="width: 3cm!important; height: 4cm!important;"><br>
+                <small class="text-muted coFirmnot_Edit d-flex justify-content-center my-2">
+                  <input type="checkbox" name="coFirmnot_Edit" value="SIN FIRMA">
+                  <b class="ml-1">Dejar sin firma</b>
+                </small>
               </div>
             </div>
           </div>
+          @include('modules.humans.partials.formCollaborator')
           <div class="form-group text-center pt-2 border-top">
             <input type="hidden" name="coId_Edit" class="form-control form-control-sm" required>
             <button type="submit" class="btn btn-outline-success form-control-sm">GUARDAR</button>
@@ -677,74 +275,135 @@
 
 @section('scripts')
 <script>
-  $(function() {
-
+  // *añade una nueva linea para agregar otros
+  $('.addOthers').click(function() {
+    $('.Others').prepend(`
+    <div class="col-md-12 row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <small class="text-muted">CENTRO ACADEMICO</small>
+          <input type="text" name="academics[]" class="form-control form-control-sm">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <small class="text-muted">TITULO</small>
+          <input type="text" name="titles[]" class="form-control form-control-sm">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <small class="text-muted">INICIO</small>
+          <input type="date" name="initials[]" class="form-control form-control-sm">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <small class="text-muted">FIN</small>
+          <input type="date" name="finals[]" class="form-control form-control-sm">
+        </div>
+      </div>
+    </div>
+    `);
   });
 
+  // ?lanza el formulario de creación
   $('.newCollaborator-link').on('click', function() {
     $('#newCollaborator-modal').modal();
   });
 
+  // ?lanza el formulario de edición
   $('.editCollaborator-link').on('click', function(e) {
     e.preventDefault();
-    var coPhoto = $(this).find('img:first').attr('src');
-    var coFirm = $(this).find('img:last').attr('src');
-    var coId = $(this).find('span:nth-child(2)').text();
-    var coNames = $(this).find('span:nth-child(3)').text();
-    var coPersonal_id = $(this).find('span:nth-child(4)').text();
-    var coNumberdocument = $(this).find('span:nth-child(5)').text();
-    var coPosition = $(this).find('span:nth-child(6)').text();
-    var depId = $(this).find('span:nth-child(7)').text();
-    var munId = $(this).find('span:nth-child(8)').text();
-    var zonId = $(this).find('span:nth-child(9)').text();
-    var neId = $(this).find('span:nth-child(10)').text();
-    var coAddress = $(this).find('span:nth-child(11)').text();
-    var coBloodtype = $(this).find('span:nth-child(12)').text();
-    var coHealths_id = $(this).find('span:nth-child(13)').text();
-    var coRisk_id = $(this).find('span:nth-child(14)').text();
-    var coPension_id = $(this).find('span:nth-child(15)').text();
-    var coLayoff_id = $(this).find('span:nth-child(16)').text();
-    var coCompensation_id = $(this).find('span:nth-child(17)').text();
-    var coEmail = $(this).find('span:nth-child(18)').text();
-    var coMovil = $(this).find('span:nth-child(19)').text();
-    var coWhatsapp = $(this).find('span:nth-child(20)').text();
+    let coPhoto = $(this).find('img:first').attr('src');
+    let coFirm = $(this).find('img:last').attr('src');
+    let coId = $(this).find('span:nth-child(2)').text();
+    let coNames = $(this).find('span:nth-child(3)').text();
+    let coPersonal_id = $(this).find('span:nth-child(4)').text();
+    let coNumberdocument = $(this).find('span:nth-child(5)').text();
+    let coPosition = $(this).find('span:nth-child(6)').text();
+    let depId = $(this).find('span:nth-child(7)').text();
+    let munId = $(this).find('span:nth-child(8)').text();
+    let zonId = $(this).find('span:nth-child(9)').text();
+    let neId = $(this).find('span:nth-child(10)').text();
+    let coAddress = $(this).find('span:nth-child(11)').text();
+    let coBloodtype = $(this).find('span:nth-child(12)').text();
+    let coHealths_id = $(this).find('span:nth-child(13)').text();
+    let coRisk_id = $(this).find('span:nth-child(14)').text();
+    let coPension_id = $(this).find('span:nth-child(15)').text();
+    let coLayoff_id = $(this).find('span:nth-child(16)').text();
+    let coCompensation_id = $(this).find('span:nth-child(17)').text();
+    let coEmail = $(this).find('span:nth-child(18)').text();
+    let coMovil = $(this).find('span:nth-child(19)').text();
+    let coWhatsapp = $(this).find('span:nth-child(20)').text();
+    let colRef1 = $(this).find('span:nth-child(21)').text();
+    let cedRef1 = $(this).find('span:nth-child(22)').text();
+    let numRef1 = $(this).find('span:nth-child(23)').text();
+    let colRef2 = $(this).find('span:nth-child(24)').text();
+    let cedRef2 = $(this).find('span:nth-child(25)').text();
+    let numRef2 = $(this).find('span:nth-child(26)').text();
+    let rsRef1 = $(this).find('span:nth-child(27)').text();
+    let nitRef1 = $(this).find('span:nth-child(28)').text();
+    let addRef1 = $(this).find('span:nth-child(29)').text();
+    let phoRef1 = $(this).find('span:nth-child(30)').text();
+    let ciuRef1 = $(this).find('span:nth-child(31)').text();
+    let rsRef2 = $(this).find('span:nth-child(32)').text();
+    let nitRef2 = $(this).find('span:nth-child(33)').text();
+    let addRef2 = $(this).find('span:nth-child(34)').text();
+    let phoRef2 = $(this).find('span:nth-child(35)').text();
+    let ciuRef2 = $(this).find('span:nth-child(36)').text();
+    let titlePrimary = $(this).find('span:nth-child(37)').text();
+    let acaPrimary = $(this).find('span:nth-child(38)').text();
+    let dePrimary = $(this).find('span:nth-child(39)').text();
+    let iniPrimary = $(this).find('span:nth-child(40)').text();
+    let finPrimary = $(this).find('span:nth-child(41)').text();
+    let titleSecondary = $(this).find('span:nth-child(42)').text();
+    let acaSecondary = $(this).find('span:nth-child(43)').text();
+    let deSecondary = $(this).find('span:nth-child(44)').text();
+    let iniSecondary = $(this).find('span:nth-child(45)').text();
+    let finSecondary = $(this).find('span:nth-child(46)').text();
+    let academics = $(this).find('span:nth-child(47)').text();
+    let titles = $(this).find('span:nth-child(48)').text();
+    let initials = $(this).find('span:nth-child(49)').text();
+    let finals = $(this).find('span:nth-child(50)').text();
+
     $('input[name=coId_Edit]').val(coId);
     $('.coPhotonow_Edit').attr("src", coPhoto);
     $('.coFirmnow_Edit').attr("src", coFirm);
-    var findFirmDefault = coFirm.indexOf('firmCollaboratorDefault.png');
+    let findFirmDefault = coFirm.indexOf('firmCollaboratorDefault.png');
     if (findFirmDefault > -1) {
       $('.coFirmnot_Edit').css("display", "none");
     } else {
       $('.coFirmnot_Edit').css("display", "block");
     }
-    var findPhotoDefault = coPhoto.indexOf('photoCollaboratorDefault.png');
+    let findPhotoDefault = coPhoto.indexOf('photoCollaboratorDefault.png');
     if (findPhotoDefault > -1) {
       $('.coPhotonot_Edit').css("display", "none");
     } else {
       $('.coPhotonot_Edit').css("display", "block");
     }
-    $('input[name=coNames_Edit]').val(coNames);
-    $('select[name=coPersonal_id_Edit]').val(coPersonal_id);
-    $('input[name=coNumberdocument_Edit]').val(coNumberdocument);
-    $('input[name=coPosition_Edit]').val(coPosition);
-    $('select[name=coDeparment_id_Edit]').val(depId);
+    $('input[name=coNames]').val(coNames);
+    $('select[name=coPersonal_id]').val(coPersonal_id);
+    $('input[name=coNumberdocument]').val(coNumberdocument);
+    $('input[name=coPosition]').val(coPosition);
+    $('select[name=coDeparment_id]').val(depId);
 
-    $('select[name=coMunicipality_id_Edit]').empty();
-    $('select[name=coMunicipality_id_Edit]').append("<option value=''>Seleccione ciudad/municipio ...</option>");
+    $('select[name=coMunicipality_id]').empty();
+    $('select[name=coMunicipality_id]').append("<option value=''>Seleccione ciudad/municipio ...</option>");
     $.get("{{ route('getMunicipalities') }}", {
       depId: depId
     }, function(objectMunicipalities) {
-      var count = Object.keys(objectMunicipalities).length;
+      let count = Object.keys(objectMunicipalities).length;
       if (count > 0) {
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
           if (objectMunicipalities[i]['munId'] == munId) {
-            $('select[name=coMunicipality_id_Edit]').append(
+            $('select[name=coMunicipality_id]').append(
               "<option value='" + objectMunicipalities[i]['munId'] + "' selected>" +
               objectMunicipalities[i]['munName'] +
               "</option>"
             );
           } else {
-            $('select[name=coMunicipality_id_Edit]').append(
+            $('select[name=coMunicipality_id]').append(
               "<option value='" + objectMunicipalities[i]['munId'] + "'>" +
               objectMunicipalities[i]['munName'] +
               "</option>"
@@ -754,22 +413,22 @@
       }
     });
 
-    $('select[name=coZoning_id_Edit]').empty();
-    $('select[name=coZoning_id_Edit]').append("<option value=''>Seleccione localidad/zona ...</option>");
+    $('select[name=coZoning_id]').empty();
+    $('select[name=coZoning_id]').append("<option value=''>Seleccione localidad/zona ...</option>");
     $.get("{{ route('getZonings') }}", {
       munId: munId
     }, function(objectZonings) {
-      var count = Object.keys(objectZonings).length;
+      let count = Object.keys(objectZonings).length;
       if (count > 0) {
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
           if (objectZonings[i]['zonId'] == zonId) {
-            $('select[name=coZoning_id_Edit]').append(
+            $('select[name=coZoning_id]').append(
               "<option value='" + objectZonings[i]['zonId'] + "' selected>" +
               objectZonings[i]['zonName'] +
               "</option>"
             );
           } else {
-            $('select[name=coZoning_id_Edit]').append(
+            $('select[name=coZoning_id]').append(
               "<option value='" + objectZonings[i]['zonId'] + "'>" +
               objectZonings[i]['zonName'] +
               "</option>"
@@ -779,23 +438,23 @@
       }
     });
 
-    $('select[name=coNeighborhood_id_Edit]').empty();
-    $('select[name=coNeighborhood_id_Edit]').append("<option value=''>Seleccione barrio ...</option>");
+    $('select[name=coNeighborhood_id]').empty();
+    $('select[name=coNeighborhood_id]').append("<option value=''>Seleccione barrio ...</option>");
     $.get("{{ route('getNeighborhoods') }}", {
       zonId: zonId
     }, function(objectNeighborhoods) {
-      var count = Object.keys(objectNeighborhoods).length;
+      let count = Object.keys(objectNeighborhoods).length;
       if (count > 0) {
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
           if (objectNeighborhoods[i]['neId'] == neId) {
-            $('input[name=coCode_Edit]').val(objectNeighborhoods[i]['neCode']);
-            $('select[name=coNeighborhood_id_Edit]').append(
+            $('input[name=coCode]').val(objectNeighborhoods[i]['neCode']);
+            $('select[name=coNeighborhood_id]').append(
               "<option value='" + objectNeighborhoods[i]['neId'] + "' data-code='" + objectNeighborhoods[i]['neCode'] + "' selected>" +
               objectNeighborhoods[i]['neName'] +
               "</option>"
             );
           } else {
-            $('select[name=coNeighborhood_id_Edit]').append(
+            $('select[name=coNeighborhood_id]').append(
               "<option value='" + objectNeighborhoods[i]['neId'] + "' data-code='" + objectNeighborhoods[i]['neCode'] + "'>" +
               objectNeighborhoods[i]['neName'] +
               "</option>"
@@ -805,44 +464,109 @@
       }
     });
 
-    $('input[name=coAddress_Edit]').val(coAddress);
-    $('select[name=coBloodtype_Edit]').val(coBloodtype);
-    $('select[name=coHealths_id_Edit]').val(coHealths_id);
-    $('select[name=coRisk_id_Edit]').val(coRisk_id);
-    $('select[name=coPension_id_Edit]').val(coPension_id);
-    $('select[name=coLayoff_id_Edit]').val(coLayoff_id);
-    $('select[name=coCompensation_id_Edit]').val(coCompensation_id);
-    $('input[name=coEmail_Edit]').val(coEmail);
-    $('input[name=coMovil_Edit]').val(coMovil);
-    $('input[name=coWhatsapp_Edit]').val(coWhatsapp);
+    $('input[name=coAddress]').val(coAddress);
+    $('select[name=coBloodtype]').val(coBloodtype);
+    $('select[name=coHealths_id]').val(coHealths_id);
+    $('select[name=coRisk_id]').val(coRisk_id);
+    $('select[name=coPension_id]').val(coPension_id);
+    $('select[name=coLayoff_id]').val(coLayoff_id);
+    $('select[name=coCompensation_id]').val(coCompensation_id);
+    $('input[name=coEmail]').val(coEmail);
+    $('input[name=coMovil]').val(coMovil);
+    $('input[name=coWhatsapp]').val(coWhatsapp);
+    $('input[name=colRef1]').val(colRef1);
+    $('input[name=cedRef1]').val(cedRef1);
+    $('input[name=numRef1]').val(numRef1);
+    $('input[name=colRef2]').val(colRef2);
+    $('input[name=cedRef2]').val(cedRef2);
+    $('input[name=numRef2]').val(numRef2);
+    $('input[name=rsRef1]').val(rsRef1);
+    $('input[name=nitRef1]').val(nitRef1);
+    $('input[name=addRef1]').val(addRef1);
+    $('input[name=phoRef1]').val(phoRef1);
+    $('input[name=ciuRef1]').val(ciuRef1);
+    $('input[name=rsRef2]').val(rsRef2);
+    $('input[name=nitRef2]').val(nitRef2);
+    $('input[name=addRef2]').val(addRef2);
+    $('input[name=phoRef2]').val(phoRef2);
+    $('input[name=ciuRef2]').val(ciuRef2);
+    $('input[name=titlePrimary]').val(titlePrimary);
+    $('input[name=acaPrimary]').val(acaPrimary);
+    $('input[name=dePrimary]').val(dePrimary);
+    $('input[name=iniPrimary]').val(iniPrimary);
+    $('input[name=finPrimary]').val(finPrimary);
+    $('input[name=titleSecondary]').val(titleSecondary);
+    $('input[name=acaSecondary]').val(acaSecondary);
+    $('input[name=deSecondary]').val(deSecondary);
+    $('input[name=iniSecondary]').val(iniSecondary);
+    $('input[name=finSecondary]').val(finSecondary);
+
+    if (academics.length != 0 & titles.length != 0 & initials.length != 0 & finals.length != 0) {
+      let academic = JSON.parse(academics);
+      let title = JSON.parse(titles);
+      let initial = JSON.parse(initials);
+      let final = JSON.parse(finals);
+
+      for (const key in academic) {
+        $('.Others').prepend(`
+          <div class="col-md-12 row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <small class="text-muted">CENTRO ACADEMICO</small>
+                <input type="text" name="academics[]" class="form-control form-control-sm" value="${academic[key]}">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <small class="text-muted">TITULO</small>
+                <input type="text" name="titles[]" class="form-control form-control-sm" value="${title[key]}">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <small class="text-muted">INICIO</small>
+                <input type="date" name="initials[]" class="form-control form-control-sm"
+                value="${initial[key]}">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <small class="text-muted">FIN</small>
+                <input type="date" name="finals[]" class="form-control form-control-sm" value="${final[key]}">
+              </div>
+            </div>
+          </div>
+        `);
+      }
+    }
 
     $('#editCollaborator-modal').modal();
   });
 
   $('.deleteCollaborator-link').on('click', function(e) {
     e.preventDefault();
-    var coPhoto = $(this).find('img:first').attr('src');
-    var coFirm = $(this).find('img:last').attr('src');
-    var coId = $(this).find('span:nth-child(2)').text();
-    var coNames = $(this).find('span:nth-child(3)').text();
-    var perName = $(this).find('span:nth-child(4)').text();
-    var coNumberdocument = $(this).find('span:nth-child(5)').text();
-    var coPosition = $(this).find('span:nth-child(6)').text();
-    var depName = $(this).find('span:nth-child(7)').text();
-    var munName = $(this).find('span:nth-child(8)').text();
-    var zonName = $(this).find('span:nth-child(9)').text();
-    var neName = $(this).find('span:nth-child(10)').text();
-    var neCode = $(this).find('span:nth-child(11)').text();
-    var coAddress = $(this).find('span:nth-child(12)').text();
-    var coBloodtype = $(this).find('span:nth-child(13)').text();
-    var coHealths_id = $(this).find('span:nth-child(14)').text();
-    var coRisk_id = $(this).find('span:nth-child(15)').text();
-    var coPension_id = $(this).find('span:nth-child(16)').text();
-    var coLayoff_id = $(this).find('span:nth-child(17)').text();
-    var coCompensation_id = $(this).find('span:nth-child(18)').text();
-    var coEmail = $(this).find('span:nth-child(19)').text();
-    var coMovil = $(this).find('span:nth-child(20)').text();
-    var coWhatsapp = $(this).find('span:nth-child(21)').text();
+    let coPhoto = $(this).find('img:first').attr('src');
+    let coFirm = $(this).find('img:last').attr('src');
+    let coId = $(this).find('span:nth-child(2)').text();
+    let coNames = $(this).find('span:nth-child(3)').text();
+    let perName = $(this).find('span:nth-child(4)').text();
+    let coNumberdocument = $(this).find('span:nth-child(5)').text();
+    let coPosition = $(this).find('span:nth-child(6)').text();
+    let depName = $(this).find('span:nth-child(7)').text();
+    let munName = $(this).find('span:nth-child(8)').text();
+    let zonName = $(this).find('span:nth-child(9)').text();
+    let neName = $(this).find('span:nth-child(10)').text();
+    let neCode = $(this).find('span:nth-child(11)').text();
+    let coAddress = $(this).find('span:nth-child(12)').text();
+    let coBloodtype = $(this).find('span:nth-child(13)').text();
+    let coHealths_id = $(this).find('span:nth-child(14)').text();
+    let coRisk_id = $(this).find('span:nth-child(15)').text();
+    let coPension_id = $(this).find('span:nth-child(16)').text();
+    let coLayoff_id = $(this).find('span:nth-child(17)').text();
+    let coCompensation_id = $(this).find('span:nth-child(18)').text();
+    let coEmail = $(this).find('span:nth-child(19)').text();
+    let coMovil = $(this).find('span:nth-child(20)').text();
+    let coWhatsapp = $(this).find('span:nth-child(21)').text();
     $('input[name=coId_Delete]').val(coId);
     $('.coNames_Delete').text(coNames);
     $('.coPersonal_id_Delete').text(perName);
@@ -870,7 +594,7 @@
 
   // CONSULTAR MUNICIPIO POR DEPARTAMENTO SELECCIONADO EN EL MODAL DE NUEVA INFORMACION
   $('select[name=coDeparment_id]').on('change', function(e) {
-    var deparmentSelected = e.target.value;
+    let deparmentSelected = e.target.value;
     $('select[name=coMunicipality_id]').empty();
     $('select[name=coMunicipality_id]').append("<option value=''>Seleccione ciudad/municipio ...</option>");
     $('select[name=coZoning_id]').empty();
@@ -882,9 +606,9 @@
       $.get("{{ route('getMunicipalities') }}", {
         depId: deparmentSelected
       }, function(objectMunicipalities) {
-        var count = Object.keys(objectMunicipalities).length;
+        let count = Object.keys(objectMunicipalities).length;
         if (count > 0) {
-          for (var i = 0; i < count; i++) {
+          for (let i = 0; i < count; i++) {
             $('select[name=coMunicipality_id]').append(
               "<option value='" + objectMunicipalities[i]['munId'] + "'>" +
               objectMunicipalities[i]['munName'] +
@@ -898,7 +622,7 @@
 
   // CONSULTAR ZONA/LOCALIDAD POR CIUDAD SELECCIONADA EN EL MODAL DE NUEVA INFORMACION
   $('select[name=coMunicipality_id]').on('change', function(e) {
-    var municipalitySelected = e.target.value;
+    let municipalitySelected = e.target.value;
     $('select[name=coZoning_id]').empty();
     $('select[name=coZoning_id]').append("<option value=''>Seleccione localidad/zona ...</option>");
     $('select[name=coNeighborhood_id]').empty();
@@ -908,9 +632,9 @@
       $.get("{{ route('getZonings') }}", {
         munId: municipalitySelected
       }, function(objectZonings) {
-        var count = Object.keys(objectZonings).length;
+        let count = Object.keys(objectZonings).length;
         if (count > 0) {
-          for (var i = 0; i < count; i++) {
+          for (let i = 0; i < count; i++) {
             $('select[name=coZoning_id]').append(
               "<option value='" + objectZonings[i]['zonId'] + "'>" +
               objectZonings[i]['zonName'] +
@@ -924,7 +648,7 @@
 
   // CONSULTAR BARRIO POR ZONA SELECCIONADA EN EL MODAL DE NUEVA INFORMACION
   $('select[name=coZoning_id]').on('change', function(e) {
-    var zoneSelected = e.target.value;
+    let zoneSelected = e.target.value;
     $('select[name=coNeighborhood_id]').empty();
     $('select[name=coNeighborhood_id]').append("<option value=''>Seleccione barrio ...</option>");
     $('input[name=coCode]').val('');
@@ -932,9 +656,9 @@
       $.get("{{ route('getNeighborhoods') }}", {
         zonId: zoneSelected
       }, function(objectNeighborhood) {
-        var count = Object.keys(objectNeighborhood).length;
+        let count = Object.keys(objectNeighborhood).length;
         if (count > 0) {
-          for (var i = 0; i < count; i++) {
+          for (let i = 0; i < count; i++) {
             $('select[name=coNeighborhood_id]').append(
               "<option value='" + objectNeighborhood[i]['neId'] + "' data-code='" + objectNeighborhood[i]['neCode'] + "'>" +
               objectNeighborhood[i]['neName'] +
@@ -948,32 +672,32 @@
 
   // CONSULTAR BARRIO POR ZONA SELECCIONADA EN EL MODAL DE NUEVA INFORMACION
   $('select[name=coNeighborhood_id]').on('change', function(e) {
-    var neSelected = e.target.value;
+    let neSelected = e.target.value;
     $('input[name=coCode]').val('');
     if (neSelected != '') {
-      var text = $('select[name=coNeighborhood_id] option:selected').attr('data-code');
+      let text = $('select[name=coNeighborhood_id] option:selected').attr('data-code');
       $('input[name=coCode]').val(text);
     }
   });
 
   // CONSULTAR MUNICIPIO POR DEPARTAMENTO SELECCIONADO EN EL MODAL DE EDICION DE INFORMACION
-  $('select[name=coDeparment_id_Edit]').on('change', function(e) {
-    var deparmentSelected = e.target.value;
-    $('select[name=coMunicipality_id_Edit]').empty();
-    $('select[name=coMunicipality_id_Edit]').append("<option value=''>Seleccione ciudad/municipio ...</option>");
-    $('select[name=coZoning_id_Edit]').empty();
-    $('select[name=coZoning_id_Edit]').append("<option value=''>Seleccione localidad/zona ...</option>");
-    $('select[name=coNeighborhood_id_Edit]').empty();
-    $('select[name=coNeighborhood_id_Edit]').append("<option value=''>Seleccione barrio ...</option>");
-    $('input[name=coCode_Edit]').val('');
+  $('select[name=coDeparment_id]').on('change', function(e) {
+    let deparmentSelected = e.target.value;
+    $('select[name=coMunicipality_id]').empty();
+    $('select[name=coMunicipality_id]').append("<option value=''>Seleccione ciudad/municipio ...</option>");
+    $('select[name=coZoning_id]').empty();
+    $('select[name=coZoning_id]').append("<option value=''>Seleccione localidad/zona ...</option>");
+    $('select[name=coNeighborhood_id]').empty();
+    $('select[name=coNeighborhood_id]').append("<option value=''>Seleccione barrio ...</option>");
+    $('input[name=coCode]').val('');
     if (deparmentSelected != '') {
       $.get("{{ route('getMunicipalities') }}", {
         depId: deparmentSelected
       }, function(objectMunicipalities) {
-        var count = Object.keys(objectMunicipalities).length;
+        let count = Object.keys(objectMunicipalities).length;
         if (count > 0) {
-          for (var i = 0; i < count; i++) {
-            $('select[name=coMunicipality_id_Edit]').append(
+          for (let i = 0; i < count; i++) {
+            $('select[name=coMunicipality_id]').append(
               "<option value='" + objectMunicipalities[i]['munId'] + "'>" +
               objectMunicipalities[i]['munName'] +
               "</option>"
@@ -985,21 +709,21 @@
   });
 
   // CONSULTAR ZONA/LOCALIDAD POR CIUDAD SELECCIONADA EN EL MODAL DE EDICION DE INFORMACION
-  $('select[name=coMunicipality_id_Edit]').on('change', function(e) {
-    var municipalitySelected = e.target.value;
-    $('select[name=coZoning_id_Edit]').empty();
-    $('select[name=coZoning_id_Edit]').append("<option value=''>Seleccione localidad/zona ...</option>");
-    $('select[name=coNeighborhood_id_Edit]').empty();
-    $('select[name=coNeighborhood_id_Edit]').append("<option value=''>Seleccione barrio ...</option>");
-    $('input[name=coCode_Edit]').val('');
+  $('select[name=coMunicipality_id]').on('change', function(e) {
+    let municipalitySelected = e.target.value;
+    $('select[name=coZoning_id]').empty();
+    $('select[name=coZoning_id]').append("<option value=''>Seleccione localidad/zona ...</option>");
+    $('select[name=coNeighborhood_id]').empty();
+    $('select[name=coNeighborhood_id]').append("<option value=''>Seleccione barrio ...</option>");
+    $('input[name=coCode]').val('');
     if (municipalitySelected != '') {
       $.get("{{ route('getZonings') }}", {
         munId: municipalitySelected
       }, function(objectZonings) {
-        var count = Object.keys(objectZonings).length;
+        let count = Object.keys(objectZonings).length;
         if (count > 0) {
-          for (var i = 0; i < count; i++) {
-            $('select[name=coZoning_id_Edit]').append(
+          for (let i = 0; i < count; i++) {
+            $('select[name=coZoning_id]').append(
               "<option value='" + objectZonings[i]['zonId'] + "'>" +
               objectZonings[i]['zonName'] +
               "</option>"
@@ -1011,19 +735,19 @@
   });
 
   // CONSULTAR BARRIO POR ZONA SELECCIONADA EN EL MODAL DE EDICION DE INFORMACION
-  $('select[name=coZoning_id_Edit]').on('change', function(e) {
-    var zoneSelected = e.target.value;
-    $('select[name=coNeighborhood_id_Edit]').empty();
-    $('select[name=coNeighborhood_id_Edit]').append("<option value=''>Seleccione barrio ...</option>");
-    $('input[name=coCode_Edit]').val('');
+  $('select[name=coZoning_id]').on('change', function(e) {
+    let zoneSelected = e.target.value;
+    $('select[name=coNeighborhood_id]').empty();
+    $('select[name=coNeighborhood_id]').append("<option value=''>Seleccione barrio ...</option>");
+    $('input[name=coCode]').val('');
     if (zoneSelected != '') {
       $.get("{{ route('getNeighborhoods') }}", {
         zonId: zoneSelected
       }, function(objectNeighborhood) {
-        var count = Object.keys(objectNeighborhood).length;
+        let count = Object.keys(objectNeighborhood).length;
         if (count > 0) {
-          for (var i = 0; i < count; i++) {
-            $('select[name=coNeighborhood_id_Edit]').append(
+          for (let i = 0; i < count; i++) {
+            $('select[name=coNeighborhood_id]').append(
               "<option value='" + objectNeighborhood[i]['neId'] + "' data-code='" + objectNeighborhood[i]['neCode'] + "'>" +
               objectNeighborhood[i]['neName'] +
               "</option>"
@@ -1035,12 +759,12 @@
   });
 
   // CONSULTAR BARRIO POR ZONA SELECCIONADA EN EL MODAL DE NUEVA INFORMACION
-  $('select[name=coNeighborhood_id_Edit]').on('change', function(e) {
-    var neSelected = e.target.value;
-    $('input[name=coCode_Edit]').val('');
+  $('select[name=coNeighborhood_id]').on('change', function(e) {
+    let neSelected = e.target.value;
+    $('input[name=coCode]').val('');
     if (neSelected != '') {
-      var text = $('select[name=coNeighborhood_id_Edit] option:selected').attr('data-code');
-      $('input[name=coCode_Edit]').val(text);
+      let text = $('select[name=coNeighborhood_id] option:selected').attr('data-code');
+      $('input[name=coCode]').val(text);
     }
   });
 </script>
