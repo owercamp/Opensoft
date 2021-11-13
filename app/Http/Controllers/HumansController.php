@@ -513,6 +513,10 @@ class HumansController extends Controller
   function saveContractorsmessenger(Request $request)
   {
     // dd($request->all());
+    $academics = json_encode($request->academics);
+    $titles = json_encode($request->titles);
+    $initials = json_encode($request->initials);
+    $finals = json_encode($request->finals);
     $validate = Contractormessenger::where('cmNumberdocument', $this->upper($request->cmNumberdocument))
       ->orWhere('cmNumberdriving', $this->upper($request->cmNumberdriving))->first();
     if ($validate == null) {
@@ -544,7 +548,37 @@ class HumansController extends Controller
             'cmCompensation_id' => trim($request->cmCompensation_id),
             'cmPension_id' => trim($request->cmPension_id),
             'cmLayoff_id' => trim($request->cmLayoff_id),
-            'cmCourses' => $idsCourses
+            'cmCourses' => $idsCourses,
+            "colRef1" => ucwords($request->colRef1),
+            "cedRef1" => trim($request->cedRef1),
+            "numRef1" => trim($request->numRef1),
+            "colRef2" => ucwords($request->colRef2),
+            "cedRef2" => trim($request->cedRef2),
+            "numRef2" => trim($request->numRef2),
+            "rsRef1" => ucwords($request->rsRef1),
+            "nitRef1" => trim($request->nitRef1),
+            "addRef1" => strtoupper($request->addRef1),
+            "phoRef1" => trim($request->phoRef1),
+            "ciuRef1" => ucwords($request->ciuRef1),
+            "rsRef2" => ucwords($request->rsRef2),
+            "nitRef2" => trim($request->nitRef2),
+            "addRef2" => strtoupper($request->addRef2),
+            "phoRef2" => trim($request->phoRef2),
+            "ciuRef2" => ucwords($request->ciuRef2),
+            "titlePrimary" => ucwords($request->titlePrimary),
+            "acaPrimary" => ucwords($request->acaPrimary),
+            "dePrimary" => ucwords($request->dePrimary),
+            "iniPrimary" => $request->iniPrimary,
+            "finPrimary" => $request->finPrimary,
+            "titleSecondary" => ucwords($request->titleSecondary),
+            "acaSecondary" => ucwords($request->acaSecondary),
+            "deSecondary" => ucwords($request->deSecondary),
+            "iniSecondary" => $request->iniSecondary,
+            "finSecondary" => $request->finSecondary,
+            "academics" => $academics,
+            "titles" => $titles,
+            "initials" => $initials,
+            "finals" => $finals
           ]);
         } else {
           $photo = $request->file('cmPhoto');
@@ -568,7 +602,37 @@ class HumansController extends Controller
             'cmCompensation_id' => trim($request->cmCompensation_id),
             'cmPension_id' => trim($request->cmPension_id),
             'cmLayoff_id' => trim($request->cmLayoff_id),
-            'cmCourses' => $idsCourses
+            'cmCourses' => $idsCourses,
+            "colRef1" => ucwords($request->colRef1),
+            "cedRef1" => trim($request->cedRef1),
+            "numRef1" => trim($request->numRef1),
+            "colRef2" => ucwords($request->colRef2),
+            "cedRef2" => trim($request->cedRef2),
+            "numRef2" => trim($request->numRef2),
+            "rsRef1" => ucwords($request->rsRef1),
+            "nitRef1" => trim($request->nitRef1),
+            "addRef1" => strtoupper($request->addRef1),
+            "phoRef1" => trim($request->phoRef1),
+            "ciuRef1" => ucwords($request->ciuRef1),
+            "rsRef2" => ucwords($request->rsRef2),
+            "nitRef2" => trim($request->nitRef2),
+            "addRef2" => strtoupper($request->addRef2),
+            "phoRef2" => trim($request->phoRef2),
+            "ciuRef2" => ucwords($request->ciuRef2),
+            "titlePrimary" => ucwords($request->titlePrimary),
+            "acaPrimary" => ucwords($request->acaPrimary),
+            "dePrimary" => ucwords($request->dePrimary),
+            "iniPrimary" => $request->iniPrimary,
+            "finPrimary" => $request->finPrimary,
+            "titleSecondary" => ucwords($request->titleSecondary),
+            "acaSecondary" => ucwords($request->acaSecondary),
+            "deSecondary" => ucwords($request->deSecondary),
+            "iniSecondary" => $request->iniSecondary,
+            "finSecondary" => $request->finSecondary,
+            "academics" => $academics,
+            "titles" => $titles,
+            "initials" => $initials,
+            "finals" => $finals
           ]);
         }
       } else {
@@ -594,7 +658,37 @@ class HumansController extends Controller
             'cmCompensation_id' => trim($request->cmCompensation_id),
             'cmPension_id' => trim($request->cmPension_id),
             'cmLayoff_id' => trim($request->cmLayoff_id),
-            'cmCourses' => $idsCourses
+            'cmCourses' => $idsCourses,
+            "colRef1" => ucwords($request->colRef1),
+            "cedRef1" => trim($request->cedRef1),
+            "numRef1" => trim($request->numRef1),
+            "colRef2" => ucwords($request->colRef2),
+            "cedRef2" => trim($request->cedRef2),
+            "numRef2" => trim($request->numRef2),
+            "rsRef1" => ucwords($request->rsRef1),
+            "nitRef1" => trim($request->nitRef1),
+            "addRef1" => strtoupper($request->addRef1),
+            "phoRef1" => trim($request->phoRef1),
+            "ciuRef1" => ucwords($request->ciuRef1),
+            "rsRef2" => ucwords($request->rsRef2),
+            "nitRef2" => trim($request->nitRef2),
+            "addRef2" => strtoupper($request->addRef2),
+            "phoRef2" => trim($request->phoRef2),
+            "ciuRef2" => ucwords($request->ciuRef2),
+            "titlePrimary" => ucwords($request->titlePrimary),
+            "acaPrimary" => ucwords($request->acaPrimary),
+            "dePrimary" => ucwords($request->dePrimary),
+            "iniPrimary" => $request->iniPrimary,
+            "finPrimary" => $request->finPrimary,
+            "titleSecondary" => ucwords($request->titleSecondary),
+            "acaSecondary" => ucwords($request->acaSecondary),
+            "deSecondary" => ucwords($request->deSecondary),
+            "iniSecondary" => $request->iniSecondary,
+            "finSecondary" => $request->finSecondary,
+            "academics" => $academics,
+            "titles" => $titles,
+            "initials" => $initials,
+            "finals" => $finals
           ]);
         } else {
           Contractormessenger::create([
@@ -614,7 +708,37 @@ class HumansController extends Controller
             'cmCompensation_id' => trim($request->cmCompensation_id),
             'cmPension_id' => trim($request->cmPension_id),
             'cmLayoff_id' => trim($request->cmLayoff_id),
-            'cmCourses' => $idsCourses
+            'cmCourses' => $idsCourses,
+            "colRef1" => ucwords($request->colRef1),
+            "cedRef1" => trim($request->cedRef1),
+            "numRef1" => trim($request->numRef1),
+            "colRef2" => ucwords($request->colRef2),
+            "cedRef2" => trim($request->cedRef2),
+            "numRef2" => trim($request->numRef2),
+            "rsRef1" => ucwords($request->rsRef1),
+            "nitRef1" => trim($request->nitRef1),
+            "addRef1" => strtoupper($request->addRef1),
+            "phoRef1" => trim($request->phoRef1),
+            "ciuRef1" => ucwords($request->ciuRef1),
+            "rsRef2" => ucwords($request->rsRef2),
+            "nitRef2" => trim($request->nitRef2),
+            "addRef2" => strtoupper($request->addRef2),
+            "phoRef2" => trim($request->phoRef2),
+            "ciuRef2" => ucwords($request->ciuRef2),
+            "titlePrimary" => ucwords($request->titlePrimary),
+            "acaPrimary" => ucwords($request->acaPrimary),
+            "dePrimary" => ucwords($request->dePrimary),
+            "iniPrimary" => $request->iniPrimary,
+            "finPrimary" => $request->finPrimary,
+            "titleSecondary" => ucwords($request->titleSecondary),
+            "acaSecondary" => ucwords($request->acaSecondary),
+            "deSecondary" => ucwords($request->deSecondary),
+            "iniSecondary" => $request->iniSecondary,
+            "finSecondary" => $request->finSecondary,
+            "academics" => $academics,
+            "titles" => $titles,
+            "initials" => $initials,
+            "finals" => $finals
           ]);
         }
       }
@@ -627,6 +751,10 @@ class HumansController extends Controller
   function updateContractorsmessenger(Request $request)
   {
     // dd($request->all());
+    $academics = json_encode($request->academics);
+    $titles = json_encode($request->titles);
+    $initials = json_encode($request->initials);
+    $finals = json_encode($request->finals);
     $validateOther = Contractormessenger::where('cmNumberdocument', $this->upper($request->cmNumberdocument_Edit))
       ->where('cmId', '!=', trim($request->cmId_Edit))
       ->first();
@@ -717,6 +845,36 @@ class HumansController extends Controller
         $validate->cmLayoff_id = trim($request->cmLayoff_id_Edit);
         $idsCourses = substr(trim($request->cmCourses_Edit), 0, -1); // QUITAR ULTIMO CARACTER QUE ES (-)
         $validate->cmCourses = $idsCourses;
+        $validate->colRef1 = ucwords($request->colRef1_Edit);
+        $validate->cedRef1 = trim($request->cedRef1_Edit);
+        $validate->numRef1 = trim($request->numRef1_Edit);
+        $validate->colRef2 = ucwords($request->colRef2_Edit);
+        $validate->cedRef2 = trim($request->cedRef2_Edit);
+        $validate->numRef2 = trim($request->numRef2_Edit);
+        $validate->rsRef1 = ucwords($request->rsRef1_Edit);
+        $validate->nitRef1 = trim($request->nitRef1_Edit);
+        $validate->addRef1 = strtoupper($request->addRef1_Edit);
+        $validate->phoRef1 = trim($request->phoRef1_Edit);
+        $validate->ciuRef1 = ucwords($request->ciuRef1_Edit);
+        $validate->rsRef2 = ucwords($request->rsRef2_Edit);
+        $validate->nitRef2 = trim($request->nitRef2_Edit);
+        $validate->addRef2 = strtoupper($request->addRef2_Edit);
+        $validate->phoRef2 = trim($request->phoRef2_Edit);
+        $validate->ciuRef2 = ucwords($request->ciuRef2_Edit);
+        $validate->titlePrimary = ucwords($request->titlePrimary_Edit);
+        $validate->acaPrimary = ucwords($request->acaPrimary_Edit);
+        $validate->dePrimary = ucwords($request->dePrimary_Edit);
+        $validate->iniPrimary = $request->iniPrimary_Edit;
+        $validate->finPrimary = $request->finPrimary_Edit;
+        $validate->titleSecondary = ucwords($request->titleSecondary_Edit);
+        $validate->acaSecondary = ucwords($request->acaSecondary_Edit);
+        $validate->deSecondary = ucwords($request->deSecondary_Edit);
+        $validate->iniSecondary = $request->iniSecondary_Edit;
+        $validate->finSecondary = $request->finSecondary_Edit;
+        $validate->academics = $academics;
+        $validate->titles = $titles;
+        $validate->initials = $initials;
+        $validate->finals = $finals;
         $validate->save();
         return redirect()->route('humans.contractorsMessenger')->with('PrimaryContractor', 'Contratista de mensajería ' . $this->fu($request->cmNames_Edit) . ', actualizado');
       } else {
