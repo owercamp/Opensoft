@@ -13,21 +13,21 @@
         </li>
         <div class="dropdown-divider bj-divider"></div>
         <li>
-          <a href="" class="nav-link">
+          <a href="{{route('training.support')}}" class="nav-link">
             <i class="far fa-clipboard"></i>
             <p>{{ ucwords('soporte de cumplimiento') }}</p>
           </a>
         </li>
         <div class="dropdown-divider bj-divider"></div>
         <li>
-          <a href="" class="nav-link">
+          <a href="{{route('training.effectiveness')}}" class="nav-link">
             <i class="fas fa-search-dollar"></i>
             <p>{{ ucwords('eficacia de capacitaciones') }}</p>
           </a>
         </li>
         <div class="dropdown-divider bj-divider"></div>
         <li>
-          <a href="" class="nav-link">
+          <a href="{{route('training.indicators')}}" class="nav-link">
             <i class="fas fa-chart-line"></i>
             <p>{{ ucwords('indicadores correspondientes') }}</p>
           </a>
