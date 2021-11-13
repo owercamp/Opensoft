@@ -74,6 +74,36 @@
             <span hidden>{{ $contractor->ccMovil }}</span>
             <span hidden>{{ $contractor->ccWhatsapp }}</span>
             <span hidden>{{ $contractor->ccCourses }}</span>
+            <span hidden>{{ $contractor->colRef1 }}</span>
+            <span hidden>{{ $contractor->cedRef1 }}</span>
+            <span hidden>{{ $contractor->numRef1 }}</span>
+            <span hidden>{{ $contractor->colRef2 }}</span>
+            <span hidden>{{ $contractor->cedRef2 }}</span>
+            <span hidden>{{ $contractor->numRef2 }}</span>
+            <span hidden>{{ $contractor->rsRef1 }}</span>
+            <span hidden>{{ $contractor->nitRef1 }}</span>
+            <span hidden>{{ $contractor->addRef1 }}</span>
+            <span hidden>{{ $contractor->phoRef1 }}</span>
+            <span hidden>{{ $contractor->ciuRef1 }}</span>
+            <span hidden>{{ $contractor->rsRef2 }}</span>
+            <span hidden>{{ $contractor->nitRef2 }}</span>
+            <span hidden>{{ $contractor->addRef2 }}</span>
+            <span hidden>{{ $contractor->phoRef2 }}</span>
+            <span hidden>{{ $contractor->ciuRef2 }}</span>
+            <span hidden>{{ $contractor->titlePrimary }}</span>
+            <span hidden>{{ $contractor->acaPrimary }}</span>
+            <span hidden>{{ $contractor->dePrimary }}</span>
+            <span hidden>{{ $contractor->iniPrimary }}</span>
+            <span hidden>{{ $contractor->finPrimary }}</span>
+            <span hidden>{{ $contractor->titleSecondary }}</span>
+            <span hidden>{{ $contractor->acaSecondary }}</span>
+            <span hidden>{{ $contractor->deSecondary }}</span>
+            <span hidden>{{ $contractor->iniSecondary }}</span>
+            <span hidden>{{ $contractor->finSecondary }}</span>
+            <span hidden>{{ $contractor->academics }}</span>
+            <span hidden>{{ $contractor->titles }}</span>
+            <span hidden>{{ $contractor->initials }}</span>
+            <span hidden>{{ $contractor->finals }}</span>
             <img src="{{ asset('storage/contractorsChargePhotos/'.$contractor->ccPhoto) }}" hidden>
             <img src="{{ asset('storage/contractorsChargeFirms/'.$contractor->ccFirm) }}" hidden>
           </a>
@@ -111,8 +141,9 @@
   </table>
 </div>
 
+<!-- formulario de creación -->
 <div class="modal fade" id="newContractor-modal">
-  <div class="modal-dialog modal-lg" style="font-size: 12px;">
+  <div class="modal-dialog modal-dialog-scrollable modal-xl" style="font-size: 12px;">
     <div class="modal-content">
       <div class="modal-header">
         <h4>NUEVO CONTRATISTA DE CARGA EXPRESS:</h4>
@@ -127,7 +158,7 @@
                   <div class="form-group">
                     <small class="text-muted">FOTOGRAFIA:</small>
                     <div class="custom-file">
-                      <input type="file" name="ccPhoto" lang="es" placeholder="Unicamente con extensión .jpg .jpeg o .png" accept="image/jpg,image/jpeg,image/png">
+                      <input type="file" name="ccPhoto" lang="es" placeholder="Unicamente con extensión .png" accept=".png">
                     </div>
                   </div>
                 </div>
@@ -135,7 +166,7 @@
                   <div class="form-group">
                     <small class="text-muted">FIRMA DIGITAL:</small>
                     <div class="custom-file">
-                      <input type="file" name="ccFirm" lang="es" placeholder="Unicamente con extensión .jpg .jpeg o .png" accept="image/jpg,image/jpeg,image/png">
+                      <input type="file" name="ccFirm" lang="es" placeholder="Unicamente con extensión .png" accept=".png">
                     </div>
                   </div>
                 </div>
@@ -205,7 +236,6 @@
                         <small class="text-muted">CIUDAD/MUNICIPIO:</small>
                         <select name="ccMunicipality_id" class="form-control form-control-sm" required>
                           <option value="">Seleccione ciudad/municipio ...</option>
-                          <!-- munId - munName - munDepartment_id -->
                         </select>
                       </div>
                     </div>
@@ -216,7 +246,6 @@
                         <small class="text-muted">LOCALIDAD/ZONA:</small>
                         <select name="ccZoning_id" class="form-control form-control-sm" required>
                           <option value="">Seleccione localidad/zona ...</option>
-                          <!-- zonId - zonName - zonMunicipality_id -->
                         </select>
                       </div>
                     </div>
@@ -225,7 +254,6 @@
                         <small class="text-muted">BARRIO:</small>
                         <select name="ccNeighborhood_id" class="form-control form-control-sm" required>
                           <option value="">Seleccione barrio ...</option>
-                          <!-- neId - neName - neZoning_id -->
                         </select>
                       </div>
                     </div>
@@ -387,11 +415,194 @@
                               <th></th>
                             </thead>
                             <tbody>
-                              <!-- Dinamics row -->
-                              <!-- couId, couName, couIntensity -->
                             </tbody>
                           </table>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <h5 class="text-muted w-100 text-center">REFERENCIAS PERSONALES</h5>
+                    <div class="col-md-12 row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <small class="text-muted">NOMBRES COMPLETOS</small>
+                          <input type="text" name="colRef1" class="form-control form-control-sm" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <small class="text-muted">CEDULA</small>
+                          <input type="text" name="cedRef1" class="form-control form-control-sm" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <small class="text-muted">TELEFONO</small>
+                          <input type="text" name="numRef1" class="form-control form-control-sm" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12 row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <small class="text-muted">NOMBRES COMPLETOS</small>
+                          <input type="text" name="colRef2" class="form-control form-control-sm" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <small class="text-muted">CEDULA</small>
+                          <input type="text" name="cedRef2" class="form-control form-control-sm" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <small class="text-muted">TELEFONO</small>
+                          <input type="text" name="numRef2" class="form-control form-control-sm" required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <h5 class="text-muted w-100 text-center">REFERENCIAS LABORALES</h5>
+                    <div class="col-md-12 row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <small class="text-muted">RAZON SOCIAL</small>
+                          <input type="text" name="rsRef1" class="form-control form-control-sm" required>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <small class="text-muted">NIT</small>
+                          <input type="text" name="nitRef1" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <small class="text-muted">DIRECCION</small>
+                          <input type="text" name="addRef1" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <small class="text-muted">TELEFONO</small>
+                          <input type="text" name="phoRef1" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <small class="text-muted">CIUDAD</small>
+                          <input type="text" name="ciuRef1" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12 row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <small class="text-muted">RAZON SOCIAL</small>
+                          <input type="text" name="rsRef2" class="form-control form-control-sm" required>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <small class="text-muted">NIT</small>
+                          <input type="text" name="nitRef2" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <small class="text-muted">DIRECCION</small>
+                          <input type="text" name="addRef2" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <small class="text-muted">TELEFONO</small>
+                          <input type="text" name="phoRef2" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <small class="text-muted">CIUDAD</small>
+                          <input type="text" name="ciuRef2" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <h5 class="text-muted w-100 text-center">FORMACION ACADEMICA</h5>
+                    <div class="col-md-12 row justify-content-around">
+                      <h6 class="text-muted w-100 ml-3">Primaria</h6>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <small class="text-muted">TITULO</small>
+                          <input type="text" name="titlePrimary" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <small class="text-muted">CENTRO ACADEMICO</small>
+                          <input type="text" name="acaPrimary" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <small class="text-muted">CIUDAD/DEPARTAMENTO</small>
+                          <input type="text" name="dePrimary" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <small class="text-muted">INICIO</small>
+                          <input type="date" name="iniPrimary" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <small class="text-muted">FIN</small>
+                          <input type="date" name="finPrimary" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <h6 class="text-muted w-100 ml-3">Secundaria</h6>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <small class="text-muted">TITULO</small>
+                          <input type="text" name="titleSecondary" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <small class="text-muted">CENTRO ACADEMICO</small>
+                          <input type="text" name="acaSecondary" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <small class="text-muted">CIUDAD/DEPARTAMENTO</small>
+                          <input type="text" name="deSecondary" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <small class="text-muted">INICIO</small>
+                          <input type="date" name="iniSecondary" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <small class="text-muted">FIN</small>
+                          <input type="date" name="finSecondary" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                      <h6 class="text-muted w-100 ml-3">Otros</h6>
+                      <div class="w-100 ml-3 Others"></div>
+                      <div class="col-md-12 d-flex justify-content-center py-2">
+                        <button type="button" class="btn btn-outline-danger btn-sm row addOthers"><i class="fas fa-plus"></i> Agregar</button>
                       </div>
                     </div>
                   </div>
@@ -409,8 +620,9 @@
   </div>
 </div>
 
+<!-- formulario de edición -->
 <div class="modal fade" id="editContractor-modal">
-  <div class="modal-dialog modal-lg" style="font-size: 12px;">
+  <div class="modal-dialog modal-dialog-scrollable modal-xl" style="font-size: 12px;">
     <div class="modal-content">
       <div class="modal-header">
         <h5>EDITAR CONTRATISTA DE CARGA EXPRESS:</h5>
@@ -418,38 +630,48 @@
       <div class="modal-body">
         <form action="{{ route('contractorsExpress.update') }}" method="POST" enctype="multipart/form-data">
           @csrf
-          <div class="row">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <small class="text-muted">FOTOGRAFIA:</small>
-                    <div class="custom-file">
-                      <input type="file" name="ccPhoto_Edit" lang="es" placeholder="Unicamente con extensión .jpg .jpeg o .png" accept="image/jpg,image/jpeg,image/png">
-                    </div>
-                    <small class="text-muted">FOTO ACTUAL:</small><br>
-                    <img src="" class="img-responsive img-thumbnail text-center ccPhotonow_Edit" style="width: 150px; height: auto;"><br>
-                    <small class="text-muted ccPhotonot_Edit">
-                      <input type="checkbox" name="ccPhotonot_Edit" value="SIN FOTO">
-                      Dejar sin fotografia
-                    </small>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <small class="text-muted">FIRMA DIGITAL:</small>
-                    <div class="custom-file">
-                      <input type="file" name="ccFirm_Edit" lang="es" placeholder="Unicamente con extensión .jpg .jpeg o .png" accept="image/jpg,image/jpeg,image/png">
-                    </div>
-                    <small class="text-muted">FIRMA ACTUAL:</small><br>
-                    <img src="" class="img-responsive img-thumbnail text-center ccFirmnow_Edit" style="width: 150px; height: auto;"><br>
-                    <small class="text-muted ccFirmnot_Edit">
-                      <input type="checkbox" name="ccFirmnot_Edit" value="SIN FIRMA">
-                      Dejar sin firma
-                    </small>
-                  </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6 row justify-content-center">
+              <div class="form-group">
+                <small class="text-muted">FOTO ACTUAL:</small><br>
+                <img src="" class="img-thumbnail text-center ccPhotonow_Edit" style="width: 3cm!important; height: 4cm!important;"><br>
+                <small class="text-muted ccPhotonot_Edit d-flex justify-content-center my-2">
+                  <input type="checkbox" name="ccPhotonot_Edit" value="SIN FOTO">
+                  <b class="ml-1">Dejar sin fotografia</b>
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6 row justify-content-center">
+              <div class="form-group">
+                <small class="text-muted">FIRMA ACTUAL:</small><br>
+                <img src="" class="img-thumbnail text-center ccFirmnow_Edit" style="width: 3cm!important; height: 4cm!important;"><br>
+                <small class="text-muted ccFirmnot_Edit d-flex justify-content-center my-2">
+                  <input type="checkbox" name="ccFirmnot_Edit" value="SIN FIRMA">
+                  <b class="ml-1">Dejar sin firma</b>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6 row justify-content-center">
+              <div class="form-group">
+                <small class="text-muted">FOTOGRAFIA:</small>
+                <div class="custom-file">
+                  <input type="file" name="ccPhoto_Edit" lang="es" placeholder="Unicamente con extensión .png" accept=".png">
                 </div>
               </div>
+            </div>
+            <div class="col-md-6 row justify-content-center">
+              <div class="form-group">
+                <small class="text-muted">FIRMA DIGITAL:</small>
+                <div class="custom-file">
+                  <input type="file" name="ccFirm_Edit" lang="es" placeholder="Unicamente con extensión .png" accept=".png">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
@@ -697,8 +919,6 @@
                               <th></th>
                             </thead>
                             <tbody>
-                              <!-- Dinamics row -->
-                              <!-- couId, couName, couIntensity -->
                             </tbody>
                           </table>
                         </div>
@@ -706,6 +926,191 @@
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <h5 class="text-muted w-100 text-center">REFERENCIAS PERSONALES</h5>
+            <div class="col-md-12 row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <small class="text-muted">NOMBRES COMPLETOS</small>
+                  <input type="text" name="colRef1_Edit" class="form-control form-control-sm" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <small class="text-muted">CEDULA</small>
+                  <input type="text" name="cedRef1_Edit" class="form-control form-control-sm" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <small class="text-muted">TELEFONO</small>
+                  <input type="text" name="numRef1_Edit" class="form-control form-control-sm" required>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <small class="text-muted">NOMBRES COMPLETOS</small>
+                  <input type="text" name="colRef2_Edit" class="form-control form-control-sm" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <small class="text-muted">CEDULA</small>
+                  <input type="text" name="cedRef2_Edit" class="form-control form-control-sm" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <small class="text-muted">TELEFONO</small>
+                  <input type="text" name="numRef2_Edit" class="form-control form-control-sm" required>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <h5 class="text-muted w-100 text-center">REFERENCIAS LABORALES</h5>
+            <div class="col-md-12 row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <small class="text-muted">RAZON SOCIAL</small>
+                  <input type="text" name="rsRef1_Edit" class="form-control form-control-sm" required>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <small class="text-muted">NIT</small>
+                  <input type="text" name="nitRef1_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <small class="text-muted">DIRECCION</small>
+                  <input type="text" name="addRef1_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <small class="text-muted">TELEFONO</small>
+                  <input type="text" name="phoRef1_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <small class="text-muted">CIUDAD</small>
+                  <input type="text" name="ciuRef1_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <small class="text-muted">RAZON SOCIAL</small>
+                  <input type="text" name="rsRef2_Edit" class="form-control form-control-sm" required>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <small class="text-muted">NIT</small>
+                  <input type="text" name="nitRef2_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <small class="text-muted">DIRECCION</small>
+                  <input type="text" name="addRef2_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <small class="text-muted">TELEFONO</small>
+                  <input type="text" name="phoRef2_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <small class="text-muted">CIUDAD</small>
+                  <input type="text" name="ciuRef2_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <h5 class="text-muted w-100 text-center">FORMACION ACADEMICA</h5>
+            <div class="col-md-12 row justify-content-around">
+              <h6 class="text-muted w-100 ml-3">Primaria</h6>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <small class="text-muted">TITULO</small>
+                  <input type="text" name="titlePrimary_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <small class="text-muted">CENTRO ACADEMICO</small>
+                  <input type="text" name="acaPrimary_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <small class="text-muted">CIUDAD/DEPARTAMENTO</small>
+                  <input type="text" name="dePrimary_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <small class="text-muted">INICIO</small>
+                  <input type="date" name="iniPrimary_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <small class="text-muted">FIN</small>
+                  <input type="date" name="finPrimary_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <h6 class="text-muted w-100 ml-3">Secundaria</h6>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <small class="text-muted">TITULO</small>
+                  <input type="text" name="titleSecondary_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <small class="text-muted">CENTRO ACADEMICO</small>
+                  <input type="text" name="acaSecondary_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <small class="text-muted">CIUDAD/DEPARTAMENTO</small>
+                  <input type="text" name="deSecondary_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <small class="text-muted">INICIO</small>
+                  <input type="date" name="iniSecondary_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <small class="text-muted">FIN</small>
+                  <input type="date" name="finSecondary_Edit" class="form-control form-control-sm">
+                </div>
+              </div>
+              <h6 class="text-muted w-100 ml-3">Otros</h6>
+              <div class="w-100 ml-3 Others_Edit"></div>
+              <div class="col-md-12 d-flex justify-content-center py-2">
+                <button type="button" class="btn btn-outline-danger btn-sm row addOthers_Edit"><i class="fas fa-plus"></i> Agregar</button>
               </div>
             </div>
           </div>
@@ -794,8 +1199,68 @@
 
 @section('scripts')
 <script>
-  $(function() {
+  // *añade una nueva linea para agregar otros
+  $('.addOthers').click(function() {
+    $('.Others').prepend(`
+    <div class="col-md-12 row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <small class="text-muted">CENTRO ACADEMICO</small>
+          <input type="text" name="academics[]" class="form-control form-control-sm">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <small class="text-muted">TITULO</small>
+          <input type="text" name="titles[]" class="form-control form-control-sm">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <small class="text-muted">INICIO</small>
+          <input type="date" name="initials[]" class="form-control form-control-sm">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <small class="text-muted">FIN</small>
+          <input type="date" name="finals[]" class="form-control form-control-sm">
+        </div>
+      </div>
+    </div>
+    `);
+  });
 
+  // *añade una nueva linea para agregar otros en formulario Edición
+  $('.addOthers_Edit').click(function() {
+    $('.Others_Edit').prepend(`
+    <div class="col-md-12 row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <small class="text-muted">CENTRO ACADEMICO</small>
+          <input type="text" name="academics[]" class="form-control form-control-sm">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <small class="text-muted">TITULO</small>
+          <input type="text" name="titles[]" class="form-control form-control-sm">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <small class="text-muted">INICIO</small>
+          <input type="date" name="initials[]" class="form-control form-control-sm">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <small class="text-muted">FIN</small>
+          <input type="date" name="finals[]" class="form-control form-control-sm">
+        </div>
+      </div>
+    </div>
+    `);
   });
 
   /*=================================================================================
@@ -809,12 +1274,12 @@
 
   // BOTON PARA AGREGAR CURSOS CERTIFICADOS A NUEVO CONTRATISTA
   $('.btn-addCourse-newContractor').on('click', function() {
-    var couId = $('select[name=ccCourse_id]').val();
-    var couName = $('select[name=ccCourse_id] option:selected').text();
-    var couIntensity = $('select[name=ccCourse_id] option:selected').attr('data-couIntensity');
-    var validateRepet = false;
+    let couId = $('select[name=ccCourse_id]').val();
+    let couName = $('select[name=ccCourse_id] option:selected').text();
+    let couIntensity = $('select[name=ccCourse_id] option:selected').attr('data-couIntensity');
+    let validateRepet = false;
     $('.tbl-courses-newContractor').find('tbody').find('tr').each(function() {
-      var idCou = $(this).attr('class');
+      let idCou = $(this).attr('class');
       if (idCou == couId) {
         validateRepet = true;
       }
@@ -852,11 +1317,11 @@
   // EVENTO PARA CLICK EN MODAL, GUARDAR EL NUEVO CONTRATISTA
   $('.btn-saveDefinitive').on('click', function(e) {
     // e.preventDefault();
-    var allCourses = '';
+    let allCourses = '';
     $('input[name=ccCourses]').val('');
     $('.tbl-courses-newContractor').find('tbody').find('tr').each(function() {
-      var idCourse = $(this).attr('data-idCourse');
-      var dateCourse = $(this).find('input[type=date]').val();
+      let idCourse = $(this).attr('data-idCourse');
+      let dateCourse = $(this).find('input[type=date]').val();
       allCourses += idCourse + '>' + dateCourse + ',';
     });
     $('input[name=ccCourses]').val(allCourses);
@@ -870,7 +1335,7 @@
 
   // CONSULTAR MUNICIPIO POR DEPARTAMENTO SELECCIONADO EN EL MODAL DE NUEVA INFORMACION
   $('select[name=ccDeparment_id]').on('change', function(e) {
-    var deparmentSelected = e.target.value;
+    let deparmentSelected = e.target.value;
     $('select[name=ccMunicipality_id]').empty();
     $('select[name=ccMunicipality_id]').append("<option value=''>Seleccione ciudad/municipio ...</option>");
     $('select[name=ccZoning_id]').empty();
@@ -882,9 +1347,9 @@
       $.get("{{ route('getMunicipalities') }}", {
         depId: deparmentSelected
       }, function(objectMunicipalities) {
-        var count = Object.keys(objectMunicipalities).length;
+        let count = Object.keys(objectMunicipalities).length;
         if (count > 0) {
-          for (var i = 0; i < count; i++) {
+          for (let i = 0; i < count; i++) {
             $('select[name=ccMunicipality_id]').append(
               "<option value='" + objectMunicipalities[i]['munId'] + "'>" +
               objectMunicipalities[i]['munName'] +
@@ -898,7 +1363,7 @@
 
   // CONSULTAR ZONA/LOCALIDAD POR CIUDAD SELECCIONADA EN EL MODAL DE NUEVA INFORMACION
   $('select[name=ccMunicipality_id]').on('change', function(e) {
-    var municipalitySelected = e.target.value;
+    let municipalitySelected = e.target.value;
     $('select[name=ccZoning_id]').empty();
     $('select[name=ccZoning_id]').append("<option value=''>Seleccione localidad/zona ...</option>");
     $('select[name=ccNeighborhood_id]').empty();
@@ -908,9 +1373,9 @@
       $.get("{{ route('getZonings') }}", {
         munId: municipalitySelected
       }, function(objectZonings) {
-        var count = Object.keys(objectZonings).length;
+        let count = Object.keys(objectZonings).length;
         if (count > 0) {
-          for (var i = 0; i < count; i++) {
+          for (let i = 0; i < count; i++) {
             $('select[name=ccZoning_id]').append(
               "<option value='" + objectZonings[i]['zonId'] + "'>" +
               objectZonings[i]['zonName'] +
@@ -924,7 +1389,7 @@
 
   // CONSULTAR BARRIO POR ZONA SELECCIONADA EN EL MODAL DE NUEVA INFORMACION
   $('select[name=ccZoning_id]').on('change', function(e) {
-    var zoneSelected = e.target.value;
+    let zoneSelected = e.target.value;
     $('select[name=ccNeighborhood_id]').empty();
     $('select[name=ccNeighborhood_id]').append("<option value=''>Seleccione barrio ...</option>");
     $('input[name=ccCode]').val('');
@@ -932,9 +1397,9 @@
       $.get("{{ route('getNeighborhoods') }}", {
         zonId: zoneSelected
       }, function(objectNeighborhood) {
-        var count = Object.keys(objectNeighborhood).length;
+        let count = Object.keys(objectNeighborhood).length;
         if (count > 0) {
-          for (var i = 0; i < count; i++) {
+          for (let i = 0; i < count; i++) {
             $('select[name=ccNeighborhood_id]').append(
               "<option value='" + objectNeighborhood[i]['neId'] + "' data-code='" + objectNeighborhood[i]['neCode'] + "'>" +
               objectNeighborhood[i]['neName'] +
@@ -948,10 +1413,10 @@
 
   // CONSULTAR BARRIO POR ZONA SELECCIONADA EN EL MODAL DE NUEVA INFORMACION
   $('select[name=ccNeighborhood_id]').on('change', function(e) {
-    var neSelected = e.target.value;
+    let neSelected = e.target.value;
     $('input[name=ccCode]').val('');
     if (neSelected != '') {
-      var text = $('select[name=ccNeighborhood_id] option:selected').attr('data-code');
+      let text = $('select[name=ccNeighborhood_id] option:selected').attr('data-code');
       $('input[name=ccCode]').val(text);
     }
   });
@@ -963,42 +1428,71 @@
   $('.editContractor-link').on('click', function(e) {
     e.preventDefault();
 
-    var ccPhoto = $(this).find('img:first').attr('src');
-    var ccFirm = $(this).find('img:last').attr('src');
-    var ccId = $(this).find('span:nth-child(2)').text();
-    var ccNames = $(this).find('span:nth-child(3)').text();
-    var ccPersonal_id = $(this).find('span:nth-child(4)').text();
-    var ccNumberdocument = $(this).find('span:nth-child(5)').text();
-    var ccDriving_id = $(this).find('span:nth-child(6)').text();
-    var ccNumberdriving = $(this).find('span:nth-child(7)').text();
-    var depId = $(this).find('span:nth-child(8)').text();
-    var munId = $(this).find('span:nth-child(9)').text();
-    var zonId = $(this).find('span:nth-child(10)').text();
-    var neId = $(this).find('span:nth-child(11)').text();
-    var ccAddress = $(this).find('span:nth-child(12)').text();
-    var ccBloodtype = $(this).find('span:nth-child(13)').text();
-    var ccHealths_id = $(this).find('span:nth-child(14)').text();
-    var ccRisk_id = $(this).find('span:nth-child(15)').text();
-    var ccPension_id = $(this).find('span:nth-child(16)').text();
-    var ccLayoff_id = $(this).find('span:nth-child(17)').text();
-    var ccCompensation_id = $(this).find('span:nth-child(18)').text();
-    var ccEmail = $(this).find('span:nth-child(19)').text();
-    var ccMovil = $(this).find('span:nth-child(20)').text();
-    var ccWhatsapp = $(this).find('span:nth-child(21)').text();
-    var ccCourses = $(this).find('span:nth-child(22)').text();
-
+    let ccPhoto = $(this).find('img:first').attr('src');
+    let ccFirm = $(this).find('img:last').attr('src');
+    let ccId = $(this).find('span:nth-child(2)').text();
+    let ccNames = $(this).find('span:nth-child(3)').text();
+    let ccPersonal_id = $(this).find('span:nth-child(4)').text();
+    let ccNumberdocument = $(this).find('span:nth-child(5)').text();
+    let ccDriving_id = $(this).find('span:nth-child(6)').text();
+    let ccNumberdriving = $(this).find('span:nth-child(7)').text();
+    let depId = $(this).find('span:nth-child(8)').text();
+    let munId = $(this).find('span:nth-child(9)').text();
+    let zonId = $(this).find('span:nth-child(10)').text();
+    let neId = $(this).find('span:nth-child(11)').text();
+    let ccAddress = $(this).find('span:nth-child(12)').text();
+    let ccBloodtype = $(this).find('span:nth-child(13)').text();
+    let ccHealths_id = $(this).find('span:nth-child(14)').text();
+    let ccRisk_id = $(this).find('span:nth-child(15)').text();
+    let ccPension_id = $(this).find('span:nth-child(16)').text();
+    let ccLayoff_id = $(this).find('span:nth-child(17)').text();
+    let ccCompensation_id = $(this).find('span:nth-child(18)').text();
+    let ccEmail = $(this).find('span:nth-child(19)').text();
+    let ccMovil = $(this).find('span:nth-child(20)').text();
+    let ccWhatsapp = $(this).find('span:nth-child(21)').text();
+    let ccCourses = $(this).find('span:nth-child(22)').text();
+    let colRef1 = $(this).find('span:nth-child(23)').text();
+    let cedRef1 = $(this).find('span:nth-child(24)').text();
+    let numRef1 = $(this).find('span:nth-child(25)').text();
+    let colRef2 = $(this).find('span:nth-child(26)').text();
+    let cedRef2 = $(this).find('span:nth-child(27)').text();
+    let numRef2 = $(this).find('span:nth-child(28)').text();
+    let rsRef1 = $(this).find('span:nth-child(29)').text();
+    let nitRef1 = $(this).find('span:nth-child(30)').text();
+    let addRef1 = $(this).find('span:nth-child(31)').text();
+    let phoRef1 = $(this).find('span:nth-child(32)').text();
+    let ciuRef1 = $(this).find('span:nth-child(33)').text();
+    let rsRef2 = $(this).find('span:nth-child(34)').text();
+    let nitRef2 = $(this).find('span:nth-child(35)').text();
+    let addRef2 = $(this).find('span:nth-child(36)').text();
+    let phoRef2 = $(this).find('span:nth-child(37)').text();
+    let ciuRef2 = $(this).find('span:nth-child(38)').text();
+    let titlePrimary = $(this).find('span:nth-child(39)').text();
+    let acaPrimary = $(this).find('span:nth-child(40)').text();
+    let dePrimary = $(this).find('span:nth-child(41)').text();
+    let iniPrimary = $(this).find('span:nth-child(42)').text();
+    let finPrimary = $(this).find('span:nth-child(43)').text();
+    let titleSecondary = $(this).find('span:nth-child(44)').text();
+    let acaSecondary = $(this).find('span:nth-child(45)').text();
+    let deSecondary = $(this).find('span:nth-child(46)').text();
+    let iniSecondary = $(this).find('span:nth-child(47)').text();
+    let finSecondary = $(this).find('span:nth-child(48)').text();
+    let academics = $(this).find('span:nth-child(49)').text();
+    let titles = $(this).find('span:nth-child(50)').text();
+    let initials = $(this).find('span:nth-child(51)').text();
+    let finals = $(this).find('span:nth-child(52)').text();
 
     $('input[name=ccId_Edit]').val(ccId);
 
     $('.ccPhotonow_Edit').attr("src", ccPhoto);
     $('.ccFirmnow_Edit').attr("src", ccFirm);
-    var findFirmDefault = ccFirm.indexOf('firmContractorChargeDefault.png');
+    let findFirmDefault = ccFirm.indexOf('firmContractorChargeDefault.png');
     if (findFirmDefault > -1) {
       $('.ccFirmnot_Edit').css("display", "none");
     } else {
       $('.ccFirmnot_Edit').css("display", "block");
     }
-    var findPhotoDefault = ccPhoto.indexOf('photoContractorChargeDefault.png');
+    let findPhotoDefault = ccPhoto.indexOf('photoContractorChargeDefault.png');
     if (findPhotoDefault > -1) {
       $('.ccPhotonot_Edit').css("display", "none");
     } else {
@@ -1016,9 +1510,9 @@
     $.get("{{ route('getMunicipalities') }}", {
       depId: depId
     }, function(objectMunicipalities) {
-      var count = Object.keys(objectMunicipalities).length;
+      let count = Object.keys(objectMunicipalities).length;
       if (count > 0) {
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
           if (objectMunicipalities[i]['munId'] == munId) {
             $('select[name=ccMunicipality_id_Edit]').append(
               "<option value='" + objectMunicipalities[i]['munId'] + "' selected>" +
@@ -1041,9 +1535,9 @@
     $.get("{{ route('getZonings') }}", {
       munId: munId
     }, function(objectZonings) {
-      var count = Object.keys(objectZonings).length;
+      let count = Object.keys(objectZonings).length;
       if (count > 0) {
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
           if (objectZonings[i]['zonId'] == zonId) {
             $('select[name=ccZoning_id_Edit]').append(
               "<option value='" + objectZonings[i]['zonId'] + "' selected>" +
@@ -1066,9 +1560,9 @@
     $.get("{{ route('getNeighborhoods') }}", {
       zonId: zonId
     }, function(objectNeighborhoods) {
-      var count = Object.keys(objectNeighborhoods).length;
+      let count = Object.keys(objectNeighborhoods).length;
       if (count > 0) {
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
           if (objectNeighborhoods[i]['neId'] == neId) {
             $('input[name=ccCode_Edit]').val(objectNeighborhoods[i]['neCode']);
             $('select[name=ccNeighborhood_id_Edit]').append(
@@ -1097,13 +1591,39 @@
     $('input[name=ccEmail_Edit]').val(ccEmail);
     $('input[name=ccMovil_Edit]').val(ccMovil);
     $('input[name=ccWhatsapp_Edit]').val(ccWhatsapp);
+    $('input[name=colRef1_Edit]').val(colRef1);
+    $('input[name=cedRef1_Edit]').val(cedRef1);
+    $('input[name=numRef1_Edit]').val(numRef1);
+    $('input[name=colRef2_Edit]').val(colRef2);
+    $('input[name=cedRef2_Edit]').val(cedRef2);
+    $('input[name=numRef2_Edit]').val(numRef2);
+    $('input[name=rsRef1_Edit]').val(rsRef1);
+    $('input[name=nitRef1_Edit]').val(nitRef1);
+    $('input[name=addRef1_Edit]').val(addRef1);
+    $('input[name=phoRef1_Edit]').val(phoRef1);
+    $('input[name=ciuRef1_Edit]').val(ciuRef1);
+    $('input[name=rsRef2_Edit]').val(rsRef2);
+    $('input[name=nitRef2_Edit]').val(nitRef2);
+    $('input[name=addRef2_Edit]').val(addRef2);
+    $('input[name=phoRef2_Edit]').val(phoRef2);
+    $('input[name=ciuRef2_Edit]').val(ciuRef2);
+    $('input[name=titlePrimary_Edit]').val(titlePrimary);
+    $('input[name=acaPrimary_Edit]').val(acaPrimary);
+    $('input[name=dePrimary_Edit]').val(dePrimary);
+    $('input[name=iniPrimary_Edit]').val(iniPrimary);
+    $('input[name=finPrimary_Edit]').val(finPrimary);
+    $('input[name=titleSecondary_Edit]').val(titleSecondary);
+    $('input[name=acaSecondary_Edit]').val(acaSecondary);
+    $('input[name=deSecondary_Edit]').val(deSecondary);
+    $('input[name=iniSecondary_Edit]').val(iniSecondary);
+    $('input[name=finSecondary_Edit]').val(finSecondary);
     $('.tbl-courses-editContractor').find('tbody').empty();
     $.get("{{ route('getCourses') }}", {
       ids: ccCourses
     }, function(objectCourses) {
-      var count = Object.keys(objectCourses).length;
+      let count = Object.keys(objectCourses).length;
       if (count > 0) {
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
           $('.tbl-courses-editContractor').find('tbody').append(
             "<tr class='" + objectCourses[i][0] + "' data-idCourse='" + objectCourses[i][0] + "'>" +
             "<td>" + objectCourses[i][1] + "</td>" +
@@ -1118,12 +1638,51 @@
       }
     });
 
+    if (academics.length != 0 & titles.length != 0 & initials.length != 0 & finals.length != 0) {
+      let academic = JSON.parse(academics);
+      let title = JSON.parse(titles);
+      let initial = JSON.parse(initials);
+      let final = JSON.parse(finals);
+
+      for (const key in academic) {
+        $('.Others_Edit').prepend(`
+          <div class="col-md-12 row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <small class="text-muted">CENTRO ACADEMICO</small>
+                <input type="text" name="academics[]" class="form-control form-control-sm" value="${academic[key]}">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <small class="text-muted">TITULO</small>
+                <input type="text" name="titles[]" class="form-control form-control-sm" value="${title[key]}">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <small class="text-muted">INICIO</small>
+                <input type="date" name="initials[]" class="form-control form-control-sm"
+                value="${initial[key]}">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <small class="text-muted">FIN</small>
+                <input type="date" name="finals[]" class="form-control form-control-sm" value="${final[key]}">
+              </div>
+            </div>
+          </div>
+        `);
+      }
+    }
+
     $('#editContractor-modal').modal();
   });
 
   // CONSULTAR MUNICIPIO POR DEPARTAMENTO SELECCIONADO EN EL MODAL DE EDICION DE INFORMACION
   $('select[name=ccDeparment_id_Edit]').on('change', function(e) {
-    var deparmentSelected = e.target.value;
+    let deparmentSelected = e.target.value;
     $('select[name=ccMunicipality_id_Edit]').empty();
     $('select[name=ccMunicipality_id_Edit]').append("<option value=''>Seleccione ciudad/municipio ...</option>");
     $('select[name=ccZoning_id_Edit]').empty();
@@ -1135,9 +1694,9 @@
       $.get("{{ route('getMunicipalities') }}", {
         depId: deparmentSelected
       }, function(objectMunicipalities) {
-        var count = Object.keys(objectMunicipalities).length;
+        let count = Object.keys(objectMunicipalities).length;
         if (count > 0) {
-          for (var i = 0; i < count; i++) {
+          for (let i = 0; i < count; i++) {
             $('select[name=ccMunicipality_id_Edit]').append(
               "<option value='" + objectMunicipalities[i]['munId'] + "'>" +
               objectMunicipalities[i]['munName'] +
@@ -1151,7 +1710,7 @@
 
   // CONSULTAR ZONA/LOCALIDAD POR CIUDAD SELECCIONADA EN EL MODAL DE EDICION DE INFORMACION
   $('select[name=ccMunicipality_id_Edit]').on('change', function(e) {
-    var municipalitySelected = e.target.value;
+    let municipalitySelected = e.target.value;
     $('select[name=ccZoning_id_Edit]').empty();
     $('select[name=ccZoning_id_Edit]').append("<option value=''>Seleccione localidad/zona ...</option>");
     $('select[name=ccNeighborhood_id_Edit]').empty();
@@ -1161,9 +1720,9 @@
       $.get("{{ route('getZonings') }}", {
         munId: municipalitySelected
       }, function(objectZonings) {
-        var count = Object.keys(objectZonings).length;
+        let count = Object.keys(objectZonings).length;
         if (count > 0) {
-          for (var i = 0; i < count; i++) {
+          for (let i = 0; i < count; i++) {
             $('select[name=ccZoning_id_Edit]').append(
               "<option value='" + objectZonings[i]['zonId'] + "'>" +
               objectZonings[i]['zonName'] +
@@ -1177,7 +1736,7 @@
 
   // CONSULTAR BARRIO POR ZONA SELECCIONADA EN EL MODAL DE EDICION DE INFORMACION
   $('select[name=ccZoning_id_Edit]').on('change', function(e) {
-    var zoneSelected = e.target.value;
+    let zoneSelected = e.target.value;
     $('select[name=ccNeighborhood_id_Edit]').empty();
     $('select[name=ccNeighborhood_id_Edit]').append("<option value=''>Seleccione barrio ...</option>");
     $('input[name=ccCode_Edit]').val('');
@@ -1185,9 +1744,9 @@
       $.get("{{ route('getNeighborhoods') }}", {
         zonId: zoneSelected
       }, function(objectNeighborhood) {
-        var count = Object.keys(objectNeighborhood).length;
+        let count = Object.keys(objectNeighborhood).length;
         if (count > 0) {
-          for (var i = 0; i < count; i++) {
+          for (let i = 0; i < count; i++) {
             $('select[name=ccNeighborhood_id_Edit]').append(
               "<option value='" + objectNeighborhood[i]['neId'] + "' data-code='" + objectNeighborhood[i]['neCode'] + "'>" +
               objectNeighborhood[i]['neName'] +
@@ -1201,22 +1760,22 @@
 
   // CONSULTAR BARRIO POR ZONA SELECCIONADA EN EL MODAL DE NUEVA INFORMACION
   $('select[name=ccNeighborhood_id_Edit]').on('change', function(e) {
-    var neSelected = e.target.value;
+    let neSelected = e.target.value;
     $('input[name=ccCode_Edit]').val('');
     if (neSelected != '') {
-      var text = $('select[name=ccNeighborhood_id_Edit] option:selected').attr('data-code');
+      let text = $('select[name=ccNeighborhood_id_Edit] option:selected').attr('data-code');
       $('input[name=ccCode_Edit]').val(text);
     }
   });
 
   // BOTON PARA AGREGAR CURSOS CERTIFICADOS A EL CONTRATISTA A EDITAR
   $('.btn-addCourse-editContractor').on('click', function() {
-    var couId = $('select[name=ccCourse_id_Edit]').val();
-    var couName = $('select[name=ccCourse_id_Edit] option:selected').text();
-    var couIntensity = $('select[name=ccCourse_id_Edit] option:selected').attr('data-couIntensity');
-    var validateRepet = false;
+    let couId = $('select[name=ccCourse_id_Edit]').val();
+    let couName = $('select[name=ccCourse_id_Edit] option:selected').text();
+    let couIntensity = $('select[name=ccCourse_id_Edit] option:selected').attr('data-couIntensity');
+    let validateRepet = false;
     $('.tbl-courses-editContractor').find('tbody').find('tr').each(function() {
-      var idCou = $(this).attr('class');
+      let idCou = $(this).attr('class');
       if (idCou == couId) {
         validateRepet = true;
       }
@@ -1254,11 +1813,11 @@
   // EVENTO PARA CLICK EN MODAL, GUARDAR EL CONTRATISTA A EDITAR
   $('.btn-updateDefinitive').on('click', function(e) {
     // e.preventDefault();
-    var allCourses = '';
+    let allCourses = '';
     $('input[name=ccCourses_Edit]').val('');
     $('.tbl-courses-editContractor').find('tbody').find('tr').each(function() {
-      var idCourse = $(this).attr('data-idCourse');
-      var dateCourse = $(this).find('input[type=date]').val();
+      let idCourse = $(this).attr('data-idCourse');
+      let dateCourse = $(this).find('input[type=date]').val();
       allCourses += idCourse + '>' + dateCourse + ',';
     });
     $('input[name=ccCourses_Edit]').val(allCourses);
@@ -1276,30 +1835,30 @@
 
   $('.deleteContractor-link').on('click', function(e) {
     e.preventDefault();
-    var ccPhoto = $(this).find('img:first').attr('src');
-    var ccFirm = $(this).find('img:last').attr('src');
-    var ccId = $(this).find('span:nth-child(2)').text();
-    var ccNames = $(this).find('span:nth-child(3)').text();
-    var perName = $(this).find('span:nth-child(4)').text();
-    var ccNumberdocument = $(this).find('span:nth-child(5)').text();
-    var driCategory = $(this).find('span:nth-child(6)').text();
-    var ccNumberdriving = $(this).find('span:nth-child(7)').text();
-    var depName = $(this).find('span:nth-child(8)').text();
-    var munName = $(this).find('span:nth-child(9)').text();
-    var zonName = $(this).find('span:nth-child(10)').text();
-    var neName = $(this).find('span:nth-child(11)').text();
-    var neCode = $(this).find('span:nth-child(12)').text();
-    var ccAddress = $(this).find('span:nth-child(13)').text();
-    var ccBloodtype = $(this).find('span:nth-child(14)').text();
-    var heaName = $(this).find('span:nth-child(15)').text();
-    var risName = $(this).find('span:nth-child(16)').text();
-    var penName = $(this).find('span:nth-child(17)').text();
-    var layName = $(this).find('span:nth-child(18)').text();
-    var comName = $(this).find('span:nth-child(19)').text();
-    var ccEmail = $(this).find('span:nth-child(20)').text();
-    var ccMovil = $(this).find('span:nth-child(21)').text();
-    var ccWhatsapp = $(this).find('span:nth-child(22)').text();
-    var ccCourses = $(this).find('span:nth-child(23)').text();
+    let ccPhoto = $(this).find('img:first').attr('src');
+    let ccFirm = $(this).find('img:last').attr('src');
+    let ccId = $(this).find('span:nth-child(2)').text();
+    let ccNames = $(this).find('span:nth-child(3)').text();
+    let perName = $(this).find('span:nth-child(4)').text();
+    let ccNumberdocument = $(this).find('span:nth-child(5)').text();
+    let driCategory = $(this).find('span:nth-child(6)').text();
+    let ccNumberdriving = $(this).find('span:nth-child(7)').text();
+    let depName = $(this).find('span:nth-child(8)').text();
+    let munName = $(this).find('span:nth-child(9)').text();
+    let zonName = $(this).find('span:nth-child(10)').text();
+    let neName = $(this).find('span:nth-child(11)').text();
+    let neCode = $(this).find('span:nth-child(12)').text();
+    let ccAddress = $(this).find('span:nth-child(13)').text();
+    let ccBloodtype = $(this).find('span:nth-child(14)').text();
+    let heaName = $(this).find('span:nth-child(15)').text();
+    let risName = $(this).find('span:nth-child(16)').text();
+    let penName = $(this).find('span:nth-child(17)').text();
+    let layName = $(this).find('span:nth-child(18)').text();
+    let comName = $(this).find('span:nth-child(19)').text();
+    let ccEmail = $(this).find('span:nth-child(20)').text();
+    let ccMovil = $(this).find('span:nth-child(21)').text();
+    let ccWhatsapp = $(this).find('span:nth-child(22)').text();
+    let ccCourses = $(this).find('span:nth-child(23)').text();
 
     $('input[name=ccId_Delete]').val(ccId);
     $('.ccNames_Delete').text(ccNames);
@@ -1328,9 +1887,9 @@
     $.get("{{ route('getCourses') }}", {
       ids: ccCourses
     }, function(objectCourses) {
-      var count = Object.keys(objectCourses).length;
+      let count = Object.keys(objectCourses).length;
       if (count > 0) {
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
           $('.ccCourses_Delete').append(
             "<li class='list-group-item d-flex justify-content-between align-items-center'>" +
             objectCourses[i][1] + ' -> ' + objectCourses[i][2] +

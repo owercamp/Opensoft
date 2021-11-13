@@ -629,8 +629,8 @@
       </div>
       <div class="modal-body">
         <form action="{{ route('contractorsMessenger.update') }}" method="POST" enctype="multipart/form-data">
+          @csrf
           <div class="col-md-12 row">
-            @csrf
             <div class="col-md-6 row justify-content-center">
               <div class="form-group">
                 <small class="text-muted">FOTO ACTUAL:</small><br>
@@ -672,8 +672,6 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <div class="row">
-              </div>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
@@ -1480,7 +1478,6 @@
     let titles = $(this).find('span:nth-child(50)').text();
     let initials = $(this).find('span:nth-child(51)').text();
     let finals = $(this).find('span:nth-child(52)').text();
-
 
     $('input[name=cmId_Edit]').val(cmId);
 
