@@ -51,7 +51,7 @@
         <td>{{ $contractor->ceNumberdocument }}</td>
         <td>{{ $contractor->ceNumberdriving }}</td>
         <td>
-          <a href="#" title="Editar contratista {{ $contractor->ceNames }}" class="btn btn-outline-primary rounded-circle form-control-sm editContractor-link">
+          <button href="#" title="Editar contratista {{ $contractor->ceNames }}" class="btn btn-outline-primary rounded-circle editContractor-link">
             <i class="fas fa-edit"></i>
             <span hidden>{{ $contractor->ceId }}</span>
             <span hidden>{{ $contractor->ceNames }}</span>
@@ -76,8 +76,8 @@
             <span hidden>{{ $contractor->ceCourses }}</span>
             <img src="{{ asset('storage/contractorsEspecialPhotos/'.$contractor->cePhoto) }}" hidden>
             <img src="{{ asset('storage/contractorsEspecialFirms/'.$contractor->ceFirm) }}" hidden>
-          </a>
-          <a href="#" title="Eliminar contratista {{ $contractor->ceNames }}" class="btn btn-outline-tertiary rounded-circle form-control-sm deleteContractor-link">
+          </button>
+          <button href="#" title="Eliminar contratista {{ $contractor->ceNames }}" class="btn btn-outline-tertiary rounded-circle deleteContractor-link">
             <i class="fas fa-trash-alt"></i>
             <span hidden>{{ $contractor->ceId }}</span>
             <span hidden>{{ $contractor->ceNames }}</span>
@@ -103,7 +103,7 @@
             <span hidden>{{ $contractor->ceCourses }}</span>
             <img src="{{ asset('storage/contractorsEspecialPhotos/'.$contractor->cePhoto) }}" hidden>
             <img src="{{ asset('storage/contractorsEspecialFirms/'.$contractor->ceFirm) }}" hidden>
-          </a>
+          </button>
         </td>
       </tr>
       @endforeach

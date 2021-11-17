@@ -243,6 +243,7 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   // *Entrevistas
   Route::post('/administrative/humans/interviewCollaborator/save', 'InterviewController@interviewSave')->name('interview.save');
   Route::post('/administrative/humans/interviewMessengers/save', 'InterviewController@MessengersSave')->name('messengers.save');
+  Route::post('/administrative/humans/interviewExpress/save', 'InterviewController@ExpressSave')->name('express.save');
 
   // ?BASE DE DATOS >> CONFIGURACION PROVEEDORES
 

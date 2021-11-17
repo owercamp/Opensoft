@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Collaborator;
+use App\Models\Contractorcharge;
 use App\Models\interviewCollaborator;
+use App\Models\interviewExpress;
 use App\Models\interviewMessenger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -39,5 +41,18 @@ class InterviewController extends Controller
       return back()->with('SuccessContractor', 'Entrevista del colaborador ' . strtoupper($msg->coNames) . ' almacenada');
     }
     return back()->with('WarningContractor', 'El colaborador ' . strtoupper($search->coNames) . ' ya cuenta con la entrevista');
+  }
+
+  function ExpressSave(Request $request)
+  {
+    $search = interviewExpress::where('int_IdCollaborator', '=', $request->int_IdCollaborator)
+      ->join('contractorschargeexpress', 'contractorschargeexpress.ccId', 'interview_expresses.int_IdCollaborator')->first();
+    if (!$search) {
+      $msg = Contractorcharge::find($request->int_IdCollaborator);
+      $data = Arr::except($request->all(), "_token");
+      interviewExpress::create($data);
+      return back()->with('SuccessContractor', 'Entrevista del contratista ' . strtoupper($msg->ccNames) . ' almacenada');
+    }
+    return back()->with('WarningContractor', 'El contratista ' . strtoupper($search->ccNames) . ' ya cuenta con la entrevista');
   }
 }

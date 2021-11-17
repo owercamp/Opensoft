@@ -51,7 +51,7 @@
         <td>{{ $contractor->ccNumberdocument }}</td>
         <td>{{ $contractor->ccNumberdriving }}</td>
         <td>
-          <a href="#" title="Editar contratista {{ $contractor->ccNames }}" class="btn btn-outline-primary rounded-circle form-control-sm editContractor-link">
+          <button href="#" title="Editar contratista {{ $contractor->ccNames }}" class="btn btn-outline-primary rounded-circle editContractor-link">
             <i class="fas fa-edit"></i>
             <span hidden>{{ $contractor->ccId }}</span>
             <span hidden>{{ $contractor->ccNames }}</span>
@@ -106,8 +106,8 @@
             <span hidden>{{ $contractor->finals }}</span>
             <img src="{{ asset('storage/contractorsChargePhotos/'.$contractor->ccPhoto) }}" hidden>
             <img src="{{ asset('storage/contractorsChargeFirms/'.$contractor->ccFirm) }}" hidden>
-          </a>
-          <a href="#" title="Eliminar contratista {{ $contractor->ccNames }}" class="btn btn-outline-tertiary rounded-circle form-control-sm deleteContractor-link">
+          </button>
+          <button href="#" title="Eliminar contratista {{ $contractor->ccNames }}" class="btn btn-outline-tertiary rounded-circle deleteContractor-link">
             <i class="fas fa-trash-alt"></i>
             <span hidden>{{ $contractor->ccId }}</span>
             <span hidden>{{ $contractor->ccNames }}</span>
@@ -133,12 +133,86 @@
             <span hidden>{{ $contractor->ccCourses }}</span>
             <img src="{{ asset('storage/contractorsChargePhotos/'.$contractor->ccPhoto) }}" hidden>
             <img src="{{ asset('storage/contractorsChargeFirms/'.$contractor->ccFirm) }}" hidden>
-          </a>
+          </button>
+          <button class="btn btn-outline-info rounded-circle Interview" title="{{'Entrevista '.$contractor->coNames}}"><i class="fas fa-clipboard"></i>
+            <span hidden>{{ $contractor->ccNames }}</span>
+            <span hidden>{{ $contractor->ccId }}</span>
+          </button>
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
+</div>
+
+<!-- formulario de entrevista -->
+<div class="modal fade" id="formInterview">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header justify-content-between">
+        <h3 id="header" class="text-capitalize"></h3>
+        <button type="button" class="btn btn-sm btn-tertiary" data-dismiss="modal">&xfr;</button>
+      </div>
+      <div class="modal-body">
+        <form action="{{route('express.save')}}" method="post">
+          @csrf
+          <div class="col-lg-12 row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <small class="text-muted">{{ucwords('fecha:')}}</small>
+                <b class="text-secondary">{{$date}}</b>
+                <input type="hidden" name="int_date">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <small class="text-muted">{{ucwords('Hora:')}}</small>
+                <b id="hour" class="text-secondary"></b>
+                <input type="hidden" name="int_hour">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12 row">
+            <div class="col-lg-6">
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <small class="text-muted">{{ucwords('cumplimiento')}}</small>
+                  <select name="int_compliance" class="form-control form-control-sm">
+                    <option value="">{{ucfirst('seleccione...')}}</option>
+                    <option value="LLEGO A TIEMPO">LLEGO A TIEMPO</option>
+                    <option value="LLEGO TARDE">LLEGO TARDE</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <small class="text-muted">{{ucwords('presentación')}}</small>
+                  <select name="int_presence" class="form-control form-control-sm">
+                    <option value="">{{ucwords('seleccione...')}}</option>
+                    <option value="EXCELENTE">EXCELENTE</option>
+                    <option value="BUENA">BUENA</option>
+                    <option value="REGULAR">REGULAR</option>
+                    <option value="MALO">MALO</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <small class="text-muted">{{ucwords('observaciones')}}</small>
+                <textarea name="int_Obs" cols="30" rows="10" class="form-control form-control-sm"></textarea>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="col-lg-12 justify-content-center d-flex">
+            <input type="hidden" name="int_IdCollaborator">
+            <button class="btn btn-outline-success">{{ucwords('guardar')}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- formulario de creación -->
@@ -1199,6 +1273,26 @@
 
 @section('scripts')
 <script>
+  // *carga hora actual
+  const timer = setInterval(() => {
+    let now = new Date();
+    let date = now.toLocaleDateString();
+    let hour = now.toLocaleTimeString('en-En');
+    $('#hour').text(('00:00:00' + hour).slice(-11));
+    $('input[name=int_hour]').val(('00:00:00' + hour).slice(-11));
+    $('input[name=int_date]').val(date);
+  }, 1000);
+
+  // *llama al formulario de entrevista
+  $('.Interview').click(function() {
+    const name = $(this).find('span:nth-child(2)').text();
+    const id = $(this).find('span:nth-child(3)').text();
+    $("#header").empty();
+    $("#header").prepend(`entrevista ${name}`);
+    $('input[name=int_IdCollaborator]').val(id);
+    $('#formInterview').modal();
+  });
+
   // *añade una nueva linea para agregar otros
   $('.addOthers').click(function() {
     $('.Others').prepend(`
