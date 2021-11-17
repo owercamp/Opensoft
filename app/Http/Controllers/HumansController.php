@@ -476,6 +476,9 @@ class HumansController extends Controller
 
   function contractorsMessengerTo()
   {
+    $dateNow = Carbon::now()->locale('es')->isoFormat('LL');
+    $day = Carbon::now()->locale('es')->dayName;
+    $date = $day . " " . $dateNow;
     $contractorsmessengers = Contractormessenger::select(
       'contractorsmessenger.*',
       'settingdepartments.*',
@@ -511,7 +514,7 @@ class HumansController extends Controller
     $layoffs = Settinglayoff::all();
     $drivings = Settingdriving::all();
     $courses = Settingcourse::all();
-    return view('modules.humans.contractorsMessenger.index', compact('contractorsmessengers', 'personals', 'deparments', 'healths', 'risks', 'compensations', 'pensions', 'layoffs', 'drivings', 'courses'));
+    return view('modules.humans.contractorsMessenger.index', compact('contractorsmessengers', 'personals', 'deparments', 'healths', 'risks', 'compensations', 'pensions', 'layoffs', 'drivings', 'courses', 'date'));
   }
 
   function saveContractorsmessenger(Request $request)
