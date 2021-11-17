@@ -23,6 +23,7 @@ use App\Models\Settingcourse;
 
 use App\Models\Billcollaborator;
 use App\Models\Billcontractor;
+use Carbon\Carbon;
 
 class HumansController extends Controller
 {
@@ -37,6 +38,9 @@ class HumansController extends Controller
 
   function collaboratorsTo()
   {
+    $dateNow = Carbon::now()->locale('es')->isoFormat('LL');
+    $day = Carbon::now()->locale('es')->dayName;
+    $date = $day . " " . $dateNow;
     $collaborators = Collaborator::select(
       'collaborators.*',
       'settingdepartments.*',
@@ -68,7 +72,7 @@ class HumansController extends Controller
     $compensations = Settingcompensation::all();
     $pensions = Settingpension::all();
     $layoffs = Settinglayoff::all();
-    return view('modules.humans.collaborators.index', compact('collaborators', 'personals', 'deparments', 'healths', 'risks', 'compensations', 'pensions', 'layoffs'));
+    return view('modules.humans.collaborators.index', compact('collaborators', 'personals', 'deparments', 'healths', 'risks', 'compensations', 'pensions', 'layoffs', 'date'));
   }
 
   function saveCollaborator(Request $request)

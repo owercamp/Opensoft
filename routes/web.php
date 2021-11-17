@@ -225,6 +225,8 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   Route::post('/administrative/humans/collaborators/save', 'HumansController@saveCollaborator')->name('collaborator.save');
   Route::post('/administrative/humans/collaborators/update', 'HumansController@updateCollaborator')->name('collaborator.update');
   Route::post('/administrative/humans/collaborators/delete', 'HumansController@deleteCollaborator')->name('collaborator.delete');
+  // *Entrevista Colaboradores
+  Route::post('/administrative/humans/interviewCollaborator/save', 'InterviewController@interviewSave')->name('interview.save');
   // *Contratistas Mensajeria
   Route::get('/administrative/humans/contractorsMessenger', 'HumansController@contractorsMessengerTo')->name('humans.contractorsMessenger');
   Route::post('/administrative/humans/contractorsMessenger/save', 'HumansController@saveContractorsmessenger')->name('contractorsMessenger.save');

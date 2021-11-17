@@ -51,7 +51,7 @@
         <td>{{ $collaborator->coNumberdocument }}</td>
         <td>{{ $collaborator->coPosition }}</td>
         <td>
-          <a href="#" title="Editar colaborador {{ $collaborator->coNames }}" class="btn btn-outline-primary rounded-circle form-control-sm editCollaborator-link">
+          <button title="Editar colaborador {{ $collaborator->coNames }}" class="btn btn-outline-primary rounded-circle editCollaborator-link">
             <i class="fas fa-edit"></i>
             <span hidden>{{ $collaborator->coId }}</span>
             <span hidden>{{ $collaborator->coNames }}</span>
@@ -108,8 +108,8 @@
             @else
             <img src="{{ asset('storage/collaboratorsFirms/firmCollaboratorDefault.png') }}" hidden>
             @endif
-          </a>
-          <a href="#" title="Eliminar colaborador {{ $collaborator->coNames }}" class="btn btn-outline-tertiary rounded-circle form-control-sm deleteCollaborator-link">
+          </button>
+          <button title="Eliminar colaborador {{ $collaborator->coNames }}" class="btn btn-outline-tertiary rounded-circle deleteCollaborator-link">
             <i class="fas fa-trash-alt"></i>
             <span hidden>{{ $collaborator->coId }}</span>
             <span hidden>{{ $collaborator->coNames }}</span>
@@ -137,12 +137,86 @@
             @else
             <img src="{{ asset('storage/collaboratorsFirms/firmCollaboratorDefault.png') }}" hidden>
             @endif
-          </a>
+          </button>
+          <button class="btn btn-outline-info rounded-circle Interview" title="{{'Entrevista '.$collaborator->coNames}}"><i class="fas fa-clipboard"></i>
+            <span hidden>{{ $collaborator->coNames }}</span>
+            <span hidden>{{ $collaborator->coId }}</span>
+          </button>
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
+</div>
+
+<!-- formulario de entrevista -->
+<div class="modal fade" id="formInterview">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header justify-content-between">
+        <h3 id="header" class="text-capitalize"></h3>
+        <button type="button" class="btn btn-sm btn-tertiary" data-dismiss="modal">&xfr;</button>
+      </div>
+      <div class="modal-body">
+        <form action="{{route('interview.save')}}" method="post">
+          @csrf
+          <div class="col-lg-12 row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <small class="text-muted">{{ucwords('fecha:')}}</small>
+                <b class="text-secondary">{{$date}}</b>
+                <input type="hidden" name="int_date">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <small class="text-muted">{{ucwords('Hora:')}}</small>
+                <b id="hour" class="text-secondary"></b>
+                <input type="hidden" name="int_hour">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12 row">
+            <div class="col-lg-6">
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <small class="text-muted">{{ucwords('cumplimiento')}}</small>
+                  <select name="int_compliance" class="form-control form-control-sm">
+                    <option value="">{{ucfirst('seleccione...')}}</option>
+                    <option value="LLEGO A TIEMPO">LLEGO A TIEMPO</option>
+                    <option value="LLEGO TARDE">LLEGO TARDE</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <small class="text-muted">{{ucwords('presentación')}}</small>
+                  <select name="int_presence" class="form-control form-control-sm">
+                    <option value="">{{ucwords('seleccione...')}}</option>
+                    <option value="EXCELENTE">EXCELENTE</option>
+                    <option value="BUENA">BUENA</option>
+                    <option value="REGULAR">REGULAR</option>
+                    <option value="MALO">MALO</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <small class="text-muted">{{ucwords('observaciones')}}</small>
+                <textarea name="int_Obs" cols="30" rows="10" class="form-control form-control-sm"></textarea>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="col-lg-12 justify-content-center d-flex">
+            <input type="hidden" name="int_IdCollaborator">
+            <button class="btn btn-outline-success">{{ucwords('guardar')}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- formulario de creación -->
@@ -275,6 +349,26 @@
 
 @section('scripts')
 <script>
+  // *carga hora actual
+  const timer = setInterval(() => {
+    let now = new Date();
+    let date = now.toLocaleDateString();
+    let hour = now.toLocaleTimeString('en-En');
+    $('#hour').text(('00:00:00' + hour).slice(-11));
+    $('input[name=int_hour]').val(('00:00:00' + hour).slice(-11));
+    $('input[name=int_date]').val(date);
+  }, 1000);
+
+  // *llama al formulario de entrevista
+  $('.Interview').click(function() {
+    const name = $(this).find('span:nth-child(2)').text();
+    const id = $(this).find('span:nth-child(3)').text();
+    $("#header").empty();
+    $("#header").prepend(`entrevista ${name}`);
+    $('input[name=int_IdCollaborator]').val(id);
+    $('#formInterview').modal();
+  });
+
   // *añade una nueva linea para agregar otros
   $('.addOthers').click(function() {
     $('.Others').prepend(`
