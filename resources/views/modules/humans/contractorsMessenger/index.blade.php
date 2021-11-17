@@ -51,7 +51,7 @@
         <td>{{ $contractor->cmNumberdocument }}</td>
         <td>{{ $contractor->cmNumberdriving }}</td>
         <td>
-          <button href="#" title="Editar contratista {{ $contractor->cmNames }}" class="btn btn-outline-primary rounded-circle form-control-sm editContractor-link">
+          <button href="#" title="Editar contratista {{ $contractor->cmNames }}" class="btn btn-outline-primary rounded-circle  editContractor-link">
             <i class="fas fa-edit"></i>
             <span hidden>{{ $contractor->cmId }}</span>
             <span hidden>{{ $contractor->cmNames }}</span>
@@ -107,7 +107,7 @@
             <img src="{{ asset('storage/contractorsMessengerPhotos/'.$contractor->cmPhoto) }}" hidden>
             <img src="{{ asset('storage/contractorsMessengerFirms/'.$contractor->cmFirm) }}" hidden>
           </button>
-          <button href="#" title="Eliminar contratista {{ $contractor->cmNames }}" class="btn btn-outline-tertiary rounded-circle form-control-sm deleteContractor-link">
+          <button href="#" title="Eliminar contratista {{ $contractor->cmNames }}" class="btn btn-outline-tertiary rounded-circle  deleteContractor-link">
             <i class="fas fa-trash-alt"></i>
             <span hidden>{{ $contractor->cmId }}</span>
             <span hidden>{{ $contractor->cmNames }}</span>
