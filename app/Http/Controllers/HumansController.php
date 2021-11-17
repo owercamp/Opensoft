@@ -1368,6 +1368,9 @@ class HumansController extends Controller
 
   function contractorsEspecialTo()
   {
+    $dateNow = Carbon::now()->locale('es')->isoFormat('LL');
+    $day = Carbon::now()->locale('es')->dayName;
+    $date = $day . " " . $dateNow;
     $contractorsespecials = Contractorespecial::select(
       'contractorsserviceespecial.*',
       'settingdepartments.*',
@@ -1403,7 +1406,7 @@ class HumansController extends Controller
     $layoffs = Settinglayoff::all();
     $drivings = Settingdriving::all();
     $courses = Settingcourse::all();
-    return view('modules.humans.contractorsEspecial.index', compact('contractorsespecials', 'personals', 'deparments', 'healths', 'risks', 'compensations', 'pensions', 'layoffs', 'drivings', 'courses'));
+    return view('modules.humans.contractorsEspecial.index', compact('contractorsespecials', 'personals', 'deparments', 'healths', 'risks', 'compensations', 'pensions', 'layoffs', 'drivings', 'courses', 'date'));
   }
 
   function saveContractorsespecial(Request $request)

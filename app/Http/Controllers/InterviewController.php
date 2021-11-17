@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Collaborator;
 use App\Models\Contractorcharge;
+use App\Models\Contractorespecial;
 use App\Models\interviewCollaborator;
 use App\Models\interviewExpress;
 use App\Models\interviewMessenger;
+use App\Models\interviewSpecial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -54,5 +56,18 @@ class InterviewController extends Controller
       return back()->with('SuccessContractor', 'Entrevista del contratista ' . strtoupper($msg->ccNames) . ' almacenada');
     }
     return back()->with('WarningContractor', 'El contratista ' . strtoupper($search->ccNames) . ' ya cuenta con la entrevista');
+  }
+
+  function SpecialsSave(Request $request)
+  {
+    $search = interviewSpecial::where('int_IdCollaborator', '=', $request->int_IdCollaborator)
+      ->join('contractorsserviceespecial', 'contractorsserviceespecial.ceId', 'interview_specials.int_IdCollaborator')->first();
+    if (!$search) {
+      $msg = Contractorespecial::find($request->int_IdCollaborator);
+      $data = Arr::except($request->all(), "_token");
+      interviewSpecial::create($data);
+      return back()->with('SuceessContractor', 'Entrevista del contratista ' . strtoupper($msg->ceNames) . ' almacenada');
+    }
+    return back()->with('WarningContractor', 'El contratista ' . strtoupper($search->ceNames) . ' ya cuenta con la entrevista');
   }
 }
