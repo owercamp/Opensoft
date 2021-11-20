@@ -9,7 +9,7 @@
       @endforeach
     </select>
   </div>
-  <div class="col-6">
+  <div class="col-8">
     <small>CONTENIDO</small>
     <textarea name="TextContent" id="TextContent" cols="30" rows="10" class="form-control-sm form-control"></textarea>
   </div>
