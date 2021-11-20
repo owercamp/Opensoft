@@ -245,6 +245,11 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   Route::post('/administrative/humans/interviewMessengers/save', 'InterviewController@MessengersSave')->name('messengers.save');
   Route::post('/administrative/humans/interviewExpress/save', 'InterviewController@ExpressSave')->name('express.save');
   Route::post('/administrative/humans/interviewSpecials/save', 'InterviewController@SpecialsSave')->name('specials.save');
+  // *Verificación Referencias
+  Route::post('/administrative/humans/interviewReferencesCollaborator/save', 'InterviewController@CollaboratorReferences')->name('collaborator.references');
+  Route::post('/administrative/humans/interviewReferencesMessenger/save', 'InterviewController@MessengerReferences')->name('messenger.references');
+  Route::post('/administrative/humans/interviewReferencesExpress/save', 'InterviewController@ExpressReferences')->name('express.references');
+  Route::post('/administrative/humans/interviewReferencesSpecials/save', 'InterviewController@SpecialsReferences')->name('specials.references');
 
   // ?BASE DE DATOS >> CONFIGURACION PROVEEDORES
 

@@ -9,6 +9,7 @@ use App\Models\interviewCollaborator;
 use App\Models\interviewExpress;
 use App\Models\interviewMessenger;
 use App\Models\interviewSpecial;
+use App\Models\ReferencesCollaborator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -30,6 +31,21 @@ class InterviewController extends Controller
       return back()->with('SuccessCollaborator', 'Entrevista del colaborador ' . strtoupper($msg->coNames) . ' almacenada');
     }
     return back()->with('WarningCollaborator', 'El colaborador ' . strtoupper($search->coNames) . ' ya cuenta con la entrevista');
+  }
+
+  function CollaboratorReferences(Request $request)
+  {
+    $search = ReferencesCollaborator::where('rc_collaborator_id', $request->rc_collaborator_id)->first();
+    if (!$search) {
+      $data = Arr::except($request->all(), ['_token']);
+      ReferencesCollaborator::create($data);
+      return back()->with('SuccessCollaborator', 'Verificación Referencias Almacenado');
+    } else {
+      $data = Arr::except($request->all(), ['_token']);
+      ReferencesCollaborator::where('rc_collaborator_id', $request->rc_collaborator_id)
+        ->update($data);
+      return back()->with('PrimaryCollaborator', 'Verificación Referencias Actualizada');
+    }
   }
 
   function MessengersSave(Request $request)

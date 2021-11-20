@@ -4,6 +4,7 @@ use App\Models\AccidentControlAndAnalysis;
 use App\Models\AnalysisMatrix;
 use App\Models\AutoMotiveFleet;
 use App\Models\BidirectionalCommunicationSystem;
+use App\Models\Collaborator;
 use App\Models\Commitee;
 use App\Models\Configdocumentlogistic;
 use App\Models\Configdocumentmanagerial;
@@ -1142,3 +1143,11 @@ Route::post("apiMatrix", function (Request $request) {
     ->get();
   return response()->json($query);
 })->name("apiMatrix");
+
+// *consulta al usuario en la tabla de colaboradores
+// *para motrarlo las referencias personales y labores 
+// *anexadas
+Route::post('apiCollaborator', function(Request $request){
+  $query = Collaborator::where('coId',$request->data)->first();
+  return response()->json($query);
+})->name('apiCollaborator');

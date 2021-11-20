@@ -49,7 +49,7 @@
 </div>
 
 <div class="modal fade" id="formCommitee">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header justify-content-between">
         <h5 class="my-auto mx-auto">Edición Actas de Comite</h5>
