@@ -183,7 +183,7 @@
                   </div>
                   <div class="form-group w-100">
                     <small class="text-muted">VERIFICACION</small>
-                    <select name="ver1" class="form-control form-control-sm">
+                    <select name="ver1" class="form-control form-control-sm" required>
                       <option value="">{{ucfirst('seleccione...')}}</option>
                       <option value="{{strtoupper('verificada')}}">{{strtoupper('verificada')}}</option>
                       <option value="{{strtoupper('no verificada')}}">{{strtoupper('no verificada')}}</option>
@@ -193,7 +193,7 @@
               </div>
               <div class="col-md-8">
                 <div class="text-muted">{{ucwords('observaciones')}}</div>
-                <textarea name="obsver1" cols="30" rows="13" class="form-control form-control-sm"></textarea>
+                <textarea name="obsver1" cols="30" rows="13" class="form-control form-control-sm" required></textarea>
               </div>
             </div>
             <hr>
@@ -214,7 +214,7 @@
                   </div>
                   <div class="form-group w-100">
                     <small class="text-muted">VERIFICACION</small>
-                    <select name="ver2" class="form-control form-control-sm">
+                    <select name="ver2" class="form-control form-control-sm" required>
                       <option value="">{{ucfirst('seleccione...')}}</option>
                       <option value="{{strtoupper('verificada')}}">{{strtoupper('verificada')}}</option>
                       <option value="{{strtoupper('no verificada')}}">{{strtoupper('no verificada')}}</option>
@@ -224,7 +224,7 @@
               </div>
               <div class="col-md-8">
                 <div class="text-muted">{{ucwords('observaciones')}}</div>
-                <textarea name="obsver2" cols="30" rows="13" class="form-control form-control-sm"></textarea>
+                <textarea name="obsver2" cols="30" rows="13" class="form-control form-control-sm" required></textarea>
               </div>
             </div>
           </div>
@@ -242,25 +242,25 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <small class="text-muted">NIT</small>
-                    <input type="text" name="nitRef1" class="form-control form-control-sm">
+                    <input type="text" name="nitRef1" class="form-control form-control-sm" required>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <small class="text-muted">DIRECCION</small>
-                    <input type="text" name="addRef1" class="form-control form-control-sm">
+                    <input type="text" name="addRef1" class="form-control form-control-sm" required>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <small class="text-muted">TELEFONO</small>
-                    <input type="text" name="phoRef1" class="form-control form-control-sm">
+                    <input type="text" name="phoRef1" class="form-control form-control-sm" required>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <small class="text-muted">CIUDAD</small>
-                    <input type="text" name="ciuRef1" class="form-control form-control-sm">
+                    <input type="text" name="ciuRef1" class="form-control form-control-sm" required>
                   </div>
                 </div>
               </div>
@@ -268,7 +268,7 @@
                 <div class="w-100">
                   <div class="col-md-6">
                     <small class="text-muted">VERIFICACION</small>
-                    <select name="verRef1" class="form-control form-control-sm">
+                    <select name="verRef1" class="form-control form-control-sm" required>
                       <option value="">{{ucfirst('seleccione...')}}</option>
                       <option value="{{strtoupper('verificada')}}">{{strtoupper('verificada')}}</option>
                       <option value="{{strtoupper('no verificada')}}">{{strtoupper('no verificada')}}</option>
@@ -277,7 +277,7 @@
                 </div>
                 <div class="col-md-12">
                   <div class="text-muted">{{ucwords('observaciones')}}</div>
-                  <textarea name="obsverRef1" cols="30" rows="13" class="form-control form-control-sm"></textarea>
+                  <textarea name="obsverRef1" cols="30" rows="13" class="form-control form-control-sm" required></textarea>
                 </div>
               </div>
             </div>
@@ -292,25 +292,25 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <small class="text-muted">NIT</small>
-                    <input type="text" name="nitRef2" class="form-control form-control-sm">
+                    <input type="text" name="nitRef2" class="form-control form-control-sm" required>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <small class="text-muted">DIRECCION</small>
-                    <input type="text" name="addRef2" class="form-control form-control-sm">
+                    <input type="text" name="addRef2" class="form-control form-control-sm" required>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <small class="text-muted">TELEFONO</small>
-                    <input type="text" name="phoRef2" class="form-control form-control-sm">
+                    <input type="text" name="phoRef2" class="form-control form-control-sm" required>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <small class="text-muted">CIUDAD</small>
-                    <input type="text" name="ciuRef2" class="form-control form-control-sm">
+                    <input type="text" name="ciuRef2" class="form-control form-control-sm" required>
                   </div>
                 </div>
               </div>
@@ -318,7 +318,7 @@
                 <div class="w-100">
                   <div class="col-md-6">
                     <small class="text-muted">VERIFICACION</small>
-                    <select name="verRef2" class="form-control form-control-sm">
+                    <select name="verRef2" class="form-control form-control-sm" required>
                       <option value="">{{ucfirst('seleccione...')}}</option>
                       <option value="{{strtoupper('verificada')}}">{{strtoupper('verificada')}}</option>
                       <option value="{{strtoupper('no verificada')}}">{{strtoupper('no verificada')}}</option>
@@ -327,7 +327,7 @@
                 </div>
                 <div class="col-md-12">
                   <div class="text-muted">{{ucwords('observaciones')}}</div>
-                  <textarea name="obsverRef2" cols="30" rows="13" class="form-control form-control-sm"></textarea>
+                  <textarea name="obsverRef2" cols="30" rows="13" class="form-control form-control-sm" required></textarea>
                 </div>
               </div>
             </div>

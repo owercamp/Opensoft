@@ -16,7 +16,7 @@ class ReferencesCollaborator extends Model
 
     public function collaborator()
     {
-      // !relacion con la tabla de colaborador
+      // !relacion con la tabla de collaborator
       return $this->belongsTo(Collaborator::class, 'rc_collaborator_id');
     }
 }

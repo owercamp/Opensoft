@@ -8,6 +8,7 @@ use App\Models\Collaborator;
 use App\Models\Commitee;
 use App\Models\Configdocumentlogistic;
 use App\Models\Configdocumentmanagerial;
+use App\Models\Contractormessenger;
 use App\Models\LegalParent;
 use App\Models\MatrixEPP;
 use App\Models\PreventiveMaintenanceReview;
@@ -1144,10 +1145,18 @@ Route::post("apiMatrix", function (Request $request) {
   return response()->json($query);
 })->name("apiMatrix");
 
-// *consulta al usuario en la tabla de colaboradores
+// *consulta al usuario en la tabla de collaborators
 // *para motrarlo las referencias personales y labores 
 // *anexadas
 Route::post('apiCollaborator', function(Request $request){
   $query = Collaborator::where('coId',$request->data)->first();
   return response()->json($query);
 })->name('apiCollaborator');
+
+// *consulta al usuario en la tabla de contractorsmessenger
+// *para motrarlo las referencias personales y labores 
+// *anexadas
+Route::post('apiMessenger', function(Request $request){
+ $query = Contractormessenger::where('cmId',$request->data)->first();
+ return response()->json($query);
+})->name('apiMessenger');
