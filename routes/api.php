@@ -8,6 +8,7 @@ use App\Models\Collaborator;
 use App\Models\Commitee;
 use App\Models\Configdocumentlogistic;
 use App\Models\Configdocumentmanagerial;
+use App\Models\Contractorcharge;
 use App\Models\Contractormessenger;
 use App\Models\LegalParent;
 use App\Models\MatrixEPP;
@@ -1160,3 +1161,11 @@ Route::post('apiMessenger', function(Request $request){
  $query = Contractormessenger::where('cmId',$request->data)->first();
  return response()->json($query);
 })->name('apiMessenger');
+
+// *consulta al usuario en la tabla de contractorschargeexpress
+// *para motrarlo las referencias personales y labores 
+// *anexadas
+Route::post('apiExpress', function(Request $request){
+  $query = Contractorcharge::where('ccId',$request->data)->first();
+  return response()->json($query);
+ })->name('apiExpress');

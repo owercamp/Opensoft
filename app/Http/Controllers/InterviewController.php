@@ -10,6 +10,7 @@ use App\Models\interviewExpress;
 use App\Models\interviewMessenger;
 use App\Models\interviewSpecial;
 use App\Models\ReferencesCollaborator;
+use App\Models\ReferencesExpress;
 use App\Models\ReferencesMessenger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -88,6 +89,21 @@ class InterviewController extends Controller
       return back()->with('SuccessContractor', 'Entrevista del contratista ' . strtoupper($msg->ccNames) . ' almacenada');
     }
     return back()->with('WarningContractor', 'El contratista ' . strtoupper($search->ccNames) . ' ya cuenta con la entrevista');
+  }
+
+  function ExpressReferences(Request $request)
+  {
+    $search = ReferencesExpress::where('rc_collaborator_id', $request->rc_collaborator_id)->first();
+    if (!$search) {
+      $data = Arr::except($request->all(), ['_token']);
+      ReferencesExpress::create($data);
+      return back()->with('SuccessContractor', 'Verificación Referencias Almacenado');
+    } else {
+      $data = Arr::except($request->all(), ['_token']);
+      ReferencesExpress::where('rc_collaborator_id', $request->rc_collaborator_id)
+        ->update($data);
+      return back()->with('PrimaryContractor', 'Verificación Referencias Actualizada');
+    }
   }
 
   function SpecialsSave(Request $request)

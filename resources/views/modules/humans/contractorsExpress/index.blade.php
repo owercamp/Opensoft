@@ -138,12 +138,207 @@
             <span hidden>{{ $contractor->ccNames }}</span>
             <span hidden>{{ $contractor->ccId }}</span>
           </button>
+          <button class="btn btn-outline-secondary rounded-circle References" title="{{'Referencias '.$contractor->ccNames}}"><i class="far fa-eye"></i>
+            <span hidden>{{ $contractor->ccNames }}</span>
+            <span hidden>{{ $contractor->ccId }}</span>
+          </button>
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
 </div>
+
+<!-- formulario de referencias -->
+<div class="modal fade" id="formCheck">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="references" class="text-capitalize"></h3>
+        <button type="button" class="btn btn-sm btn-success" data-dismiss="modal">&xfr;</button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ route('express.references') }}" method="post">
+          @csrf
+          <div class="row">
+            <h5 class="text-muted w-100 text-center">REFERENCIAS PERSONALES</h5>
+            <div class="col-md-12 row">
+              <div class="col-md-4">
+                <div class="col-md-12 row">
+                  <div class="form-group w-100">
+                    <small class="text-muted">NOMBRES COMPLETOS</small>
+                    <input type="text" name="colRef1" class="form-control form-control-sm" required>
+                  </div>
+                  <div class="form-group w-100">
+                    <small class="text-muted">CEDULA</small>
+                    <input type="text" name="cedRef1" class="form-control form-control-sm" required>
+                  </div>
+                  <div class="form-group w-100">
+                    <small class="text-muted">TELEFONO</small>
+                    <input type="text" name="numRef1" class="form-control form-control-sm" required>
+                  </div>
+                  <div class="form-group w-100">
+                    <small class="text-muted">VERIFICACION</small>
+                    <select name="ver1" class="form-control form-control-sm" required>
+                      <option value="">{{ucfirst('seleccione...')}}</option>
+                      <option value="{{strtoupper('verificada')}}">{{strtoupper('verificada')}}</option>
+                      <option value="{{strtoupper('no verificada')}}">{{strtoupper('no verificada')}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="text-muted">{{ucwords('observaciones')}}</div>
+                <textarea name="obsver1" cols="30" rows="13" class="form-control form-control-sm" required></textarea>
+              </div>
+            </div>
+            <hr>
+            <div class="col-md-12 row">
+              <div class="col-md-4">
+                <div class="col-md-12 row">
+                  <div class="form-group w-100">
+                    <small class="text-muted">NOMBRES COMPLETOS</small>
+                    <input type="text" name="colRef2" class="form-control form-control-sm" required>
+                  </div>
+                  <div class="form-group w-100">
+                    <small class="text-muted">CEDULA</small>
+                    <input type="text" name="cedRef2" class="form-control form-control-sm" required>
+                  </div>
+                  <div class="form-group w-100">
+                    <small class="text-muted">TELEFONO</small>
+                    <input type="text" name="numRef2" class="form-control form-control-sm" required>
+                  </div>
+                  <div class="form-group w-100">
+                    <small class="text-muted">VERIFICACION</small>
+                    <select name="ver2" class="form-control form-control-sm" required>
+                      <option value="">{{ucfirst('seleccione...')}}</option>
+                      <option value="{{strtoupper('verificada')}}">{{strtoupper('verificada')}}</option>
+                      <option value="{{strtoupper('no verificada')}}">{{strtoupper('no verificada')}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="text-muted">{{ucwords('observaciones')}}</div>
+                <textarea name="obsver2" cols="30" rows="13" class="form-control form-control-sm" required></textarea>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <h5 class="text-muted w-100 text-center">REFERENCIAS LABORALES</h5>
+            <div class="col-md-12 row">
+              <div class="col-md-4">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <small class="text-muted">RAZON SOCIAL</small>
+                    <input type="text" name="rsRef1" class="form-control form-control-sm" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <small class="text-muted">NIT</small>
+                    <input type="text" name="nitRef1" class="form-control form-control-sm" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <small class="text-muted">DIRECCION</small>
+                    <input type="text" name="addRef1" class="form-control form-control-sm" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <small class="text-muted">TELEFONO</small>
+                    <input type="text" name="phoRef1" class="form-control form-control-sm" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <small class="text-muted">CIUDAD</small>
+                    <input type="text" name="ciuRef1" class="form-control form-control-sm" required>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="w-100">
+                  <div class="col-md-6">
+                    <small class="text-muted">VERIFICACION</small>
+                    <select name="verRef1" class="form-control form-control-sm" required>
+                      <option value="">{{ucfirst('seleccione...')}}</option>
+                      <option value="{{strtoupper('verificada')}}">{{strtoupper('verificada')}}</option>
+                      <option value="{{strtoupper('no verificada')}}">{{strtoupper('no verificada')}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="text-muted">{{ucwords('observaciones')}}</div>
+                  <textarea name="obsverRef1" cols="30" rows="13" class="form-control form-control-sm" required></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 row">
+              <div class="col-md-4">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <small class="text-muted">RAZON SOCIAL</small>
+                    <input type="text" name="rsRef2" class="form-control form-control-sm" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <small class="text-muted">NIT</small>
+                    <input type="text" name="nitRef2" class="form-control form-control-sm" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <small class="text-muted">DIRECCION</small>
+                    <input type="text" name="addRef2" class="form-control form-control-sm" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <small class="text-muted">TELEFONO</small>
+                    <input type="text" name="phoRef2" class="form-control form-control-sm" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <small class="text-muted">CIUDAD</small>
+                    <input type="text" name="ciuRef2" class="form-control form-control-sm" required>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="w-100">
+                  <div class="col-md-6">
+                    <small class="text-muted">VERIFICACION</small>
+                    <select name="verRef2" class="form-control form-control-sm" required>
+                      <option value="">{{ucfirst('seleccione...')}}</option>
+                      <option value="{{strtoupper('verificada')}}">{{strtoupper('verificada')}}</option>
+                      <option value="{{strtoupper('no verificada')}}">{{strtoupper('no verificada')}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="text-muted">{{ucwords('observaciones')}}</div>
+                  <textarea name="obsverRef2" cols="30" rows="13" class="form-control form-control-sm" required></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="w-100 d-flex justify-content-center my-3">
+            <input type="hidden" name="rc_collaborator_id">
+            <button type="submit" class="btn btn-outline-success">{{ucwords('guardar')}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- formulario de entrevista -->
 <div class="modal fade" id="formInterview">
@@ -1273,6 +1468,63 @@
 
 @section('scripts')
 <script>
+  // *llama al formulario de validación referencias
+  $('.References').click(function() {
+    const name = $(this).find('span:nth-child(2)').text();
+    const id = $(this).find('span:nth-child(3)').text();
+    $("#references").empty();
+    $("#references").prepend(`Referencias de ${name}`);
+    $.ajax({
+      "_token": "{{csrf_token()}}",
+      type: "POST",
+      dataType: "JSON",
+      url: "{{ route('apiExpress') }}",
+      data: {
+        data: id
+      },
+      beforeSend() {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+
+        Toast.fire({
+          icon: 'info',
+          title: `Consultando las referencias de ${name.toUpperCase()}`
+        })
+      },
+      success(res) {
+        $('input[name=colRef1]').val(res.colRef1);
+        $('input[name=colRef2]').val(res.colRef2);
+        $('input[name=cedRef1]').val(res.cedRef1);
+        $('input[name=cedRef2]').val(res.cedRef2);
+        $('input[name=numRef1]').val(res.numRef1);
+        $('input[name=numRef2]').val(res.numRef2);
+        $('input[name=rsRef1]').val(res.rsRef1);
+        $('input[name=rsRef2]').val(res.rsRef2);
+        $('input[name=nitRef1]').val(res.nitRef1);
+        $('input[name=nitRef2]').val(res.nitRef2);
+        $('input[name=addRef1]').val(res.addRef1);
+        $('input[name=addRef2]').val(res.addRef2);
+        $('input[name=phoRef1]').val(res.phoRef1);
+        $('input[name=phoRef2]').val(res.phoRef2);
+        $('input[name=ciuRef1]').val(res.ciuRef1);
+        $('input[name=ciuRef2]').val(res.ciuRef2);
+        $('input[name=rc_collaborator_id]').val(id);
+      },
+      complete() {
+        $('#formCheck').modal();
+      }
+    })
+  });
+
   // *carga hora actual
   const timer = setInterval(() => {
     let now = new Date();
