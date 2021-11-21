@@ -12,6 +12,7 @@ use App\Models\interviewSpecial;
 use App\Models\ReferencesCollaborator;
 use App\Models\ReferencesExpress;
 use App\Models\ReferencesMessenger;
+use App\Models\ReferencesSpecial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -117,5 +118,20 @@ class InterviewController extends Controller
       return back()->with('SuceessContractor', 'Entrevista del contratista ' . strtoupper($msg->ceNames) . ' almacenada');
     }
     return back()->with('WarningContractor', 'El contratista ' . strtoupper($search->ceNames) . ' ya cuenta con la entrevista');
+  }
+
+  function SpecialsReferences(Request $request)
+  {
+    $search = ReferencesSpecial::where('rc_collaborator_id', $request->rc_collaborator_id)->first();
+    if (!$search) {
+      $data = Arr::except($request->all(), ['_token']);
+      ReferencesSpecial::create($data);
+      return back()->with('SuccessContractor', 'Verificación Referencias Almacenado');
+    } else {
+      $data = Arr::except($request->all(), ['_token']);
+      ReferencesSpecial::where('rc_collaborator_id', $request->rc_collaborator_id)
+        ->update($data);
+      return back()->with('PrimaryContractor', 'Verificación Referencias Actualizada');
+    }
   }
 }
