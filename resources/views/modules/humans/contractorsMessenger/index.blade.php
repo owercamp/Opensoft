@@ -4,7 +4,7 @@
 <div class="col-md-12 p-3">
   <div class="row border-bottom mb-3">
     <div class="col-md-4">
-      <h5>CONTRATISTAS MENSAJERIA</h5>
+      <h5 id="titleSection">CONTRATISTAS MENSAJERIA</h5>
     </div>
     <div class="col-md-4">
       <button type="button" title="Registrar contratista de mensajeria" class="btn btn-outline-success form-control-sm newContractor-link">NUEVO</button>
@@ -51,7 +51,7 @@
         <td>{{ $contractor->cmNumberdocument }}</td>
         <td>{{ $contractor->cmNumberdriving }}</td>
         <td>
-          <button href="#" title="Editar contratista {{ $contractor->cmNames }}" class="btn btn-outline-primary rounded-circle  editContractor-link">
+          <button href="#" title="Editar contratista {{ ucwords($contractor->cmNames) }}" class="btn btn-outline-primary rounded-circle  editContractor-link">
             <i class="fas fa-edit"></i>
             <span hidden>{{ $contractor->cmId }}</span>
             <span hidden>{{ $contractor->cmNames }}</span>
@@ -107,7 +107,7 @@
             <img src="{{ asset('storage/contractorsMessengerPhotos/'.$contractor->cmPhoto) }}" hidden>
             <img src="{{ asset('storage/contractorsMessengerFirms/'.$contractor->cmFirm) }}" hidden>
           </button>
-          <button href="#" title="Eliminar contratista {{ $contractor->cmNames }}" class="btn btn-outline-tertiary rounded-circle  deleteContractor-link">
+          <button href="#" title="Eliminar contratista {{ ucwords($contractor->cmNames) }}" class="btn btn-outline-tertiary rounded-circle  deleteContractor-link">
             <i class="fas fa-trash-alt"></i>
             <span hidden>{{ $contractor->cmId }}</span>
             <span hidden>{{ $contractor->cmNames }}</span>
@@ -134,19 +134,29 @@
             <img src="{{ asset('storage/contractorsMessengerPhotos/'.$contractor->cmPhoto) }}" hidden>
             <img src="{{ asset('storage/contractorsMessengerFirms/'.$contractor->cmFirm) }}" hidden>
           </button>
-          <button class="btn btn-outline-info rounded-circle Interview" title="{{'Entrevista '.$contractor->coNames}}"><i class="fas fa-clipboard"></i>
+          <button class="btn btn-outline-info rounded-circle Interview" title="{{'Entrevista '.ucwords($contractor->cmNames)}}"><i class="fas fa-clipboard"></i>
             <span hidden>{{ $contractor->cmNames }}</span>
             <span hidden>{{ $contractor->cmId }}</span>
           </button>
-          <button class="btn btn-outline-secondary rounded-circle References" title="{{'Referencias '.$contractor->cmNames}}"><i class="far fa-eye"></i>
+          <button class="btn btn-outline-secondary rounded-circle References" title="{{'Referencias '.ucwords($contractor->cmNames)}}"><i class="far fa-eye"></i>
             <span hidden>{{ $contractor->cmNames }}</span>
             <span hidden>{{ $contractor->cmId }}</span>
           </button>
+          <button class="btn btn-outline-tertiary rounded-circle CV" title="{{'Hoja de Vida '.ucwords($contractor->cmNames)}}"><i class="fas fa-award"></i><span hidden>{{ $contractor->cmId}}</span></button>
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
+</div>
+
+<!-- formulario para crear el PDF de la hoja de vida -->
+<div hidden aria-hidden="true">
+  <form action="{{route('cv.collaborators')}}" method="post" id="formCV">
+    @csrf
+    <input type="text" name="idSearch">
+    <input type="text" name="FormSubmit">
+  </form>
 </div>
 
 <!-- formulario de referencias -->
@@ -1464,6 +1474,23 @@
 
 @section('scripts')
 <script>
+  $('input[name=cedRef1]').mask('###',{reverse:true});
+  $('input[name=numRef1]').mask('###',{reverse:true});
+  $('input[name=cedRef2]').mask('###',{reverse:true});
+  $('input[name=numRef2]').mask('###',{reverse:true});
+  $('input[name=cedRef1_Edit]').mask('###',{reverse:true});
+  $('input[name=numRef1_Edit]').mask('###',{reverse:true});
+  $('input[name=cedRef2_Edit]').mask('###',{reverse:true});
+  $('input[name=numRef2_Edit]').mask('###',{reverse:true});
+  // *se envia el id para consultar la información del colaborador para generar el PDF y toma el nombre de la cabecera
+  $('.CV').click(function() {
+    let id = $(this).find('span:nth-child(2)').text();
+    let form = $('#titleSection').text();
+    $('input[name=idSearch]').val(id);
+    $('input[name=FormSubmit]').val(form);
+    $('#formCV').submit();
+  });
+
   // *llama al formulario de validación referencias
   $('.References').click(function() {
     const name = $(this).find('span:nth-child(2)').text();

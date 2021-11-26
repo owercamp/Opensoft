@@ -251,6 +251,9 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   Route::post('/administrative/humans/interviewReferencesExpress/save', 'InterviewController@ExpressReferences')->name('express.references');
   Route::post('/administrative/humans/interviewReferencesSpecials/save', 'InterviewController@SpecialsReferences')->name('specials.references');
 
+  // *generador de PDF
+  Route::post('/administrative/humans/CV/PDF','InterviewController@PDFCollaborators')->name('cv.collaborators');
+
   // ?BASE DE DATOS >> CONFIGURACION PROVEEDORES
 
   // *Productos

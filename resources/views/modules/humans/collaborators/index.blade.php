@@ -4,7 +4,7 @@
 <div class="col-md-12 p-3">
   <div class="row border-bottom mb-3">
     <div class="col-md-4">
-      <h5>COLABORADORES</h5>
+      <h5 id="titleSection">COLABORADORES</h5>
     </div>
     <div class="col-md-4">
       <button type="button" title="Registrar colaborador" class="btn btn-outline-success form-control-sm newCollaborator-link">NUEVO</button>
@@ -51,7 +51,7 @@
         <td>{{ $collaborator->coNumberdocument }}</td>
         <td>{{ $collaborator->coPosition }}</td>
         <td>
-          <button title="Editar colaborador {{ $collaborator->coNames }}" class="btn btn-outline-primary rounded-circle editCollaborator-link">
+          <button title="Editar colaborador {{ ucwords($collaborator->coNames) }}" class="btn btn-outline-primary rounded-circle editCollaborator-link">
             <i class="fas fa-edit"></i>
             <span hidden>{{ $collaborator->coId }}</span>
             <span hidden>{{ $collaborator->coNames }}</span>
@@ -109,7 +109,7 @@
             <img src="{{ asset('storage/collaboratorsFirms/firmCollaboratorDefault.png') }}" hidden>
             @endif
           </button>
-          <button title="Eliminar colaborador {{ $collaborator->coNames }}" class="btn btn-outline-tertiary rounded-circle deleteCollaborator-link">
+          <button title="Eliminar colaborador {{ ucwords($collaborator->coNames) }}" class="btn btn-outline-tertiary rounded-circle deleteCollaborator-link">
             <i class="fas fa-trash-alt"></i>
             <span hidden>{{ $collaborator->coId }}</span>
             <span hidden>{{ $collaborator->coNames }}</span>
@@ -138,19 +138,29 @@
             <img src="{{ asset('storage/collaboratorsFirms/firmCollaboratorDefault.png') }}" hidden>
             @endif
           </button>
-          <button class="btn btn-outline-info rounded-circle Interview" title="{{'Entrevista '.$collaborator->coNames}}"><i class="fas fa-clipboard"></i>
+          <button class="btn btn-outline-info rounded-circle Interview" title="{{'Entrevista '.ucwords($collaborator->coNames)}}"><i class="fas fa-clipboard"></i>
             <span hidden>{{ $collaborator->coNames }}</span>
             <span hidden>{{ $collaborator->coId }}</span>
           </button>
-          <button class="btn btn-outline-secondary rounded-circle References" title="{{'Referencias '.$collaborator->coNames}}"><i class="far fa-eye"></i>
+          <button class="btn btn-outline-secondary rounded-circle References" title="{{'Referencias '.ucwords($collaborator->coNames)}}"><i class="far fa-eye"></i>
             <span hidden>{{ $collaborator->coNames }}</span>
             <span hidden>{{ $collaborator->coId }}</span>
           </button>
+          <button class="btn btn-outline-tertiary rounded-circle CV" title="{{'Hoja de Vida '.ucwords($collaborator->coNames)}}"><i class="fas fa-award"></i><span hidden>{{ $collaborator->coId}}</span></button>
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
+</div>
+
+<!-- formulario para crear el PDF de la hoja de vida -->
+<div hidden aria-hidden="true">
+  <form action="{{route('cv.collaborators')}}" method="post" id="formCV">
+    @csrf
+    <input type="text" name="idSearch">
+    <input type="text" name="FormSubmit">
+  </form>
 </div>
 
 <!-- formulario de referencias -->
@@ -543,6 +553,19 @@
 
 @section('scripts')
 <script>
+  $('input[name=cedRef1]').mask('###',{reverse:true});
+  $('input[name=numRef1]').mask('###',{reverse:true});
+  $('input[name=cedRef2]').mask('###',{reverse:true});
+  $('input[name=numRef2]').mask('###',{reverse:true});
+  // *se envia el id para consultar la información del colaborador para generar el PDF y toma el nombre de la cabecera
+  $('.CV').click(function() {
+    let id = $(this).find('span:nth-child(2)').text();
+    let form = $('#titleSection').text();
+    $('input[name=idSearch]').val(id);
+    $('input[name=FormSubmit]').val(form);
+    $('#formCV').submit();
+  });
+
   // *llama al formulario de validación referencias
   $('.References').click(function() {
     const name = $(this).find('span:nth-child(2)').text();
