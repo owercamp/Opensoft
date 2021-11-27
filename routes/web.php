@@ -318,6 +318,12 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   Route::get('administrative/training/effectiveness', 'TrainingController@effectivenessTo')->name('training.effectiveness');
   // *Indicadores Correspondientes
   Route::get('administrative/training/indicators', 'TrainingController@indicatorsTo')->name('training.indicators');
+
+  // *Listado Maestro
+  Route::get('/continuous-improvement/list', 'ContinuousImprovementController@listTo')->name('list.improvement');
+  Route::get('/continuous-improvement/procedure', 'ContinuousImprovementController@procedureTo')->name('procedure.improvement');
+  Route::get('/continuous-improvement/register', 'ContinuousImprovementController@registerTo')->name('register.improvement');
+  Route::get('/continuous-improvement/search', 'ContinuousImprovementController@searchTo')->name('search.improvement');
 });
 
 // !RUTAS DEL MODULO GERENCIAL
