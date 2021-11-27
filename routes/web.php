@@ -908,6 +908,7 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   Route::get('/logistic/providers/notifications/pdf', 'LProvidersController@pdfNotification')->name('providers.notification.pdf');
   // *Evaluaciones de desempeño
   Route::get('/logistic/providers/tests', 'LProvidersController@testsTo')->name('providers.tests');
+  Route::post('/logistic/providers/tests/save', 'LProvidersController@supplierTo')->name('provider.evaluation');
   // *Orden de compra
   Route::get('/logistic/providers/order', 'LProvidersController@orderTo')->name('providers.order');
   Route::post('/logistic/providers/order/save', 'LProvidersController@saveOrder')->name('providers.order.save');
