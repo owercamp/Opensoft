@@ -202,29 +202,29 @@
       <tr>
         <td class="px-1" colspan="2">
           <small class="mb-0">{{ucwords('nombres completos')}}</small>
-          <p class="border-bottom border-primary px-2">{{ucwords($search->colRef1)}}</p>
+          <p class="border-bottom border-primary px-2">{{(isset($search->colRef1)) ? ucwords($search->colRef1) : ''}}</p>
         </td>
         <td class="px-1" colspan="2">
           <small class="mb-0">{{ucwords('cedula')}}</small>
-          <p class="border-bottom border-primary px-2">{{number_format($search->cedRef1,0,',','.')}}</p>
+          <p class="border-bottom border-primary px-2">{{(isset($search->cedRef1)) ? number_format(($search->cedRef1 > 0) ? $search->cedRef1 : 0,0,',','.') : ''}}</p>
         </td>
         <td class="px-1" colspan="2">
           <small class="mb-0">{{ucwords('telefono')}}</small>
-          <p class="border-bottom border-primary px-2">{{ucwords($search->numRef1)}}</p>
+          <p class="border-bottom border-primary px-2">{{(isset($search->numRef1)) ? ucwords($search->numRef1) : ''}}</p>
         </td>
       </tr>
       <tr>
         <td class="px-1" colspan="2">
           <small class="mb-0">{{ucwords('nombres completos')}}</small>
-          <p class="border-bottom border-primary px-2">{{ucwords($search->colRef2)}}</p>
+          <p class="border-bottom border-primary px-2">{{ (isset($search->colRef2)) ? ucwords($search->colRef2) : ''}}</p>
         </td>
         <td class="px-1" colspan="2">
           <small class="mb-0">{{ucwords('cedula')}}</small>
-          <p class="border-bottom border-primary px-2">{{number_format($search->cedRef2,0,',','.')}}</p>
+          <p class="border-bottom border-primary px-2">{{(isset($search->cedRef2)) ? number_format(($search->cedRef2 > '') ? $search->cedRef2 : 0,0,',','.') : ''}}</p>
         </td>
         <td class="px-1" colspan="2">
           <small class="mb-0">{{ucwords('telefono')}}</small>
-          <p class="border-bottom border-primary px-2">{{ucwords($search->numRef2)}}</p>
+          <p class="border-bottom border-primary px-2">{{(isset($search->numRef2)) ? ucwords($search->numRef2) : ''}}</p>
         </td>
       </tr>
       <tr>
@@ -235,49 +235,49 @@
       <tr>
         <td colspan="3">
           <small class="mb-0">{{ucwords('razón social')}}</small>
-          <p class="border-bottom border-primary mx-2">{{ucwords($search->rsRef1)}}</p>
+          <p class="border-bottom border-primary mx-2">{{(isset($search->rsRef1)) ? ucwords($search->rsRef1) : ''}}</p>
         </td>
         <td colspan="2">
           <small class="mb-0">{{ucwords('nit')}}</small>
-          <p class="border-bottom border-primary mx-2">{{ucwords($search->nitRef1)}}</p>
+          <p class="border-bottom border-primary mx-2">{{(isset($search->nitRef1)) ? ucwords($search->nitRef1): ''}}</p>
         </td>
         <td>
           <small class="mb-0">{{ucwords('telefono')}}</small>
-          <p class="border-bottom border-primary mx-2">{{ucwords($search->phoRef1)}}</p>
+          <p class="border-bottom border-primary mx-2">{{(isset($search->phoRef1)) ? ucwords($search->phoRef1) : ''}}</p>
         </td>
       </tr>
       <tr>
         <td colspan="4">
           <small class="mb-0">{{ucwords('dirección')}}</small>
-          <p class="border-bottom border-primary mx-2">{{ucwords($search->addRef1)}}</p>
+          <p class="border-bottom border-primary mx-2">{{(isset($search->addRef1)) ? ucwords($search->addRef1) : ''}}</p>
         </td>
         <td colspan="2">
           <small class="mb-0">{{ucwords('ciudad')}}</small>
-          <p class="border-bottom border-primary mx-2">{{ucwords($search->ciuRef1)}}</p>
+          <p class="border-bottom border-primary mx-2">{{(isset($search->ciuRef1)) ? ucwords($search->ciuRef1) : ''}}</p>
         </td>
       </tr>
       <tr>
         <td colspan="3">
           <small class="mb-0">{{ucwords('razón social')}}</small>
-          <p class="border-bottom border-primary mx-2">{{ucwords($search->rsRef2)}}</p>
+          <p class="border-bottom border-primary mx-2">{{(isset($search->rsRef2)) ? ucwords($search->rsRef2) : ''}}</p>
         </td>
         <td colspan="2">
           <small class="mb-0">{{ucwords('nit')}}</small>
-          <p class="border-bottom border-primary mx-2">{{ucwords($search->nitRef2)}}</p>
+          <p class="border-bottom border-primary mx-2">{{(isset($search->nitRef2)) ? ucwords($search->nitRef2) : ''}}</p>
         </td>
         <td>
           <small class="mb-0">{{ucwords('telefono')}}</small>
-          <p class="border-bottom border-primary px-2">{{ucwords($search->phoRef2)}}</p>
+          <p class="border-bottom border-primary px-2">{{(isset($search->phoRef2)) ? ucwords($search->phoRef2) : ''}}</p>
         </td>
       </tr>
       <tr>
         <td colspan="4">
           <small class="mb-0">{{ucwords('dirección')}}</small>
-          <p class="border-bottom border-primary mx-2">{{ucwords($search->addRef2)}}</p>
+          <p class="border-bottom border-primary mx-2">{{(isset($search->addRef2)) ? ucwords($search->addRef2) : ''}}</p>
         </td>
         <td colspan="2">
           <small class="mb-0">{{ucwords('ciudad')}}</small>
-          <p class="border-bottom border-primary px-2">{{ucwords($search->ciuRef2)}}</p>
+          <p class="border-bottom border-primary px-2">{{(isset($search->ciuRef2)) ? ucwords($search->ciuRef2) : ''}}</p>
         </td>
       </tr>
       <!-- información academica -->
