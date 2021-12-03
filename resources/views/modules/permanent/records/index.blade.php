@@ -38,6 +38,7 @@
 					<th>CIUDAD</th>
 					<th>CONTACTO</th>
 					<th>ESTADO</th>
+          <th>ACCIONES</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -56,6 +57,15 @@
 						@endif
 					</td>
 					<td>{{ $legalization->lcoStatus }}</td>
+          <td>
+          <form action="{{ route('permanent.legalizations.pdf') }}" method="GET" style="display: inline-block;">
+            @csrf
+            <input type="hidden" name="lcoId" value="{{ $legalization->lcoId }}" class="form-control form-control-sm" required>
+            <button type="submit" title="Descargar PDF" class="btn btn-outline-success rounded-circle form-control-sm">
+              <i class="fas fa-file-pdf"></i>
+            </button>
+          </form>
+          </td>
 				</tr>
 				@endforeach
 			</tbody>
