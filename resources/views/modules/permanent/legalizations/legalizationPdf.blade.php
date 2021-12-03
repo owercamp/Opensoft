@@ -58,7 +58,7 @@
             </table>
         </header>
         <p style="text-align: justify;">
-            {{ $legalization->lcoContentfinal }}
+            {!! $legalization->lcoContentfinal !!}
         </p>
         <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
         <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>

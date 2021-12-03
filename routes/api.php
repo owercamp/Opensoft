@@ -11,6 +11,7 @@ use App\Models\Configdocumentmanagerial;
 use App\Models\Contractorcharge;
 use App\Models\Contractorespecial;
 use App\Models\Contractormessenger;
+use App\Models\Legalizationcontractual;
 use App\Models\LegalParent;
 use App\Models\MatrixEPP;
 use App\Models\PreventiveMaintenanceReview;

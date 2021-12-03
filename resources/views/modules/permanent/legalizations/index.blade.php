@@ -39,7 +39,7 @@
         <th>NOMBRE DE DOCUMENTO</th>
         <th>CODIGO DE DOCUMENTO</th>
         <th>CLIENTE</th>
-        <th>CONTENIDO</th>
+        <!-- <th>CONTENIDO</th> -->
         <th>ACCIONES</th>
       </tr>
     </thead>
@@ -51,13 +51,13 @@
         <td>{{ $legalization->document->docName }}</td>
         <td>{{ $legalization->document->docCode }}</td>
         <td>{{ $legalization->client->cliNamereason }}</td>
-        <td>
+        <!-- <td>
           @if(strlen($legalization->lcoContentfinal) > 50)
           {{ substr($legalization->lcoContentfinal,0,50) . ' ...' }}
           @else
           {{ $legalization->lcoContentfinal }}
           @endif
-        </td>
+        </td> -->
         <td>
           @if($legalization->lcoStatus != 'TERMINADO')
           <a href="#" title="Editar" class="btn btn-outline-primary rounded-circle form-control-sm editLegalization-link">
@@ -106,8 +106,9 @@ $yearfutureSix = date('Y') + 6;
 $yearfutureSeven = date('Y') + 7;
 @endphp
 
+<!-- creación -->
 <div class="modal fade" id="newLegalization-modal">
-  <div class="modal-dialog modal-lg" style="font-size: 12px;">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable" style="font-size: 12px;">
     <div class="modal-content">
       <div class="modal-header">
         <h6>NUEVA LEGALIZACION:</h6>
@@ -160,17 +161,17 @@ $yearfutureSeven = date('Y') + 7;
                     <select name="lcoConfigdocument_id" class="form-control form-control-sm" required>
                       <option value="">Seleccione ...</option>
                     </select>
-                    <input type="hidden" name="lcoTemplate" class="form-control form-control-sm" readonly required>
+                    <!-- <input type="text" name="lcoTemplate" class="form-control form-control-sm" readonly required> -->
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <textarea name="lcoTemplate" id="lcoTemplate" cols="30" rows="10"></textarea>
+              <!-- <div class="row">
                 <div class="col-md-12">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="row">
                         <div class="col-md-12 p-2 border lcoContentfinal" style="font-size: 12px;">
-
                         </div>
                       </div>
                     </div>
@@ -183,7 +184,7 @@ $yearfutureSeven = date('Y') + 7;
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="form-group text-center mt-3">
@@ -195,8 +196,9 @@ $yearfutureSeven = date('Y') + 7;
   </div>
 </div>
 
+<!-- edicion -->
 <div class="modal fade" id="editLegalization-modal">
-  <div class="modal-dialog modal-lg" style="font-size: 12px;">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable" style="font-size: 12px;">
     <div class="modal-content">
       <div class="modal-header">
         <h6>MODIFICACION DE LEGALIZACION:</h6>
@@ -244,11 +246,12 @@ $yearfutureSeven = date('Y') + 7;
                     <select name="lcoConfigdocument_id_Edit" class="form-control form-control-sm" required>
                       <option value="">Seleccione ...</option>
                     </select>
-                    <input type="hidden" name="lcoTemplate_Edit" class="form-control form-control-sm" readonly required>
+                    <!-- <input type="hidden" name="lcoTemplate_Edit" class="form-control form-control-sm" readonly required> -->
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <textarea name="lcoTemplate_Edit" id="lcoTemplate_Edit" cols="30" rows="10"></textarea>
+              <!-- <div class="row">
                 <div class="col-md-12">
                   <div class="row">
                     <div class="col-md-12">
@@ -267,7 +270,7 @@ $yearfutureSeven = date('Y') + 7;
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="row border-top mt-3 text-center">
@@ -285,6 +288,7 @@ $yearfutureSeven = date('Y') + 7;
   </div>
 </div>
 
+<!-- eliminacion -->
 <div class="modal fade" id="deleteLegalization-modal">
   <div class="modal-dialog" style="font-size: 12px;">
     <div class="modal-content">
@@ -324,11 +328,73 @@ $yearfutureSeven = date('Y') + 7;
 
 @section('scripts')
 <script>
-  $(function() {
+  // ?implementación de ckeditor
+  let MyEditor;
+  ClassicEditor
+    .create(document.querySelector('#lcoTemplate'), {
+      fontColor: {
+        colors: [{
+            color: '#000000',
+            label: 'Black',
+            hasBorder: true
+          },
+          {
+            color: '#4D4D4D',
+            label: 'Dim grey',
+            hasBorder: true
+          },
+          {
+            color: '#999999',
+            label: 'Grey',
+            hasBorder: true
+          },
+          {
+            color: '#E6E6E6',
+            label: 'Light grey',
+            hasBorder: true
+          },
+          {
+            color: '#FFFFFF',
+            label: 'White',
+            hasBorder: true
+          },
+          {
+            color: '#e3342f',
+            label: 'Red',
+            hasBorder: true
+          },
+          {
+            color: '#0086f9',
+            label: 'Blue',
+            hasBorder: true
+          },
+          {
+            color: '#ffed4a',
+            label: 'Yellow',
+            hasBorder: true
+          },
+          {
+            color: '#fd8701',
+            label: 'Orange',
+            hasBorder: true
+          },
+          {
+            color: '#627700',
+            label: 'Green',
+            hasBorder: true
+          }
+        ]
+      },
+    })
+    .then(editor => {
+      MyEditor = editor;
+    })
+    .catch(error => {
+      console.error(error);
+    });
 
-  });
-
-  $('.newLegalization-link').on('click', function() {
+  // *se lanza el formulario de creación
+    $('.newLegalization-link').on('click', function() {
     $('#newLegalization-modal').modal();
   });
 
@@ -372,29 +438,96 @@ $yearfutureSeven = date('Y') + 7;
     $('div.lcoContentfinal').empty();
     if (selected != '') {
       var content = $('select[name=lcoConfigdocument_id] option:selected').attr('data-content');
-      $('input[name=lcoTemplate]').val(content);
-      $('div.lcoContentfinal').append(showContent(content));
+      // $('input[name=lcoTemplate]').val(content);
+      MyEditor.setData(content);
+      // $('div.lcoContentfinal').append(showContent(content));
     }
   });
 
-  $('div.lcoContentfinal').on('keyup change', '.field-dinamic', function() {
-    var value = $(this).val();
-    var element = $(this);
-    var type = $(this).attr('data-type');
-    var all = '';
-    $('input[name=lcoVariables]').val('');
-    $('div.lcoContentfinal > .field-dinamic').each(function() {
-      var value = $(this).val();
-      var type = $(this).attr('data-type');
-      if (value != '') {
-        all += value + '=>' + type + '!!==¡¡';
-      } else {
-        all += 'NOT!!==¡¡';
-      }
-    });
-    $('input[name=lcoVariables]').val(all);
-  });
+  // *se comento al parecer ya no se necesita
+  // $('div.lcoContentfinal').on('keyup change', '.field-dinamic', function() {
+  //   var value = $(this).val();
+  //   var element = $(this);
+  //   var type = $(this).attr('data-type');
+  //   var all = '';
+  //   $('input[name=lcoVariables]').val('');
+  //   $('div.lcoContentfinal > .field-dinamic').each(function() {
+  //     var value = $(this).val();
+  //     var type = $(this).attr('data-type');
+  //     if (value != '') {
+  //       all += value + '=>' + type + '!!==¡¡';
+  //     } else {
+  //       all += 'NOT!!==¡¡';
+  //     }
+  //   });
+  //   $('input[name=lcoVariables]').val(all);
+  // });
 
+  let MyEditorEdit;
+  ClassicEditor
+    .create(document.querySelector('#lcoTemplate_Edit'), {
+      fontColor: {
+        colors: [{
+            color: '#000000',
+            label: 'Black',
+            hasBorder: true
+          },
+          {
+            color: '#4D4D4D',
+            label: 'Dim grey',
+            hasBorder: true
+          },
+          {
+            color: '#999999',
+            label: 'Grey',
+            hasBorder: true
+          },
+          {
+            color: '#E6E6E6',
+            label: 'Light grey',
+            hasBorder: true
+          },
+          {
+            color: '#FFFFFF',
+            label: 'White',
+            hasBorder: true
+          },
+          {
+            color: '#e3342f',
+            label: 'Red',
+            hasBorder: true
+          },
+          {
+            color: '#0086f9',
+            label: 'Blue',
+            hasBorder: true
+          },
+          {
+            color: '#ffed4a',
+            label: 'Yellow',
+            hasBorder: true
+          },
+          {
+            color: '#fd8701',
+            label: 'Orange',
+            hasBorder: true
+          },
+          {
+            color: '#627700',
+            label: 'Green',
+            hasBorder: true
+          }
+        ]
+      },
+    })
+    .then(editor => {
+      MyEditorEdit = editor;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
+  // *se lanza el formualrio de edición
   $('.editLegalization-link').on('click', function(e) {
     e.preventDefault();
     var lcoId = $(this).find('span:nth-child(2)').text();
@@ -415,6 +548,7 @@ $yearfutureSeven = date('Y') + 7;
     $.get("{{ route('getContentFromDocument') }}", {
       docId: lcoDocument_id
     }, function(objectsConfig) {
+      $('select[name=lcoConfigdocument_id_Edit]').empty();
       var count = Object.keys(objectsConfig).length;
       if (count > 0) {
         for (var i = 0; i < count; i++) {
@@ -424,22 +558,26 @@ $yearfutureSeven = date('Y') + 7;
               $('select[name=lcoConfigdocument_id_Edit]').append(
                 "<option value='" + objectsConfig[i]['cdoId'] + "' data-content='" + objectsConfig[i]['cdoContent'] + "' selected>" + chain + "</option>"
               );
-              $('input[name=lcoTemplate_Edit]').val(objectsConfig[i]['cdoContent']);
-              $('div.lcoContentfinal_Edit').html(showContent(objectsConfig[i]['cdoContent']));
+              MyEditorEdit.setData(lcoContentfinal)
+              // $('input[name=lcoTemplate_Edit]').val(objectsConfig[i]['cdoContent']);
+              // $('div.lcoContentfinal_Edit').html(showContent(objectsConfig[i]['cdoContent']));
             } else {
-              $('select[name=lcoConfigdocument_id_Edit]').append(
-                "<option value='" + objectsConfig[i]['cdoId'] + "' data-content='" + objectsConfig[i]['cdoContent'] + "'>" + chain + "</option>"
-              );
+              MyEditorEdit.setData(lcoContentfinal);
+              // $('select[name=lcoConfigdocument_id_Edit]').append(
+              //   "<option value='" + objectsConfig[i]['cdoId'] + "' data-content='" + objectsConfig[i]['cdoContent'] + "'>" + chain + "</option>"
+              // );
             }
           } else {
             if (lcoConfigdocument_id == objectsConfig[i]['cdoId']) {
-              $('select[name=lcoConfigdocument_id_Edit]').append(
-                "<option value='" + objectsConfig[i]['cdoId'] + "' data-content='" + objectsConfig[i]['cdoContent'] + "' selected>" + objectsConfig[i]['cdoContent'] + "</option>"
-              );
+              MyEditorEdit.setData(lcoContentfinal);
+              // $('select[name=lcoConfigdocument_id_Edit]').append(
+              //   "<option value='" + objectsConfig[i]['cdoId'] + "' data-content='" + objectsConfig[i]['cdoContent'] + "' selected>" + objectsConfig[i]['cdoContent'] + "</option>"
+              // );
             } else {
-              $('select[name=lcoConfigdocument_id_Edit]').append(
-                "<option value='" + objectsConfig[i]['cdoId'] + "' data-content='" + objectsConfig[i]['cdoContent'] + "'>" + objectsConfig[i]['cdoContent'] + "</option>"
-              );
+              MyEditorEdit.setData(lcoContentfinal);
+              // $('select[name=lcoConfigdocument_id_Edit]').append(
+              //   "<option value='" + objectsConfig[i]['cdoId'] + "' data-content='" + objectsConfig[i]['cdoContent'] + "'>" + objectsConfig[i]['cdoContent'] + "</option>"
+              // );
             }
           }
         }

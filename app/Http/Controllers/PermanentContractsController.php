@@ -474,30 +474,30 @@ class PermanentcontractsController extends Controller
         */
         $validate = Legalizationcontractual::where('lcoClient_id',trim($request->lcoClient_id))->first();
         if($validate == null){
-            $content = '';
-            $variables = substr(trim($request->lcoVariables),0,-8); // QUITAR LOS ULTIMOS 3 CARACTERES (!!==¡¡)
-            $variablesSeparated = explode('!!==¡¡',$variables);
-            for ($i=0; $i < count($variablesSeparated); $i++) { 
-                $var = explode('=>', $variablesSeparated[$i]); // $var[0] = writed; $var[1] = type;
-                $search = '';
-                switch ($var[1]) {
-                    case 'texto': $search = '/¡¡¡texto dinámico!!!/'; break;
-                    case 'numero': $search = '/¡¡¡número dinámico!!!/'; break;
-                    case 'moneda': $search = '/¡¡¡moneda dinámica!!!/'; break;
-                    case 'calendario': $search = '/¡¡¡calendario dinámico!!!/'; break;
-                }
-                if($i == 0){
-                    $content = preg_replace($search, $var[0], trim($request->lcoTemplate),1);
-                }else{
-                    $content = preg_replace($search, $var[0], $content,1);
-                }
-            }
+            // $content = '';
+            // $variables = substr(trim($request->lcoVariables),0,-8); // QUITAR LOS ULTIMOS 3 CARACTERES (!!==¡¡)
+            // $variablesSeparated = explode('!!==¡¡',$variables);
+            // for ($i=0; $i < count($variablesSeparated); $i++) { 
+            //     $var = explode('=>', $variablesSeparated[$i]); // $var[0] = writed; $var[1] = type;
+            //     $search = '';
+                // switch ($var[1]) {
+                //     case 'texto': $search = '/¡¡¡texto dinámico!!!/'; break;
+                //     case 'numero': $search = '/¡¡¡número dinámico!!!/'; break;
+                //     case 'moneda': $search = '/¡¡¡moneda dinámica!!!/'; break;
+                //     case 'calendario': $search = '/¡¡¡calendario dinámico!!!/'; break;
+                // }
+            //     if($i == 0){
+            //         $content = preg_replace($search, $var[0], trim($request->lcoTemplate),1);
+            //     }else{
+            //         $content = preg_replace($search, $var[0], $content,1);
+            //     }
+            // }
             Legalizationcontractual::create([
                 'lcoDocument_id' => trim($request->lcoDocument_id),
                 'lcoClient_id' => trim($request->lcoClient_id),
                 'lcoConfigdocument_id' => trim($request->lcoConfigdocument_id),
-                'lcoContentfinal' => $content,
-                'lcoWrited' => $variables
+                'lcoContentfinal' => trim($request->lcoTemplate),
+                'lcoWrited' => (isset($variables)) ? $variables : ''
             ]);
             $client = Client::find(trim($request->lcoClient_id));
             return redirect()->route('permanent.legalizations')->with('SuccessLegalization', 'Legalizacion contractual de ' . $client->cliNamereason . ', registrada');
@@ -518,28 +518,28 @@ class PermanentcontractsController extends Controller
         */
         $validate = Legalizationcontractual::find(trim($request->lcoId_Edit));
         if($validate != null){
-            $content = '';
-            $variables = substr(trim($request->lcoVariables_Edit),0,-8); // QUITAR LOS ULTIMOS 3 CARACTERES (!!==¡¡)
-            $variablesSeparated = explode('!!==¡¡',$variables);
-            for ($i=0; $i < count($variablesSeparated); $i++) { 
-                $var = explode('=>', $variablesSeparated[$i]); // $var[0] = writed; $var[1] = type;
-                $search = '';
-                switch ($var[1]) {
-                    case 'texto': $search = '/¡¡¡texto dinámico!!!/'; break;
-                    case 'numero': $search = '/¡¡¡número dinámico!!!/'; break;
-                    case 'moneda': $search = '/¡¡¡moneda dinámica!!!/'; break;
-                    case 'calendario': $search = '/¡¡¡calendario dinámico!!!/'; break;
-                }
-                if($i == 0){
-                    $content = preg_replace($search, $var[0], trim($request->lcoTemplate_Edit),1);
-                }else{
-                    $content = preg_replace($search, $var[0], $content,1);
-                }
-            }
+            // $content = '';
+            // $variables = substr(trim($request->lcoVariables_Edit),0,-8); // QUITAR LOS ULTIMOS 3 CARACTERES (!!==¡¡)
+            // $variablesSeparated = explode('!!==¡¡',$variables);
+            // for ($i=0; $i < count($variablesSeparated); $i++) { 
+            //     $var = explode('=>', $variablesSeparated[$i]); // $var[0] = writed; $var[1] = type;
+            //     $search = '';
+            //     switch ($var[1]) {
+            //         case 'texto': $search = '/¡¡¡texto dinámico!!!/'; break;
+            //         case 'numero': $search = '/¡¡¡número dinámico!!!/'; break;
+            //         case 'moneda': $search = '/¡¡¡moneda dinámica!!!/'; break;
+            //         case 'calendario': $search = '/¡¡¡calendario dinámico!!!/'; break;
+            //     }
+            //     if($i == 0){
+            //         $content = preg_replace($search, $var[0], trim($request->lcoTemplate_Edit),1);
+            //     }else{
+            //         $content = preg_replace($search, $var[0], $content,1);
+            //     }
+            // }
             $validate->lcoDocument_id = trim($request->lcoDocument_id_Edit);
             $validate->lcoConfigdocument_id = trim($request->lcoConfigdocument_id_Edit);
-            $validate->lcoContentfinal = $content;
-            $validate->lcoWrited = $variables;
+            $validate->lcoContentfinal = trim($request->lcoTemplate_Edit);
+            $validate->lcoWrited = (isset($variables)) ? $variables : '';
             $validate->save();
             return redirect()->route('permanent.legalizations')->with('SuccessLegalization', 'Legalizacion contractual de ' . trim($request->lcoClient_id_Edit) . ', actualizada');
         }else{
