@@ -17,6 +17,7 @@ use App\Models\Orderoccasional;
 use App\Models\Requestlogistic;
 use App\Models\Requestcharge;
 use App\Models\Requestturism;
+use App\Models\RequestUrbanTransfer;
 
 class ProgrammingController extends Controller
 {
@@ -34,7 +35,9 @@ class ProgrammingController extends Controller
         $logistics = Requestlogistic::all();
         $charges = Requestcharge::all();
         $turisms = Requestturism::all();
+        $transfers = RequestUrbanTransfer::all();
 
+        
         $dates = array();
 
         foreach ($messengers as $messenger) {
@@ -131,7 +134,31 @@ class ProgrammingController extends Controller
                 $turism->retAddressdestiny,
                 'N/A'
             ]);
-        }
+          }
+
+        foreach ($transfers as $transfer) {
+          $date = Date('Y-m-d',strtotime($transfer->reuDateservice));
+          $hour = Date('H:i:s',strtotime($transfer->reuHourstart));
+          if($transfer->reuTypecliente == 'PERMANENTE'){
+              $client = $transfer->permanent->client->cliNamereason;
+          }else{
+              $client = $transfer->occasional->proposal->cprClient;
+          }
+          array_push($dates,[
+              $date,
+              $hour,
+              $client,
+              'Traslado Urbano',
+              $transfer->transfer->strService,
+              $transfer->origin->munName,
+              $transfer->reuAddressorigin,
+              $transfer->reuContact,
+              $transfer->reuPhone,
+              $transfer->destiny->munName,
+              $transfer->reuAddressdestiny,
+              'N/A'
+          ]);
+      }
 
         sort($dates);
 
