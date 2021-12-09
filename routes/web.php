@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\SGOperativeController;
-
 Route::get('/', function () {
   return view('auth.login');
 })->middleware('guest');
@@ -513,6 +511,7 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   Route::post('/operative/request/transfer/save', 'RequestController@transferSave')->name('request.transfer.save');
   // *Traslado intermunicipal
   Route::get('/operative/request/transferintermunicipal', 'RequestController@transferintermunicipalTo')->name('request.transferintermunipal');
+  Route::post('/operative/request/transferintermunicipal/save', 'RequestController@transferintermunicipalSave')->name('request.transferintermunipal.save');
 
   // ?OPERATIVA >> PROGRAMACION DE SERVICIOS
 

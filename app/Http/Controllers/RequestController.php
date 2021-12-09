@@ -54,6 +54,7 @@ use App\Models\Settingmunicipality;
 use App\Models\Requestmessenger;
 use App\Models\Requestlogistic;
 use App\Models\Requestcharge;
+use App\Models\RequestIntermunityTransfer;
 use App\Models\Requestturism;
 use App\Models\RequestUrbanTransfer;
 
@@ -648,7 +649,7 @@ class RequestController extends Controller
   {
     $clients = array();
     $date = Date('Y-m-d');
-    // CLIENTES QUE TIENEN PORTAFOLIO DE TURISMO EN SUS CONDICIONES ECONOMICAS Y ESTEN ACTIVOS DENTRO DEL RANGO DE CONTRATO
+    // CLIENTES QUE TIENEN PORTAFOLIO DE TRASLADO URBANO EN SUS CONDICIONES ECONOMICAS Y ESTEN ACTIVOS DENTRO DEL RANGO DE CONTRATO
     $permanents = Term::select(
       'legalizationscontractual.*',
       'clients.*',
@@ -763,7 +764,115 @@ class RequestController extends Controller
 
   function transferintermunicipalTo()
   {
-    return view('modules.requests.transferintermunicipal.index');
+    $clients = array();
+    $date = Date('Y-m-d');
+    // CLIENTES QUE TIENEN PORTAFOLIO DE TRANSPORTE INTERMUNICIPAL EN SUS CONDICIONES ECONOMICAS Y ESTEN ACTIVOS DENTRO DEL RANGO DE CONTRATO
+    $permanents = Term::select(
+      'legalizationscontractual.*',
+      'clients.*',
+      'terms.*'
+    )->join('legalizationscontractual', 'legalizationscontractual.lcoId', 'terms.terLegalization_id')
+      ->join('clients', 'clients.cliId', 'legalizationscontractual.lcoClient_id')
+      ->where('lcoStatus', 'VIGENTE')
+      ->where('terStatus', 'VIGENTE')
+      ->where('terBriefcase', 'LIKE', '%Traslado Intermunicipal%')
+      ->where('terDateinitial', '<=', $date)
+      ->where('terDatefinal', '>=', $date)
+      ->get();
+    $occasionals = Orderoccasional::select(
+      'orderoccasionals.*',
+      'clientproposals.*'
+    )->join('clientproposals', 'clientproposals.cprId', 'orderoccasionals.oroClientproposal_id')
+      ->where('oroState', 'APROBADO')
+      ->where('oroStatus', 'VIGENTE')
+      ->where('cprStatus', 'ACEPTADO')
+      ->where('oroAllproposal', 'LIKE', '%Traslado Intermunicipal%')
+      ->where('oroDatestart', '<=', $date)
+      ->where('oroDateend', '>=', $date)
+      ->get();
+    foreach ($permanents as $permanent) {
+      array_push($clients, [
+        $permanent->lcoId,
+        $permanent->cliNamereason . ' (Contrato permanente)',
+        $permanent->cliNumberdocument,
+        $permanent->terDateinitial,
+        $permanent->terDatefinal,
+        'PERMANENTE'
+      ]);
+    }
+
+    foreach ($occasionals as $occasional) {
+      array_push($clients, [
+        $occasional->oroId,
+        $occasional->cprClient . ' (Contrato ocasional)',
+        $occasional->cprNumberdocument,
+        $occasional->oroDatestart,
+        $occasional->oroDateend,
+        'OCASIONAL'
+      ]);
+    }
+    asort($clients);
+    $servicetransfers = Settingservicetransfermunicipal::all();
+    $municipalities = Settingmunicipality::orderBy('munName', 'asc')->get();
+    return view('modules.requests.transferintermunicipal.index',compact('clients','servicetransfers','municipalities'));
+  }
+
+  function transferintermunicipalSave(Request $request)
+  {
+    $dateservice = Date('Y-m-d', strtotime($request->reiDateservice));
+    if (trim($request->reiTypecliente) === 'PERMANENTE') {
+      $validate = RequestIntermunityTransfer::where('reiClientpermanent_id', trim($request->reiClient))
+        ->where('reiDateservice', $dateservice)
+        ->where('reiMunicipalitydestiny_id', trim($request->reiMunicipalitydestiny_id))
+        ->where('reiMunicipalityorigin_id', trim($request->reiMunicipalityorigin_id))
+        ->first();
+      if ($validate === null) {
+        RequestIntermunityTransfer::create([
+          'reiTypecliente' => 'PERMANENTE',
+          'reiClientpermanent_id' => trim($request->reiClient),
+          'reiClientoccasional_id' => null,
+          'reiTransfer_id' => trim($request->reiTransfer_id), // tipo de servicio seleccionado de las configuraciones
+          'reiDateservice' => $dateservice,
+          'reiHourstart' => trim($request->reiHourstart),
+          'reiAddressdestiny' => $this->upper($request->reiAddressdestiny),
+          'reiMunicipalitydestiny_id' => trim($request->reiMunicipalitydestiny_id),
+          'reiAddressorigin' => $this->upper($request->reiAddressorigin),
+          'reiMunicipalityorigin_id' => trim($request->reiMunicipalityorigin_id),
+          'reiContact' => $this->fu($request->reiContact),
+          'reiPhone' => trim($request->reiPhone)
+        ]);
+        return back()->with('Success', 'Se ha procesado y guardado el registro correctamente, consúltelo en los registros: Operativa >> Programacion de servicios >> pendiente de asignación');
+      } else {
+        return back()->with('Secondary', 'Ya existe un registro como en indicado, consulte los registros pendientes de asignación');
+      }
+    } else if (trim($request->reiTypecliente) === 'OCASIONAL') {
+      $validate = RequestIntermunityTransfer::where('reiClientpermanent_id', trim($request->reiClient))
+        ->where('reiDateservice', $dateservice)
+        ->where('reiMunicipalitydestiny_id', trim($request->reiMunicipalitydestiny_id))
+        ->where('reiMunicipalityorigin_id', trim($request->reiMunicipalityorigin_id))
+        ->first();
+      if ($validate === null) {
+        RequestIntermunityTransfer::create([
+          'reiTypecliente' => 'OCASIONAL',
+          'reiClientpermanent_id' => null,
+          'reiClientoccasional_id' => trim($request->reiClient),
+          'reiTransfer_id' => trim($request->reiTransfer_id), // tipo de servicio seleccionado de las configuraciones
+          'reiDateservice' => $dateservice,
+          'reiHourstart' => trim($request->reiHourstart),
+          'reiAddressdestiny' => $this->upper($request->reiAddressdestiny),
+          'reiMunicipalitydestiny_id' => trim($request->reiMunicipalitydestiny_id),
+          'reiAddressorigin' => $this->upper($request->reiAddressorigin),
+          'reiMunicipalityorigin_id' => trim($request->reiMunicipalityorigin_id),
+          'reiContact' => $this->fu($request->reiContact),
+          'reiPhone' => trim($request->reiPhone)
+        ]);
+        return back()->with('Success', 'Se ha procesado y guardado el registro correctamente, consúltelo en los registros: Operativa >> Programacion de servicios >> pendiente de asignación');
+      } else {
+        return back()->with('Secondary', 'Ya existe un registro como en indicado, consulte los registros pendientes de asignación');
+      }
+    } else {
+      return back()->with('Secondary', 'No se encuentra el tipo de cliente (' . trim($request->reiTypecliente) . '), intentelo de nuevo');
+    }
   }
 
   /* ===========================================================================================================

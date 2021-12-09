@@ -1,10 +1,10 @@
 @extends('modules.operativeRequest')
 
 @section('space')
-	<div class="col-md-12">
-		<h5>TRASLADO URBANO</h5>
-    @include('partials.alerts')
-    <form action="{{ route('request.transfer.save') }}" method="POST" enctype="multipart/form-data">
+<div class="col-md-12">
+  <h5>TRASLADO URBANO</h5>
+  @include('partials.alerts')
+  <form action="{{ route('request.transfer.save') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row">
       <div class="col-md-4">
@@ -24,7 +24,7 @@
           <small class="text-muted">Tipo de servicio: </small>
           <select name="reuTransfer_id" class="form-control form-control-sm select2" required>
             <option value="">Seleccione...</option>
-          @foreach($servicetransfers as $servicetransfer)
+            @foreach($servicetransfers as $servicetransfer)
             <option value="{{ $servicetransfer->strId }}" data-service="{{ $servicetransfer->strService }}" data-description="{{ $servicetransfer->strDescription }}">
               {{ $servicetransfer->strService }}
             </option>
@@ -119,7 +119,7 @@
     </div>
   </form>
 </div>
-	</div>
+
 @endsection
 
 @section('scripts')
