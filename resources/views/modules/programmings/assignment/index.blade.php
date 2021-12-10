@@ -42,7 +42,7 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Función para retornar el onsecutivo con ceros a la izquierda de acuerdo a cada iteracion -->
+      <!-- Función para retornar el consecutivo con ceros a la izquierda de acuerdo a cada iteracion -->
       @php
       function getStringSequence ($number){
       $len = strlen($number);
@@ -130,12 +130,126 @@
     </tbody>
   </table>
 </div>
+
+!-- Modal -->
+<div class="modal fade" id="ShowAsign" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title"></h5>
+        <button type="button" class="btn-close btn-primary" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-center">
+          <div class="form-group text-center">
+            <p class="text-muted m-0">Fecha:</p>
+            <p id="date" class="m-0"></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="form-group text-center">
+            <p class="text-muted m-0">Hora:</p>
+            <p id="hour" class="m-0"></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="form-group text-center">
+            <p class="text-muted m-0">Cliente:</p>
+            <p id="customer" class="m-0"></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="form-group text-center">
+            <p class="text-muted m-0">Tipo de Solicitud:</p>
+            <p id="typeRequest" class="m-0"></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="form-group text-center">
+            <p class="text-muted m-0">Servicio:</p>
+            <p id="service" class="m-0"></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="form-group text-center">
+            <p class="text-muted m-0">Ciudad Origen:</p>
+            <p id="origin" class="m-0"></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="form-group text-center">
+            <p class="text-muted m-0">Dirección Origen:</p>
+            <p id="addressOrigin" class="m-0"></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="form-group text-center">
+            <p class="text-muted m-0">Contacto:</p>
+            <p id="contact" class="m-0"></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="form-group text-center">
+            <p class="text-muted m-0">Telefono:</p>
+            <p id="phone" class="m-0"></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="form-group text-center">
+            <p class="text-muted m-0">Ciudad Destino:</p>
+            <p id="destiny" class="m-0"></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="form-group text-center">
+            <p class="text-muted m-0">Dirección Destino:</p>
+            <p id="addressDestiny" class="m-0"></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="form-group text-center">
+            <p class="text-muted m-0">Observaciones:</p>
+            <p id="obs" class="m-0"></p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 
 @section('scripts')
 <script>
-  $(function() {
-
+  $('.details-link').click(function() {
+    let date = $(this).find('span:nth-child(2)').text(),
+      hour = $(this).find('span:nth-child(3)').text(),
+      customer = $(this).find('span:nth-child(4)').text(),
+      typeRequest = $(this).find('span:nth-child(5)').text(),
+      service = $(this).find('span:nth-child(6)').text(),
+      origin = $(this).find('span:nth-child(7)').text(),
+      addressOrigin = $(this).find('span:nth-child(8)').text(),
+      contact = $(this).find('span:nth-child(9)').text(),
+      phone = $(this).find('span:nth-child(10)').text(),
+      destiny = $(this).find('span:nth-child(11)').text(),
+      addressDestiny = $(this).find('span:nth-child(12)').text(),
+      obs = $(this).find('span:nth-child(13)').text();
+    $('#title').text(`Servicio ${typeRequest}`).addClass('text-uppercase');
+    $('#date').text(date);
+    $('#hour').text(hour);
+    $('#customer').text(customer);
+    $('#typeRequest').text(typeRequest);
+    $('#service').text(service);
+    $('#origin').text(origin);
+    $('#addressOrigin').text(addressOrigin);
+    $('#contact').text(contact);
+    $('#phone').text(phone);
+    $('#destiny').text(destiny);
+    $('#addressDestiny').text(addressDestiny);
+    $('#obs').text(obs);
+    $('#ShowAsign').modal();
   });
 </script>
 @endsection
