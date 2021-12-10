@@ -512,6 +512,7 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   // *Traslado intermunicipal
   Route::get('/operative/request/transferintermunicipal', 'RequestController@transferintermunicipalTo')->name('request.transferintermunipal');
   Route::post('/operative/request/transferintermunicipal/save', 'RequestController@transferintermunicipalSave')->name('request.transferintermunipal.save');
+  Route::patch('//operative/request/all/update', 'RequestController@editRegister')->name('request.update');
 
   // ?OPERATIVA >> PROGRAMACION DE SERVICIOS
 

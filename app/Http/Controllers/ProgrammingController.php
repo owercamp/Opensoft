@@ -19,6 +19,7 @@ use App\Models\Requestcharge;
 use App\Models\RequestIntermunityTransfer;
 use App\Models\Requestturism;
 use App\Models\RequestUrbanTransfer;
+use App\Models\Term;
 
 class ProgrammingController extends Controller
 {
@@ -39,6 +40,56 @@ class ProgrammingController extends Controller
     $turisms = Requestturism::all();
     $transfers = RequestUrbanTransfer::all();
     $intermunipals = RequestIntermunityTransfer::all();
+
+    $clients = array();
+    $date = Date('Y-m-d');
+    // CLIENTES QUE TIENEN PORTAFOLIO DE TRANSPORTE INTERMUNICIPAL EN SUS CONDICIONES ECONOMICAS Y ESTEN ACTIVOS DENTRO DEL RANGO DE CONTRATO
+    $permanents = Term::select(
+      'legalizationscontractual.*',
+      'clients.*',
+      'terms.*'
+    )->join('legalizationscontractual', 'legalizationscontractual.lcoId', 'terms.terLegalization_id')
+      ->join('clients', 'clients.cliId', 'legalizationscontractual.lcoClient_id')
+      ->where('lcoStatus', 'VIGENTE')
+      ->where('terStatus', 'VIGENTE')
+      // ->where('terBriefcase', 'LIKE', '%Traslado Intermunicipal%')
+      ->where('terDateinitial', '<=', $date)
+      ->where('terDatefinal', '>=', $date)
+      ->get();
+    $occasionals = Orderoccasional::select(
+      'orderoccasionals.*',
+      'clientproposals.*'
+    )->join('clientproposals', 'clientproposals.cprId', 'orderoccasionals.oroClientproposal_id')
+      ->where('oroState', 'APROBADO')
+      ->where('oroStatus', 'VIGENTE')
+      ->where('cprStatus', 'ACEPTADO')
+      // ->where('oroAllproposal', 'LIKE', '%Traslado Intermunicipal%')
+      ->where('oroDatestart', '<=', $date)
+      ->where('oroDateend', '>=', $date)
+      ->get();
+    foreach ($permanents as $permanent) {
+      array_push($clients, [
+        $permanent->lcoId,
+        $permanent->cliNamereason . ' (Contrato permanente)',
+        $permanent->cliNumberdocument,
+        $permanent->terDateinitial,
+        $permanent->terDatefinal,
+        'PERMANENTE'
+      ]);
+    }
+
+    foreach ($occasionals as $occasional) {
+      array_push($clients, [
+        $occasional->oroId,
+        $occasional->cprClient . ' (Contrato ocasional)',
+        $occasional->cprNumberdocument,
+        $occasional->oroDatestart,
+        $occasional->oroDateend,
+        'OCASIONAL'
+      ]);
+    }
+
+    $municipalities = Settingmunicipality::orderBy('munName', 'asc')->get();
 
     $dates = array();
 
@@ -62,7 +113,8 @@ class ProgrammingController extends Controller
         $messenger->remPhone,
         $messenger->destiny->munName,
         $messenger->remAddressdestiny,
-        $messenger->remObservation
+        (isset($messenger->remObservation)) ? $messenger->remObservation : 'N/A',
+        $messenger->remId
       ]);
     }
 
@@ -86,7 +138,8 @@ class ProgrammingController extends Controller
         $logistic->relPhone,
         $logistic->destiny->munName,
         $logistic->relAddressdestiny,
-        'N/A'
+        'N/A',
+        $logistic->relId
       ]);
     }
 
@@ -110,7 +163,8 @@ class ProgrammingController extends Controller
         $charge->recPhone,
         $charge->destiny->munName,
         $charge->recAddressdestiny,
-        'N/A'
+        'N/A',
+        $charge->recId
       ]);
     }
 
@@ -134,7 +188,8 @@ class ProgrammingController extends Controller
         $turism->retPhone,
         $turism->destiny->munName,
         $turism->retAddressdestiny,
-        'N/A'
+        'N/A',
+        $turism->retId
       ]);
     }
 
@@ -158,7 +213,8 @@ class ProgrammingController extends Controller
         $transfer->reuPhone,
         $transfer->destiny->munName,
         $transfer->reuAddressdestiny,
-        'N/A'
+        'N/A',
+        $transfer->reuId
       ]);
     }
 
@@ -182,13 +238,14 @@ class ProgrammingController extends Controller
         $municipal->reiPhone,
         $municipal->destiny->munName,
         $municipal->reiAddressdestiny,
-        'N/A'
+        'N/A',
+        $municipal->reiId
       ]);
     }
 
     sort($dates);
 
-    return view('modules.programmings.assignment.index', compact('dates'));
+    return view('modules.programmings.assignment.index', compact('dates', 'clients', 'municipalities'));
   }
 
   /* ===============================================================================================

@@ -814,7 +814,7 @@ class RequestController extends Controller
     asort($clients);
     $servicetransfers = Settingservicetransfermunicipal::all();
     $municipalities = Settingmunicipality::orderBy('munName', 'asc')->get();
-    return view('modules.requests.transferintermunicipal.index',compact('clients','servicetransfers','municipalities'));
+    return view('modules.requests.transferintermunicipal.index', compact('clients', 'servicetransfers', 'municipalities'));
   }
 
   function transferintermunicipalSave(Request $request)
@@ -872,6 +872,303 @@ class RequestController extends Controller
       }
     } else {
       return back()->with('Secondary', 'No se encuentra el tipo de cliente (' . trim($request->reiTypecliente) . '), intentelo de nuevo');
+    }
+  }
+
+
+  function editRegister(Request $request)
+  {
+    if ($request->type == "Mensajería Express") {
+      $dateservice = Date('Y-m-d', strtotime($request->Dateservice));
+      // dd($dateservice);
+      if (trim($request->Typecliente) === 'PERMANENTE') {
+        $validate = Requestmessenger::where('remId', trim($request->id))
+          ->first();
+        if ($validate != null) {
+          $validate->remTypecliente = 'PERMANENTE';
+          $validate->remClientpermanent_id = trim($request->Client);
+          $validate->remClientoccasional_id = null;
+          $validate->remMessenger_id = trim($request->Messenger_id);
+          $validate->remDateservice = $dateservice;
+          $validate->remHourstart = trim($request->Hourstart);
+          $validate->remAddressdestiny = $this->upper($request->Addressdestiny);
+          $validate->remMunicipalitydestiny_id = trim($request->Municipalitydestiny_id);
+          $validate->remAddressorigin = $this->upper($request->Addressorigin);
+          $validate->remMunicipalityorigin_id = trim($request->Municipalityorigin_id);
+          $validate->remContact = $this->fu($request->Contact);
+          $validate->remPhone = trim($request->Phone);
+          $validate->remObservation = $this->fu($request->Observation);
+          $validate->save();
+          return back()->with('Success', 'Se ha procesado y guardado el registro correctamente');
+        } else {
+          return back()->with('Secondary', 'No existe un registro como le indicado, consulte los registros pendientes de asignación');
+        }
+      } else if (trim($request->remTypecliente) === 'OCASIONAL') {
+        $validate = Requestmessenger::where('remId', trim($request->id))
+          ->first();
+        if ($validate != null) {
+          $validate->remTypecliente = 'OCASIONAL';
+          $validate->remClientpermanent_id = null;
+          $validate->remClientoccasional_id = trim($request->Client);
+          $validate->remMessenger_id = trim($request->Messenger_id);
+          $validate->remDateservice = $dateservice;
+          $validate->remHourstart = trim($request->Hourstart);
+          $validate->remAddressdestiny = $this->upper($request->Addressdestiny);
+          $validate->remMunicipalitydestiny_id = trim($request->Municipalitydestiny_id);
+          $validate->remAddressorigin = $this->upper($request->Addressorigin);
+          $validate->remMunicipalityorigin_id = trim($request->Municipalityorigin_id);
+          $validate->remContact = $this->fu($request->Contact);
+          $validate->remPhone = trim($request->Phone);
+          $validate->remObservation = $this->fu($request->Observation);
+          $validate->save();
+
+          return back()->with('Success', 'Se ha procesado y guardado el registro correctamente');
+        } else {
+          return back()->with('Secondary', 'Ya existe un registro como el indicado, consulte los registros pendientes de asignación');
+        }
+      } else {
+        return back()->with('Secondary', 'No se encuentra el tipo de cliente (' . trim($request->remTypecliente) . '), intentelo de nuevo');
+      }
+    }elseif ($request->type == 'Logística Express') {
+      $dateservice = Date('Y-m-d', strtotime($request->Dateservice));
+      if (trim($request->Typecliente) === 'PERMANENTE') {
+        $validate = Requestlogistic::where('relId', trim($request->id))
+          ->first();
+        if ($validate != null) {
+          $validate->relTypecliente = 'PERMANENTE';
+          $validate->relClientpermanent_id = trim($request->Client);
+          $validate->relClientoccasional_id = null;
+          $validate->relLogistic_id = trim($request->Messenger_id);
+          $validate->relDateservice = $dateservice;
+          $validate->relHourstart = trim($request->Hourstart);
+          $validate->relAddressdestiny = $this->upper($request->Addressdestiny);
+          $validate->relMunicipalitydestiny_id = trim($request->Municipalitydestiny_id);
+          $validate->relAddressorigin = $this->upper($request->Addressorigin);
+          $validate->relMunicipalityorigin_id = trim($request->Municipalityorigin_id);
+          $validate->relContact = $this->fu($request->Contact);
+          $validate->relPhone = trim($request->Phone);
+          $validate->save();
+          return back()->with('Success', 'Se ha procesado y guardado el registro correctamente');
+        } else {
+          return back()->with('Secondary', 'No existe un registro como le indicado, consulte los registros pendientes de asignación');
+        }
+      } else if (trim($request->Typecliente) === 'OCASIONAL') {
+        $validate = Requestlogistic::where('relId', trim($request->id))
+          ->first();
+        if ($validate != null) {
+          $validate->relTypecliente = 'OCASIONAL';
+          $validate->relClientpermanent_id = null;
+          $validate->relClientoccasional_id = trim($request->Client);
+          $validate->relLogistic_id = trim($request->Messenger_id);
+          $validate->relDateservice = $dateservice;
+          $validate->relHourstart = trim($request->Hourstart);
+          $validate->relAddressdestiny = $this->upper($request->Addressdestiny);
+          $validate->relMunicipalitydestiny_id = trim($request->Municipalitydestiny_id);
+          $validate->relAddressorigin = $this->upper($request->Addressorigin);
+          $validate->relMunicipalityorigin_id = trim($request->Municipalityorigin_id);
+          $validate->relContact = $this->fu($request->Contact);
+          $validate->relPhone = trim($request->Phone);
+          $validate->save();
+
+          return back()->with('Success', 'Se ha procesado y guardado el registro correctamente');
+        } else {
+          return back()->with('Secondary', 'Ya existe un registro como el indicado, consulte los registros pendientes de asignación');
+        }
+      } else {
+        return back()->with('Secondary', 'No se encuentra el tipo de cliente (' . trim($request->relTypecliente) . '), intentelo de nuevo');
+      }
+    }elseif ($request->type == 'Carga Express') {
+      $dateservice = Date('Y-m-d', strtotime($request->Dateservice));
+      if (trim($request->Typecliente) === 'PERMANENTE') {
+        $validate = Requestcharge::where('recId', trim($request->id))
+          ->first();
+        if ($validate != null) {
+          $validate->recTypecliente = 'PERMANENTE';
+          $validate->recClientpermanent_id = trim($request->Client);
+          $validate->recClientoccasional_id = null;
+          $validate->recCharge_id = trim($request->Messenger_id);
+          $validate->recDateservice = $dateservice;
+          $validate->recHourstart = trim($request->Hourstart);
+          $validate->recAddressdestiny = $this->upper($request->Addressdestiny);
+          $validate->recMunicipalitydestiny_id = trim($request->Municipalitydestiny_id);
+          $validate->recAddressorigin = $this->upper($request->Addressorigin);
+          $validate->recMunicipalityorigin_id = trim($request->Municipalityorigin_id);
+          $validate->recContact = $this->fu($request->Contact);
+          $validate->recPhone = trim($request->Phone);
+          $validate->save();
+          return back()->with('Success', 'Se ha procesado y guardado el registro correctamente');
+        } else {
+          return back()->with('Secondary', 'No existe un registro como le indicado, consulte los registros pendientes de asignación');
+        }
+      } else if (trim($request->Typecliente) === 'OCASIONAL') {
+        $validate = Requestcharge::where('recId', trim($request->id))
+          ->first();
+        if ($validate != null) {
+          $validate->recTypecliente = 'OCASIONAL';
+          $validate->recClientpermanent_id = null;
+          $validate->recClientoccasional_id = trim($request->Client);
+          $validate->recCharge_id = trim($request->Messenger_id);
+          $validate->recDateservice = $dateservice;
+          $validate->recHourstart = trim($request->Hourstart);
+          $validate->recAddressdestiny = $this->upper($request->Addressdestiny);
+          $validate->recMunicipalitydestiny_id = trim($request->Municipalitydestiny_id);
+          $validate->recAddressorigin = $this->upper($request->Addressorigin);
+          $validate->recMunicipalityorigin_id = trim($request->Municipalityorigin_id);
+          $validate->recContact = $this->fu($request->Contact);
+          $validate->recPhone = trim($request->Phone);
+          $validate->save();
+
+          return back()->with('Success', 'Se ha procesado y guardado el registro correctamente');
+        } else {
+          return back()->with('Secondary', 'Ya existe un registro como el indicado, consulte los registros pendientes de asignación');
+        }
+      } else {
+        return back()->with('Secondary', 'No se encuentra el tipo de cliente (' . trim($request->recTypecliente) . '), intentelo de nuevo');
+      }
+    }elseif ($request->type == 'Turismo Pasajeros') {
+      $dateservice = Date('Y-m-d', strtotime($request->Dateservice));
+      if (trim($request->Typecliente) === 'PERMANENTE') {
+        $validate = Requestturism::where('retId', trim($request->id))
+          ->first();
+        if ($validate != null) {
+          $validate->retTypecliente = 'PERMANENTE';
+          $validate->retClientpermanent_id = trim($request->Client);
+          $validate->retClientoccasional_id = null;
+          $validate->retTurism_id = trim($request->Messenger_id);
+          $validate->retDateservice = $dateservice;
+          $validate->retHourstart = trim($request->Hourstart);
+          $validate->retAddressdestiny = $this->upper($request->Addressdestiny);
+          $validate->retMunicipalitydestiny_id = trim($request->Municipalitydestiny_id);
+          $validate->retAddressorigin = $this->upper($request->Addressorigin);
+          $validate->retMunicipalityorigin_id = trim($request->Municipalityorigin_id);
+          $validate->retContact = $this->fu($request->Contact);
+          $validate->retPhone = trim($request->Phone);
+          $validate->save();
+          return back()->with('Success', 'Se ha procesado y guardado el registro correctamente');
+        } else {
+          return back()->with('Secondary', 'No existe un registro como le indicado, consulte los registros pendientes de asignación');
+        }
+      } else if (trim($request->Typecliente) === 'OCASIONAL') {
+        $validate = Requestturism::where('retId', trim($request->id))
+          ->first();
+        if ($validate != null) {
+          $validate->retTypecliente = 'OCASIONAL';
+          $validate->retClientpermanent_id = null;
+          $validate->retClientoccasional_id = trim($request->Client);
+          $validate->retTurism_id = trim($request->Messenger_id);
+          $validate->retDateservice = $dateservice;
+          $validate->retHourstart = trim($request->Hourstart);
+          $validate->retAddressdestiny = $this->upper($request->Addressdestiny);
+          $validate->retMunicipalitydestiny_id = trim($request->Municipalitydestiny_id);
+          $validate->retAddressorigin = $this->upper($request->Addressorigin);
+          $validate->retMunicipalityorigin_id = trim($request->Municipalityorigin_id);
+          $validate->retContact = $this->fu($request->Contact);
+          $validate->retPhone = trim($request->Phone);
+          $validate->save();
+
+          return back()->with('Success', 'Se ha procesado y guardado el registro correctamente');
+        } else {
+          return back()->with('Secondary', 'Ya existe un registro como el indicado, consulte los registros pendientes de asignación');
+        }
+      } else {
+        return back()->with('Secondary', 'No se encuentra el tipo de cliente (' . trim($request->retTypecliente) . '), intentelo de nuevo');
+      }
+    }elseif ($request->type == 'Traslado Urbano') {
+      $dateservice = Date('Y-m-d', strtotime($request->Dateservice));
+      if (trim($request->Typecliente) === 'PERMANENTE') {
+        $validate = RequestUrbanTransfer::where('reuId', trim($request->id))
+          ->first();
+        if ($validate != null) {
+          $validate->reuTypecliente = 'PERMANENTE';
+          $validate->reuClientpermanent_id = trim($request->Client);
+          $validate->reuClientoccasional_id = null;
+          $validate->reuTransfer_id = trim($request->Messenger_id);
+          $validate->reuDateservice = $dateservice;
+          $validate->reuHourstart = trim($request->Hourstart);
+          $validate->reuAddressdestiny = $this->upper($request->Addressdestiny);
+          $validate->reuMunicipalitydestiny_id = trim($request->Municipalitydestiny_id);
+          $validate->reuAddressorigin = $this->upper($request->Addressorigin);
+          $validate->reuMunicipalityorigin_id = trim($request->Municipalityorigin_id);
+          $validate->reuContact = $this->fu($request->Contact);
+          $validate->reuPhone = trim($request->Phone);
+          $validate->save();
+          return back()->with('Success', 'Se ha procesado y guardado el registro correctamente');
+        } else {
+          return back()->with('Secondary', 'No existe un registro como le indicado, consulte los registros pendientes de asignación');
+        }
+      } else if (trim($request->Typecliente) === 'OCASIONAL') {
+        $validate = RequestUrbanTransfer::where('reuId', trim($request->id))
+          ->first();
+        if ($validate != null) {
+          $validate->reuTypecliente = 'OCASIONAL';
+          $validate->reuClientpermanent_id = null;
+          $validate->reuClientoccasional_id = trim($request->Client);
+          $validate->reuTransfer_id = trim($request->Messenger_id);
+          $validate->reuDateservice = $dateservice;
+          $validate->reuHourstart = trim($request->Hourstart);
+          $validate->reuAddressdestiny = $this->upper($request->Addressdestiny);
+          $validate->reuMunicipalitydestiny_id = trim($request->Municipalitydestiny_id);
+          $validate->reuAddressorigin = $this->upper($request->Addressorigin);
+          $validate->reuMunicipalityorigin_id = trim($request->Municipalityorigin_id);
+          $validate->reuContact = $this->fu($request->Contact);
+          $validate->reuPhone = trim($request->Phone);
+          $validate->save();
+
+          return back()->with('Success', 'Se ha procesado y guardado el registro correctamente');
+        } else {
+          return back()->with('Secondary', 'Ya existe un registro como el indicado, consulte los registros pendientes de asignación');
+        }
+      } else {
+        return back()->with('Secondary', 'No se encuentra el tipo de cliente (' . trim($request->reuTypecliente) . '), intentelo de nuevo');
+      }
+    }elseif ($request->type == 'Traslado Intermunicipal') {
+      $dateservice = Date('Y-m-d', strtotime($request->Dateservice));
+      if (trim($request->Typecliente) === 'PERMANENTE') {
+        $validate = RequestUrbanTransfer::where('reiId', trim($request->id))
+          ->first();
+        if ($validate != null) {
+          $validate->reiTypecliente = 'PERMANENTE';
+          $validate->reiClientpermanent_id = trim($request->Client);
+          $validate->reiClientoccasional_id = null;
+          $validate->reiTransfer_id = trim($request->Messenger_id);
+          $validate->reiDateservice = $dateservice;
+          $validate->reiHourstart = trim($request->Hourstart);
+          $validate->reiAddressdestiny = $this->upper($request->Addressdestiny);
+          $validate->reiMunicipalitydestiny_id = trim($request->Municipalitydestiny_id);
+          $validate->reiAddressorigin = $this->upper($request->Addressorigin);
+          $validate->reiMunicipalityorigin_id = trim($request->Municipalityorigin_id);
+          $validate->reiContact = $this->fu($request->Contact);
+          $validate->reiPhone = trim($request->Phone);
+          $validate->save();
+          return back()->with('Success', 'Se ha procesado y guardado el registro correctamente');
+        } else {
+          return back()->with('Secondary', 'No existe un registro como le indicado, consulte los registros pendientes de asignación');
+        }
+      } else if (trim($request->Typecliente) === 'OCASIONAL') {
+        $validate = RequestUrbanTransfer::where('reuId', trim($request->id))
+          ->first();
+        if ($validate != null) {
+          $validate->reiTypecliente = 'OCASIONAL';
+          $validate->reiClientpermanent_id = null;
+          $validate->reiClientoccasional_id = trim($request->Client);
+          $validate->reiTransfer_id = trim($request->Messenger_id);
+          $validate->reiDateservice = $dateservice;
+          $validate->reiHourstart = trim($request->Hourstart);
+          $validate->reiAddressdestiny = $this->upper($request->Addressdestiny);
+          $validate->reiMunicipalitydestiny_id = trim($request->Municipalitydestiny_id);
+          $validate->reiAddressorigin = $this->upper($request->Addressorigin);
+          $validate->reiMunicipalityorigin_id = trim($request->Municipalityorigin_id);
+          $validate->reiContact = $this->fu($request->Contact);
+          $validate->reiPhone = trim($request->Phone);
+          $validate->save();
+
+          return back()->with('Success', 'Se ha procesado y guardado el registro correctamente');
+        } else {
+          return back()->with('Secondary', 'Ya existe un registro como el indicado, consulte los registros pendientes de asignación');
+        }
+      } else {
+        return back()->with('Secondary', 'No se encuentra el tipo de cliente (' . trim($request->reiTypecliente) . '), intentelo de nuevo');
+      }
     }
   }
 

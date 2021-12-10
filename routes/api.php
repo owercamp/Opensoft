@@ -16,6 +16,19 @@ use App\Models\LegalParent;
 use App\Models\MatrixEPP;
 use App\Models\PreventiveMaintenanceReview;
 use App\Models\Procedure;
+use App\Models\Requestcharge;
+use App\Models\RequestIntermunityTransfer;
+use App\Models\Requestlogistic;
+use App\Models\Requestmessenger;
+use App\Models\Requestturism;
+use App\Models\RequestUrbanTransfer;
+use App\Models\Settingproductcharge;
+use App\Models\Settingservicecharge;
+use App\Models\Settingservicelogistic;
+use App\Models\Settingservicemessenger;
+use App\Models\Settingservicetransfer;
+use App\Models\Settingservicetransfermunicipal;
+use App\Models\Settingserviceturism;
 use App\Models\TrafficRegulationsViolation;
 use App\Models\UserServiceProcedures;
 use Illuminate\Http\Request;
@@ -1172,10 +1185,147 @@ Route::post('apiExpress', function (Request $request) {
   return response()->json($query);
 })->name('apiExpress');
 
- // *consulta al usuario en la tabla de contractorschargeexpress
+// *consulta al usuario en la tabla de contractorschargeexpress
 // *para motrarlo las referencias personales y labores 
 // *anexadas
 Route::post('apiSpecial', function (Request $request) {
   $query = Contractorespecial::where('ceId', $request->data)->first();
   return response()->json($query);
 })->name('apiSpecial');
+
+// !consulta tabla request pertinente dependiendo del tipo de solicitud
+Route::post('apiService', function (Request $request) {
+  $result = '';
+  $client = '';
+  $date = '';
+  $hour = '';
+  $origin = '';
+  if ($request->type == "Mensajería Express") {
+
+    $result = "Mensajeria";
+    $query = Requestmessenger::where('remId', '=', $request->id)->first();
+
+    $client = ($query->remClientpermanent_id != null) ? $query->remClientpermanent_id : $query->remClientoccasional_id;
+
+    $date = $query->remDateservice;
+    $hour = $query->remHourstart;
+    $origin = $query->remMunicipalityorigin_id;
+    $addressOrigin = $query->remAddressorigin;
+    $destiny = $query->remMunicipalitydestiny_id;
+    $addressDestiny = $query->remAddressdestiny;
+    $contact = $query->remContact;
+    $phone = $query->remPhone;
+    $obs = $query->remObservation;
+    $type = $query->remMessenger_id;
+  } elseif ($request->type == "Logística Express") {
+
+    $result = 'Logistica';
+    $query = Requestlogistic::where('relId', '=', $request->id)->first();
+
+    $client = ($query->relClientpermanent_id != null) ? $query->relClientpermanent_id : $query->relClientoccasional_id;
+
+    $date = $query->relDateservice;
+    $hour = $query->relHourstart;
+    $origin = $query->relMunicipalityorigin_id;
+    $addressOrigin = $query->relAddressorigin;
+    $destiny = $query->relMunicipalitydestiny_id;
+    $addressDestiny = $query->relAddressdestiny;
+    $contact = $query->relContact;
+    $phone = $query->relPhone;
+    $obs = $query->relObservation;
+    $type = $query->relLogistic_id;
+  } elseif ($request->type == "Carga Express") {
+
+    $result = 'Carga';
+    $query = Requestcharge::where('recId', '=', $request->id)->first();
+
+    $date = $query->recDateservice;
+    $hour = $query->recHourstart;
+    $origin = $query->recMunicipalityorigin_id;
+    $addressOrigin = $query->recAddressorigin;
+    $destiny = $query->recMunicipalitydestiny_id;
+    $addressDestiny = $query->recAddressdestiny;
+    $contact = $query->recContact;
+    $phone = $query->recPhone;
+    $obs = $query->recObservation;
+    $type = $query->recCharge_id;
+  } elseif ($request->type == "Turismo Pasajeros") {
+
+    $result = 'Turismo';
+    $query = Requestturism::where('retId', '=', $request->id)->first();
+
+    $date = $query->retDateservice;
+    $hour = $query->retHourstart;
+    $origin = $query->retMunicipalityorigin_id;
+    $addressOrigin = $query->retAddressorigin;
+    $destiny = $query->retMunicipalitydestiny_id;
+    $addressDestiny = $query->retAddressdestiny;
+    $contact = $query->retContact;
+    $phone = $query->retPhone;
+    $obs = $query->retObservation;
+    $type = $query->retTurism_id;
+  } elseif ($request->type == "Traslado Urbano") {
+
+    $result = 'Urbano';
+    $query = RequestUrbanTransfer::where('reuId', '=', $request->id)->first();
+
+    $client = ($query->reuClientpermanent_id != null) ? $query->reuClientpermanent_id : $query->reuClientoccasional_id;
+
+    $date = $query->reuDateservice;
+    $hour = $query->reuHourstart;
+    $origin = $query->reuMunicipalityorigin_id;
+    $addressOrigin = $query->reuAddressorigin;
+    $destiny = $query->reuMunicipalitydestiny_id;
+    $addressDestiny = $query->reuAddressdestiny;
+    $contact = $query->reuContact;
+    $phone = $query->reuPhone;
+    $obs = (isset($query->reuObservation)) ? $query->reuObservation : '';
+    $type = $query->reuTransfer_id;
+  } elseif ($request->type == "Traslado Intermunicipal") {
+
+    $result = 'Intermunicipal';
+    $query = RequestIntermunityTransfer::where('reiId', '=', $request->id)->first();
+
+    $date = $query->reiDateservice;
+    $hour = $query->reiHourstart;
+    $origin = $query->reiMunicipalityorigin_id;
+    $addressOrigin = $query->reiAddressorigin;
+    $destiny = $query->reiMunicipalitydestiny_id;
+    $addressDestiny = $query->reiAddressdestiny;
+    $contact = $query->reiContact;
+    $phone = $query->reiPhone;
+    $obs = (isset($query->reiObservation)) ? $query->reiObservation : '';
+    $type = $query->reiTransfer_id;
+  }
+  return response()->json([$result, $client, $date, $hour, $origin, $addressOrigin, $destiny, $addressDestiny, $contact, $phone, $obs, $type]);
+})->name('apiService');
+
+Route::get('getMessenger', function () {
+  $query = Settingservicemessenger::all();
+  return response()->json($query);
+})->name('getMessenger');
+
+Route::get('getLogistic', function () {
+  $query = Settingservicelogistic::all();
+  return response()->json($query);
+})->name('getLogistic');
+
+Route::get('getExpress', function () {
+    $query = Settingservicecharge::all();
+    return response()->json($query);
+})->name('getExpress');
+
+Route::get('getTurism', function () {
+    $query = Settingserviceturism::all();
+    return response()->json($query);
+})->name('getTurism');
+
+Route::get('getUrban', function () {
+    $query = Settingservicetransfer::all();
+    return response()->json($query);
+})->name('getUrban');
+
+Route::get('getInter', function () {
+    $query = Settingservicetransfermunicipal::all();
+    return response()->json($query);
+})->name('getInter');
