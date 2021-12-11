@@ -285,6 +285,30 @@
   </div>
 </div>
 
+<!-- delete -->
+<div class="modal fade" id="Delete" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title title"></h5>
+        <button type="button" class="btn-close btn-primary" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ route('destroy.to')}}" method="post">
+          @csrf @method('DELETE')
+          @include('modules.programmings.assignment.form.ShowDelete')
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="submit" class="btn btn-tertiary">Eliminar</button>
+            <input type="hidden" name="id">
+            <input type="hidden" name="type">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection
 
 @section('scripts')
@@ -419,33 +443,45 @@
     })
   });
 
+  // *del info
+  $('.delete-link').click(function() {
+    let typeRequest = $(this).find('span:nth-child(5)').text();
+    $('.title').text(`Servicio ${typeRequest}`).addClass('text-uppercase');
+    $('.date').text($(this).find('span:nth-child(2)').text());
+    $('.hour').text($(this).find('span:nth-child(3)').text());
+    $('.customer').text($(this).find('span:nth-child(4)').text());
+    $('.typeRequest').text($(this).find('span:nth-child(5)').text());
+    $('.service').text($(this).find('span:nth-child(6)').text());
+    $('.origin').text($(this).find('span:nth-child(7)').text());
+    $('.addressOrigin').text($(this).find('span:nth-child(8)').text());
+    $('.contact').text($(this).find('span:nth-child(9)').text());
+    $('.phone').text($(this).find('span:nth-child(10)').text());
+    $('.destiny').text($(this).find('span:nth-child(11)').text());
+    $('.addressDestiny').text($(this).find('span:nth-child(12)').text());
+    $('input[name=id]').val($(this).find('span:nth-child(14)').text());
+    $('input[name=type]').val($(this).find('span:nth-child(5)').text());
+    $('.obs').text($(this).find('span:nth-child(13)').text());
+    
+    $('#Delete').modal();
+  });
+
   // *show info
   $('.details-link').click(function() {
-    let date = $(this).find('span:nth-child(2)').text(),
-      hour = $(this).find('span:nth-child(3)').text(),
-      customer = $(this).find('span:nth-child(4)').text(),
-      typeRequest = $(this).find('span:nth-child(5)').text(),
-      service = $(this).find('span:nth-child(6)').text(),
-      origin = $(this).find('span:nth-child(7)').text(),
-      addressOrigin = $(this).find('span:nth-child(8)').text(),
-      contact = $(this).find('span:nth-child(9)').text(),
-      phone = $(this).find('span:nth-child(10)').text(),
-      destiny = $(this).find('span:nth-child(11)').text(),
-      addressDestiny = $(this).find('span:nth-child(12)').text(),
-      obs = $(this).find('span:nth-child(13)').text();
+    let typeRequest = $(this).find('span:nth-child(5)').text();
     $('#title').text(`Servicio ${typeRequest}`).addClass('text-uppercase');
-    $('#date').text(date);
-    $('#hour').text(hour);
-    $('#customer').text(customer);
-    $('#typeRequest').text(typeRequest);
-    $('#service').text(service);
-    $('#origin').text(origin);
-    $('#addressOrigin').text(addressOrigin);
-    $('#contact').text(contact);
-    $('#phone').text(phone);
-    $('#destiny').text(destiny);
-    $('#addressDestiny').text(addressDestiny);
-    $('#obs').text(obs);
+    $('.date').text($(this).find('span:nth-child(2)').text());
+    $('.hour').text($(this).find('span:nth-child(3)').text());
+    $('.customer').text($(this).find('span:nth-child(4)').text());
+    $('.typeRequest').text($(this).find('span:nth-child(5)').text());
+    $('.service').text($(this).find('span:nth-child(6)').text());
+    $('.origin').text($(this).find('span:nth-child(7)').text());
+    $('.addressOrigin').text($(this).find('span:nth-child(8)').text());
+    $('.contact').text($(this).find('span:nth-child(9)').text());
+    $('.phone').text($(this).find('span:nth-child(10)').text());
+    $('.destiny').text($(this).find('span:nth-child(11)').text());
+    $('.addressDestiny').text($(this).find('span:nth-child(12)').text());
+    $('.obs').text($(this).find('span:nth-child(13)').text());
+
     $('#ShowAsign').modal();
   });
 </script>

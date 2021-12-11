@@ -248,6 +248,59 @@ class ProgrammingController extends Controller
     return view('modules.programmings.assignment.index', compact('dates', 'clients', 'municipalities'));
   }
 
+  function destroyTo(Request $request)
+  {
+    if ($request->type == "Mensajería Express") {
+      $search = Requestmessenger::where('remId',$request->id)->first();
+      if (!$search) {
+        return back()->with('Info','No se encontro el registro');
+      }
+      Requestmessenger::destroy($request->id);
+      DB::statement('ALTER TABLE requestmessengers AUTO_INCREMENT=1');
+      return back()->with('Delete','registro eliminado');
+    }elseif ($request->type == "Logística Express") {
+      $search = Requestlogistic::where('relId',$request->id)->first();
+      if (!$search) {
+        return back()->with('Info','No se encontro el registro');
+      }
+      Requestlogistic::destroy($request->id);
+      DB::statement('ALTER TABLE requestlogistics AUTO_INCREMENT=1');
+      return back()->with('Delete','registro eliminado');
+    }elseif ($request->type == "Carga Express") {
+      $search = Requestcharge::where('recId',$request->id)->first();
+      if (!$search) {
+        return back()->with('Info','No se encontro el registro');
+      }
+      Requestcharge::destroy($request->id);
+      DB::statement('ALTER TABLE requestcharges AUTO_INCREMENT=1');
+      return back()->with('Delete','registro eliminado');
+    }elseif ($request->type == "Turismo Pasajeros") {
+      $search = Requestturism::where('retId',$request->id)->first();
+      if (!$search) {
+        return back()->with('Info','No se encontro el registro');
+      }
+      Requestturism::destroy($request->id);
+      DB::statement('ALTER TABLE requestturisms AUTO_INCREMENT=1');
+      return back()->with('Delete','registro eliminado');
+    }elseif ($request->type == "Traslado Urbano") {
+      $search = RequestUrbanTransfer::where('reuId',$request->id)->first();
+      if (!$search) {
+        return back()->with('Info','No se encontro el registro');
+      }
+      RequestUrbanTransfer::destroy($request->id);
+      DB::statement('ALTER TABLE request_urban_transfers AUTO_INCREMENT=1');
+      return back()->with('Delete','registro eliminado');
+    }elseif ($request->type == "Traslado Intermunicipal") {
+      $search = RequestIntermunityTransfer::where('reiId',$request->id)->first(); 
+      if (!$search) {
+        return back()->with('Info','No se encontro el registro');
+      }
+      RequestIntermunityTransfer::destroy($request->id);
+      DB::statement('ALTER TABLE request_intermunity_transfers AUTO_INCREMENT=1');
+      return back()->with('Delete','registro eliminado');
+    }
+  }
+
   /* ===============================================================================================
 			MODULO DE ACEPTACION DE OPERADOR DE (PROGRAMACION DE SERVICIOS)
     =============================================================================================== */

@@ -1124,7 +1124,7 @@ class RequestController extends Controller
     }elseif ($request->type == 'Traslado Intermunicipal') {
       $dateservice = Date('Y-m-d', strtotime($request->Dateservice));
       if (trim($request->Typecliente) === 'PERMANENTE') {
-        $validate = RequestUrbanTransfer::where('reiId', trim($request->id))
+        $validate = RequestIntermunityTransfer::where('reiId', trim($request->id))
           ->first();
         if ($validate != null) {
           $validate->reiTypecliente = 'PERMANENTE';
@@ -1145,7 +1145,7 @@ class RequestController extends Controller
           return back()->with('Secondary', 'No existe un registro como le indicado, consulte los registros pendientes de asignación');
         }
       } else if (trim($request->Typecliente) === 'OCASIONAL') {
-        $validate = RequestUrbanTransfer::where('reuId', trim($request->id))
+        $validate = RequestIntermunityTransfer::where('reiId', trim($request->id))
           ->first();
         if ($validate != null) {
           $validate->reiTypecliente = 'OCASIONAL';
