@@ -18,13 +18,13 @@
 							<p>{{ __('Aceptación Operador') }}</p>
 						</a>
 					</li>
-					<div class="dropdown-divider bj-divider"></div>
+					<!-- <div class="dropdown-divider bj-divider"></div>
 					<li>
 						<a href="{{ route('programming.report') }}" class="nav-link">
 							<i class="fas fa-list-alt"></i>
 							<p>{{ __('Informe de servicio') }}</p>
 						</a>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 			<div class="col-md-10">
