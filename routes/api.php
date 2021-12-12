@@ -1300,32 +1300,56 @@ Route::post('apiService', function (Request $request) {
   return response()->json([$result, $client, $date, $hour, $origin, $addressOrigin, $destiny, $addressDestiny, $contact, $phone, $obs, $type]);
 })->name('apiService');
 
+// *consulta los servicios de mensajeria
 Route::get('getMessenger', function () {
   $query = Settingservicemessenger::all();
   return response()->json($query);
 })->name('getMessenger');
 
+// *consulta los servicios de logistico
 Route::get('getLogistic', function () {
   $query = Settingservicelogistic::all();
   return response()->json($query);
 })->name('getLogistic');
 
+// *consulta los servicios express
 Route::get('getExpress', function () {
     $query = Settingservicecharge::all();
     return response()->json($query);
 })->name('getExpress');
 
+// *consulta los servicios turismo
 Route::get('getTurism', function () {
     $query = Settingserviceturism::all();
     return response()->json($query);
 })->name('getTurism');
 
+// *consulta los servicios transporte urbano
 Route::get('getUrban', function () {
     $query = Settingservicetransfer::all();
     return response()->json($query);
 })->name('getUrban');
 
+// *consulta los servicios de transporte intermunicipal
 Route::get('getInter', function () {
     $query = Settingservicetransfermunicipal::all();
     return response()->json($query);
 })->name('getInter');
+
+// *consulta contratistas mensajeria
+Route::get("apiContractorMessenger",function(){
+  $query = Contractormessenger::all();
+  return response()->json($query);
+})->name("apiContractorMessenger");
+
+// *consulta contratistas trasporte express
+Route::get('apiContractorCharge', function () {
+    $query = Contractorcharge::all();
+    return response()->json($query);
+})->name('apiContractorCharge');
+
+// *consulta contratistas transporte especial
+Route::get('apiContractorSpecial', function () {
+    $query = Contractorespecial::all();
+    return response()->json($query);
+})->name('apiContractorSpecial');

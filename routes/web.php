@@ -521,6 +521,7 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   Route::delete('/operative/programming/assignment/destroy', 'ProgrammingController@destroyTo')->name('destroy.to');
   // *Aceptación operador
   Route::get('/operative/programming/acceptance', 'ProgrammingController@acceptancesTo')->name('programming.acceptance');
+  Route::post('/operative/programming/assignment/asign', 'ProgrammingController@asignTo')->name('asign.to');
   // *Informe de servicio
   Route::get('/operative/programming/report', 'ProgrammingController@reportsTo')->name('programming.report');
 

@@ -175,6 +175,7 @@ class RequestController extends Controller
           'remMunicipalityorigin_id' => trim($request->remMunicipalityorigin_id),
           'remContact' => $this->fu($request->remContact),
           'remPhone' => trim($request->remPhone),
+          'remStatus' => "PENDIENTE",
           'remObservation' => $this->fu($request->remObservation)
         ]);
         return redirect()->route('request.messenger')->with('SuccessMessenger', 'Se ha procesado y guardado el registro correctamente, consúltelo en los registros: Operativa >> Programacion de servicios >> pendiente de asignación');
@@ -201,6 +202,7 @@ class RequestController extends Controller
           'remMunicipalityorigin_id' => trim($request->remMunicipalityorigin_id),
           'remContact' => $this->fu($request->remContact),
           'remPhone' => trim($request->remPhone),
+          'remStatus' => "PENDIENTE",
           'remObservation' => $this->fu($request->remObservation)
         ]);
         return redirect()->route('request.messenger')->with('SuccessMessenger', 'Se ha procesado y guardado el registro correctamente, consúltelo en los registros: Operativa >> Programacion de servicios >> pendiente de asignación');
@@ -319,7 +321,8 @@ class RequestController extends Controller
           'relAddressorigin' => $this->upper($request->relAddressorigin),
           'relMunicipalityorigin_id' => trim($request->relMunicipalityorigin_id),
           'relContact' => $this->fu($request->relContact),
-          'relPhone' => trim($request->relPhone)
+          'relPhone' => trim($request->relPhone),
+          'relStatus' => "PENDIENTE"
         ]);
         return redirect()->route('request.logistic')->with('SuccessLogistic', 'Se ha procesado y guardado el registro correctamente, consúltelo en los registros: Operativa >> Programacion de servicios >> pendiente de asignación');
       } else {
@@ -344,7 +347,8 @@ class RequestController extends Controller
           'relAddressorigin' => $this->upper($request->relAddressorigin),
           'relMunicipalityorigin_id' => trim($request->relMunicipalityorigin_id),
           'relContact' => $this->fu($request->relContact),
-          'relPhone' => trim($request->relPhone)
+          'relPhone' => trim($request->relPhone),
+          'relStatus' => "PENDIENTE"
         ]);
         return redirect()->route('request.logistic')->with('SuccessLogistic', 'Se ha procesado y guardado el registro correctamente, consúltelo en los registros: Operativa >> Programacion de servicios >> pendiente de asignación');
       } else {
@@ -462,7 +466,8 @@ class RequestController extends Controller
           'recAddressorigin' => $this->upper($request->recAddressorigin),
           'recMunicipalityorigin_id' => trim($request->recMunicipalityorigin_id),
           'recContact' => $this->fu($request->recContact),
-          'recPhone' => trim($request->recPhone)
+          'recPhone' => trim($request->recPhone),
+          'recStatus' => "PENDIENTE"
         ]);
         return redirect()->route('request.charge')->with('SuccessCharge', 'Se ha procesado y guardado el registro correctamente, consúltelo en los registros: Operativa >> Programacion de servicios >> pendiente de asignación');
       } else {
@@ -487,7 +492,8 @@ class RequestController extends Controller
           'recAddressorigin' => $this->upper($request->recAddressorigin),
           'recMunicipalityorigin_id' => trim($request->recMunicipalityorigin_id),
           'recContact' => $this->fu($request->recContact),
-          'recPhone' => trim($request->recPhone)
+          'recPhone' => trim($request->recPhone),
+          'recStatus' => "PENDIENTE"
         ]);
         return redirect()->route('request.charge')->with('SuccessCharge', 'Se ha procesado y guardado el registro correctamente, consúltelo en los registros: Operativa >> Programacion de servicios >> pendiente de asignación');
       } else {
@@ -605,7 +611,8 @@ class RequestController extends Controller
           'retAddressorigin' => $this->upper($request->retAddressorigin),
           'retMunicipalityorigin_id' => trim($request->retMunicipalityorigin_id),
           'retContact' => $this->fu($request->retContact),
-          'retPhone' => trim($request->retPhone)
+          'retPhone' => trim($request->retPhone),
+          'retStatus' => "PENDIENTE"
         ]);
         return redirect()->route('request.turism')->with('SuccessTurism', 'Se ha procesado y guardado el registro correctamente, consúltelo en los registros: Operativa >> Programacion de servicios >> pendiente de asignación');
       } else {
@@ -630,7 +637,8 @@ class RequestController extends Controller
           'retAddressorigin' => $this->upper($request->retAddressorigin),
           'retMunicipalityorigin_id' => trim($request->retMunicipalityorigin_id),
           'retContact' => $this->fu($request->retContact),
-          'retPhone' => trim($request->retPhone)
+          'retPhone' => trim($request->retPhone),
+          'retStatus' => "PENDIENTE"
         ]);
         return redirect()->route('request.turism')->with('SuccessTurism', 'Se ha procesado y guardado el registro correctamente, consúltelo en los registros: Operativa >> Programacion de servicios >> pendiente de asignación');
       } else {
@@ -722,7 +730,8 @@ class RequestController extends Controller
           'reuAddressorigin' => $this->upper($request->reuAddressorigin),
           'reuMunicipalityorigin_id' => trim($request->reuMunicipalityorigin_id),
           'reuContact' => $this->fu($request->reuContact),
-          'reuPhone' => trim($request->reuPhone)
+          'reuPhone' => trim($request->reuPhone),
+          'reuStatus' => "PENDIENTE"
         ]);
         return back()->with('Success', 'Se ha procesado y guardado el registro correctamente, consúltelo en los registros: Operativa >> Programacion de servicios >> pendiente de asignación');
       } else {
@@ -747,7 +756,8 @@ class RequestController extends Controller
           'reuAddressorigin' => $this->upper($request->reuAddressorigin),
           'reuMunicipalityorigin_id' => trim($request->reuMunicipalityorigin_id),
           'reuContact' => $this->fu($request->reuContact),
-          'reuPhone' => trim($request->reuPhone)
+          'reuPhone' => trim($request->reuPhone),
+          'reuStatus' => "PENDIENTE"
         ]);
         return back()->with('Success', 'Se ha procesado y guardado el registro correctamente, consúltelo en los registros: Operativa >> Programacion de servicios >> pendiente de asignación');
       } else {
@@ -839,7 +849,8 @@ class RequestController extends Controller
           'reiAddressorigin' => $this->upper($request->reiAddressorigin),
           'reiMunicipalityorigin_id' => trim($request->reiMunicipalityorigin_id),
           'reiContact' => $this->fu($request->reiContact),
-          'reiPhone' => trim($request->reiPhone)
+          'reiPhone' => trim($request->reiPhone),
+          'reiStatus' => "PENDIENTE"
         ]);
         return back()->with('Success', 'Se ha procesado y guardado el registro correctamente, consúltelo en los registros: Operativa >> Programacion de servicios >> pendiente de asignación');
       } else {
@@ -864,7 +875,8 @@ class RequestController extends Controller
           'reiAddressorigin' => $this->upper($request->reiAddressorigin),
           'reiMunicipalityorigin_id' => trim($request->reiMunicipalityorigin_id),
           'reiContact' => $this->fu($request->reiContact),
-          'reiPhone' => trim($request->reiPhone)
+          'reiPhone' => trim($request->reiPhone),
+          'reiStatus' => "PENDIENTE"
         ]);
         return back()->with('Success', 'Se ha procesado y guardado el registro correctamente, consúltelo en los registros: Operativa >> Programacion de servicios >> pendiente de asignación');
       } else {

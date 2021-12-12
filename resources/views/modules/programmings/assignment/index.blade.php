@@ -39,7 +39,7 @@
         <th>CLIENTE</th>
         <th>ORIGEN</th>
         <th>DESTINO</th>
-        <th></th>
+        <th>ACCIONES</th>
       </tr>
     </thead>
     <tbody>
@@ -309,6 +309,41 @@
   </div>
 </div>
 
+<!-- asignación -->
+<div class="modal fade" id="Asign" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title title"></h5>
+        <button type="button" class="btn-close btn-primary" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered border" id="tbl" width="100">
+          <thead>
+            <th>Selección</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Telefono</th>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <form action="{{ route('asign.to') }}" method="post">
+          @csrf
+          <input type="hidden" name="id">
+          <input type="hidden" name="tblid">
+          <input type="hidden" name="type">
+          <button type="submit" class="btn btn-primary">Asignar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection
 
 @section('scripts')
@@ -321,6 +356,75 @@
       $('input[name=Typecliente]').val(type);
     }
   });
+
+  const asign = (asign, register, type) => {
+    let typeService = ["Mensajería Express", "Logística Express", "Carga Express", "Turismo Pasajeros", "Traslado Urbano", "Traslado Intermunicipal"];
+    if ($("input[name=id]").val() == "") {
+      $("input[name='id']").val(asign);
+      $("input[name='tblid']").val(register);
+      $("input[name='type']").val(typeService[type]);
+    } else {
+      $("input[name='id']").val(asign);
+      $("input[name='tblid']").val(register);
+      $("input[name='type']").val(typeService[type]);
+      $('input[type=checkbox]').each(function() {
+        if ($(this).val() == $('input[name=id]').val()) {
+          $(this).prop("checked", true);
+        } else {
+          $(this).prop("checked", false);
+        }
+      });
+    }
+  }
+
+  // *asign
+  $('.assign-link').click(function() {
+    let typeRequest = $(this).find('span:nth-child(5)').text(),
+      register = $(this).find('span:nth-child(14)').text(),
+      type = ["Mensajería Express", "Logística Express", "Carga Express", "Turismo Pasajeros", "Traslado Urbano", "Traslado Intermunicipal"];
+    let index = type.findIndex(type => type === typeRequest);
+    $('.title').text(`Servicio ${typeRequest}`).addClass('text-uppercase');
+    $('#tbl tbody').empty();
+    if ($(this).find('span:nth-child(5)').text() == 'Mensajería Express') {
+      // *consulta contractormessegers
+      $.get("{{ route('apiContractorMessenger') }}", function(objectMessenger) {
+        objectMessenger.forEach(element => {
+          $('#tbl tbody').append(`<tr>
+          <td style="vertical-align: middle"><input type="checkbox" value="${element.cmId}" class="micheckbox" onclick="asign(${element.cmId},${register},${index})"></td>
+          <td style="vertical-align: middle" class="text-capitalize">${element.cmNames}</td>
+          <td style="vertical-align: middle">${element.cmEmail}</td>
+          <td style="vertical-align: middle">${element.cmMovil}</td>
+          </tr>`);
+        });
+      })
+    } else if ($(this).find('span:nth-child(5)').text() == 'Logística Express' || $(this).find('span:nth-child(5)').text() == 'Carga Express') {
+      // *consulta contracttorschargeexpress
+      $.get("{{ route('apiContractorCharge') }}", function(objectCharge) {
+        objectCharge.forEach(element => {
+          $('#tbl tbody').append(`<tr>
+          <td style="vertical-align: middle"><input type="checkbox" value="${element.ccId}" class="micheckbox" onclick="asign(${element.ccId},${register},${index})"></td>
+          <td style="vertical-align: middle" class="text-capitalize">${element.ccNames}</td>
+          <td style="vertical-align: middle">${element.ccEmail}</td>
+          <td style="vertical-align: middle">${element.ccMovil}</td>
+          </tr>`);
+        });
+      });
+    } else if ($(this).find('span:nth-child(5)').text() == 'Turismo Pasajeros' || $(this).find('span:nth-child(5)').text() == 'Traslado Urbano' || $(this).find('span:nth-child(5)').text() == 'Traslado Intermunicipal') {
+      // *consulta contractorserviceespecial
+      $.get("{{ route('apiContractorSpecial') }}", function(objectSpecial) {
+        objectSpecial.forEach(element => {
+          $('#tbl tbody').append(`<tr>
+          <td style="vertical-align: middle"><input type="checkbox" value="${element.ceId}" class="micheckbox" onclick="asign(${element.ceId},${register},${index})"></td>
+          <td style="vertical-align: middle" class="text-capitalize">${element.ceNames}</td>
+          <td style="vertical-align: middle">${element.ceEmail}</td>
+          <td style="vertical-align: middle">${element.ceMovil}</td>
+          </tr>`);
+        });
+      });
+    }
+    $('#Asign').modal();
+  });
+
   // *edit info
   $('.edit-link').click(function() {
     let typeService = $(this).find('span:nth-child(5)').text(),
@@ -383,11 +487,11 @@
             if (count > 0) {
               for (let i = 0; i < count; i++) {
                 if (objectExpress[i]['scId'] == res[11]) {
-                  $('select[name=Messenger_id]').append(`<option value="${objectExpress[i]['scId']}" selected>${objectExpress[i]['scService']}</option>`);    
+                  $('select[name=Messenger_id]').append(`<option value="${objectExpress[i]['scId']}" selected>${objectExpress[i]['scService']}</option>`);
                 } else {
                   $('select[name=Messenger_id]').append(`<option value="${objectExpress[i]['scId']}">${objectExpress[i]['scService']}</option>`);
                 }
-              }              
+              }
             }
           });
         } else if (typeService == "Turismo Pasajeros") {
@@ -396,7 +500,7 @@
             if (count > 0) {
               for (let i = 0; i < count; i++) {
                 if (objectTurism[i]['stId'] == res[11]) {
-                  $('select[name=Messenger_id]').append(`<option value="${objectTurism[i]['stId']}" selected>${objectTurism[i]['stService']}</option>`);    
+                  $('select[name=Messenger_id]').append(`<option value="${objectTurism[i]['stId']}" selected>${objectTurism[i]['stService']}</option>`);
                 } else {
                   $('select[name=Messenger_id]').append(`<option value="${objectTurism[i]['stId']}" selected>${objectTurism[i]['stService']}</option>`);
                 }
@@ -422,11 +526,11 @@
             if (count > 0) {
               for (let i = 0; i < count; i++) {
                 if (objectInter[i]['stmId'] == res[11]) {
-                  $('select[name=Messenger_id]').append(`<option value="${objectInter[i]['stmId']}" selected>${objectInter[i]['stmService']}</option>`);  
+                  $('select[name=Messenger_id]').append(`<option value="${objectInter[i]['stmId']}" selected>${objectInter[i]['stmService']}</option>`);
                 } else {
                   $('select[name=Messenger_id]').append(`<option value="${objectInter[i]['stmId']}">${objectInter[i]['stmService']}</option>`);
                 }
-              }             
+              }
             }
           })
         }
@@ -461,7 +565,7 @@
     $('input[name=id]').val($(this).find('span:nth-child(14)').text());
     $('input[name=type]').val($(this).find('span:nth-child(5)').text());
     $('.obs').text($(this).find('span:nth-child(13)').text());
-    
+
     $('#Delete').modal();
   });
 
