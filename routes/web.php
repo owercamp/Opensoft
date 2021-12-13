@@ -522,6 +522,7 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   // *Aceptación operador
   Route::get('/operative/programming/acceptance', 'ProgrammingController@acceptancesTo')->name('programming.acceptance');
   Route::post('/operative/programming/assignment/asign', 'ProgrammingController@asignTo')->name('asign.to');
+  Route::post('/operative/programming/acceptance/rejected', 'ProgrammingController@rejected')->name('rejected.to');
   // *Informe de servicio
   Route::get('/operative/programming/report', 'ProgrammingController@reportsTo')->name('programming.report');
 

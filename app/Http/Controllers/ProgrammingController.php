@@ -305,34 +305,34 @@ class ProgrammingController extends Controller
   function asignTo(Request $request)
   {
     if ($request->type == "Mensajería Express") {
-      $search = Requestmessenger::find(trim($request->id));
-      $search->reuStatus = "EJECUTANDO";
+      $search = Requestmessenger::find(trim($request->tblid));
+      $search->remStatus = "EJECUTANDO";
       $search->save();
     }elseif ($request->type == "Logística Express") {
-      $search = Requestlogistic::find(trim($request->id));
-      $search->reuStatus = "EJECUTANDO";
+      $search = Requestlogistic::find(trim($request->tblid));
+      $search->relStatus = "EJECUTANDO";
       $search->save();
     }elseif ($request->type == "Carga Express") {
-      $search = Requestcharge::find(trim($request->id));
-      $search->reuStatus = "EJECUTANDO";
+      $search = Requestcharge::find(trim($request->tblid));
+      $search->recStatus = "EJECUTANDO";
       $search->save();
     }elseif ($request->type == "Turismo Pasajeros") {
-      $search = Requestturism::find(trim($request->id));
-      $search->reuStatus = "EJECUTANDO";
+      $search = Requestturism::find(trim($request->tblid));
+      $search->retStatus = "EJECUTANDO";
       $search->save();
     }elseif ($request->type == "Traslado Urbano") {
-      $search = RequestUrbanTransfer::find(trim($request->id));
+      $search = RequestUrbanTransfer::find(trim($request->tblid));
       $search->reuStatus = "EJECUTANDO";
       $search->save();
     }elseif ($request->type == "Traslado Intermunicipal") {
-      $search = RequestIntermunityTransfer::find(trim($request->id));
-      $search->reuStatus = "EJECUTANDO";
+      $search = RequestIntermunityTransfer::find(trim($request->tblid));
+      $search->reiStatus = "EJECUTANDO";
       $search->save();
     }
 
     RequestshasContractors::create([
-      "rc_request" => $request->id,
-      "rc_contractor" => $request->tblid,
+      "rc_request" => $request->tblid,
+      "rc_contractor" => $request->id,
       "rc_type" => $request->type
     ]);
 
@@ -507,6 +507,47 @@ class ProgrammingController extends Controller
     sort($dates);
 
     return view('modules.programmings.acceptance.index',compact('dates'));
+  }
+
+  function rejected(Request $request)
+  {
+    if ($request->type == "Mensajería Express") {
+      $search = Requestmessenger::find(trim($request->id));
+      $search->remStatus = "PENDIENTE";
+      $search->save();
+    }elseif ($request->type == "Logística Express") {
+      $search = Requestlogistic::find(trim($request->id));
+      $search->relStatus = "PENDIENTE";
+      $search->save();
+    }elseif ($request->type == "Carga Express") {
+      $search = Requestcharge::find(trim($request->id));
+      $search->recStatus = "PENDIENTE";
+      $search->save();
+    }elseif ($request->type == "Turismo Pasajeros") {
+      $search = Requestturism::find(trim($request->id));
+      $search->retStatus = "PENDIENTE";
+      $search->save();
+    }elseif ($request->type == "Traslado Urbano") {
+      $search = RequestUrbanTransfer::find(trim($request->id));
+      $search->reuStatus = "PENDIENTE";
+      $search->save();
+    }elseif ($request->type == "Traslado Intermunicipal") {
+      $search = RequestIntermunityTransfer::find(trim($request->id));
+      $search->reiStatus = "PENDIENTE";
+      $search->save();
+    }
+
+    $validate = RequestshasContractors::where([
+      ["rc_request","=",$request->id],
+      ["rc_type","=",$request->type]
+    ])->first();
+
+    if ($validate) {
+      RequestshasContractors::destroy($validate->rc_id);
+      DB::statement("ALTER TABLE requestshas_contractors AUTO_INCREMENT=1");
+      return back()->with("Info","Solicitud Rechazada");
+    }
+    return back()->with("Error","No se encontro el registro");
   }
 
   /* ===============================================================================================
