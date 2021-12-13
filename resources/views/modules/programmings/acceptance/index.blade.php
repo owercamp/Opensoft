@@ -13,7 +13,7 @@
           <th>CLIENTE</th>
           <th>ORIGEN</th>
           <th>DESTINO</th>
-          <!-- <th>ACCIONES</th> -->
+          <th>ACCIONES</th>
         </tr>
       </thead>
       <tbody>
@@ -32,12 +32,16 @@
         }
         @endphp
         @for($i = 0; $i < count($dates); $i++) <tr>
-          <td>{{ getStringSequence($i + 1) }}</td>
-          <td>{{ $dates[$i][3] }}</td>
-          <td>{{ $dates[$i][4] }}</td>
-          <td>{{ $dates[$i][2] }}</td>
-          <td>{{ $dates[$i][5] }}</td>
-          <td>{{ $dates[$i][9] }}</td>
+          <td class="align-middle">{{ getStringSequence($i + 1) }}</td>
+          <td class="align-middle">{{ $dates[$i][3] }}</td>
+          <td class="align-middle">{{ $dates[$i][4] }}</td>
+          <td class="align-middle">{{ $dates[$i][2] }}</td>
+          <td class="align-middle">{{ $dates[$i][5] }}</td>
+          <td class="align-middle">{{ $dates[$i][9] }}</td>
+          <td class="align-middle">
+            <button class="btn btn-outline-primary rounded-circle"><i class="fas fa-check-circle"></i></button>
+            <button class="btn btn-outline-tertiary rounded-circle"><i class="fas fa-times-circle"></i></button>
+          </td>
           </tr>
           @endfor
       </tbody>
