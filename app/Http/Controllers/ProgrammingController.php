@@ -331,8 +331,8 @@ class ProgrammingController extends Controller
     }
 
     RequestshasContractors::create([
-      "rc_request" => $request->tblid,
-      "rc_contractor" => $request->id,
+      "rc_request" => $request->tblid, // es el id de la tabla de request ('messenger','turism','intermunity','urban','logistic','special')
+      "rc_contractor" => $request->id, // es el id del colaborador dependiendo del servicio 
       "rc_type" => $request->type
     ]);
 
@@ -548,6 +548,36 @@ class ProgrammingController extends Controller
       return back()->with("Info","Solicitud Rechazada");
     }
     return back()->with("Error","No se encontro el registro");
+  }
+
+  function accepted(Request $request)
+  {
+    if ($request->type == "Mensajería Express") {
+      $search = Requestmessenger::find(trim($request->id));
+      $search->remStatus = "ACEPTADO";
+      $search->save();
+    }elseif ($request->type == "Logística Express") {
+      $search = Requestlogistic::find(trim($request->id));
+      $search->relStatus = "ACEPTADO";
+      $search->save();
+    }elseif ($request->type == "Carga Express") {
+      $search = Requestcharge::find(trim($request->id));
+      $search->recStatus = "ACEPTADO";
+      $search->save();
+    }elseif ($request->type == "Turismo Pasajeros") {
+      $search = Requestturism::find(trim($request->id));
+      $search->retStatus = "ACEPTADO";
+      $search->save();
+    }elseif ($request->type == "Traslado Urbano") {
+      $search = RequestUrbanTransfer::find(trim($request->id));
+      $search->reuStatus = "ACEPTADO";
+      $search->save();
+    }elseif ($request->type == "Traslado Intermunicipal") {
+      $search = RequestIntermunityTransfer::find(trim($request->id));
+      $search->reiStatus = "ACEPTADO";
+      $search->save();
+    }
+    return back()->with('Success','Servicio Aceptado');
   }
 
   /* ===============================================================================================

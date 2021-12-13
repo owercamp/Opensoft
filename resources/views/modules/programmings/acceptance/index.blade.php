@@ -40,12 +40,12 @@
           <td class="align-middle">{{ $dates[$i][5] }}</td>
           <td class="align-middle">{{ $dates[$i][9] }}</td>
           <td class="align-middle d-flex justify-content-center">
-            <form action="" method="post">
+            <form action="{{ route('accepted.to') }}" method="post">
               @csrf
               <button class="btn btn-outline-primary rounded-circle" title="Aceptar">
                 <i class="fas fa-check-circle"></i>
-                <span hidden>{{ $dates[$i][12] }}</span> <!-- Identificador -->
-                <span hidden>{{ $dates[$i][3] }}</span> <!-- Tipo de solicitud -->
+                <input type="hidden" name="id" value="{{ $dates[$i][12] }}"> <!-- Identificador -->
+                <input type="hidden" name="type" value="{{ $dates[$i][3] }}"> <!-- Tipo de solicitud -->
               </button>
             </form>
             <form action="{{ route('rejected.to') }}" method="post">
