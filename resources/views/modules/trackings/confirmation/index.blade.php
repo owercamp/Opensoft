@@ -49,7 +49,7 @@
                 <input type="hidden" name="col" value="{{ $dates[$i][13] }}">
               </button>
             </form>
-            <form action="" method="post">
+            <form action="{{ route('tracking.rejected') }}" method="post">
               @csrf
               <button class="btn btn-outline-tertiary" title="Rechazar">
                 <i class="far fa-thumbs-down"></i>
