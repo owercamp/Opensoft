@@ -40,7 +40,7 @@
           <td class="align-middle">{{ $dates[$i][5] }}</td>
           <td class="align-middle">{{ $dates[$i][9] }}</td>
           <td class="align-middle d-flex justify-content-around">
-            <form action="#" method="post">
+            <form action="{{ route('tracking.initials') }}" method="post">
               @csrf
               <button class="btn btn-outline-primary rounded-circle" title="Inicio de Servicio">
                 <i class="fas fa-stopwatch"></i>

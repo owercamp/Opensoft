@@ -535,6 +535,7 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
     Route::post('/operative/tracking/confirmation/rejected', 'TrackingController@rejectedTo')->name('.rejected');
     // *Inicio del servicio
     Route::get('/operative/tracking/start', 'TrackingController@startsTo')->name('.start');
+    Route::post('/operative/tracking/start/initials', 'TrackingController@initialsTo')->name('.initials');
     // *Servicio en ejecución
     Route::get('/operative/tracking/running', 'TrackingController@runningsTo')->name('.running');
     // *Servicios finalizados
