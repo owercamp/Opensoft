@@ -10,11 +10,11 @@
         <tr>
           <th>N° SERVICIO</th>
           <th>TIPO DE SOLICITUD</th>
-          <th>SERVICIO</th>
+          <th>COLABORADOR</th>
           <th>CLIENTE</th>
           <th>ORIGEN</th>
           <th>DESTINO</th>
-          <!-- <th>ACCIONES</th> -->
+          <th>ACCIONES</th>
         </tr>
       </thead>
       <tbody>
@@ -34,29 +34,31 @@
         @endphp
         @for($i = 0; $i < count($dates); $i++) <tr>
           <td class="align-middle">{{ getStringSequence($i + 1) }}</td>
-          <td class="align-middle">{{ $dates[$i][3] }}</td>
-          <td class="align-middle">{{ $dates[$i][4] }}</td>
+          <td class="align-middle">{{ $dates[$i][3] }} - {{ $dates[$i][4] }}</td>
+          <td class="align-middle">{{ $dates[$i][13] }}</td>
           <td class="align-middle">{{ $dates[$i][2] }}</td>
           <td class="align-middle">{{ $dates[$i][5] }}</td>
           <td class="align-middle">{{ $dates[$i][9] }}</td>
-          <!-- <td class="align-middle d-flex justify-content-center">
-            <form action="{{ route('accepted.to') }}" method="post">
+          <td class="align-middle d-flex justify-content-around">
+            <form action="{{ route('tracking.accepted') }}" method="post">
               @csrf
-              <button class="btn btn-outline-primary rounded-circle" title="Aceptar">
-                <i class="fas fa-check-circle"></i>
+              <button class="btn btn-outline-primary" title="Confirmar">
+                <i class="far fa-thumbs-up"></i>
                 <input type="hidden" name="id" value="{{ $dates[$i][12] }}">
                 <input type="hidden" name="type" value="{{ $dates[$i][3] }}">
+                <input type="hidden" name="col" value="{{ $dates[$i][13] }}">
               </button>
             </form>
-            <form action="{{ route('rejected.to') }}" method="post">
-              <button class="btn btn-outline-tertiary rounded-circle" title="Rechazar">
-                @csrf
-                <i class="fas fa-times-circle"></i>
+            <form action="" method="post">
+              @csrf
+              <button class="btn btn-outline-tertiary" title="Rechazar">
+                <i class="far fa-thumbs-down"></i>
                 <input type="hidden" name="id" value="{{ $dates[$i][12] }}">
                 <input type="hidden" name="type" value="{{ $dates[$i][3] }}">
+                <input type="hidden" name="col" value="{{ $dates[$i][13] }}">
               </button>
             </form>
-          </td> -->
+          </td>
           </tr>
           @endfor
       </tbody>

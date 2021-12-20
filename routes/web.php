@@ -528,15 +528,18 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   Route::get('/operative/programming/report', 'ProgrammingController@reportsTo')->name('programming.report');
 
   // ?OPERATIVA >> SEGUIMIENTO DE SERVICIOS
+  Route::name('tracking')->group(function () {  
+    // *Confirmación operador
+    Route::get('/operative/tracking/confirmation', 'TrackingController@confirmationsTo')->name('.confirmation');
+    Route::post('/operative/tracking/confirmation/accepted', 'TrackingController@acceptedTo')->name('.accepted');
+    // *Inicio del servicio
+    Route::get('/operative/tracking/start', 'TrackingController@startsTo')->name('.start');
+    // *Servicio en ejecución
+    Route::get('/operative/tracking/running', 'TrackingController@runningsTo')->name('.running');
+    // *Servicios finalizados
+    Route::get('/operative/tracking/finalized', 'TrackingController@finalizedsTo')->name('.finalized');
+  });
 
-  // *Confirmación operador
-  Route::get('/operative/tracking/confirmation', 'TrackingController@confirmationsTo')->name('tracking.confirmation');
-  // *Inicio del servicio
-  Route::get('/operative/tracking/start', 'TrackingController@startsTo')->name('tracking.start');
-  // *Servicio en ejecución
-  Route::get('/operative/tracking/running', 'TrackingController@runningsTo')->name('tracking.running');
-  // *Servicios finalizados
-  Route::get('/operative/tracking/finalized', 'TrackingController@finalizedsTo')->name('tracking.finalized');
 
   // ?OPERATIVA >> LIQUIDACION DE SERVICIOS
 

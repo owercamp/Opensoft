@@ -7,13 +7,6 @@ use App\Models\Contractorespecial;
 use App\Models\Contractormessenger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-use App\Models\Settingservicetransfermunicipal;
-use App\Models\Settingservicemessenger;
-use App\Models\Settingservicelogistic;
-use App\Models\Settingservicetransfer;
-use App\Models\Settingserviceturism;
-use App\Models\Settingservicecharge;
 use App\Models\Settingmunicipality;
 use App\Models\Requestmessenger;
 use App\Models\Orderoccasional;
