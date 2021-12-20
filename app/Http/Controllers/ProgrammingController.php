@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contractorcharge;
+use App\Models\Contractorespecial;
+use App\Models\Contractormessenger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -362,6 +365,14 @@ class ProgrammingController extends Controller
       } else {
         $client = $messenger->occasional->proposal->cprClient;
       }
+      $exists = RequestshasContractors::where([
+        ['rc_request','=',$messenger->remId],
+        ['rc_type','=','Mensajería Express']
+      ])->value('rc_contractor');
+
+      if ($exists) {
+        $collaborator = Contractormessenger::where('cmId','=',$exists)->value('cmNames');
+      }
       array_push($dates, [
         $date,
         $hour,
@@ -375,7 +386,8 @@ class ProgrammingController extends Controller
         $messenger->destiny->munName,
         $messenger->remAddressdestiny,
         (isset($messenger->remObservation)) ? $messenger->remObservation : 'N/A',
-        $messenger->remId
+        $messenger->remId,
+        $collaborator
       ]);
     }
 
@@ -386,6 +398,15 @@ class ProgrammingController extends Controller
         $client = $logistic->permanent->client->cliNamereason;
       } else {
         $client = $logistic->occasional->proposal->cprClient;
+      }
+
+      $exists = RequestshasContractors::where([
+        ['rc_request','=',$logistic->relId],
+        ['rc_type','=','Logística Express']
+      ])->value('rc_contractor');
+
+      if ($exists) {
+        $collaborator = Contractorcharge::where('ccId','=',$exists)->value('ccNames');
       }
       array_push($dates, [
         $date,
@@ -400,7 +421,8 @@ class ProgrammingController extends Controller
         $logistic->destiny->munName,
         $logistic->relAddressdestiny,
         'N/A',
-        $logistic->relId
+        $logistic->relId,
+        $collaborator
       ]);
     }
 
@@ -411,6 +433,15 @@ class ProgrammingController extends Controller
         $client = $charge->permanent->client->cliNamereason;
       } else {
         $client = $charge->occasional->proposal->cprClient;
+      }
+
+      $exists = RequestshasContractors::where([
+        ['rc_request','=',$charge->recId],
+        ['rc_type','=','Carga Express']
+      ])->value('rc_contractor');
+
+      if ($exists) {
+        $collaborator = Contractorcharge::where('ccId','=',$exists)->value('ccNames');
       }
       array_push($dates, [
         $date,
@@ -425,7 +456,8 @@ class ProgrammingController extends Controller
         $charge->destiny->munName,
         $charge->recAddressdestiny,
         'N/A',
-        $charge->recId
+        $charge->recId,
+        $collaborator
       ]);
     }
 
@@ -436,6 +468,15 @@ class ProgrammingController extends Controller
         $client = $turism->permanent->client->cliNamereason;
       } else {
         $client = $turism->occasional->proposal->cprClient;
+      }
+
+      $exists = RequestshasContractors::where([
+        ['rc_request','=',$turism->retId],
+        ['rc_type','=','Turismo Pasajeros']
+      ])->value('rc_contractor');
+
+      if ($exists) {
+        $collaborator = Contractorespecial::where('ceId','=',$exists)->value('ceNames');
       }
       array_push($dates, [
         $date,
@@ -450,7 +491,8 @@ class ProgrammingController extends Controller
         $turism->destiny->munName,
         $turism->retAddressdestiny,
         'N/A',
-        $turism->retId
+        $turism->retId,
+        $collaborator
       ]);
     }
 
@@ -461,6 +503,15 @@ class ProgrammingController extends Controller
         $client = $transfer->permanent->client->cliNamereason;
       } else {
         $client = $transfer->occasional->proposal->cprClient;
+      }
+
+      $exists = RequestshasContractors::where([
+        ['rc_request','=',$transfer->reuId],
+        ['rc_type','=','Traslado Urbano']
+      ])->value('rc_contractor');
+
+      if ($exists) {
+        $collaborator = Contractorespecial::where('ceId','=',$exists)->value('ceNames');
       }
       array_push($dates, [
         $date,
@@ -475,7 +526,8 @@ class ProgrammingController extends Controller
         $transfer->destiny->munName,
         $transfer->reuAddressdestiny,
         'N/A',
-        $transfer->reuId
+        $transfer->reuId,
+        $collaborator
       ]);
     }
 
@@ -486,6 +538,15 @@ class ProgrammingController extends Controller
         $client = $municipal->permanent->client->cliNamereason;
       } else {
         $client = $municipal->occasional->proposal->cprClient;
+      }
+
+      $exists = RequestshasContractors::where([
+        ['rc_request','=',$municipal->reiId],
+        ['rc_type','=','Traslado Intermunicipal']
+      ])->value('rc_contractor');
+
+      if ($exists) {
+        $collaborator = Contractorespecial::where('ceId','=',$exists)->value('ceNames');
       }
       array_push($dates, [
         $date,
@@ -500,7 +561,8 @@ class ProgrammingController extends Controller
         $municipal->destiny->munName,
         $municipal->reiAddressdestiny,
         'N/A',
-        $municipal->reiId
+        $municipal->reiId,
+        $collaborator
       ]);
     }
 

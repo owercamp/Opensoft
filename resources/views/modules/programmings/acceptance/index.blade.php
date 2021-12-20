@@ -10,7 +10,7 @@
         <tr>
           <th>N° SERVICIO</th>
           <th>TIPO DE SOLICITUD</th>
-          <th>SERVICIO</th>
+          <th>COLABORADOR</th>
           <th>CLIENTE</th>
           <th>ORIGEN</th>
           <th>DESTINO</th>
@@ -34,8 +34,8 @@
         @endphp
         @for($i = 0; $i < count($dates); $i++) <tr>
           <td class="align-middle">{{ getStringSequence($i + 1) }}</td>
-          <td class="align-middle">{{ $dates[$i][3] }}</td>
-          <td class="align-middle">{{ $dates[$i][4] }}</td>
+          <td class="align-middle">{{ $dates[$i][3] }} - {{ $dates[$i][4] }}</td>
+          <td class="align-middle">{{ ucwords($dates[$i][13]) }}</td>
           <td class="align-middle">{{ $dates[$i][2] }}</td>
           <td class="align-middle">{{ $dates[$i][5] }}</td>
           <td class="align-middle">{{ $dates[$i][9] }}</td>
