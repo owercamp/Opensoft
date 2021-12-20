@@ -709,4 +709,32 @@ function loadDatatables() {
       }
     },
   });
+
+
+  // !para la Tabla personal de Servicios
+  $('#tableServices').css('font-size', '15px');
+  $('#tableServices').DataTable({
+    "order":[
+      [0,"asc"]
+    ],
+    language: {
+      processing: "Procesamiento en curso...",
+      search: "Buscar:",
+      lengthMenu: "Mostrar _MENU_ registros",
+      info: "Mostrando _START_ a _END_ de _TOTAL_ registros. ",
+      infoEmpty: "Mostrando dato 0 a 0 de 0 registros",
+      emptyTable: "No hay registros disponibles",
+      infoFiltered: "Filtrado de _MAX_ elementos totales",
+      infoPostFix: "",
+      loadingRecords: "Cargando...",
+      zeroRecords: "No hay registros para mostrar",
+      infoFiltered: "Filtrado de _MAX_ registros",
+      paginate: {
+        first: "|<",
+        previous: "<",
+        next: ">",
+        last: ">|"
+      }
+    },
+  });
 }
