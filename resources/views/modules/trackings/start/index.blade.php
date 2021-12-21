@@ -55,15 +55,12 @@
               <span hidden>{{ $dates[$i][3] }}</span><!-- tipo de servicio -->
               <span hidden>{{ $dates[$i][13] }}</span><!-- Colaborador -->
             </button>
-            <form action="#" method="post">
-              @csrf
-              <button class="btn btn-outline-secondary rounded-circle" title="Cancelación Servicio">
-                <i class="fas fa-ban"></i>
-                <input type="hidden" name="id" value="{{ $dates[$i][12] }}">
-                <input type="hidden" name="type" value="{{ $dates[$i][3] }}">
-                <input type="hidden" name="col" value="{{ $dates[$i][13] }}">
-              </button>
-            </form>
+            <button class="btn btn-outline-secondary rounded-circle cancel-register" title="Cancelación Servicio">
+              <i class="fas fa-ban"></i>
+              <span hidden>{{ $dates[$i][12] }}</span><!-- identificador -->
+              <span hidden>{{ $dates[$i][3] }}</span><!-- tipo de servicio -->
+              <span hidden>{{ $dates[$i][13] }}</span><!-- Colaborador -->
+            </button>
             <form action="#" method="post">
               @csrf
               <button class="btn btn-outline-dark rounded-circle" title="Novedades Servicio">
@@ -81,7 +78,35 @@
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Cancelacion Servicio -->
+<div class="modal fade" id="CancelServices" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title Title"></h5>
+        <button type="button" class="btn btn-sm btn-outline-info" data-dismiss="modal" aria-label="Close">&Dfr;</button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ route('tracking.cancel') }}" method="post">
+          @csrf @method('PATCH')
+          <div class="col-lg-12 row d-flex justify-content-center ml-1">
+            <small class="text-muted">{{ ucwords('observaciones de cancelación') }}</small>
+            <textarea name="bs_observations" cols="30" rows="10" class="form-control form-control-sm"></textarea>
+          </div>
+          <div class="modal-footer">
+            <input type="hidden" name="bs_type">
+            <input type="hidden" name="bs_oldCollaborator">
+            <input type="hidden" name="bs_request">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-tertiary">Cancelar Servicio</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cambio de Colaborador -->
 <div class="modal fade" id="Edit" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
@@ -122,8 +147,18 @@
 
 @section('scripts')
 <script>
+  // *cancelación de servicio
+  $('.cancel-register').click(function() {
+    $('.Title').text($(this).find('span:nth-child(3)').text());
+    $('input[name=bs_request]').val($(this).find('span:nth-child(2)').text());
+    $('input[name=bs_type]').val($(this).find('span:nth-child(3)').text());
+    $('input[name=bs_oldCollaborator]').val($(this).find('span:nth-child(4)').text()+" - CANCELADO");
+    $('#CancelServices').modal();
+  });
+
+  // *edición de colaborador
   $('.edit-register').click(function() {
-    $('.title').text($(this).find('span:nth-child(3)').text()+" Cambio Colaborador").addClass('text-uppercase');
+    $('.title').text($(this).find('span:nth-child(3)').text() + " Cambio Colaborador").addClass('text-uppercase');
     $('input[name=bs_oldCollaborator]').val($(this).find('span:nth-child(4)').text());
     $('input[name=bs_request]').val($(this).find('span:nth-child(2)').text());
     $('input[name=bs_type]').val($(this).find('span:nth-child(3)').text());
@@ -132,44 +167,44 @@
     if ($(this).find('span:nth-child(3)').text() == "Mensajería Express") {
       let col = $(this).find('span:nth-child(4)').text();
       // *consulta contractormessegers
-      $.get("{{ route('apiContractorMessenger') }}", function(objectMessenger){
+      $.get("{{ route('apiContractorMessenger') }}", function(objectMessenger) {
         let count = Object.keys(objectMessenger).length;
         if (count > 0) {
           for (let i = 0; i < count; i++) {
             if (objectMessenger[i]['cmNames'] == col) {
-              $('select[name=bs_collaborator]').append("<option value='"+objectMessenger[i]['cmId']+"' selected>"+objectMessenger[i]['cmNames']+"</option>");
+              $('select[name=bs_collaborator]').append("<option value='" + objectMessenger[i]['cmId'] + "' selected>" + objectMessenger[i]['cmNames'] + "</option>");
             } else {
-              $('select[name=bs_collaborator]').append("<option value='"+objectMessenger[i]['cmId']+"'>"+objectMessenger[i]['cmNames']+"</option>");
+              $('select[name=bs_collaborator]').append("<option value='" + objectMessenger[i]['cmId'] + "'>" + objectMessenger[i]['cmNames'] + "</option>");
             }
           }
         }
       });
-    }else if ($(this).find('span:nth-child(3)').text() == "Logística Express" || $(this).find('span:nth-child(3)').text() == "Carga Express") {
+    } else if ($(this).find('span:nth-child(3)').text() == "Logística Express" || $(this).find('span:nth-child(3)').text() == "Carga Express") {
       let col = $(this).find('span:nth-child(4)').text();
       // *consulta contracttorschargeexpress
-      $.get("{{ route('apiContractorCharge') }}", function(objectCharge){
+      $.get("{{ route('apiContractorCharge') }}", function(objectCharge) {
         let count = Object.keys(objectCharge).length;
         if (count > 0) {
           for (let i = 0; i < count; i++) {
             if (objectCharge[i]['ccNames'] == col) {
-              $('select[name=bs_collaborator]').append("<option value='"+objectCharge[i]['ccId']+"' selected>"+objectCharge[i]['ccNames']+"</option>");
+              $('select[name=bs_collaborator]').append("<option value='" + objectCharge[i]['ccId'] + "' selected>" + objectCharge[i]['ccNames'] + "</option>");
             } else {
-              $('select[name=bs_collaborator]').append("<option value='"+objectCharge[i]['ccId']+"'>"+objectCharge[i]['ccNames']+"</option>");
+              $('select[name=bs_collaborator]').append("<option value='" + objectCharge[i]['ccId'] + "'>" + objectCharge[i]['ccNames'] + "</option>");
             }
           }
         }
       });
-    }else if ($(this).find('span:nth-child(3)').text() == "Turismo Pasajeros" || $(this).find('span:nth-child(3)').text() == "Traslado Urbano" || $(this).find('span:nth-child(3)').text() == "Traslado Intermunicipal") {
+    } else if ($(this).find('span:nth-child(3)').text() == "Turismo Pasajeros" || $(this).find('span:nth-child(3)').text() == "Traslado Urbano" || $(this).find('span:nth-child(3)').text() == "Traslado Intermunicipal") {
       let col = $(this).find('span:nth-child(4)').text();
       // *consulta contractorserviceespecial
-      $.get("{{ route('apiContractorSpecial') }}", function(objectSpecial){
+      $.get("{{ route('apiContractorSpecial') }}", function(objectSpecial) {
         let count = Object.keys(objectSpecial).length;
         if (count > 0) {
           for (let i = 0; i < count; i++) {
             if (objectSpecial[i]['ceNames'] == col) {
-              $('select[name=bs_collaborator]').append("<option value='"+objectSpecial[i]['ceId']+"' selected>"+objectSpecial[i]['ceNames']+"</option>");
+              $('select[name=bs_collaborator]').append("<option value='" + objectSpecial[i]['ceId'] + "' selected>" + objectSpecial[i]['ceNames'] + "</option>");
             } else {
-              $('select[name=bs_collaborator]').append("<option value='"+objectSpecial[i]['ceId']+"'>"+objectSpecial[i]['ceNames']+"</option>");
+              $('select[name=bs_collaborator]').append("<option value='" + objectSpecial[i]['ceId'] + "'>" + objectSpecial[i]['ceNames'] + "</option>");
             }
           }
         }

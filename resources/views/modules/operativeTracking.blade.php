@@ -32,6 +32,13 @@
 							<p>{{ __('Servicios finalizados') }}</p>
 						</a>
 					</li>
+          <div class="dropdown-divider bj-divider"></div>
+					<li>
+						<a href="{{ route('tracking.canceled') }}" class="nav-link">
+							<i class="fas fa-clipboard-list"></i>
+							<p>{{ __('Servicios Cancelados') }}</p>
+						</a>
+					</li>
 				</ul>
 			</div>
 			<div class="col-md-10">

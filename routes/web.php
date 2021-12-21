@@ -541,6 +541,9 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
     Route::get('/operative/tracking/running', 'TrackingController@runningsTo')->name('.running');
     // *Servicios finalizados
     Route::get('/operative/tracking/finalized', 'TrackingController@finalizedsTo')->name('.finalized');
+    // *Servicios cancelados
+    Route::get('/operative/tracking/canceled', 'TrackingController@canceledTo')->name('.canceled');
+    Route::patch('/operative/tracking/canceled/cancel', 'TrackingController@canceledCancel')->name('.cancel');
   });
 
 
