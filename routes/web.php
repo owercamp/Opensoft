@@ -536,6 +536,7 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
     // *Inicio del servicio
     Route::get('/operative/tracking/start', 'TrackingController@startsTo')->name('.start');
     Route::post('/operative/tracking/start/initials', 'TrackingController@initialsTo')->name('.initials');
+    Route::patch('/operative/tracking/chargeColaborator', 'TrackingController@collaboratorUpdate')->name('.update');
     // *Servicio en ejecución
     Route::get('/operative/tracking/running', 'TrackingController@runningsTo')->name('.running');
     // *Servicios finalizados

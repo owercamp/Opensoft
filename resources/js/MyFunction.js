@@ -32,6 +32,10 @@ $(document).ready(function () {
 
   $('.select2').select2();
 
+  $('.select2Modal').select2({
+    dropdownParent: $("#staticBackdrop")
+  })
+
   var direccionActual = $('.directionUri').html();
   $('.directionUri').html(seeDirection(direccionActual));
 });

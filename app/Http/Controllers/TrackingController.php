@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BinnacleService;
 use App\Models\Contractorcharge;
 use App\Models\Contractorespecial;
 use App\Models\Contractormessenger;
@@ -16,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
+use Illuminate\Support\Arr;
 
 class TrackingController extends Controller
 {
@@ -814,6 +816,33 @@ class TrackingController extends Controller
       $search->save();
     }
     return back()->with('Info', 'Servicio del colaborador ' . strtoupper($request->col) . ' ha sido inicializado');
+  }
+
+  function collaboratorUpdate(Request $request)
+  {
+    $consult = RequestshasContractors::where([
+      ['rc_request','=',$request->bs_request],
+      ['rc_type','=',$request->bs_type]
+      ])->value('rc_id');
+
+      // dd($consult);
+    if ($consult) {
+      RequestshasContractors::where('rc_id','=',$consult)->update(['rc_contractor' => $request->bs_collaborator]);
+    }
+
+    $search = BinnacleService::where([
+      ['bs_request', '=', $request->bs_request],
+      ['bs_oldCollaborator','=',$request->bs_oldCollaborator],
+      ['bs_type','=',$request->bs_type],
+      ['bs_observations','=',$request->bs_observations]
+      ])->first();
+      if (!$search) {
+        $data = Arr::except($request->all(),['_token','_method','bs_collaborator']);
+        BinnacleService::create($data);
+        return back()->with("Success","Se realiza el almacenamiento en la bitacora");
+      } else {
+        return back()->with("Error", "Ya existe un registro con estos datos en la bitacora");
+      }
   }
 
   /* ===============================================================================================
