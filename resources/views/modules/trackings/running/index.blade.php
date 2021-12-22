@@ -40,8 +40,8 @@
           <td class="align-middle">{{ $dates[$i][5] }}</td>
           <td class="align-middle">{{ $dates[$i][9] }}</td>
           <td class="align-middle d-flex justify-content-around">
-            <form action="#" method="post">
-              @csrf
+            <form action="{{ route('tracking.finish') }}" method="post">
+              @csrf @method('PATCH')
               <button class="btn btn-outline-secondary rounded-circle" title="Finalización Servicio">
                 <i class="fas fa-ban"></i>
                 <input type="hidden" name="id" value="{{ $dates[$i][12] }}">
