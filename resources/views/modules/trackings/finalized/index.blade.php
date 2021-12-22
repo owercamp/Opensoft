@@ -1,9 +1,9 @@
 @extends('modules.operativeTracking')
 
 @section('space')
-	<div class="col-md-12">
-		<h5>SERVICIOS FINALIZADOS</h5>
-    @include('partials.alerts')
+<div class="col-md-12">
+  <h5>SERVICIOS FINALIZADOS</h5>
+  @include('partials.alerts')
   <div class="container-fluid">
     <table id="tableServices" class="table text-center" width="100%">
       <thead>
@@ -14,7 +14,7 @@
           <th>CLIENTE</th>
           <th>ORIGEN</th>
           <th>DESTINO</th>
-          <!-- <th>ACCIONES</th> -->
+          <th>ACCIONES</th>
         </tr>
       </thead>
       <tbody>
@@ -39,16 +39,7 @@
           <td class="align-middle">{{ $dates[$i][2] }}</td>
           <td class="align-middle">{{ $dates[$i][5] }}</td>
           <td class="align-middle">{{ $dates[$i][9] }}</td>
-          <!-- <td class="align-middle d-flex justify-content-around">
-            <form action="{{ route('tracking.finish') }}" method="post">
-              @csrf @method('PATCH')
-              <button class="btn btn-outline-secondary rounded-circle" title="Finalización Servicio">
-                <i class="fas fa-ban"></i>
-                <input type="hidden" name="id" value="{{ $dates[$i][12] }}">
-                <input type="hidden" name="type" value="{{ $dates[$i][3] }}">
-                <input type="hidden" name="col" value="{{ $dates[$i][13] }}">
-              </button>
-            </form>
+          <td class="align-middle d-flex justify-content-around">
             <form action="{{ route('tracking.binnacle') }}" method="post">
               @csrf
               <button class="btn btn-outline-dark rounded-circle" title="Novedades Servicio">
@@ -56,22 +47,30 @@
                 <input type="hidden" name="id" value="{{ $dates[$i][12] }}">
                 <input type="hidden" name="type" value="{{ $dates[$i][3] }}">
                 <input type="hidden" name="col" value="{{ $dates[$i][13] }}">
-                <input type="hidden" name="view" value="Editable">
               </button>
             </form>
-          </td> -->
+            <!-- <form action="" method="post">
+              @csrf @method('PATCH') -->
+              <button class="btn btn-outline-secondary rounded-circle" title="Liquidar Servicio">
+                <i class="fas fa-copy"></i>
+                <input type="hidden" name="id" value="{{ $dates[$i][12] }}">
+                <input type="hidden" name="type" value="{{ $dates[$i][3] }}">
+                <input type="hidden" name="col" value="{{ $dates[$i][13] }}">
+              </button>
+            <!-- </form> -->
+          </td>
           </tr>
           @endfor
       </tbody>
     </table>
   </div>
-	</div>
+</div>
 @endsection
 
 @section('scripts')
-	<script>
-		$(function(){
+<script>
+  $(function() {
 
-		});
-	</script>
+  });
+</script>
 @endsection

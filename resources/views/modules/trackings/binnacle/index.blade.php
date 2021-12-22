@@ -11,7 +11,7 @@
       <span hidden>{{ $col }}</span>
     </button>
     @endif
-    <a href="{{ route('tracking.start') }}" class="btn btn-sm btn-warning" title="Regresar" style="z-index: 1000;"><i class="fas fa-undo-alt"></i></a>
+    <button class="btn btn-sm btn-warning back" title="Regresar" style="z-index: 1000;"><i class="fas fa-undo-alt"></i></button>
   </div>
   <div class="col-lg-12">
     @include('partials.alerts')
@@ -70,6 +70,11 @@
 
 @section('scripts')
 <script>
+
+  $('.back').click(function(){
+    history.back();
+  });
+
   $('.binnacle-link').click(function() {
     let id = $(this).find('span:nth-child(1)').text(),
       type = $(this).find('span:nth-child(2)').text(),
