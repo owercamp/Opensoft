@@ -61,7 +61,7 @@
               <span hidden>{{ $dates[$i][3] }}</span><!-- tipo de servicio -->
               <span hidden>{{ $dates[$i][13] }}</span><!-- Colaborador -->
             </button>
-            <form action="#" method="post">
+            <form action="{{ route('tracking.binnacle') }}" method="post">
               @csrf
               <button class="btn btn-outline-dark rounded-circle" title="Novedades Servicio">
                 <i class="fas fa-info-circle"></i>
