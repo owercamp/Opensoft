@@ -49,13 +49,14 @@
                 <input type="hidden" name="col" value="{{ $dates[$i][13] }}">
               </button>
             </form>
-            <form action="#" method="post">
+            <form action="{{ route('tracking.binnacle') }}" method="post">
               @csrf
               <button class="btn btn-outline-dark rounded-circle" title="Novedades Servicio">
                 <i class="fas fa-info-circle"></i>
                 <input type="hidden" name="id" value="{{ $dates[$i][12] }}">
                 <input type="hidden" name="type" value="{{ $dates[$i][3] }}">
                 <input type="hidden" name="col" value="{{ $dates[$i][13] }}">
+                <input type="hidden" name="view" value="Editable">
               </button>
             </form>
           </td>

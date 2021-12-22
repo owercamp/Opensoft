@@ -540,6 +540,7 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
     Route::post('/operative/tracking/binnacle', 'TrackingController@binnacleIndex')->name('.binnacle');
     // *Servicio en ejecución
     Route::get('/operative/tracking/running', 'TrackingController@runningsTo')->name('.running');
+    Route::patch('/operative/tracking/running/binnacle', 'TrackingController@runningsBinnacle')->name('.binnacle.save');
     // *Servicios finalizados
     Route::get('/operative/tracking/finalized', 'TrackingController@finalizedsTo')->name('.finalized');
     // *Servicios cancelados

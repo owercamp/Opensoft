@@ -566,6 +566,11 @@ class TrackingController extends Controller
   function binnacleIndex(Request $request)
   {
     $data = [];
+    $edit = (isset($request->view)? $request->view : "");
+    $id = (isset($request->id)? $request->id : "");
+    $type = (isset($request->type)? $request->type : "");
+    $col = (isset($request->col)? $request->col : "");
+
     $all = BinnacleService::where([
       ['bs_request', '=', $request->id],
       ['bs_type', '=', $request->type]
@@ -573,7 +578,6 @@ class TrackingController extends Controller
 
     if ($request->type == "Mensajería Express") {
       $all = $all->join('requestmessengers', 'requestmessengers.remId', '=', 'binnacle_services.bs_request')->get();
-      // dd($all);
       foreach ($all as $value) {
         $create = BinnacleService::where('bs_id',$value->bs_id)->value('created_at');
         $origin = Settingmunicipality::where('munId',$value->remMunicipalityorigin_id)->value('munName');
@@ -692,17 +696,17 @@ class TrackingController extends Controller
           $value->bs_observations
         ]);
       }
-    } elseif ($request->type == "Traslado Urbano") {
-      $all = $all->join('request_intermunity_transfers', 'request_intermunity_transfers.reuId', '=', 'binnacle_services.bs_request')->get();
+    } elseif ($request->type == "Traslado Intermunicipal") {
+      $all = $all->join('request_intermunity_transfers', 'request_intermunity_transfers.reiId', '=', 'binnacle_services.bs_request')->get();
       foreach ($all as $value) {
         $create = BinnacleService::where('bs_id',$value->bs_id)->value('created_at');
-        $origin = Settingmunicipality::where('munId',$value->reuMunicipalityorigin_id)->value('munName');
-        $destiny = Settingmunicipality::where('munId',$value->reuMunicipalitydestiny_id)->value('munName');
-        if ($value->remClientpermanent_id) {
-          $contract = Legalizationcontractual::where('lcoId',$value->reuClientpermanent_id)->value('lcoClient_id');
+        $origin = Settingmunicipality::where('munId',$value->reiMunicipalityorigin_id)->value('munName');
+        $destiny = Settingmunicipality::where('munId',$value->reiMunicipalitydestiny_id)->value('munName');
+        if ($value->reiClientpermanent_id) {
+          $contract = Legalizationcontractual::where('lcoId',$value->reiClientpermanent_id)->value('lcoClient_id');
           $client = Client::where('cliId',$contract)->value('cliNamereason');
         } else {
-          $contract = Orderoccasional::where('oroId',$value->reuClientoccasional_id)->value('oroClientproposal_id');
+          $contract = Orderoccasional::where('oroId',$value->reiClientoccasional_id)->value('oroClientproposal_id');
           $client = Clientproposal::where('cprId',$contract)->value('cprClient');
         }
         
@@ -718,7 +722,7 @@ class TrackingController extends Controller
       }
     }
 
-    return view('modules.trackings.binnacle.index', compact('data'));
+    return view('modules.trackings.binnacle.index', compact('data', 'edit', 'id', 'type', 'col'));
   }
 
   /* ===============================================================================================
@@ -949,6 +953,13 @@ class TrackingController extends Controller
     sort($dates);
 
     return view('modules.trackings.running.index', compact('dates'));
+  }
+
+  function runningsBinnacle(Request $request)
+  {
+    BinnacleService::create($request->all());
+
+    return redirect()->route('tracking.running')->with('Success','Se registro la novedad');
   }
 
   function initialsTo(Request $request)
