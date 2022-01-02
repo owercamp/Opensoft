@@ -1507,6 +1507,36 @@ class TrackingController extends Controller
     return view('modules.trackings.canceled.index', compact('dates'));
   }
 
+  function settlementTo(Request $request)
+  {
+    if ($request->type == "Mensajería Express") {
+      $search = Requestmessenger::find(trim($request->id));
+      $search->remStatus = "LIQUIDAR";
+      $search->save();
+    } elseif ($request->type == "Logística Express") {
+      $search = Requestlogistic::find(trim($request->id));
+      $search->relStatus = "LIQUIDAR";
+      $search->save();
+    } elseif ($request->type == "Carga Express") {
+      $search = Requestcharge::find(trim($request->id));
+      $search->recStatus = "LIQUIDAR";
+      $search->save();
+    } elseif ($request->type == "Turismo Pasajeros") {
+      $search = Requestturism::find(trim($request->id));
+      $search->retStatus = "LIQUIDAR";
+      $search->save();
+    } elseif ($request->type == "Traslado Urbano") {
+      $search = RequestUrbanTransfer::find(trim($request->id));
+      $search->reuStatus = "LIQUIDAR";
+      $search->save();
+    } elseif ($request->type == "Traslado Intermunicipal") {
+      $search = RequestIntermunityTransfer::find(trim($request->id));
+      $search->reiStatus = "LIQUIDAR";
+      $search->save();
+    }
+    return back()->with("Info","El servicio del colaborador ".strtoupper($request->col)." ha sido almacenado para liquidar lo encontrará en OPERATIVA >> LIQUIDACION SERVICIOS >> LIQUIDACION PARA CLIENTES");
+  }
+
   function canceledCancel(Request $request)
   {
     BinnacleService::create($request->all());

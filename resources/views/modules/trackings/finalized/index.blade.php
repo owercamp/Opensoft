@@ -49,15 +49,15 @@
                 <input type="hidden" name="col" value="{{ $dates[$i][13] }}">
               </button>
             </form>
-            <!-- <form action="" method="post">
-              @csrf @method('PATCH') -->
+            <form action="{{ route('tracking.settlement') }}" method="post">
+              @csrf @method('PATCH')
               <button class="btn btn-outline-secondary rounded-circle" title="Liquidar Servicio">
                 <i class="fas fa-copy"></i>
                 <input type="hidden" name="id" value="{{ $dates[$i][12] }}">
                 <input type="hidden" name="type" value="{{ $dates[$i][3] }}">
                 <input type="hidden" name="col" value="{{ $dates[$i][13] }}">
               </button>
-            <!-- </form> -->
+            </form>
           </td>
           </tr>
           @endfor
