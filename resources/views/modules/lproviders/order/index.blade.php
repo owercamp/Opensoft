@@ -167,7 +167,7 @@
                 </div>
               </div>
               <div class="row">
-                <table class="table text-center tbl-newOrder-provider" width="100%">
+                <table class="table table-hover text-center tbl-newOrder-provider" width="100%">
                   <thead>
                     <tr>
                       <th>RAZON SOCIAL</th>
@@ -213,7 +213,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <small class="text-muted">PRODUCTOS/SERVICIOS AGREGADOS: </small><br>
-                  <table class="table text-center tbl-orpOrders-newOrder" width="100%">
+                  <table class="table table-hover text-center tbl-orpOrders-newOrder" width="100%">
                     <thead>
                       <th>TIPO</th>
                       <th>NOMBRE</th>
@@ -268,7 +268,7 @@
         <form action="{{ route('providers.order.update') }}" method="POST">
           @csrf
           <div class="row">
-            <table class="table text-center tbl-editOrder-provider" width="100%" style="font-size: 12px;">
+            <table class="table table-hover text-center tbl-editOrder-provider" width="100%" style="font-size: 12px;">
               <thead>
                 <tr>
                   <th>PROVEEDOR</th>
@@ -314,7 +314,7 @@
           <div class="row">
             <div class="col-md-12">
               <small class="text-muted">PRODUCTOS/SERVICIOS AGREGADOS: </small><br>
-              <table class="table text-center tbl-orpOrders-editOrder" width="100%" style="font-size: 12px;">
+              <table class="table table-hover text-center tbl-orpOrders-editOrder" width="100%" style="font-size: 12px;">
                 <thead>
                   <th>TIPO</th>
                   <th>NOMBRE</th>
@@ -367,7 +367,7 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <table class="table text-center tbl-nullOrder-provider" width="100%" style="font-size: 12px;">
+          <table class="table table-hover text-center tbl-nullOrder-provider" width="100%" style="font-size: 12px;">
             <thead>
               <tr>
                 <th>PROVEEDOR</th>
@@ -391,7 +391,7 @@
         <div class="row">
           <div class="col-md-12">
             <small class="text-muted">PRODUCTOS/SERVICIOS DE LA ORDEN DE COMPRA: </small><br>
-            <table class="table text-center tbl-orpOrders-nullOrder" width="100%" style="font-size: 12px;">
+            <table class="table table-hover text-center tbl-orpOrders-nullOrder" width="100%" style="font-size: 12px;">
               <thead>
                 <th>TIPO</th>
                 <th>NOMBRE</th>
@@ -444,7 +444,7 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <table class="table text-center tbl-qualifyOrder-provider" width="100%" style="font-size: 12px;">
+          <table class="table table-hover text-center tbl-qualifyOrder-provider" width="100%" style="font-size: 12px;">
             <thead>
               <tr>
                 <th>PROVEEDOR</th>
@@ -468,7 +468,7 @@
         <div class="row">
           <div class="col-md-12">
             <small class="text-muted">PRODUCTOS/SERVICIOS DE LA ORDEN DE COMPRA: </small><br>
-            <table class="table text-center tbl-orpOrders-qualifyOrder" width="100%" style="font-size: 12px;">
+            <table class="table table-hover text-center tbl-orpOrders-qualifyOrder" width="100%" style="font-size: 12px;">
               <thead>
                 <th>TIPO</th>
                 <th>NOMBRE</th>

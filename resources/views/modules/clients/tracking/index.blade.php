@@ -150,7 +150,7 @@
           </div>
           <div class="col-md-8 text-center">
             <small class="text-center" style="font-weight: bold;">SEGUIMIENTOS</small>
-            <table class="table table-striped text-center tbl-binnacle" style="font-size: 12px;">
+            <table class="table table-hover text-center tbl-binnacle" style="font-size: 12px;">
               <thead>
                 <tr>
                   <th>FECHA</th>
@@ -265,7 +265,7 @@
           </div>
           <div class="col-md-8 text-center">
             <h3 class="text-center" style="font-weight: bold;">SEGUIMIENTOS</h3>
-            <table class="table table-striped text-center tbl-binnacle-proposal" style="font-size: 12px;">
+            <table class="table table-hover text-center tbl-binnacle-proposal" style="font-size: 12px;">
               <thead>
                 <tr>
                   <th>FECHA</th>
@@ -281,7 +281,7 @@
         <div class="row p-3">
           <div class="col-md-12 p-3">
             <h3 class="text-center" style="font-weight: bold;">PORTAFOLIOS INCLUIDOS</h3>
-            <table class="table table-striped text-center tbl-briefcase-proposal" style="font-size: 12px;">
+            <table class="table table-hover text-center tbl-briefcase-proposal" style="font-size: 12px;">
               <thead>
                 <tr>
                   <th>PORTAFOLIO</th>

@@ -5,7 +5,7 @@
   <h5>INICIO DEL SERVICIO</h5>
   @include('partials.alerts')
   <div class="container-fluid">
-    <table id="tableServices" class="table text-center" width="100%">
+    <table id="tableServices" class="table table-hover text-center" width="100%">
       <thead>
         <tr>
           <th>FECHA SERVICIO</th>
@@ -33,12 +33,12 @@
         }
         @endphp
         @for($i = 0; $i < count($dates); $i++) <tr>
-          <td class="align-middle">{{ $dates[$i][0] }} {{ $dates[$i][1] }}</td>
-          <td class="align-middle">{{ $dates[$i][3] }} - {{ $dates[$i][4] }}</td>
-          <td class="align-middle">{{ $dates[$i][13] }}</td>
-          <td class="align-middle">{{ $dates[$i][2] }}</td>
-          <td class="align-middle">{{ $dates[$i][5] }}</td>
-          <td class="align-middle">{{ $dates[$i][9] }}</td>
+          <td>{{ $dates[$i][0] }} {{ $dates[$i][1] }}</td>
+          <td>{{ $dates[$i][3] }} - {{ $dates[$i][4] }}</td>
+          <td>{{ $dates[$i][13] }}</td>
+          <td>{{ $dates[$i][2] }}</td>
+          <td>{{ $dates[$i][5] }}</td>
+          <td>{{ $dates[$i][9] }}</td>
           <td class="align-middle d-flex justify-content-around">
             <form action="{{ route('tracking.initials') }}" method="post">
               @csrf

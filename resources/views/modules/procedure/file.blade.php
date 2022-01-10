@@ -17,9 +17,9 @@
       @foreach($allfiles as $file)
       @if($file->pro_status == "approved")
       <tr>
-        <td class="align-middle">{{ $row++ }}</td>
-        <td class="align-middle">{{ $file->domName}}</td>
-        <td class="align-middle">
+        <td>{{ $row++ }}</td>
+        <td>{{ $file->domName}}</td>
+        <td>
           @php
           $data = str_split($file->pro_content);
           $num=0;

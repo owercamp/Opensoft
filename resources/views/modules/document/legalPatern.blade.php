@@ -28,12 +28,12 @@
       <tbody>
         @foreach($legals as $legal)
         <tr>
-          <td class="align-middle">{{$legal->domName}}</td>
-          <td class="align-middle">{{$legal->lp_typeDoc}}</td>
-          <td class="align-middle">{{$legal->lp_title}}</td>
-          <td class="align-middle">{{$legal->lp_article}}</td>
-          <td class="align-middle">{{$legal->lp_year}}</td>
-          <td class="align-middle">{{ucwords($legal->coNames)}}</td>
+          <td>{{$legal->domName}}</td>
+          <td>{{$legal->lp_typeDoc}}</td>
+          <td>{{$legal->lp_title}}</td>
+          <td>{{$legal->lp_article}}</td>
+          <td>{{$legal->lp_year}}</td>
+          <td>{{ucwords($legal->coNames)}}</td>
           <td>
             <button class="btn btn-outline-secondary rounded-circle editLegalParent"><i class="far fa-keyboard"></i><span hidden>{{$legal->lp_id}}</span></button>
             <button class="btn btn-dark rounded-circle deleteLegalParent"><i class="fas fa-eraser"></i><span hidden>{{$legal->lp_id}}</span></button>

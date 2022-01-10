@@ -686,7 +686,7 @@
                       </div>
                       <div class="row">
                         <div class="col-md-12">
-                          <table class="table text-center tbl-courses-newContractor" width="100%" style="font-size: 12px;">
+                          <table class="table table-hover text-center tbl-courses-newContractor" width="100%" style="font-size: 12px;">
                             <thead>
                               <th>CURSO</th>
                               <th>DURACION</th>
@@ -1190,7 +1190,7 @@
                       </div>
                       <div class="row">
                         <div class="col-md-12">
-                          <table class="table text-center tbl-courses-editContractor" width="100%" style="font-size: 12px;">
+                          <table class="table table-hover text-center tbl-courses-editContractor" width="100%" style="font-size: 12px;">
                             <thead>
                               <th>CURSO</th>
                               <th>DURACION</th>

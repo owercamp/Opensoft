@@ -6,7 +6,7 @@
 </div>
 @include('partials.alerts')
 <div class="w-100 container">
-  <table id="tableDatatable" class="table table-bordered table-striped w-100 text-center">
+  <table id="tableDatatable" class="table table-hover w-100 text-center">
     <thead>
       <th>N°</th>
       <th>DOCUMENTO</th>
@@ -18,9 +18,9 @@
       @foreach ($minutes as $item)
       @if($item->com_status == "non-approved")
       <tr>
-        <td class="align-middle">{{ $row++ }}</td>
-        <td class="align-middle">{{ $item->domName }}</td>
-        <td class="align-middle">
+        <td>{{ $row++ }}</td>
+        <td>{{ $item->domName }}</td>
+        <td>
           @php
           $data = str_split($item->comtext);
           $num=0;
@@ -33,7 +33,7 @@
           @endphp
           ...
         </td>
-        <!-- <td class="align-middle">{!! substr($item->comtext,0,70)."..."!!}</td> -->
+        <!-- <td>{!! substr($item->comtext,0,70)."..."!!}</td> -->
         <td>
           <button title="EDITAR" class="btn btn-outline-info rounded-circle showForm"><i class="fas fa-indent"></i><span hidden>{{$item->comid}}</span>
           </button>

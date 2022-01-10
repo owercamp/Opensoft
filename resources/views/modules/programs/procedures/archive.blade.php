@@ -6,7 +6,7 @@
 </div>
 @include('partials.alerts')
 <div class="container">
-  <table id="tableDatatable" class="table table-bordered table-striped text-center w-100">
+  <table id="tableDatatable" class="table table-hover text-center w-100">
     <thead>
       <th>N°</th>
       <th>DOCUMENTO</th>
@@ -19,9 +19,9 @@
       @endphp
       @foreach ($all as $item)
       <tr>
-        <td class="align-middle">{{$row++}}</td>
-        <td class="align-middle">{{$item->dolName}}</td>
-        <td class="align-middle">
+        <td>{{$row++}}</td>
+        <td>{{$item->dolName}}</td>
+        <td>
           @php
           $data = str_split($item->usp_content);
           $num=0;

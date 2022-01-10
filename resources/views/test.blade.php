@@ -57,7 +57,7 @@
     </div>
     <div class="row p-4">
       <div class="col-md-12">
-        <table class="table table-striped text-center tbl-info" width="100%">
+        <table class="table table-hover text-center tbl-info" width="100%">
           <thead>
             <tr>
               <th>NOMBRE</th>

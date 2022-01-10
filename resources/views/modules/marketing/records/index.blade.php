@@ -130,7 +130,7 @@
           </div>
           <div class="col-md-8 text-center">
             <small class="text-center" style="font-weight: bold;">SEGUIMIENTOS</small>
-            <table class="table table-striped text-center tbl-history" style="font-size: 12px;">
+            <table class="table table-hover text-center tbl-history" style="font-size: 12px;">
               <thead>
                 <tr>
                   <th>FECHA</th>

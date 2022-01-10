@@ -17,9 +17,9 @@
         @foreach($all as $item)
         @if($item->pro_status == "non-approved")
         <tr>
-          <td class="align-middle">{{$row++}}</td>
-          <td class="align-middle">{{$item->domName}}</td>
-          <td class="align-middle">
+          <td>{{$row++}}</td>
+          <td>{{$item->domName}}</td>
+          <td>
             @php
             $data = str_split($item->pro_content);
             $num=0;

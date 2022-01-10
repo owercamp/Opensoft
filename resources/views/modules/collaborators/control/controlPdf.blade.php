@@ -57,7 +57,7 @@
                 </tr>
             </table>
         </header>
-        <table class="table text-center" width="100%">
+        <table class="table table-hover text-center" width="100%">
         	<thead>
 	        	<tr>
 	        		<th>FECHA</th>

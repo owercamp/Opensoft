@@ -30,7 +30,7 @@
     </div>
   </div>
   @include('partials.alerts')
-  <table id="tableDatatable" class="table text-center" width="100%">
+  <table id="tableDatatable" class="table table-hover text-center" width="100%">
     <thead>
       <tr>
         <th>N° SERVICIO</th>

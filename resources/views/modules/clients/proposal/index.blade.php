@@ -164,7 +164,7 @@
             </div>
             <div class="row">
               <div class="col-md-12">
-                <table class="table text-center border-bottom tbl-briefcase-proposals" width="100%" style="font-size: 12px;">
+                <table class="table table-hover text-center border-bottom tbl-briefcase-proposals" width="100%" style="font-size: 12px;">
                   <thead>
                     <th>PORTAFOLIO</th>
                     <th>TIPO DE SERVICIO</th>

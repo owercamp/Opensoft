@@ -166,7 +166,7 @@
                 </div>
               </div>
               <div class="row border m-3 p-3">
-                <table class="table table-striped text-center tbl-legalizations-newTraining" width="100%" style="font-size: 12px;">
+                <table class="table table-hover text-center tbl-legalizations-newTraining" width="100%" style="font-size: 12px;">
                   <thead>
                     <tr>
                       <td>COLABORADOR</td>
@@ -279,7 +279,7 @@
                 </div>
               </div>
               <div class="row border m-3 p-3">
-                <table class="table table-striped text-center tbl-legalizations-updateTraining" width="100%" style="font-size: 12px;">
+                <table class="table table-hover text-center tbl-legalizations-updateTraining" width="100%" style="font-size: 12px;">
                   <thead>
                     <tr>
                       <td>COLABORADOR</td>
@@ -335,7 +335,7 @@
                 <p class="text-muted">ASISTENTES</p>
               </div>
             </div>
-            <table class="table table-striped text-center tbl-collaborators-Delete" width="100%" style="font-size: 12px;">
+            <table class="table table-hover text-center tbl-collaborators-Delete" width="100%" style="font-size: 12px;">
               <thead>
                 <tr>
                   <th>COLABORADOR/CARGO</th>

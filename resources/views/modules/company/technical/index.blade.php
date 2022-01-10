@@ -199,7 +199,7 @@
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      <table class="table text-center tbl-certificated-newTechnical" width="100%" style="font-size: 10px;">
+                      <table class="table table-hover text-center tbl-certificated-newTechnical" width="100%" style="font-size: 10px;">
                         <thead>
                           <th colspan="2">CERTIFICADOS ESCRITOS</th>
                         </thead>
@@ -330,7 +330,7 @@
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      <table class="table text-center tbl-certificated-editTechnical" width="100%" style="font-size: 12px;">
+                      <table class="table table-hover text-center tbl-certificated-editTechnical" width="100%" style="font-size: 12px;">
                         <thead>
                           <th>CERTIFICADOS ACTUALES</th>
                         </thead>

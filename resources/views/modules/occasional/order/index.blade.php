@@ -215,7 +215,7 @@
 												Aqui se llena el select con las propuestas aprobadas de acuerdo al cliente seleccionado
 											</select>
 										</div> -->
-                  <table class="table text-center tbl-proposalsOrder-save" width="100%" style="margin-bottom: 100px;">
+                  <table class="table table-hover text-center tbl-proposalsOrder-save" width="100%" style="margin-bottom: 100px;">
                     <thead>
                       <tr>
                         <th>PORTAFOLIO</th>
@@ -351,7 +351,7 @@
               <!-- producto/servicio -->
               <div class="row">
                 <div class="col-md-12">
-                  <table class="table text-center tbl-proposalsOrder-update" width="100%" style="margin-bottom: 100px;">
+                  <table class="table table-hover text-center tbl-proposalsOrder-update" width="100%" style="margin-bottom: 100px;">
                     <thead>
                       <tr>
                         <th>PORTAFOLIO</th>
@@ -460,7 +460,7 @@
           <div class="col-md-12">
             <b class="text-muted">PRODUCTOS/SERVICIOS RELACIONADOS: </b>
             <hr>
-            <table class="table text-center tbl-proposalsOrder-cancel" width="100%">
+            <table class="table table-hover text-center tbl-proposalsOrder-cancel" width="100%">
               <thead>
                 <tr>
                   <th>PORTAFOLIO</th>
@@ -544,7 +544,7 @@
           <div class="col-md-12">
             <b class="text-muted">PRODUCTOS/SERVICIOS RELACIONADOS: </b>
             <hr>
-            <table class="table text-center tbl-proposalsOrder-aproved" width="100%">
+            <table class="table table-hover text-center tbl-proposalsOrder-aproved" width="100%">
               <thead>
                 <tr>
                   <th>PORTAFOLIO</th>

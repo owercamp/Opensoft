@@ -76,11 +76,11 @@
       <tbody>
         @foreach($pdfs as $item)
         <tr>
-          <td class="align-middle">{{$item->domName}}</td>
-          <td class="align-middle">{{$item->amActivity}}</td>
-          <td class="align-middle">{{$item->amRick}}</td>
-          <td class="align-middle">{{$item->amTypeRick}}</td>
-          <td class="align-middle">{{$item->amGradeRick}}</td>
+          <td>{{$item->domName}}</td>
+          <td>{{$item->amActivity}}</td>
+          <td>{{$item->amRick}}</td>
+          <td>{{$item->amTypeRick}}</td>
+          <td>{{$item->amGradeRick}}</td>
         </tr>
         @endforeach
       </tbody>

@@ -27,11 +27,11 @@
       <tbody>
         @foreach($analysis as $item)
         <tr>
-          <td class="align-middle">{{$item->domName}}</td>
-          <td class="align-middle">{{$item->amActivity}}</td>
-          <td class="align-middle">{{$item->amRick}}</td>
-          <td class="align-middle">{{$item->amTypeRick}}</td>
-          <td class="align-middle">{{$item->amGradeRick}}</td>
+          <td>{{$item->domName}}</td>
+          <td>{{$item->amActivity}}</td>
+          <td>{{$item->amRick}}</td>
+          <td>{{$item->amTypeRick}}</td>
+          <td>{{$item->amGradeRick}}</td>
           <td>
             <button class="btn btn-outline-primary rounded-circle editAnalysisMatrix"><i class="fas fa-pen-square"></i><span hidden>{{$item->am_id}}</span></button>
             <button class="btn btn-outline-danger rounded-circle deleteAnalysisMatrix"><i class="fas fa-ban"></i><span hidden>{{$item->am_id}}</span></button>

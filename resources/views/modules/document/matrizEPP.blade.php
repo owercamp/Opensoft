@@ -26,10 +26,10 @@
       <tbody>
         @foreach($epps as $epp)
         <tr>
-          <td class="align-middle">{{$epp->domName}}</td>
-          <td class="align-middle">{{$epp->meEPP}}</td>
-          <td class="align-middle">{{$epp->meNor}}</td>
-          <td class="align-middle">{{$epp->meObs}}</td>
+          <td>{{$epp->domName}}</td>
+          <td>{{$epp->meEPP}}</td>
+          <td>{{$epp->meNor}}</td>
+          <td>{{$epp->meObs}}</td>
           <td>
 
             <button class="btn btn-outline-success rounded-circle editMatrixEPP"><i class="fas fa-pen-nib"></i><span hidden>{{$epp->me_id}}</span><span hidden>{{asset('storage/MatrixEPP')."/".$epp->meFil}}</span></button>

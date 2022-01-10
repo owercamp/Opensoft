@@ -232,6 +232,25 @@ header{
 	}
 /* # Responsive profile # */
 
+table{
+  border-collapse: collapse!important;
+  > thead{
+    background-color: rgba($blue, .5) ;
+    color: $white;
+    th:first-child{
+      border-top-left-radius: 20px;
+    }
+    th:last-child{
+      border-top-right-radius: 20px;
+    }
+  }
+  > tbody{
+    td{
+      border: .2px solid #dee2e6;
+      vertical-align: middle!important;
+    }
+  }
+} 
 
 
 

@@ -4,7 +4,7 @@
 <div class="container-fluid">
   <h6>ARCHIVO DE ACTAS</h6>
   <div class="container">
-    <table id="tableDatatable" class="table table-bordered table-striped w-100 text-center">
+    <table id="tableDatatable" class="table table-hover w-100 text-center">
       <thead>
         <th>#</th>
         <th>DOCUMENTO</th>
@@ -18,9 +18,9 @@
         @foreach ($archives as $archive)
         @if ($archive->com_status == "approved")
         <tr>
-          <td class="align-middle">{{ $row++ }}</td>
-          <td class="align-middle">{{ $archive->domName }}</td>
-          <td class="align-middle">
+          <td>{{ $row++ }}</td>
+          <td>{{ $archive->domName }}</td>
+          <td>
             @php
             $data = str_split($archive->comtext);
             $num=0;

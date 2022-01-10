@@ -210,7 +210,7 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <table class="table text-center border-bottom tbl-briefcase-terms" width="100%" style="font-size: 12px;">
+                  <table class="table table-hover text-center border-bottom tbl-briefcase-terms" width="100%" style="font-size: 12px;">
                     <thead>
                       <th>PORTAFOLIO</th>
                       <th>TIPO DE SERVICIO</th>
@@ -352,7 +352,7 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <table class="table text-center border-bottom tbl-briefcase-terms-edit" width="100%" style="font-size: 12px;">
+                  <table class="table table-hover text-center border-bottom tbl-briefcase-terms-edit" width="100%" style="font-size: 12px;">
                     <thead>
                       <th>PORTAFOLIO</th>
                       <th>TIPO DE SERVICIO</th>
@@ -407,7 +407,7 @@
             <span class="text-muted">DESDE: <b class="terDateinitial_Delete"></b> HASTA: <b class="terDatefinal_Delete"></b></span><br>
             <hr>
             <small class="text-muted">SERVICIOS: </small><br>
-            <table class="table text-center terBriefcases_Delete" width="100%" style="font-size: 12px;">
+            <table class="table table-hover text-center terBriefcases_Delete" width="100%" style="font-size: 12px;">
               <thead>
                 <tr>
                   <td>PORTAFOLIO</td>

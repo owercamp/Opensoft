@@ -76,11 +76,11 @@
       <tbody>
         @foreach($pdfs as $item)
         <tr>
-          <td class="align-middle">{{$item->domName}}</td>
-          <td class="align-middle">{{$item->meEPP}}</td>
-          <td class="align-middle">{{$item->meNor}}</td>
-          <td class="align-middle">{{$item->meObs}}</td>
-          <td class="align-middle"><img class="py-2 px-1 bg-white border border-secondary rounded" src="{{asset('storage/MatrixEPP/'.$item->meFil)}}" alt="{{$item->meFil}}" width="90cm" height="90cm"></td>
+          <td>{{$item->domName}}</td>
+          <td>{{$item->meEPP}}</td>
+          <td>{{$item->meNor}}</td>
+          <td>{{$item->meObs}}</td>
+          <td><img class="py-2 px-1 bg-white border border-secondary rounded" src="{{asset('storage/MatrixEPP/'.$item->meFil)}}" alt="{{$item->meFil}}" width="90cm" height="90cm"></td>
         </tr>
         @endforeach
       </tbody>

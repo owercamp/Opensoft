@@ -3,7 +3,7 @@
 @section('modules')
 <div class="col-md-12 bj-container-nav">
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-2" id="MenuforHidden">
       <ul class="nav bj-flex">
         <li>
           <a href="{{route('training.planing')}}" class="nav-link">

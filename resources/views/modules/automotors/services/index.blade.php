@@ -225,7 +225,7 @@
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      <table class="table text-center tbl-drivers-newEspecial" width="100%" style="font-size: 12px;">
+                      <table class="table table-hover text-center tbl-drivers-newEspecial" width="100%" style="font-size: 12px;">
                         <thead>
                           <th>NOMBRE</th>
                           <th>DOCUMENTO</th>
@@ -408,7 +408,7 @@
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      <table class="table text-center tbl-drivers-editEspecial" width="100%" style="font-size: 12px;">
+                      <table class="table table-hover text-center tbl-drivers-editEspecial" width="100%" style="font-size: 12px;">
                         <thead>
                           <th>NOMBRE</th>
                           <th>DOCUMENTO</th>

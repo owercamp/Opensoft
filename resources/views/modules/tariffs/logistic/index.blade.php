@@ -157,7 +157,7 @@ $yearfutureSeven = date('Y') + 7;
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <table class="table text-center border-bottom tbl-service-newExpress" width="100%" style="font-size: 12px;">
+                  <table class="table table-hover text-center border-bottom tbl-service-newExpress" width="100%" style="font-size: 12px;">
                     <thead>
                       <th>SERVICIO</th>
                       <th>TARIFA BASE</th>
@@ -217,7 +217,7 @@ $yearfutureSeven = date('Y') + 7;
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <table class="table text-center border-bottom tbl-service-editExpress" width="100%" style="font-size: 12px;">
+                  <table class="table table-hover text-center border-bottom tbl-service-editExpress" width="100%" style="font-size: 12px;">
                     <thead>
                       <th>TARIFA BASE</th>
                       <th>VALOR MINUTO DE ESPERA</th>

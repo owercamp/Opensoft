@@ -62,7 +62,7 @@
         </div>
         <small class="text-muted">INFORMACION GENERAL: </small>
         <hr>
-        <table class="table text-center" width="100%" style="font-size: 12px;">
+        <table class="table table-hover text-center" width="100%" style="font-size: 12px;">
           <thead>
             <tr>
               <th>PROVEEDOR</th>
@@ -84,7 +84,7 @@
         </table>
         <small class="text-muted">PRODUCTOS/SERVICIOS DE LA ORDEN DE COMPRA: </small>
         <hr>
-        <table border="1" class="table text-center" width="100%" style="font-size: 12px;">
+        <table border="1" class="table table-hover text-center" width="100%" style="font-size: 12px;">
           <thead>
             <tr>
               <th>TIPO</th>

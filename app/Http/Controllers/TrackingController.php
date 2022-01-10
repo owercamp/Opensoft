@@ -566,10 +566,10 @@ class TrackingController extends Controller
   function binnacleIndex(Request $request)
   {
     $data = [];
-    $edit = (isset($request->view)? $request->view : "");
-    $id = (isset($request->id)? $request->id : "");
-    $type = (isset($request->type)? $request->type : "");
-    $col = (isset($request->col)? $request->col : "");
+    $edit = (isset($request->view) ? $request->view : "");
+    $id = (isset($request->id) ? $request->id : "");
+    $type = (isset($request->type) ? $request->type : "");
+    $col = (isset($request->col) ? $request->col : "");
 
     $all = BinnacleService::where([
       ['bs_request', '=', $request->id],
@@ -579,18 +579,18 @@ class TrackingController extends Controller
     if ($request->type == "Mensajería Express") {
       $all = $all->join('requestmessengers', 'requestmessengers.remId', '=', 'binnacle_services.bs_request')->get();
       foreach ($all as $value) {
-        $create = BinnacleService::where('bs_id',$value->bs_id)->value('created_at');
-        $origin = Settingmunicipality::where('munId',$value->remMunicipalityorigin_id)->value('munName');
-        $destiny = Settingmunicipality::where('munId',$value->remMunicipalitydestiny_id)->value('munName');
+        $create = BinnacleService::where('bs_id', $value->bs_id)->value('created_at');
+        $origin = Settingmunicipality::where('munId', $value->remMunicipalityorigin_id)->value('munName');
+        $destiny = Settingmunicipality::where('munId', $value->remMunicipalitydestiny_id)->value('munName');
         if ($value->remClientpermanent_id) {
-          $contract = Legalizationcontractual::where('lcoId',$value->remClientpermanent_id)->value('lcoClient_id');
-          $client = Client::where('cliId',$contract)->value('cliNamereason');
+          $contract = Legalizationcontractual::where('lcoId', $value->remClientpermanent_id)->value('lcoClient_id');
+          $client = Client::where('cliId', $contract)->value('cliNamereason');
         } else {
-          $contract = Orderoccasional::where('oroId',$value->relClientoccasional_id)->value('oroClientproposal_id');
-          $client = Clientproposal::where('cprId',$contract)->value('cprClient');
+          $contract = Orderoccasional::where('oroId', $value->relClientoccasional_id)->value('oroClientproposal_id');
+          $client = Clientproposal::where('cprId', $contract)->value('cprClient');
         }
-        
-        array_push($data,[
+
+        array_push($data, [
           $create,
           $value->bs_type,
           $origin,
@@ -603,18 +603,18 @@ class TrackingController extends Controller
     } elseif ($request->type == "Logística Express") {
       $all = $all->join('requestlogistics', 'requestlogistics.relId', '=', 'binnacle_services.bs_request')->get();
       foreach ($all as $value) {
-        $create = BinnacleService::where('bs_id',$value->bs_id)->value('created_at');
-        $origin = Settingmunicipality::where('munId',$value->relMunicipalityorigin_id)->value('munName');
-        $destiny = Settingmunicipality::where('munId',$value->relMunicipalitydestiny_id)->value('munName');
+        $create = BinnacleService::where('bs_id', $value->bs_id)->value('created_at');
+        $origin = Settingmunicipality::where('munId', $value->relMunicipalityorigin_id)->value('munName');
+        $destiny = Settingmunicipality::where('munId', $value->relMunicipalitydestiny_id)->value('munName');
         if ($value->relClientpermanent_id) {
-          $contract = Legalizationcontractual::where('lcoId',$value->relClientpermanent_id)->value('lcoClient_id');
-          $client = Client::where('cliId',$contract)->value('cliNamereason');
+          $contract = Legalizationcontractual::where('lcoId', $value->relClientpermanent_id)->value('lcoClient_id');
+          $client = Client::where('cliId', $contract)->value('cliNamereason');
         } else {
-          $contract = Orderoccasional::where('oroId',$value->relClientoccasional_id)->value('oroClientproposal_id');
-          $client = Clientproposal::where('cprId',$contract)->value('cprClient');
+          $contract = Orderoccasional::where('oroId', $value->relClientoccasional_id)->value('oroClientproposal_id');
+          $client = Clientproposal::where('cprId', $contract)->value('cprClient');
         }
-        
-        array_push($data,[
+
+        array_push($data, [
           $create,
           $value->bs_type,
           $origin,
@@ -627,18 +627,18 @@ class TrackingController extends Controller
     } elseif ($request->type == "Carga Express") {
       $all = $all->join('requestcharges', 'requestcharges.recId', '=', 'binnacle_services.bs_request')->get();
       foreach ($all as $value) {
-        $create = BinnacleService::where('bs_id',$value->bs_id)->value('created_at');
-        $origin = Settingmunicipality::where('munId',$value->recMunicipalityorigin_id)->value('munName');
-        $destiny = Settingmunicipality::where('munId',$value->recMunicipalitydestiny_id)->value('munName');
+        $create = BinnacleService::where('bs_id', $value->bs_id)->value('created_at');
+        $origin = Settingmunicipality::where('munId', $value->recMunicipalityorigin_id)->value('munName');
+        $destiny = Settingmunicipality::where('munId', $value->recMunicipalitydestiny_id)->value('munName');
         if ($value->recClientpermanent_id) {
-          $contract = Legalizationcontractual::where('lcoId',$value->recClientpermanent_id)->value('lcoClient_id');
-          $client = Client::where('cliId',$contract)->value('cliNamereason');
+          $contract = Legalizationcontractual::where('lcoId', $value->recClientpermanent_id)->value('lcoClient_id');
+          $client = Client::where('cliId', $contract)->value('cliNamereason');
         } else {
-          $contract = Orderoccasional::where('oroId',$value->recClientoccasional_id)->value('oroClientproposal_id');
-          $client = Clientproposal::where('cprId',$contract)->value('cprClient');
+          $contract = Orderoccasional::where('oroId', $value->recClientoccasional_id)->value('oroClientproposal_id');
+          $client = Clientproposal::where('cprId', $contract)->value('cprClient');
         }
-        
-        array_push($data,[
+
+        array_push($data, [
           $create,
           $value->bs_type,
           $origin,
@@ -651,18 +651,18 @@ class TrackingController extends Controller
     } elseif ($request->type == "Turismo Pasajeros") {
       $all = $all->join('requestturisms', 'requestturisms.retId', '=', 'binnacle_services.bs_request')->get();
       foreach ($all as $value) {
-        $create = BinnacleService::where('bs_id',$value->bs_id)->value('created_at');
-        $origin = Settingmunicipality::where('munId',$value->retMunicipalityorigin_id)->value('munName');
-        $destiny = Settingmunicipality::where('munId',$value->retMunicipalitydestiny_id)->value('munName');
+        $create = BinnacleService::where('bs_id', $value->bs_id)->value('created_at');
+        $origin = Settingmunicipality::where('munId', $value->retMunicipalityorigin_id)->value('munName');
+        $destiny = Settingmunicipality::where('munId', $value->retMunicipalitydestiny_id)->value('munName');
         if ($value->retClientpermanent_id) {
-          $contract = Legalizationcontractual::where('lcoId',$value->retClientpermanent_id)->value('lcoClient_id');
-          $client = Client::where('cliId',$contract)->value('cliNamereason');
+          $contract = Legalizationcontractual::where('lcoId', $value->retClientpermanent_id)->value('lcoClient_id');
+          $client = Client::where('cliId', $contract)->value('cliNamereason');
         } else {
-          $contract = Orderoccasional::where('oroId',$value->retClientoccasional_id)->value('oroClientproposal_id');
-          $client = Clientproposal::where('cprId',$contract)->value('cprClient');
+          $contract = Orderoccasional::where('oroId', $value->retClientoccasional_id)->value('oroClientproposal_id');
+          $client = Clientproposal::where('cprId', $contract)->value('cprClient');
         }
-        
-        array_push($data,[
+
+        array_push($data, [
           $create,
           $value->bs_type,
           $origin,
@@ -675,18 +675,18 @@ class TrackingController extends Controller
     } elseif ($request->type == "Traslado Urbano") {
       $all = $all->join('request_urban_transfers', 'request_urban_transfers.reuId', '=', 'binnacle_services.bs_request')->get();
       foreach ($all as $value) {
-        $create = BinnacleService::where('bs_id',$value->bs_id)->value('created_at');
-        $origin = Settingmunicipality::where('munId',$value->reuMunicipalityorigin_id)->value('munName');
-        $destiny = Settingmunicipality::where('munId',$value->reuMunicipalitydestiny_id)->value('munName');
+        $create = BinnacleService::where('bs_id', $value->bs_id)->value('created_at');
+        $origin = Settingmunicipality::where('munId', $value->reuMunicipalityorigin_id)->value('munName');
+        $destiny = Settingmunicipality::where('munId', $value->reuMunicipalitydestiny_id)->value('munName');
         if ($value->reuClientpermanent_id) {
-          $contract = Legalizationcontractual::where('lcoId',$value->reuClientpermanent_id)->value('lcoClient_id');
-          $client = Client::where('cliId',$contract)->value('cliNamereason');
+          $contract = Legalizationcontractual::where('lcoId', $value->reuClientpermanent_id)->value('lcoClient_id');
+          $client = Client::where('cliId', $contract)->value('cliNamereason');
         } else {
-          $contract = Orderoccasional::where('oroId',$value->reuClientoccasional_id)->value('oroClientproposal_id');
-          $client = Clientproposal::where('cprId',$contract)->value('cprClient');
+          $contract = Orderoccasional::where('oroId', $value->reuClientoccasional_id)->value('oroClientproposal_id');
+          $client = Clientproposal::where('cprId', $contract)->value('cprClient');
         }
-        
-        array_push($data,[
+
+        array_push($data, [
           $create,
           $value->bs_type,
           $origin,
@@ -699,18 +699,18 @@ class TrackingController extends Controller
     } elseif ($request->type == "Traslado Intermunicipal") {
       $all = $all->join('request_intermunity_transfers', 'request_intermunity_transfers.reiId', '=', 'binnacle_services.bs_request')->get();
       foreach ($all as $value) {
-        $create = BinnacleService::where('bs_id',$value->bs_id)->value('created_at');
-        $origin = Settingmunicipality::where('munId',$value->reiMunicipalityorigin_id)->value('munName');
-        $destiny = Settingmunicipality::where('munId',$value->reiMunicipalitydestiny_id)->value('munName');
+        $create = BinnacleService::where('bs_id', $value->bs_id)->value('created_at');
+        $origin = Settingmunicipality::where('munId', $value->reiMunicipalityorigin_id)->value('munName');
+        $destiny = Settingmunicipality::where('munId', $value->reiMunicipalitydestiny_id)->value('munName');
         if ($value->reiClientpermanent_id) {
-          $contract = Legalizationcontractual::where('lcoId',$value->reiClientpermanent_id)->value('lcoClient_id');
-          $client = Client::where('cliId',$contract)->value('cliNamereason');
+          $contract = Legalizationcontractual::where('lcoId', $value->reiClientpermanent_id)->value('lcoClient_id');
+          $client = Client::where('cliId', $contract)->value('cliNamereason');
         } else {
-          $contract = Orderoccasional::where('oroId',$value->reiClientoccasional_id)->value('oroClientproposal_id');
-          $client = Clientproposal::where('cprId',$contract)->value('cprClient');
+          $contract = Orderoccasional::where('oroId', $value->reiClientoccasional_id)->value('oroClientproposal_id');
+          $client = Clientproposal::where('cprId', $contract)->value('cprClient');
         }
-        
-        array_push($data,[
+
+        array_push($data, [
           $create,
           $value->bs_type,
           $origin,
@@ -959,7 +959,7 @@ class TrackingController extends Controller
   {
     BinnacleService::create($request->all());
 
-    return redirect()->route('tracking.running')->with('Success','Se registro la novedad');
+    return redirect()->route('tracking.running')->with('Success', 'Se registro la novedad');
   }
 
   function runningsFinish(Request $request)
@@ -989,7 +989,7 @@ class TrackingController extends Controller
       $search->reiStatus = "FINALIZADO";
       $search->save();
     }
-    return back()->with("Update","Servicio ".strtoupper($request->type)." Finalizado");
+    return back()->with("Update", "Servicio " . strtoupper($request->type) . " Finalizado");
   }
 
   function initialsTo(Request $request)
@@ -1274,7 +1274,7 @@ class TrackingController extends Controller
     }
 
     sort($dates);
-    return view('modules.trackings.finalized.index',compact('dates'));
+    return view('modules.trackings.finalized.index', compact('dates'));
   }
 
   /* ===============================================================================================
@@ -1507,6 +1507,245 @@ class TrackingController extends Controller
     return view('modules.trackings.canceled.index', compact('dates'));
   }
 
+
+  public function NoveltyReport(Request $request)
+  {
+    // dd($request->all());
+    $data = [];
+    $initial = '';
+    $final = '';
+    $validate = BinnacleService::where([
+      ['bs_request', '=', $request->id],
+      ['bs_type', '=', $request->type]
+    ])->count();
+
+    if ($validate == 0) {
+      return back()->with("Error", "No se encontraron registros para mostrar");
+    }
+
+    $all = BinnacleService::where([
+      ['bs_request', '=', $request->id],
+      ['bs_type', '=', $request->type]
+    ]);
+
+    if ($request->type == "Mensajería Express") {
+      if (isset($request->dateInitials) && isset($request->dateFinals)) {
+        $initial = $request->dateInitials;
+        $final = $request->dateFinals;
+        $num = $all->whereBetween('binnacle_services.created_at', [$request->dateInitials, $request->dateFinals])->count();
+      }
+
+      if ((isset($num) ? $num : 1) > 0) {
+        $all = $all->join('requestmessengers', 'requestmessengers.remId', '=', 'binnacle_services.bs_request')->get();
+      } else {
+        $all = $all->get();
+      }
+
+      foreach ($all as $value) {
+        $create = BinnacleService::where('bs_id', $value->bs_id)->value('created_at');
+        $origin = Settingmunicipality::where('munId', $value->remMunicipalityorigin_id)->value('munName');
+        $destiny = Settingmunicipality::where('munId', $value->remMunicipalitydestiny_id)->value('munName');
+        if ($value->remClientpermanent_id) {
+          $contract = Legalizationcontractual::where('lcoId', $value->remClientpermanent_id)->value('lcoClient_id');
+          $client = Client::where('cliId', $contract)->value('cliNamereason');
+        } else {
+          $contract = Orderoccasional::where('oroId', $value->relClientoccasional_id)->value('oroClientproposal_id');
+          $client = Clientproposal::where('cprId', $contract)->value('cprClient');
+        }
+
+        array_push($data, [
+          $create,
+          $value->bs_type,
+          $origin,
+          $destiny,
+          $client,
+          $value->bs_oldCollaborator,
+          $value->bs_observations
+        ]);
+      }
+    } elseif ($request->type == "Logística Express") {
+      if (isset($request->dateInitials) && isset($request->dateFinals)) {
+        $initial = $request->dateInitials;
+        $final = $request->dateFinals;
+        $num = $all->whereBetween('binnacle_services.created_at', [$request->dateInitials, $request->dateFinals])->count();
+      }
+
+      if ((isset($num) ? $num : 1) > 0) {
+        $all = $all->join('requestlogistics', 'requestlogistics.relId', '=', 'binnacle_services.bs_request')->get();
+      } else {
+        $all = $all->get();
+      }
+
+      foreach ($all as $value) {
+        $create = BinnacleService::where('bs_id', $value->bs_id)->value('created_at');
+        $origin = Settingmunicipality::where('munId', $value->relMunicipalityorigin_id)->value('munName');
+        $destiny = Settingmunicipality::where('munId', $value->relMunicipalitydestiny_id)->value('munName');
+        if ($value->relClientpermanent_id) {
+          $contract = Legalizationcontractual::where('lcoId', $value->relClientpermanent_id)->value('lcoClient_id');
+          $client = Client::where('cliId', $contract)->value('cliNamereason');
+        } else {
+          $contract = Orderoccasional::where('oroId', $value->relClientoccasional_id)->value('oroClientproposal_id');
+          $client = Clientproposal::where('cprId', $contract)->value('cprClient');
+        }
+
+        array_push($data, [
+          $create,
+          $value->bs_type,
+          $origin,
+          $destiny,
+          $client,
+          $value->bs_oldCollaborator,
+          $value->bs_observations
+        ]);
+      }
+    } elseif ($request->type == "Carga Express") {
+      if (isset($request->dateInitials) && isset($request->dateFinals)) {
+        $initial = $request->dateInitials;
+        $final = $request->dateFinals;
+        $num = $all->whereBetween('binnacle_services.created_at', [$request->dateInitials, $request->dateFinals])->count();
+      }
+
+      if ((isset($num) ? $num : 1) > 0) {
+        $all = $all->join('requestcharges', 'requestcharges.recId', '=', 'binnacle_services.bs_request')->get();
+      } else {
+        $all = $all->get();
+      }
+
+      foreach ($all as $value) {
+        $create = BinnacleService::where('bs_id', $value->bs_id)->value('created_at');
+        $origin = Settingmunicipality::where('munId', $value->recMunicipalityorigin_id)->value('munName');
+        $destiny = Settingmunicipality::where('munId', $value->recMunicipalitydestiny_id)->value('munName');
+        if ($value->recClientpermanent_id) {
+          $contract = Legalizationcontractual::where('lcoId', $value->recClientpermanent_id)->value('lcoClient_id');
+          $client = Client::where('cliId', $contract)->value('cliNamereason');
+        } else {
+          $contract = Orderoccasional::where('oroId', $value->recClientoccasional_id)->value('oroClientproposal_id');
+          $client = Clientproposal::where('cprId', $contract)->value('cprClient');
+        }
+
+        array_push($data, [
+          $create,
+          $value->bs_type,
+          $origin,
+          $destiny,
+          $client,
+          $value->bs_oldCollaborator,
+          $value->bs_observations
+        ]);
+      }
+    } elseif ($request->type == "Turismo Pasajeros") {
+      if (isset($request->dateInitials) && isset($request->dateFinals)) {
+        $initial = $request->dateInitials;
+        $final = $request->dateFinals;
+        $num = $all->whereBetween('binnacle_services.created_at', [$request->dateInitials, $request->dateFinals])->count();
+      }
+
+      if ((isset($num) ? $num : 1) > 0) {
+        $all = $all->join('requestturisms', 'requestturisms.retId', '=', 'binnacle_services.bs_request')->get();
+      } else {
+        $all = $all->get();
+      }
+
+      foreach ($all as $value) {
+        $create = BinnacleService::where('bs_id', $value->bs_id)->value('created_at');
+        $origin = Settingmunicipality::where('munId', $value->retMunicipalityorigin_id)->value('munName');
+        $destiny = Settingmunicipality::where('munId', $value->retMunicipalitydestiny_id)->value('munName');
+        if ($value->retClientpermanent_id) {
+          $contract = Legalizationcontractual::where('lcoId', $value->retClientpermanent_id)->value('lcoClient_id');
+          $client = Client::where('cliId', $contract)->value('cliNamereason');
+        } else {
+          $contract = Orderoccasional::where('oroId', $value->retClientoccasional_id)->value('oroClientproposal_id');
+          $client = Clientproposal::where('cprId', $contract)->value('cprClient');
+        }
+
+        array_push($data, [
+          $create,
+          $value->bs_type,
+          $origin,
+          $destiny,
+          $client,
+          $value->bs_oldCollaborator,
+          $value->bs_observations
+        ]);
+      }
+    } elseif ($request->type == "Traslado Urbano") {
+      if (isset($request->dateInitials) && isset($request->dateFinals)) {
+        $initial = $request->dateInitials;
+        $final = $request->dateFinals;
+        $num = $all->whereBetween('binnacle_services.created_at', [$request->dateInitials, $request->dateFinals])->count();
+      }
+
+      if ((isset($num) ? $num : 1) > 0) {
+        $all = $all->join('request_urban_transfers', 'request_urban_transfers.reuId', '=', 'binnacle_services.bs_request')->get();
+      } else {
+        $all = $all->get();
+      }
+
+      foreach ($all as $value) {
+        $create = BinnacleService::where('bs_id', $value->bs_id)->value('created_at');
+        $origin = Settingmunicipality::where('munId', $value->reuMunicipalityorigin_id)->value('munName');
+        $destiny = Settingmunicipality::where('munId', $value->reuMunicipalitydestiny_id)->value('munName');
+        if ($value->reuClientpermanent_id) {
+          $contract = Legalizationcontractual::where('lcoId', $value->reuClientpermanent_id)->value('lcoClient_id');
+          $client = Client::where('cliId', $contract)->value('cliNamereason');
+        } else {
+          $contract = Orderoccasional::where('oroId', $value->reuClientoccasional_id)->value('oroClientproposal_id');
+          $client = Clientproposal::where('cprId', $contract)->value('cprClient');
+        }
+
+        array_push($data, [
+          $create,
+          $value->bs_type,
+          $origin,
+          $destiny,
+          $client,
+          $value->bs_oldCollaborator,
+          $value->bs_observations
+        ]);
+      }
+    } elseif ($request->type == "Traslado Intermunicipal") {
+      if (isset($request->dateInitials) && isset($request->dateFinals)) {
+        $initial = $request->dateInitials;
+        $final = $request->dateFinals;
+        $num = $all->whereBetween('binnacle_services.created_at', [$request->dateInitials, $request->dateFinals])->count();
+      }
+
+      if ((isset($num) ? $num : 1) > 0) {
+        $all = $all->join('request_intermunity_transfers', 'request_intermunity_transfers.reiId', '=', 'binnacle_services.bs_request')->get();
+      } else {
+        $all = $all->get();
+      }
+
+      foreach ($all as $value) {
+        $create = BinnacleService::where('bs_id', $value->bs_id)->value('created_at');
+        $origin = Settingmunicipality::where('munId', $value->reiMunicipalityorigin_id)->value('munName');
+        $destiny = Settingmunicipality::where('munId', $value->reiMunicipalitydestiny_id)->value('munName');
+        if ($value->reiClientpermanent_id) {
+          $contract = Legalizationcontractual::where('lcoId', $value->reiClientpermanent_id)->value('lcoClient_id');
+          $client = Client::where('cliId', $contract)->value('cliNamereason');
+        } else {
+          $contract = Orderoccasional::where('oroId', $value->reiClientoccasional_id)->value('oroClientproposal_id');
+          $client = Clientproposal::where('cprId', $contract)->value('cprClient');
+        }
+
+        array_push($data, [
+          $create,
+          $value->bs_type,
+          $origin,
+          $destiny,
+          $client,
+          $value->bs_oldCollaborator,
+          $value->bs_observations
+        ]);
+      }
+    }
+
+    $identifier = $request->id;
+    $type = $request->type;
+
+    return view('modules.trackings.report.index', compact('data', 'identifier', 'type', 'initial', 'final'));
+  }
+
   function settlementTo(Request $request)
   {
     if ($request->type == "Mensajería Express") {
@@ -1534,7 +1773,7 @@ class TrackingController extends Controller
       $search->reiStatus = "LIQUIDAR";
       $search->save();
     }
-    return back()->with("Info","El servicio del colaborador ".strtoupper($request->col)." ha sido almacenado para liquidar lo encontrará en OPERATIVA >> LIQUIDACION SERVICIOS >> LIQUIDACION PARA CLIENTES");
+    return back()->with("Info", "El servicio del colaborador " . strtoupper($request->col) . " ha sido almacenado para liquidar lo encontrará en OPERATIVA >> LIQUIDACION SERVICIOS >> LIQUIDACION PARA CLIENTES");
   }
 
   function canceledCancel(Request $request)

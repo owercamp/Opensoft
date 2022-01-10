@@ -77,12 +77,12 @@
       <tbody>
         @foreach($pdfs as $item)
         <tr>
-          <td class="align-middle">{{$item->domName}}</td>
-          <td class="align-middle">{{$item->lp_typeDoc}}</td>
-          <td class="align-middle">{{$item->lp_title}}</td>
-          <td class="align-middle">{{$item->lp_article}}</td>
-          <td class="align-middle">{{$item->lp_year}}</td>
-          <td class="align-middle">{{ucwords($item->coNames)}}</td>
+          <td>{{$item->domName}}</td>
+          <td>{{$item->lp_typeDoc}}</td>
+          <td>{{$item->lp_title}}</td>
+          <td>{{$item->lp_article}}</td>
+          <td>{{$item->lp_year}}</td>
+          <td>{{ucwords($item->coNames)}}</td>
         </tr>
         @endforeach
       </tbody>

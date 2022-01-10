@@ -140,7 +140,7 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <table class="table text-center border-bottom tbl-destiny-newTransfermunicipality" width="100%" style="font-size: 12px;">
+                  <table class="table table-hover text-center border-bottom tbl-destiny-newTransfermunicipality" width="100%" style="font-size: 12px;">
                     <thead>
                       <th>#</th>
                       <th>DESTINO</th>
@@ -233,7 +233,7 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <table class="table text-center border-bottom tbl-destiny-editTransfermunicipality" width="100%" style="font-size: 12px;">
+                  <table class="table table-hover text-center border-bottom tbl-destiny-editTransfermunicipality" width="100%" style="font-size: 12px;">
                     <thead>
                       <th>#</th>
                       <th>DESTINO</th>
