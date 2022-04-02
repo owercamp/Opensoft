@@ -556,6 +556,8 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
 
   // *Liquidación para clientes
   Route::get('/operative/settlement/clients', 'SettlementController@clientsTo')->name('settlement.clients');
+  Route::post('/operative/settlement/clients/liquidate', 'SettlementController@liquidateTo')->name('liquidate.service');
+  Route::post('/operative/settlement/clients/liquidate/save', 'SettlementController@liquidateSave')->name('liquidate.service.save');
   // *Liquidación para operadores
   Route::get('/operative/settlement/operators', 'SettlementController@operatorsTo')->name('settlement.operators');
 
