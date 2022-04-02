@@ -146,6 +146,28 @@ return [
     |
     */
 
-  'attributes' => [],
+  'attributes' => [
+    "typeservices" => "Tipo de Servicio",
+    "name" => "Nombre",
+    "description" => "Descripción",
+    "price" => "Precio",
+    "duration" => "Duración",
+    "image" => "Imagen",
+    "services" => "Servicios",
+    "service" => "Servicio",
+    "origin" => "Origen",
+    "destiny" => "Destino",
+    "date" => "Fecha",
+    "hour" => "Hora",
+    "user" => "Usuario",
+    "password" => "Contraseña",
+    "email" => "Correo Electrónico",
+    "phone" => "Teléfono",
+    "address" => "Dirección",
+    "city" => "Ciudad",
+    "state" => "Estado",
+    "country" => "País",
+    "colaborator" => "Colaborador",
+  ],
 
 ];

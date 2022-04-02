@@ -11,7 +11,6 @@ use App\Models\Configdocumentmanagerial;
 use App\Models\Contractorcharge;
 use App\Models\Contractorespecial;
 use App\Models\Contractormessenger;
-use App\Models\Legalizationcontractual;
 use App\Models\LegalParent;
 use App\Models\MatrixEPP;
 use App\Models\PreventiveMaintenanceReview;
@@ -22,7 +21,6 @@ use App\Models\Requestlogistic;
 use App\Models\Requestmessenger;
 use App\Models\Requestturism;
 use App\Models\RequestUrbanTransfer;
-use App\Models\Settingproductcharge;
 use App\Models\Settingservicecharge;
 use App\Models\Settingservicelogistic;
 use App\Models\Settingservicemessenger;
@@ -32,7 +30,6 @@ use App\Models\Settingserviceturism;
 use App\Models\TrafficRegulationsViolation;
 use App\Models\UserServiceProcedures;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,10 +92,10 @@ Route::get('getContractormessenger', function (Request $request) {
     $query = App\Models\Contractormessenger::whereIn('cmId', $request->cmId)->get();
     foreach ($query as $q) {
       array_push($drivers, [
-        $d->cmId,
-        $d->cmNames,
-        $d->cmNumberdocument,
-        $d->cmNumberdriving
+        $q->cmId,
+        $q->cmNames,
+        $q->cmNumberdocument,
+        $q->cmNumberdriving
       ]);
     }
     return response()->json($drivers);
@@ -119,10 +116,10 @@ Route::get('getContractorcharge', function (Request $request) {
     $query = App\Models\Contractorcharge::whereIn('ccId', $request->ccId)->get();
     foreach ($query as $q) {
       array_push($drivers, [
-        $d->ccId,
-        $d->ccNames,
-        $d->ccNumberdocument,
-        $d->ccNumberdriving
+        $q->ccId,
+        $q->ccNames,
+        $q->ccNumberdocument,
+        $q->ccNumberdriving
       ]);
     }
     return response()->json($drivers);
@@ -143,10 +140,10 @@ Route::get('getContractorespecial', function (Request $request) {
     $query = App\Models\Contractorespecial::whereIn('ceId', $request->ceId)->get();
     foreach ($query as $q) {
       array_push($drivers, [
-        $d->ceId,
-        $d->ceNames,
-        $d->ceNumberdocument,
-        $d->ceNumberdriving
+        $q->ceId,
+        $q->ceNames,
+        $q->ceNumberdocument,
+        $q->ceNumberdriving
       ]);
     }
     return response()->json($drivers);
@@ -167,8 +164,8 @@ Route::get('getMunicipalitiesFromTransfer', function (Request $request) {
     $query = App\Models\Settingmunicipality::whereIn('munId', $request->munId)->get();
     foreach ($query as $q) {
       array_push($municipalities, [
-        $d->munId,
-        $d->munName
+        $q->munId,
+        $q->munName
       ]);
     }
     return response()->json($municipalities);
