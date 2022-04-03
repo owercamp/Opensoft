@@ -631,7 +631,239 @@ class SettlementController extends Controller
 
   function operatorsTo()
   {
-    return view('modules.settlements.operators.index');
+    /** CONSULTA DE LAS SOLICITUDES **/
+    $messengers = Requestmessenger::with('permanent.client','occasional.proposal')->where('remStatus', 'LIQUIDADOPCLIENTE')->get();
+    $logistics = Requestlogistic::with('permanent.client','occasional.proposal')->where('relStatus', 'LIQUIDADOPCLIENTE')->get();
+    $charges = Requestcharge::with('permanent.client','occasional.proposal')->where('recStatus', 'LIQUIDADOPCLIENTE')->get();
+    $turisms = Requestturism::with('permanent.client','occasional.proposal')->where('retStatus', 'LIQUIDADOPCLIENTE')->get();
+    $urbans = RequesturbanTransfer::with('permanent.client','occasional.proposal')->where('reuStatus', 'LIQUIDADOPCLIENTE')->get();
+    $intermunipals = RequestIntermunityTransfer::with('permanent.client','occasional.proposal')->where('reiStatus', 'LIQUIDADOPCLIENTE')->get();
+
+    $dataArray = array();
+
+    /** RECORRIDO DE LAS SOLICITUDES DE MENSAJERIA**/
+    foreach ($messengers as $messenger) {
+      $date = Date('Y-m-d', strtotime($messenger->remDateservice));
+      $hour = Date('H:i:s', strtotime($messenger->remHourstart));
+      if ($messenger->remTypecliente == 'PERMANENTE') {
+        $client = $messenger->permanent->client->cliNamereason;
+      } else {
+        $client = $messenger->occasional->proposal->cprClient;
+      }
+
+      $exists = RequestshasContractors::where([
+        ['rc_request', '=', $messenger->remId],
+        ['rc_type', '=', 'Mensajería Express']
+      ])->value('rc_contractor');
+
+      if ($exists) {
+        $collaborator = Contractormessenger::where('cmId', '=', $exists)->value('cmNames');
+      }
+      array_push($dates, [
+        $date,
+        $hour,
+        $client,
+        'Mensajería Express',
+        $messenger->messenger->smService,
+        $messenger->origin->munName,
+        $messenger->remAddressorigin,
+        $messenger->remContact,
+        $messenger->remPhone,
+        $messenger->destiny->munName,
+        $messenger->remAddressdestiny,
+        (isset($messenger->remObservation)) ? $messenger->remObservation : 'N/A',
+        $messenger->remId,
+        (isset($collaborator)) ? $collaborator : ''
+      ]);
+    }
+
+    /** RECORRIDO DE LAS SOLICITUDES DE LOGISTICA**/
+    foreach ($logistics as $logistic) {
+      $date = Date('Y-m-d', strtotime($logistic->relDateservice));
+      $hour = Date('H:i:s', strtotime($logistic->relHourstart));
+      if ($logistic->relTypecliente == 'PERMANENTE') {
+        $client = $logistic->permanent->client->cliNamereason;
+      } else {
+        $client = $logistic->occasional->proposal->cprClient;
+      }
+
+      $exists = RequestshasContractors::where([
+        ['rc_request', '=', $logistic->relId],
+        ['rc_type', '=', 'Logística Express']
+      ])->value('rc_contractor');
+
+      if ($exists) {
+        $collaborator = Contractorcharge::where('ccId', '=', $exists)->value('ccNames');
+      }
+      array_push($dates, [
+        $date,
+        $hour,
+        $client,
+        'Logística Express',
+        $logistic->logistic->slService,
+        $logistic->origin->munName,
+        $logistic->relAddressorigin,
+        $logistic->relContact,
+        $logistic->relPhone,
+        $logistic->destiny->munName,
+        $logistic->relAddressdestiny,
+        (isset($logistic->relObservation)) ? $logistic->relObservation : 'N/A',
+        $logistic->relId,
+        (isset($collaborator)) ? $collaborator : ''
+      ]);
+    }
+
+    /** RECORRIDO DE LAS SOLICITUDES DE CARGA EXPRESS **/
+    foreach ($charges as $charge) {
+      $date = Date('Y-m-d', strtotime($charge->recDateservice));
+      $hour = Date('H:i:s', strtotime($charge->recHourstart));
+      if ($charge->recTypecliente == 'PERMANENTE') {
+        $client = $charge->permanent->client->cliNamereason;
+      } else {
+        $client = $charge->occasional->proposal->cprClient;
+      }
+
+      $exists = RequestshasContractors::where([
+        ['rc_request', '=', $charge->recId],
+        ['rc_type', '=', 'Carga Express']
+      ])->value('rc_contractor');
+
+      if ($exists) {
+        $collaborator = Contractorcharge::where('ccId', '=', $exists)->value('ccNames');
+      }
+      array_push($dataArray, [
+        $date,
+        $hour,
+        $client,
+        'Carga Express',
+        $charge->charge->scService,
+        $charge->origin->munName,
+        $charge->recAddressorigin,
+        $charge->recContact,
+        $charge->recPhone,
+        $charge->destiny->munName,
+        $charge->recAddressdestiny,
+        (isset($charge->recObservation)) ? $charge->recObservation : 'N/A',
+        $charge->recId,
+        (isset($collaborator)) ? $collaborator : ''
+      ]);
+    }
+
+    /** RECORRIDO DE LAS SOLICITUDES DE TURISMO **/
+    foreach($turisms as $turism){
+      $date = Date('Y-m-d', strtotime($turism->retDateservice));
+      $hour = Date('H:i:s', strtotime($turism->retHourstart));
+
+      if ($turism->retTypecliente == 'PERMANENTE') {
+        $client = $turism->permanent->client->cliNamereason;
+      } else {
+        $client = $turism->occasional->proposal->cprClient;
+      }
+
+      $exists = RequestshasContractors::where([
+        ['rc_request', '=', $turism->retId],
+        ['rc_type', '=', 'Turismo Pasajeros']
+      ])->value('rc_contractor');
+
+      if($exists){
+        $collaborator = Contractorespecial::where('ceId', '=', $exists)->value('ceNames');
+      }
+
+      array_push($dataArray,[
+        $date,
+        $hour,
+        $client,
+        'Turismo Pasajeros',
+        $turism->charge->scService,
+        $turism->origin->munName,
+        $turism->retAddressorigin,
+        $turism->retContact,
+        $turism->retPhone,
+        $turism->destiny->munName,
+        $turism->retAddressdestiny,
+        (isset($turism->retObservation)) ? $turism->retObservation : 'N/A',
+        $turism->retId,
+        (isset($collaborator)) ? $collaborator : ''
+      ]);
+    }
+
+    /** RECORRIDO DE LAS SOLICITUDES DE TRASLADO URBANO **/
+    foreach($urbans as $urban){
+      $date = Date('Y-m-d', strtotime($urban->reuDateservice));
+      $hour = Date('H:i:s', strtotime($urban->reuHourstart));
+      if ($urban->reuTypecliente == 'PERMANENTE') {
+        $client = $urban->permanent->client->cliNamereason;
+      } else {
+        $client = $urban->occasional->proposal->cprClient;
+      }
+
+      $exists = RequestshasContractors::where([
+        ['rc_request', '=', $urban->reuId],
+        ['rc_type', '=', 'Traslado Urbano']
+      ])->value('rc_contractor');
+
+      if($exists){
+        $collaborator = Contractorespecial::where('ceId', '=', $exists)->value('ceNames');
+      }
+
+      array_push($dataArray,[
+        $date,
+        $hour,
+        $client,
+        'Traslado Urbano',
+        $urban->transfer->strService,
+        $urban->origin->munName,
+        $urban->reuAddressorigin,
+        $urban->reuContact,
+        $urban->reuPhone,
+        $urban->destiny->munName,
+        $urban->reuAddressdestiny,
+        (isset($urban->reuObservation)) ? $urban->reuObservation : 'N/A',
+        $urban->reuId,
+        (isset($collaborator)) ? $collaborator : ''
+      ]);
+    }
+
+    /** RECORRIDO DE LAS SOLICITUDES DE TRASLADO INTERMUNICIPAL **/
+    foreach ($intermunipals as $intermunicipal) {
+      $date = Date('Y-m-d', strtotime($intermunicipal->reiDateservice));
+      $hour = Date('H:i:s', strtotime($intermunicipal->reiHourstart));
+      if ($intermunicipal->reiTypecliente == 'PERMANENTE') {
+        $client = $intermunicipal->permanent->client->cliNamereason;
+      }else {
+        $client = $intermunicipal->occasional->proposal->cprClient;
+      }
+
+      $exists = RequestshasContractors::where([
+        ['rc_request', '=', $intermunicipal->reiId],
+        ['rc_type', '=', 'Traslado Intermunicipal']
+      ])->value('rc_contractor');
+
+      if($exists){
+        $collaborator = Contractorespecial::where('ceId', '=', $exists)->value('ceNames');
+      }
+
+      array_push($dataArray,[
+        $date,
+        $hour,
+        $client,
+        'Traslado Intermunicipal',
+        $intermunicipal->transfer->stmService,
+        $intermunicipal->origin->munName,
+        $intermunicipal->reiAddressorigin,
+        $intermunicipal->reiContact,
+        $intermunicipal->reiPhone,
+        $intermunicipal->destiny->munName,
+        $intermunicipal->reiAddressdestiny,
+        (isset($intermunicipal->reiObservation)) ? $intermunicipal->reiObservation : 'N/A',
+        $intermunicipal->reiId,
+        (isset($collaborator)) ? $collaborator : ''
+      ]);
+    }
+
+    sort($dataArray,SORT_REGULAR);
+
+    return view('modules.settlements.operators.index', compact('dataArray'));
   }
 
   /* ===========================================================================================================
