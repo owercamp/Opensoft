@@ -560,11 +560,13 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   Route::post('/operative/settlement/clients/liquidate/save', 'SettlementController@liquidateSave')->name('liquidate.service.save');
   // *Liquidación para operadores
   Route::get('/operative/settlement/operators', 'SettlementController@operatorsTo')->name('settlement.operators');
+  Route::patch('/operative/settlement/operators/liquidate/save', 'BouchersServicesController@liquidateApproved')->name('liquidate.service.approved');
 
   // ?OPERATIVA >> CALIFICACION DE SERVICIOS
 
   // *Calificación del usuario
   Route::get('/operative/qualification/users', 'QualificationController@usersTo')->name('qualification.users');
+  Route::get('/operative/qualification/server','QualificationController@usersToServerSide')->name('serverside.qualification');
   // *Calificación del operador
   Route::get('/operative/qualification/operators', 'QualificationController@operatorsTo')->name('qualification.operators');
   // *Estadisticas
@@ -578,11 +580,13 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
 
   // *Cuentas por cobrar
   Route::get('/financial/account/receivable', 'AccountsController@accountreceivableTo')->name('account.receivable');
+  Route::get('/financial/account/receivable/datatable','AccountsController@accountServerSide')->name('serverside.recevable');
 
   // ?FINANCIERO >> CUENTAS POR PAGAR
 
   // *Cuentas por pagar
   Route::get('/financial/account/pay', 'AccountsController@accountpayTo')->name('account.pay');
+  Route::get('/financial/account/pay/datatable', 'AccountsController@accountpayToServer')->name('account.pay');
 
   // ?FINANCIERO >> MOVIMIENTO DE INGRESOS
 

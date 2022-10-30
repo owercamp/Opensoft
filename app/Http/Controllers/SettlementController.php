@@ -659,22 +659,32 @@ class SettlementController extends Controller
       if ($exists) {
         $collaborator = Contractormessenger::where('cmId', '=', $exists)->value('cmNames');
       }
-      array_push($dates, [
-        $date,
-        $hour,
-        $client,
-        'Mensajería Express',
-        $messenger->messenger->smService,
-        $messenger->origin->munName,
-        $messenger->remAddressorigin,
-        $messenger->remContact,
-        $messenger->remPhone,
-        $messenger->destiny->munName,
-        $messenger->remAddressdestiny,
-        (isset($messenger->remObservation)) ? $messenger->remObservation : 'N/A',
-        $messenger->remId,
-        (isset($collaborator)) ? $collaborator : ''
-      ]);
+
+      $validateExists = BouchersServices::where([
+        ['origin',$messenger->reuMunicipalityorigin_id],
+        ['destiny',$messenger->reuMunicipalitydestiny_id],
+        ['colaborator',$client],
+        ['status','LIQUIDADO']
+      ])->count();
+
+      if($validateExists > 0){
+        array_push($dates, [
+          $date,
+          $hour,
+          $client,
+          'Mensajería Express',
+          $messenger->messenger->smService,
+          $messenger->origin->munName,
+          $messenger->remAddressorigin,
+          $messenger->remContact,
+          $messenger->remPhone,
+          $messenger->destiny->munName,
+          $messenger->remAddressdestiny,
+          (isset($messenger->remObservation)) ? $messenger->remObservation : 'N/A',
+          $messenger->remId,
+          (isset($collaborator)) ? $collaborator : ''
+        ]);
+      }
     }
 
     /** RECORRIDO DE LAS SOLICITUDES DE LOGISTICA**/
@@ -695,22 +705,32 @@ class SettlementController extends Controller
       if ($exists) {
         $collaborator = Contractorcharge::where('ccId', '=', $exists)->value('ccNames');
       }
-      array_push($dates, [
-        $date,
-        $hour,
-        $client,
-        'Logística Express',
-        $logistic->logistic->slService,
-        $logistic->origin->munName,
-        $logistic->relAddressorigin,
-        $logistic->relContact,
-        $logistic->relPhone,
-        $logistic->destiny->munName,
-        $logistic->relAddressdestiny,
-        (isset($logistic->relObservation)) ? $logistic->relObservation : 'N/A',
-        $logistic->relId,
-        (isset($collaborator)) ? $collaborator : ''
-      ]);
+
+      $validateExists = BouchersServices::where([
+        ['origin',$logistic->reuMunicipalityorigin_id],
+        ['destiny',$logistic->reuMunicipalitydestiny_id],
+        ['colaborator',$client],
+        ['status','LIQUIDADO']
+      ])->count();
+
+      if($validateExists > 0){
+        array_push($dates, [
+          $date,
+          $hour,
+          $client,
+          'Logística Express',
+          $logistic->logistic->slService,
+          $logistic->origin->munName,
+          $logistic->relAddressorigin,
+          $logistic->relContact,
+          $logistic->relPhone,
+          $logistic->destiny->munName,
+          $logistic->relAddressdestiny,
+          (isset($logistic->relObservation)) ? $logistic->relObservation : 'N/A',
+          $logistic->relId,
+          (isset($collaborator)) ? $collaborator : ''
+        ]);
+      }
     }
 
     /** RECORRIDO DE LAS SOLICITUDES DE CARGA EXPRESS **/
@@ -731,22 +751,32 @@ class SettlementController extends Controller
       if ($exists) {
         $collaborator = Contractorcharge::where('ccId', '=', $exists)->value('ccNames');
       }
-      array_push($dataArray, [
-        $date,
-        $hour,
-        $client,
-        'Carga Express',
-        $charge->charge->scService,
-        $charge->origin->munName,
-        $charge->recAddressorigin,
-        $charge->recContact,
-        $charge->recPhone,
-        $charge->destiny->munName,
-        $charge->recAddressdestiny,
-        (isset($charge->recObservation)) ? $charge->recObservation : 'N/A',
-        $charge->recId,
-        (isset($collaborator)) ? $collaborator : ''
-      ]);
+
+      $validateExists = BouchersServices::where([
+        ['origin',$charge->reuMunicipalityorigin_id],
+        ['destiny',$charge->reuMunicipalitydestiny_id],
+        ['colaborator',$client],
+        ['status','LIQUIDADO']
+      ])->count();
+
+      if($validateExists > 0){
+        array_push($dataArray, [
+          $date,
+          $hour,
+          $client,
+          'Carga Express',
+          $charge->charge->scService,
+          $charge->origin->munName,
+          $charge->recAddressorigin,
+          $charge->recContact,
+          $charge->recPhone,
+          $charge->destiny->munName,
+          $charge->recAddressdestiny,
+          (isset($charge->recObservation)) ? $charge->recObservation : 'N/A',
+          $charge->recId,
+          (isset($collaborator)) ? $collaborator : ''
+        ]);
+      }
     }
 
     /** RECORRIDO DE LAS SOLICITUDES DE TURISMO **/
@@ -769,22 +799,31 @@ class SettlementController extends Controller
         $collaborator = Contractorespecial::where('ceId', '=', $exists)->value('ceNames');
       }
 
-      array_push($dataArray,[
-        $date,
-        $hour,
-        $client,
-        'Turismo Pasajeros',
-        $turism->charge->scService,
-        $turism->origin->munName,
-        $turism->retAddressorigin,
-        $turism->retContact,
-        $turism->retPhone,
-        $turism->destiny->munName,
-        $turism->retAddressdestiny,
-        (isset($turism->retObservation)) ? $turism->retObservation : 'N/A',
-        $turism->retId,
-        (isset($collaborator)) ? $collaborator : ''
-      ]);
+      $validateExists = BouchersServices::where([
+        ['origin',$turism->reuMunicipalityorigin_id],
+        ['destiny',$turism->reuMunicipalitydestiny_id],
+        ['colaborator',$client],
+        ['status','LIQUIDADO']
+      ])->count();
+
+      if ($validateExists > 0) {
+        array_push($dataArray,[
+          $date,
+          $hour,
+          $client,
+          'Turismo Pasajeros',
+          $turism->charge->scService,
+          $turism->origin->munName,
+          $turism->retAddressorigin,
+          $turism->retContact,
+          $turism->retPhone,
+          $turism->destiny->munName,
+          $turism->retAddressdestiny,
+          (isset($turism->retObservation)) ? $turism->retObservation : 'N/A',
+          $turism->retId,
+          (isset($collaborator)) ? $collaborator : ''
+        ]);
+      }
     }
 
     /** RECORRIDO DE LAS SOLICITUDES DE TRASLADO URBANO **/
@@ -806,22 +845,31 @@ class SettlementController extends Controller
         $collaborator = Contractorespecial::where('ceId', '=', $exists)->value('ceNames');
       }
 
-      array_push($dataArray,[
-        $date,
-        $hour,
-        $client,
-        'Traslado Urbano',
-        $urban->transfer->strService,
-        $urban->origin->munName,
-        $urban->reuAddressorigin,
-        $urban->reuContact,
-        $urban->reuPhone,
-        $urban->destiny->munName,
-        $urban->reuAddressdestiny,
-        (isset($urban->reuObservation)) ? $urban->reuObservation : 'N/A',
-        $urban->reuId,
-        (isset($collaborator)) ? $collaborator : ''
-      ]);
+      $validateExists = BouchersServices::where([
+        ['origin',$urban->reuMunicipalityorigin_id],
+        ['destiny',$urban->reuMunicipalitydestiny_id],
+        ['colaborator',$client],
+        ['status','LIQUIDADO']
+      ])->count();
+
+      if ($validateExists > 0) {
+        array_push($dataArray,[
+          $date,
+          $hour,
+          $client,
+          'Traslado Urbano',
+          $urban->transfer->strService,
+          $urban->origin->munName,
+          $urban->reuAddressorigin,
+          $urban->reuContact,
+          $urban->reuPhone,
+          $urban->destiny->munName,
+          $urban->reuAddressdestiny,
+          (isset($urban->reuObservation)) ? $urban->reuObservation : 'N/A',
+          $urban->reuId,
+          (isset($collaborator)) ? $collaborator : ''
+        ]);
+      }
     }
 
     /** RECORRIDO DE LAS SOLICITUDES DE TRASLADO INTERMUNICIPAL **/
@@ -843,22 +891,31 @@ class SettlementController extends Controller
         $collaborator = Contractorespecial::where('ceId', '=', $exists)->value('ceNames');
       }
 
-      array_push($dataArray,[
-        $date,
-        $hour,
-        $client,
-        'Traslado Intermunicipal',
-        $intermunicipal->transfer->stmService,
-        $intermunicipal->origin->munName,
-        $intermunicipal->reiAddressorigin,
-        $intermunicipal->reiContact,
-        $intermunicipal->reiPhone,
-        $intermunicipal->destiny->munName,
-        $intermunicipal->reiAddressdestiny,
-        (isset($intermunicipal->reiObservation)) ? $intermunicipal->reiObservation : 'N/A',
-        $intermunicipal->reiId,
-        (isset($collaborator)) ? $collaborator : ''
-      ]);
+      $validateExists = BouchersServices::where([
+        ['origin',$intermunicipal->reuMunicipalityorigin_id],
+        ['destiny',$intermunicipal->reuMunicipalitydestiny_id],
+        ['colaborator',$client],
+        ['status','LIQUIDADO']
+      ])->count();
+
+      if ($validateExists > 0) {
+        array_push($dataArray,[
+          $date,
+          $hour,
+          $client,
+          'Traslado Intermunicipal',
+          $intermunicipal->transfer->stmService,
+          $intermunicipal->origin->munName,
+          $intermunicipal->reiAddressorigin,
+          $intermunicipal->reiContact,
+          $intermunicipal->reiPhone,
+          $intermunicipal->destiny->munName,
+          $intermunicipal->reiAddressdestiny,
+          (isset($intermunicipal->reiObservation)) ? $intermunicipal->reiObservation : 'N/A',
+          $intermunicipal->reiId,
+          (isset($collaborator)) ? $collaborator : ''
+        ]);
+      }
     }
 
     sort($dataArray,SORT_REGULAR);
