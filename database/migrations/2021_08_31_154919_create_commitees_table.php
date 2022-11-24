@@ -17,7 +17,7 @@ class CreateCommiteesTable extends Migration
       $table->Increments('com_id');
       $table->integer('comconfig')->unsigned();
       $table->text("comTextContent");
-      $table->json("ComFirm");
+      $table->longText("ComFirm");
       $table->foreign("comconfig")->references("cdmId")->on("configdocumentsmanagerial");
       $table->timestamps();
     });

@@ -38,3 +38,11 @@
     <strong>{{ $message }}</strong>
     @enderror
 </div>
+<div class="form-group">
+  <label for="date">{{ ucwords('fecha') }}</label>
+  <input type="text" name="date" class="form-control @error('date') is-invalid @enderror" id="date" value="{{ old('date') }}">
+  @error('date')
+  <span class="invalid-feedback" role="alert">
+    <strong>{{ $message }}</strong>
+    @enderror
+</div>

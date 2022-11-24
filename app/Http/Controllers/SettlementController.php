@@ -285,18 +285,17 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['legalization']['proposal']['cprId'] == $req[0]) {
             $all = explode('=>', $term['terBriefcase']);
-            $price = $all[6];
+            $price = str_replace("<=|","",$all[6]);
             $service = $all[0];
             $client = $term['legalization']['proposal']['cprClient'];
-            $origin = $request->origin;
-            $destiny = $request->destiny;
             array_push($arrayData, [
               'id'=>$request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
-              'origin' => $origin,
-              'destiny' => $destiny
+              'origin' => $request->origin,
+              'destiny' => $request->destiny,
+              'date' => $request->date
             ]);
           }
         }
@@ -304,18 +303,17 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['legalization']['client']['cliId'] == $req[0]) {
             $all = explode('=>', $term['terBriefcase']);
-            $price = $all[6];
+            $price = str_replace("<=|","",$all[6]);
             $service = $all[0];
             $client = $term['legalization']['client']['cliNamereason'];
-            $origin = $request->origin;
-            $destiny = $request->destiny;
             array_push($arrayData, [
               'id'=>$request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
-              'origin' => $origin,
-              'destiny' => $destiny
+              'origin' => $request->origin,
+              'destiny' => $request->destiny,
+              'date' => $request->date
             ]);
           }
         }
@@ -332,18 +330,17 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['proposal']['cprId'] == $req[0]) {
             $all = explode('===>', $term['oroAllproposal']);
-            $price = $all[10];
+            $price = str_replace("<=|","",$all[10]);
             $service = $all[6];
             $client = $term['proposal']['cprClient'];
-            $origin = $request->origin;
-            $destiny = $request->destiny;
             array_push($arrayData, [
               'id'=>$request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
-              'origin' => $origin,
-              'destiny' => $destiny
+              'origin' => $request->origin,
+              'destiny' => $request->destiny,
+              'date' => $request->date
             ]);
           }
         }
@@ -351,18 +348,17 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['legalization']['client']['cliId'] == $req[0]) {
             $all = explode('=>', $term['terBriefcase']);
-            $price = $all[6];
+            $price = str_replace("<=|","",$all[6]);
             $service = $all[0];
             $client = $term['legalization']['client']['cliNamereason'];
-            $origin = $request->origin;
-            $destiny = $request->destiny;
             array_push($arrayData, [
               'id'=>$request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
-              'origin' => $origin,
-              'destiny' => $destiny
+              'origin' => $request->origin,
+              'destiny' => $request->destiny,
+              'date' => $request->date
             ]);
           }
         }
@@ -379,18 +375,17 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['proposal']['cprId'] == $req[0]) {
             $all = explode('===>', $term['oroAllproposal']);
-            $price = $all[10];
+            $price = str_replace("<=|","",$all[10]);
             $service = $all[6];
             $client = $term['proposal']['cprClient'];
-            $origin = $request->origin;
-            $destiny = $request->destiny;
             array_push($arrayData, [
               'id'=>$request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
-              'origin' => $origin,
-              'destiny' => $destiny
+              'origin' => $request->origin,
+              'destiny' => $request->destiny,
+              'date' => $request->date
             ]);
           }
         }
@@ -398,18 +393,17 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['legalization']['client']['cliId'] == $req[0]) {
             $all = explode('=>', $term['terBriefcase']);
-            $price = $all[6];
+            $price = str_replace("<=|","",$all[6]);
             $service = $all[0];
             $client = $term['legalization']['client']['cliNamereason'];
-            $origin = $request->origin;
-            $destiny = $request->destiny;
             array_push($arrayData, [
               'id'=>$request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
-              'origin' => $origin,
-              'destiny' => $destiny
+              'origin' => $request->origin,
+              'destiny' => $request->destiny,
+              'date' => $request->date
             ]);
           }
         }
@@ -426,18 +420,17 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['proposal']['cprId'] == $req[0]) {
             $all = explode('===>', $term['oroAllproposal']);
-            $price = $all[10];
+            $price = str_replace("<=|","",$all[10]);
             $service = $all[6];
             $client = $term['proposal']['cprClient'];
-            $origin = $request->origin;
-            $destiny = $request->destiny;
             array_push($arrayData, [
               'id'=>$request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
-              'origin' => $origin,
-              'destiny' => $destiny
+              'origin' => $request->origin,
+              'destiny' => $request->destiny,
+              'date' => $request->date
             ]);
           }
         }
@@ -445,18 +438,17 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['legalization']['client']['cliId'] == $req[0]) {
             $all = explode('=>', $term['terBriefcase']);
-            $price = $all[6];
+            $price = str_replace("<=|","",$all[6]);
             $service = $all[0];
             $client = $term['legalization']['client']['cliNamereason'];
-            $origin = $request->origin;
-            $destiny = $request->destiny;
             array_push($arrayData, [
               'id'=>$request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
-              'origin' => $origin,
-              'destiny' => $destiny
+              'origin' => $request->origin,
+              'destiny' => $request->destiny,
+              'date' => $request->date
             ]);
           }
         }
@@ -473,18 +465,17 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['proposal']['cprId'] == $req[0]) {
             $all = explode('===>', $term['oroAllproposal']);
-            $price = $all[10];
+            $price = str_replace("<=|","",$all[10]);
             $service = $all[6];
             $client = $term['proposal']['cprClient'];
-            $origin = $request->origin;
-            $destiny = $request->destiny;
             array_push($arrayData, [
               'id'=>$request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
-              'origin' => $origin,
-              'destiny' => $destiny
+              'origin' => $request->origin,
+              'destiny' => $request->destiny,
+              'date' => $request->date
             ]);
           }
         }
@@ -492,18 +483,17 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['legalization']['client']['cliId'] == $req[0]) {
             $all = explode('=>', $term['terBriefcase']);
-            $price = $all[6];
+            $price = str_replace("<=|","",$all[6]);
             $service = $all[0];
             $client = $term['legalization']['client']['cliNamereason'];
-            $origin = $request->origin;
-            $destiny = $request->destiny;
             array_push($arrayData, [
               'id'=>$request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
-              'origin' => $origin,
-              'destiny' => $destiny
+              'origin' => $request->origin,
+              'destiny' => $request->destiny,
+              'date' => $request->date
             ]);
           }
         }
@@ -520,18 +510,17 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['proposal']['cprId'] == $req[0]) {
             $all = explode('===>', $term['oroAllproposal']);
-            $price = $all[10];
+            $price = str_replace("<=|","",$all[10]);
             $service = $all[6];
             $client = $term['proposal']['cprClient'];
-            $origin = $request->origin;
-            $destiny = $request->destiny;
             array_push($arrayData, [
               'id'=>$request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
-              'origin' => $origin,
-              'destiny' => $destiny
+              'origin' => $request->origin,
+              'destiny' => $request->destiny,
+              'date' => $request->date
             ]);
           }
         }
@@ -539,18 +528,17 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['legalization']['client']['cliId'] == $req[0]) {
             $all = explode('=>', $term['terBriefcase']);
-            $price = $all[6];
+            $price = str_replace("<=|","",$all[6]);
             $service = $all[0];
             $client = $term['legalization']['client']['cliNamereason'];
-            $origin = $request->origin;
-            $destiny = $request->destiny;
             array_push($arrayData, [
               'id'=>$request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
-              'origin' => $origin,
-              'destiny' => $destiny
+              'origin' => $request->origin,
+              'destiny' => $request->destiny,
+              'date' => $request->date
             ]);
           }
         }
@@ -571,6 +559,7 @@ class SettlementController extends Controller
       'destiny' => 'required|string',
       'price' => 'required|string',
       'colaborator' => 'required|string',
+      'date' => 'required|date'
     ]);
 
     /** TRATAMIENTO DE MIS DATOS **/
@@ -587,7 +576,8 @@ class SettlementController extends Controller
       ['origin', $idOrigin],
       ['destiny', $idDestiny],
       ['price', $price],
-      ['colaborator', $request->colaborator]
+      ['colaborator', $request->colaborator],
+      ['date',$request->date]
     ])->count();
     if ($validate) {
       return back()->with('Info', 'El servicio ya existe en liquidación');
@@ -602,6 +592,7 @@ class SettlementController extends Controller
       $liquidateNew->price = intval($price);
       $liquidateNew->status = "LIQUIDADO";
       $liquidateNew->colaborator = $request->colaborator;
+      $liquidateNew->date = $request->date;
       if($liquidateNew->save()){
         if ($idSeparate[0] == strtoupper("Traslado Urbano")) {
           RequestUrbanTransfer::where('reuId', $idSeparate[1])->update(['reuStatus' => 'LIQUIDADOPCLIENTE']);
@@ -918,6 +909,7 @@ class SettlementController extends Controller
       }
     }
 
+    dd($dataArray);
     sort($dataArray,SORT_REGULAR);
 
     return view('modules.settlements.operators.index', compact('dataArray'));
