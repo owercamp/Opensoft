@@ -285,11 +285,11 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['legalization']['proposal']['cprId'] == $req[0]) {
             $all = explode('=>', $term['terBriefcase']);
-            $price = str_replace("<=|","",$all[6]);
+            $price = str_replace("<=|", "", $all[6]);
             $service = $all[0];
             $client = $term['legalization']['proposal']['cprClient'];
             array_push($arrayData, [
-              'id'=>$request->id,
+              'id' => $request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
@@ -303,11 +303,11 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['legalization']['client']['cliId'] == $req[0]) {
             $all = explode('=>', $term['terBriefcase']);
-            $price = str_replace("<=|","",$all[6]);
+            $price = str_replace("<=|", "", $all[6]);
             $service = $all[0];
             $client = $term['legalization']['client']['cliNamereason'];
             array_push($arrayData, [
-              'id'=>$request->id,
+              'id' => $request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
@@ -330,11 +330,11 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['proposal']['cprId'] == $req[0]) {
             $all = explode('===>', $term['oroAllproposal']);
-            $price = str_replace("<=|","",$all[10]);
+            $price = str_replace("<=|", "", $all[10]);
             $service = $all[6];
             $client = $term['proposal']['cprClient'];
             array_push($arrayData, [
-              'id'=>$request->id,
+              'id' => $request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
@@ -348,11 +348,11 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['legalization']['client']['cliId'] == $req[0]) {
             $all = explode('=>', $term['terBriefcase']);
-            $price = str_replace("<=|","",$all[6]);
+            $price = str_replace("<=|", "", $all[6]);
             $service = $all[0];
             $client = $term['legalization']['client']['cliNamereason'];
             array_push($arrayData, [
-              'id'=>$request->id,
+              'id' => $request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
@@ -375,11 +375,11 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['proposal']['cprId'] == $req[0]) {
             $all = explode('===>', $term['oroAllproposal']);
-            $price = str_replace("<=|","",$all[10]);
+            $price = str_replace("<=|", "", $all[10]);
             $service = $all[6];
             $client = $term['proposal']['cprClient'];
             array_push($arrayData, [
-              'id'=>$request->id,
+              'id' => $request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
@@ -393,11 +393,11 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['legalization']['client']['cliId'] == $req[0]) {
             $all = explode('=>', $term['terBriefcase']);
-            $price = str_replace("<=|","",$all[6]);
+            $price = str_replace("<=|", "", $all[6]);
             $service = $all[0];
             $client = $term['legalization']['client']['cliNamereason'];
             array_push($arrayData, [
-              'id'=>$request->id,
+              'id' => $request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
@@ -420,11 +420,11 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['proposal']['cprId'] == $req[0]) {
             $all = explode('===>', $term['oroAllproposal']);
-            $price = str_replace("<=|","",$all[10]);
+            $price = str_replace("<=|", "", $all[10]);
             $service = $all[6];
             $client = $term['proposal']['cprClient'];
             array_push($arrayData, [
-              'id'=>$request->id,
+              'id' => $request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
@@ -438,11 +438,11 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['legalization']['client']['cliId'] == $req[0]) {
             $all = explode('=>', $term['terBriefcase']);
-            $price = str_replace("<=|","",$all[6]);
+            $price = str_replace("<=|", "", $all[6]);
             $service = $all[0];
             $client = $term['legalization']['client']['cliNamereason'];
             array_push($arrayData, [
-              'id'=>$request->id,
+              'id' => $request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
@@ -465,11 +465,11 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['proposal']['cprId'] == $req[0]) {
             $all = explode('===>', $term['oroAllproposal']);
-            $price = str_replace("<=|","",$all[10]);
+            $price = str_replace("<=|", "", $all[10]);
             $service = $all[6];
             $client = $term['proposal']['cprClient'];
             array_push($arrayData, [
-              'id'=>$request->id,
+              'id' => $request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
@@ -483,11 +483,11 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['legalization']['client']['cliId'] == $req[0]) {
             $all = explode('=>', $term['terBriefcase']);
-            $price = str_replace("<=|","",$all[6]);
+            $price = str_replace("<=|", "", $all[6]);
             $service = $all[0];
             $client = $term['legalization']['client']['cliNamereason'];
             array_push($arrayData, [
-              'id'=>$request->id,
+              'id' => $request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
@@ -510,11 +510,11 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['proposal']['cprId'] == $req[0]) {
             $all = explode('===>', $term['oroAllproposal']);
-            $price = str_replace("<=|","",$all[10]);
+            $price = str_replace("<=|", "", $all[10]);
             $service = $all[6];
             $client = $term['proposal']['cprClient'];
             array_push($arrayData, [
-              'id'=>$request->id,
+              'id' => $request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
@@ -528,11 +528,11 @@ class SettlementController extends Controller
         foreach ($terms as $key => $term) {
           if ($term['legalization']['client']['cliId'] == $req[0]) {
             $all = explode('=>', $term['terBriefcase']);
-            $price = str_replace("<=|","",$all[6]);
+            $price = str_replace("<=|", "", $all[6]);
             $service = $all[0];
             $client = $term['legalization']['client']['cliNamereason'];
             array_push($arrayData, [
-              'id'=>$request->id,
+              'id' => $request->id,
               'price' => $price,
               'service' => $service,
               'client' => $client,
@@ -563,10 +563,10 @@ class SettlementController extends Controller
     ]);
 
     /** TRATAMIENTO DE MIS DATOS **/
-    $clean = array("COP",".","$");
-    $price = str_replace($clean,"",$request->price);
-    $idSeparate = explode("-",$request->typeservices);
-    
+    $clean = array("COP", ".", "$");
+    $price = str_replace($clean, "", $request->price);
+    $idSeparate = explode("-", $request->typeservices);
+
     $idDestiny = Settingmunicipality::where('munName', $request->destiny)->value('munId');
     $idOrigin = Settingmunicipality::where('munName', $request->origin)->value('munId');
 
@@ -577,14 +577,14 @@ class SettlementController extends Controller
       ['destiny', $idDestiny],
       ['price', $price],
       ['colaborator', $request->colaborator],
-      ['date',$request->date]
+      ['date', $request->date]
     ])->count();
     if ($validate) {
       return back()->with('Info', 'El servicio ya existe en liquidación');
     }
 
     DB::beginTransaction();
-    try{
+    try {
       $liquidateNew = new BouchersServices;
       $liquidateNew->typeservices = $idSeparate[0];
       $liquidateNew->origin = $idOrigin;
@@ -593,26 +593,26 @@ class SettlementController extends Controller
       $liquidateNew->status = "LIQUIDADO";
       $liquidateNew->colaborator = $request->colaborator;
       $liquidateNew->date = $request->date;
-      if($liquidateNew->save()){
+      if ($liquidateNew->save()) {
         if ($idSeparate[0] == strtoupper("Traslado Urbano")) {
           RequestUrbanTransfer::where('reuId', $idSeparate[1])->update(['reuStatus' => 'LIQUIDADOPCLIENTE']);
-        }elseif ($idSeparate[0] == strtoupper("Mensajería Express")) {
+        } elseif ($idSeparate[0] == strtoupper("Mensajería Express")) {
           Requestmessenger::where('remId', $idSeparate[1])->update(['remStatus' => 'LIQUIDADOPCLIENTE']);
-        }elseif ($idSeparate[0] == strtoupper("Traslado Intermunicipal")) {
+        } elseif ($idSeparate[0] == strtoupper("Traslado Intermunicipal")) {
           RequestIntermunityTransfer::where('reiId', $idSeparate[1])->update(['reiStatus' => 'LIQUIDADOPCLIENTE']);
-        }elseif ($idSeparate[0] == strtoupper("Logística Express")) {
+        } elseif ($idSeparate[0] == strtoupper("Logística Express")) {
           Requestlogistic::where('relId', $idSeparate[1])->update(['relStatus' => 'LIQUIDADOPCLIENTE']);
-        }elseif ($idSeparate[0] == strtoupper("Carga Express")) {
+        } elseif ($idSeparate[0] == strtoupper("Carga Express")) {
           Requestcharge::where('recId', $idSeparate[1])->update(['recStatus' => 'LIQUIDADOPCLIENTE']);
-        }elseif ($idSeparate[0] == strtoupper("Turismo Pasajeros")) {
+        } elseif ($idSeparate[0] == strtoupper("Turismo Pasajeros")) {
           Requestturism::where('retId', $idSeparate[1])->update(['retStatus' => 'LIQUIDADOPCLIENTE']);
         }
         DB::commit();
-        return back()->with('Success', 'Facturación del Voucher N°'.str_pad($liquidateNew->id,5,"00000",STR_PAD_LEFT).' guardada correctamente');
+        return back()->with('Success', 'Facturación del Voucher N°' . str_pad($liquidateNew->id, 5, "00000", STR_PAD_LEFT) . ' guardada correctamente');
       }
-    }catch(Exception $e){
+    } catch (Exception $e) {
       DB::rollback();
-      return back()->with('Error', 'Error al guardar la facturación del Voucher N° '.str_pad($liquidateNew->id,5,"00000",STR_PAD_LEFT));
+      return back()->with('Error', 'Error al guardar la facturación del Voucher N° ' . str_pad($liquidateNew->id, 5, "00000", STR_PAD_LEFT));
     }
   }
 
@@ -623,12 +623,12 @@ class SettlementController extends Controller
   function operatorsTo()
   {
     /** CONSULTA DE LAS SOLICITUDES **/
-    $messengers = Requestmessenger::with('permanent.client','occasional.proposal')->where('remStatus', 'LIQUIDADOPCLIENTE')->get();
-    $logistics = Requestlogistic::with('permanent.client','occasional.proposal')->where('relStatus', 'LIQUIDADOPCLIENTE')->get();
-    $charges = Requestcharge::with('permanent.client','occasional.proposal')->where('recStatus', 'LIQUIDADOPCLIENTE')->get();
-    $turisms = Requestturism::with('permanent.client','occasional.proposal')->where('retStatus', 'LIQUIDADOPCLIENTE')->get();
-    $urbans = RequesturbanTransfer::with('permanent.client','occasional.proposal')->where('reuStatus', 'LIQUIDADOPCLIENTE')->get();
-    $intermunipals = RequestIntermunityTransfer::with('permanent.client','occasional.proposal')->where('reiStatus', 'LIQUIDADOPCLIENTE')->get();
+    $messengers = Requestmessenger::with('permanent.client', 'occasional.proposal')->where('remStatus', 'LIQUIDADOPCLIENTE')->get();
+    $logistics = Requestlogistic::with('permanent.client', 'occasional.proposal')->where('relStatus', 'LIQUIDADOPCLIENTE')->get();
+    $charges = Requestcharge::with('permanent.client', 'occasional.proposal')->where('recStatus', 'LIQUIDADOPCLIENTE')->get();
+    $turisms = Requestturism::with('permanent.client', 'occasional.proposal')->where('retStatus', 'LIQUIDADOPCLIENTE')->get();
+    $urbans = RequesturbanTransfer::with('permanent.client', 'occasional.proposal')->where('reuStatus', 'LIQUIDADOPCLIENTE')->get();
+    $intermunipals = RequestIntermunityTransfer::with('permanent.client', 'occasional.proposal')->where('reiStatus', 'LIQUIDADOPCLIENTE')->get();
 
     $dataArray = array();
 
@@ -652,13 +652,13 @@ class SettlementController extends Controller
       }
 
       $validateExists = BouchersServices::where([
-        ['origin',$messenger->reuMunicipalityorigin_id],
-        ['destiny',$messenger->reuMunicipalitydestiny_id],
-        ['colaborator',$client],
-        ['status','LIQUIDADO']
+        ['origin', $messenger->reuMunicipalityorigin_id],
+        ['destiny', $messenger->reuMunicipalitydestiny_id],
+        ['colaborator', $client],
+        ['status', 'LIQUIDADO']
       ])->count();
 
-      if($validateExists > 0){
+      if ($validateExists > 0) {
         array_push($dates, [
           $date,
           $hour,
@@ -698,13 +698,13 @@ class SettlementController extends Controller
       }
 
       $validateExists = BouchersServices::where([
-        ['origin',$logistic->reuMunicipalityorigin_id],
-        ['destiny',$logistic->reuMunicipalitydestiny_id],
-        ['colaborator',$client],
-        ['status','LIQUIDADO']
+        ['origin', $logistic->reuMunicipalityorigin_id],
+        ['destiny', $logistic->reuMunicipalitydestiny_id],
+        ['colaborator', $client],
+        ['status', 'LIQUIDADO']
       ])->count();
 
-      if($validateExists > 0){
+      if ($validateExists > 0) {
         array_push($dates, [
           $date,
           $hour,
@@ -744,13 +744,13 @@ class SettlementController extends Controller
       }
 
       $validateExists = BouchersServices::where([
-        ['origin',$charge->reuMunicipalityorigin_id],
-        ['destiny',$charge->reuMunicipalitydestiny_id],
-        ['colaborator',$client],
-        ['status','LIQUIDADO']
+        ['origin', $charge->reuMunicipalityorigin_id],
+        ['destiny', $charge->reuMunicipalitydestiny_id],
+        ['colaborator', $client],
+        ['status', 'LIQUIDADO']
       ])->count();
 
-      if($validateExists > 0){
+      if ($validateExists > 0) {
         array_push($dataArray, [
           $date,
           $hour,
@@ -771,7 +771,7 @@ class SettlementController extends Controller
     }
 
     /** RECORRIDO DE LAS SOLICITUDES DE TURISMO **/
-    foreach($turisms as $turism){
+    foreach ($turisms as $turism) {
       $date = Date('Y-m-d', strtotime($turism->retDateservice));
       $hour = Date('H:i:s', strtotime($turism->retHourstart));
 
@@ -786,19 +786,19 @@ class SettlementController extends Controller
         ['rc_type', '=', 'Turismo Pasajeros']
       ])->value('rc_contractor');
 
-      if($exists){
+      if ($exists) {
         $collaborator = Contractorespecial::where('ceId', '=', $exists)->value('ceNames');
       }
 
       $validateExists = BouchersServices::where([
-        ['origin',$turism->reuMunicipalityorigin_id],
-        ['destiny',$turism->reuMunicipalitydestiny_id],
-        ['colaborator',$client],
-        ['status','LIQUIDADO']
+        ['origin', $turism->reuMunicipalityorigin_id],
+        ['destiny', $turism->reuMunicipalitydestiny_id],
+        ['colaborator', $client],
+        ['status', 'LIQUIDADO']
       ])->count();
 
       if ($validateExists > 0) {
-        array_push($dataArray,[
+        array_push($dataArray, [
           $date,
           $hour,
           $client,
@@ -818,7 +818,7 @@ class SettlementController extends Controller
     }
 
     /** RECORRIDO DE LAS SOLICITUDES DE TRASLADO URBANO **/
-    foreach($urbans as $urban){
+    foreach ($urbans as $urban) {
       $date = Date('Y-m-d', strtotime($urban->reuDateservice));
       $hour = Date('H:i:s', strtotime($urban->reuHourstart));
       if ($urban->reuTypecliente == 'PERMANENTE') {
@@ -832,19 +832,20 @@ class SettlementController extends Controller
         ['rc_type', '=', 'Traslado Urbano']
       ])->value('rc_contractor');
 
-      if($exists){
+      if ($exists) {
         $collaborator = Contractorespecial::where('ceId', '=', $exists)->value('ceNames');
       }
 
+      // dd($collaborator);
       $validateExists = BouchersServices::where([
-        ['origin',$urban->reuMunicipalityorigin_id],
-        ['destiny',$urban->reuMunicipalitydestiny_id],
-        ['colaborator',$client],
-        ['status','LIQUIDADO']
+        ['origin', $urban->reuMunicipalityorigin_id],
+        ['destiny', $urban->reuMunicipalitydestiny_id],
+        ['colaborator', $client],
+        ['status', 'LIQUIDADO']
       ])->count();
 
       if ($validateExists > 0) {
-        array_push($dataArray,[
+        array_push($dataArray, [
           $date,
           $hour,
           $client,
@@ -869,7 +870,7 @@ class SettlementController extends Controller
       $hour = Date('H:i:s', strtotime($intermunicipal->reiHourstart));
       if ($intermunicipal->reiTypecliente == 'PERMANENTE') {
         $client = $intermunicipal->permanent->client->cliNamereason;
-      }else {
+      } else {
         $client = $intermunicipal->occasional->proposal->cprClient;
       }
 
@@ -878,19 +879,19 @@ class SettlementController extends Controller
         ['rc_type', '=', 'Traslado Intermunicipal']
       ])->value('rc_contractor');
 
-      if($exists){
+      if ($exists) {
         $collaborator = Contractorespecial::where('ceId', '=', $exists)->value('ceNames');
       }
 
       $validateExists = BouchersServices::where([
-        ['origin',$intermunicipal->reuMunicipalityorigin_id],
-        ['destiny',$intermunicipal->reuMunicipalitydestiny_id],
-        ['colaborator',$client],
-        ['status','LIQUIDADO']
+        ['origin', $intermunicipal->reuMunicipalityorigin_id],
+        ['destiny', $intermunicipal->reuMunicipalitydestiny_id],
+        ['colaborator', $client],
+        ['status', 'LIQUIDADO']
       ])->count();
 
       if ($validateExists > 0) {
-        array_push($dataArray,[
+        array_push($dataArray, [
           $date,
           $hour,
           $client,
@@ -909,8 +910,7 @@ class SettlementController extends Controller
       }
     }
 
-    dd($dataArray);
-    sort($dataArray,SORT_REGULAR);
+    sort($dataArray, SORT_REGULAR);
 
     return view('modules.settlements.operators.index', compact('dataArray'));
   }

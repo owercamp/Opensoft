@@ -42,7 +42,7 @@
           <td class="align-middle d-flex justify-content-around">
             <form action="{{ route('tracking.binnacle') }}" method="post">
               @csrf
-              <button class="btn btn-outline-dark rounded-circle" title="Novedades Servicio">
+              <button class="btn btn-outline-dark rounded-circle" title="Informe de Novedades">
                 <i class="fas fa-info-circle"></i>
                 <input type="hidden" name="id" value="{{ $dates[$i][12] }}">
                 <input type="hidden" name="type" value="{{ $dates[$i][3] }}">

@@ -28,17 +28,17 @@
           <td class="align-middle d-flex justify-content-around">
             <form action="{{ route('tracking.binnacle') }}" method="post">
               @csrf
-              <button class="btn btn-outline-dark rounded-circle" title="Novedades Servicio">
+              <button class="btn btn-outline-dark rounded-circle" title="Informe de Novedades">
                 <i class="fas fa-info-circle"></i>
                 <input type="hidden" name="id" value="{{ $dataArray[$i][12] }}">
                 <input type="hidden" name="type" value="{{ $dataArray[$i][3] }}">
                 <input type="hidden" name="col" value="{{ $dataArray[$i][13] }}">
               </button>
             </form>
-            <button class="btn btn-outline-secondary rounded-circle tickets" data-origin="{{ $dataArray[$i][5] }}" data-destiny="{{ $dataArray[$i][9] }}" data-id="{{ $dataArray[$i][12] }}" data-type="{{ $dataArray[$i][3] }}" data-col="{{ $dataArray[$i][13] }}" data-date="{{ $dataArray[$i][0] }}" title="ticket Cliente">
+            <button class="btn btn-outline-secondary rounded-circle tickets" data-origin="{{ $dataArray[$i][5] }}" data-destiny="{{ $dataArray[$i][9] }}" data-id="{{ $dataArray[$i][12] }}" data-type="{{ $dataArray[$i][3] }}" data-col="{{ $dataArray[$i][13] }}" data-date="{{ $dataArray[$i][0] }}" title="Ticket Cliente">
               <i class="fas fa-ticket-alt"></i>
             </button>
-            <button class="btn btn-outline-secondary rounded-circle liquidar" data-origin="{{ $dataArray[$i][5] }}" data-destiny="{{ $dataArray[$i][9] }}" data-id="{{ $dataArray[$i][12] }}" data-type="{{ $dataArray[$i][3] }}" data-col="{{ $dataArray[$i][13] }}" data-date="{{ $dataArray[$i][0] }}" title="liquidar Servicio">
+            <button class="btn btn-outline-secondary rounded-circle liquidar" data-origin="{{ $dataArray[$i][5] }}" data-destiny="{{ $dataArray[$i][9] }}" data-id="{{ $dataArray[$i][12] }}" data-type="{{ $dataArray[$i][3] }}" data-col="{{ $dataArray[$i][13] }}" data-date="{{ $dataArray[$i][0] }}" title="Liquidar Servicio">
               <i class="far fa-check-circle"></i>
             </button>
           </td>
