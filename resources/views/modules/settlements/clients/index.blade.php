@@ -49,7 +49,7 @@
                 <input type="hidden" name="col" value="{{ $dates[$i][13] }}">
               </button>
             </form>
-            <button class="btn btn-outline-secondary rounded-circle liquidar" data-origin="{{ $dates[$i][5] }}" data-destiny="{{ $dates[$i][9] }}" data-id="{{ $dates[$i][12] }}" data-type="{{ $dates[$i][3] }}" data-col="{{ $dates[$i][13] }}" title="Liquidar Servicio">
+            <button class="btn btn-outline-secondary rounded-circle liquidar" data-origin="{{ $dates[$i][5] }}" data-destiny="{{ $dates[$i][9] }}" data-id="{{ $dates[$i][12] }}" data-type="{{ $dates[$i][3] }}" data-col="{{ $dates[$i][13] }}" data-date="{{ $dates[$i][0] }}" title="Liquidar Servicio">
               <i class="fas fa-copy"></i>
             </button>
           </td>
@@ -112,6 +112,15 @@
               <strong>{{ $message }}</strong>
             @enderror
           </div>
+          <div class="form-group">
+            <label for="date">{{ ucwords('fecha servicio') }}</label>
+            <input type="date" name="date" id="date" class="form-control @error('date') is-invalid @enderror" value="{{ old('date') }}">
+            @error('date')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+            @enderror
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ ucwords("Cancelar") }}</button>
             <button type="submit" class="btn btn-primary" id="factureSubmit">{{ucwords("Guardar Factura")}}</button>
@@ -137,7 +146,8 @@
         id: $(this).data('id'),
         type: $(this).data('type'),
         origin: $(this).data('origin'),
-        destiny: $(this).data('destiny')
+        destiny: $(this).data('destiny'),
+        date: $(this).data('date')
       },
       url: "{{ route('liquidate.service') }}",
       success(res) {
@@ -150,6 +160,7 @@
           currency: 'COP', // tipo de moneda
           maximumFractionDigits: 0, //Cantidad de decimales
         }).format(res[0]['price']));
+        $('input[name="date"]').val(res[0]['date'])
         $('#factureSubmit').attr('data-id',(res[0]['id']));
       },
       complete() {
@@ -159,6 +170,7 @@
           $('input[name="destiny"]').attr('disabled', true);
           $('input[name="colaborator"]').attr('disabled', true);
           $('input[name="price"]').attr('disabled', true);
+          $('input[name="date"]').attr('disabled', true);
       }
     })
   });
@@ -172,6 +184,7 @@
     $('input[name="destiny"]').attr('disabled', false);
     $('input[name="colaborator"]').attr('disabled', false);
     $('input[name="price"]').attr('disabled', false);
+    $('input[name="date"]').attr('disabled', false);
   });
 </script>
 @endsection

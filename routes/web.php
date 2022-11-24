@@ -586,7 +586,7 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
 
   // *Cuentas por pagar
   Route::get('/financial/account/pay', 'AccountsController@accountpayTo')->name('account.pay');
-  Route::get('/financial/account/pay/datatable', 'AccountsController@accountpayToServer')->name('account.pay');
+  Route::get('/financial/account/pay/datatable', 'AccountsController@accountpayToServer')->name('serverside.pay');
 
   // ?FINANCIERO >> MOVIMIENTO DE INGRESOS
 

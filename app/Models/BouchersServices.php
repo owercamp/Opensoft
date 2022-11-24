@@ -40,6 +40,7 @@ class BouchersServices extends Model
         'destiny' => 'integer',
         'colaborator' => 'string',
         'price' => 'integer',
+        'date' => 'date'
     ];
 
     /**

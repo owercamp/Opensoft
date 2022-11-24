@@ -48,8 +48,8 @@
 				data: 'action',
 				render: function(data, type, full, meta) {
 					return `<div class="btn-group">
-					<a href="javascript:void(0)" class="" data-id="${data.id}">
-					<i class="fa-solid fa-circle-exclamation"></i>
+					<a href="javascript:void(0)" class="btn btn-outline-primary rounded-circle form-control-sm" height="150" width="50" data-id="${data.id}">
+					<i class="fas fa-dolly-flatbed"></i>
 					</a>
 					</div>`;
 				}
