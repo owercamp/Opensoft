@@ -655,10 +655,10 @@ class SettlementController extends Controller
         ['origin', $messenger->reuMunicipalityorigin_id],
         ['destiny', $messenger->reuMunicipalitydestiny_id],
         ['colaborator', $client],
-        ['status', 'LIQUIDADO']
-      ])->count();
+        ['status','!=','CANCELADO']
+      ]);
 
-      if ($validateExists > 0) {
+      if ($validateExists->count() > 0) {
         array_push($dates, [
           $date,
           $hour,
@@ -673,7 +673,8 @@ class SettlementController extends Controller
           $messenger->remAddressdestiny,
           (isset($messenger->remObservation)) ? $messenger->remObservation : 'N/A',
           $messenger->remId,
-          (isset($collaborator)) ? $collaborator : ''
+          (isset($collaborator)) ? $collaborator : '',
+          $validateExists->value('status')
         ]);
       }
     }
@@ -701,10 +702,10 @@ class SettlementController extends Controller
         ['origin', $logistic->reuMunicipalityorigin_id],
         ['destiny', $logistic->reuMunicipalitydestiny_id],
         ['colaborator', $client],
-        ['status', 'LIQUIDADO']
-      ])->count();
+        ['status','!=','CANCELADO']
+      ]);
 
-      if ($validateExists > 0) {
+      if ($validateExists->count() > 0) {
         array_push($dates, [
           $date,
           $hour,
@@ -719,7 +720,8 @@ class SettlementController extends Controller
           $logistic->relAddressdestiny,
           (isset($logistic->relObservation)) ? $logistic->relObservation : 'N/A',
           $logistic->relId,
-          (isset($collaborator)) ? $collaborator : ''
+          (isset($collaborator)) ? $collaborator : '',
+          $validateExists->value('status')
         ]);
       }
     }
@@ -747,10 +749,10 @@ class SettlementController extends Controller
         ['origin', $charge->reuMunicipalityorigin_id],
         ['destiny', $charge->reuMunicipalitydestiny_id],
         ['colaborator', $client],
-        ['status', 'LIQUIDADO']
-      ])->count();
+        ['status','!=','CANCELADO']
+      ]);
 
-      if ($validateExists > 0) {
+      if ($validateExists->count() > 0) {
         array_push($dataArray, [
           $date,
           $hour,
@@ -765,7 +767,8 @@ class SettlementController extends Controller
           $charge->recAddressdestiny,
           (isset($charge->recObservation)) ? $charge->recObservation : 'N/A',
           $charge->recId,
-          (isset($collaborator)) ? $collaborator : ''
+          (isset($collaborator)) ? $collaborator : '',
+          $validateExists->value('status')
         ]);
       }
     }
@@ -794,10 +797,10 @@ class SettlementController extends Controller
         ['origin', $turism->reuMunicipalityorigin_id],
         ['destiny', $turism->reuMunicipalitydestiny_id],
         ['colaborator', $client],
-        ['status', 'LIQUIDADO']
-      ])->count();
+        ['status','!=','CANCELADO']
+      ]);
 
-      if ($validateExists > 0) {
+      if ($validateExists->count() > 0) {
         array_push($dataArray, [
           $date,
           $hour,
@@ -812,7 +815,8 @@ class SettlementController extends Controller
           $turism->retAddressdestiny,
           (isset($turism->retObservation)) ? $turism->retObservation : 'N/A',
           $turism->retId,
-          (isset($collaborator)) ? $collaborator : ''
+          (isset($collaborator)) ? $collaborator : '',
+          $validateExists->value('status')
         ]);
       }
     }
@@ -841,10 +845,10 @@ class SettlementController extends Controller
         ['origin', $urban->reuMunicipalityorigin_id],
         ['destiny', $urban->reuMunicipalitydestiny_id],
         ['colaborator', $client],
-        ['status', 'LIQUIDADO']
-      ])->count();
+        ['status','!=','CANCELADO']
+      ]);
 
-      if ($validateExists > 0) {
+      if ($validateExists->count() > 0) {
         array_push($dataArray, [
           $date,
           $hour,
@@ -859,7 +863,8 @@ class SettlementController extends Controller
           $urban->reuAddressdestiny,
           (isset($urban->reuObservation)) ? $urban->reuObservation : 'N/A',
           $urban->reuId,
-          (isset($collaborator)) ? $collaborator : ''
+          (isset($collaborator)) ? $collaborator : '',
+          $validateExists->value('status')
         ]);
       }
     }
@@ -887,10 +892,11 @@ class SettlementController extends Controller
         ['origin', $intermunicipal->reuMunicipalityorigin_id],
         ['destiny', $intermunicipal->reuMunicipalitydestiny_id],
         ['colaborator', $client],
-        ['status', 'LIQUIDADO']
-      ])->count();
+        ['status','!=','CANCELADO']
+      ]);
 
-      if ($validateExists > 0) {
+
+      if ($validateExists->count() > 0) {
         array_push($dataArray, [
           $date,
           $hour,
@@ -905,7 +911,8 @@ class SettlementController extends Controller
           $intermunicipal->reiAddressdestiny,
           (isset($intermunicipal->reiObservation)) ? $intermunicipal->reiObservation : 'N/A',
           $intermunicipal->reiId,
-          (isset($collaborator)) ? $collaborator : ''
+          (isset($collaborator)) ? $collaborator : '',
+          $validateExists->value('status')
         ]);
       }
     }
