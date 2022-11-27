@@ -7,6 +7,7 @@ use App\Models\BillsPay;
 use Illuminate\Http\Request;
 use App\Models\CustomerRating;
 use App\Models\AccountsReceivable;
+use App\Models\BouchersServices;
 use App\Models\Settingmunicipality;
 use Illuminate\Support\Facades\DB;
 
@@ -43,6 +44,7 @@ class BouchersServicesController extends Controller
 			$qualification->origin = $origin;
 			$qualification->destiny = $destiny;
 			$qualification->collaborator = $collaborator;
+			$qualification->date = $request->date;
 			if ($qualification->save()) {
 				$pay = new BillsPay();
 				$pay->typeservices = $typeservices;
@@ -50,6 +52,7 @@ class BouchersServicesController extends Controller
 				$pay->destiny = $destiny;
 				$pay->collaborator = $collaborator;
 				$pay->price = intval($priceSave);
+				$pay->date = $request->date;
 				if ($pay->save()) {
 					$receivable = new AccountsReceivable();
 					$receivable->typeservices = $typeservices;
@@ -57,7 +60,14 @@ class BouchersServicesController extends Controller
 					$receivable->destiny = $destiny;
 					$receivable->collaborator = $collaborator;
 					$receivable->price = intval($priceSave);
+					$receivable->date = $request->date;
 					if ($receivable->save()) {
+						BouchersServices::where([
+							['typeservices',$typeservices],
+							['origin',$origin],
+							['destiny',$destiny],
+							['colaborator',$collaborator]
+						])->update(['status' => 'FACTURADO']);
             DB::commit();
 						return redirect()->route('settlement.operators')->with('Info','Liquidación de servicio realizado con exito !!');
 					}

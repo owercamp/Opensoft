@@ -38,9 +38,11 @@
             <button class="btn btn-outline-secondary rounded-circle tickets" data-origin="{{ $dataArray[$i][5] }}" data-destiny="{{ $dataArray[$i][9] }}" data-id="{{ $dataArray[$i][12] }}" data-type="{{ $dataArray[$i][3] }}" data-col="{{ $dataArray[$i][13] }}" data-date="{{ $dataArray[$i][0] }}" title="Ticket Cliente">
               <i class="fas fa-ticket-alt"></i>
             </button>
+            @if ($dataArray[$i][14] != 'FACTURADO')
             <button class="btn btn-outline-secondary rounded-circle liquidar" data-origin="{{ $dataArray[$i][5] }}" data-destiny="{{ $dataArray[$i][9] }}" data-id="{{ $dataArray[$i][12] }}" data-type="{{ $dataArray[$i][3] }}" data-col="{{ $dataArray[$i][13] }}" data-date="{{ $dataArray[$i][0] }}" title="Liquidar Servicio">
               <i class="far fa-check-circle"></i>
             </button>
+            @endif
           </td>
           </tr>
           @endfor
@@ -118,7 +120,7 @@
         type: $(this).data('type'),
         origin: $(this).data('origin'),
         destiny: $(this).data('destiny'),
-        date:$(this).data('date')
+        date: $(this).data('date')
       },
       url: "{{ route('liquidate.service') }}",
       success(res) {

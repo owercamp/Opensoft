@@ -5,12 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-use App\Models\Alliesmessenger;
-use App\Models\Alliescharge;
-use App\Models\Alliesespecial;
-use App\Models\Settingpersonal;
-use App\Models\Settingdepartment;
-
 class AccountsController extends Controller
 {
   public function __construct()
@@ -46,6 +40,7 @@ class AccountsController extends Controller
     $consulta = DB::table('accounts_receivables')
       ->join('settingmunicipalities', 'settingmunicipalities.munId', 'accounts_receivables.origin')
       ->join('settingmunicipalities as mun', 'mun.munId', 'accounts_receivables.destiny')
+      ->whereMonth('date',$request->month)
       ->select('accounts_receivables.typeservices AS services', 'settingmunicipalities.munName AS origin', 'mun.munName AS destiny', 'accounts_receivables.collaborator AS collaborator','accounts_receivables.price AS price',"accounts_receivables.id as id");
 
     $totalData = $consulta->count();
@@ -75,7 +70,7 @@ class AccountsController extends Controller
         $nestedData['services'] = $receivable->services;
         $nestedData['origin'] = $receivable->origin." - ".$receivable->destiny;
         $nestedData['collaborator'] = $receivable->collaborator;
-        $nestedData['price'] = $receivable->price;
+        $nestedData['price'] = number_format($receivable->price,0,",",".");
         $nestedData['action'] = $receivable;
         $data[] = $nestedData;
       }
@@ -118,7 +113,10 @@ class AccountsController extends Controller
     $consulta = DB::table('bills_pays')
       ->join('settingmunicipalities', 'settingmunicipalities.munId', 'bills_pays.origin')
       ->join('settingmunicipalities as mun', 'mun.munId', 'bills_pays.destiny')
+      ->whereMonth('date',$request->month)
       ->select('bills_pays.typeservices AS services', 'settingmunicipalities.munName AS origin', 'mun.munName AS destiny', 'bills_pays.collaborator AS collaborator','bills_pays.price AS price','bills_pays.id as id');
+
+    // dd($consulta->get(), $request->month,$request->request);
 
     $totalData = $consulta->count();
     $limit = $request->input('length');
@@ -143,12 +141,12 @@ class AccountsController extends Controller
     
     $data = array();
     if ($posts) {
-      foreach ($posts as $key => $receivable) {
-        $nestedData['services'] = $receivable->services;
-        $nestedData['origin'] = $receivable->origin." - ".$receivable->destiny;
-        $nestedData['collaborator'] = $receivable->collaborator;
-        $nestedData['price'] = $receivable->price;
-        $nestedData['action'] = $receivable;
+      foreach ($posts as $key => $pay) {
+        $nestedData['services'] = $pay->services;
+        $nestedData['origin'] = $pay->origin." - ".$pay->destiny;
+        $nestedData['collaborator'] = $pay->collaborator;
+        $nestedData['price'] = number_format($pay->price,0,",",".");
+        $nestedData['action'] = $pay;
         $data[] = $nestedData;
       }
     }
