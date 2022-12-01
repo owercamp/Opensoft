@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomerRating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,13 +34,15 @@ class QualificationController extends Controller
       1 => 'origin',
       2 => 'collaborator',
       3 => 'star',
-      4 => 'comment'
+      4 => 'comment',
+      5 => 'action'
     );
 
     $consulta = DB::table('customer_ratings')
       ->join('settingmunicipalities', 'settingmunicipalities.munId', 'customer_ratings.origin')
       ->join('settingmunicipalities as mun', 'mun.munId', 'customer_ratings.destiny')
-      ->select('customer_ratings.typeservices AS type_service', 'settingmunicipalities.munName AS origin', 'mun.munName AS destiny', 'customer_ratings.collaborator AS collaborator', 'customer_ratings.stars AS star', 'customer_ratings.comments AS comment');
+      ->where('customer_ratings.users','CLIENTE')
+      ->select('customer_ratings.typeservices AS type_service', 'settingmunicipalities.munName AS origin', 'mun.munName AS destiny', 'customer_ratings.collaborator AS collaborator', 'customer_ratings.stars AS star', 'customer_ratings.comments AS comment','customer_ratings.id as id');
 
     /** VALORES PARA DATATABLE **/
     $totalData = $consulta->count();
@@ -71,6 +74,7 @@ class QualificationController extends Controller
         $nestedData['collaborator'] = $service->collaborator;
         $nestedData['star'] = $service->star;
         $nestedData['comment'] = $service->comment;
+        $nestedData['action'] = $service;
         $data[] = $nestedData;
       }
     }
@@ -82,6 +86,12 @@ class QualificationController extends Controller
       "data"            => $data
     );
     return json_encode($json_data);
+  }
+
+  function usersToCancel(Request $request)
+  {
+    CustomerRating::where('id',$request->id)->update(['users' => trim('OPERARIO')]);
+    return back()->with('Info',"Calificación omitida correctamente");
   }
 
   /* ===============================================================================================

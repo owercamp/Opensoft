@@ -567,6 +567,7 @@ Route::group(['middleware' => ['role:ADMINISTRADOR SISTEMA|ADMINISTRADOR']], fun
   // *Calificación del usuario
   Route::get('/operative/qualification/users', 'QualificationController@usersTo')->name('qualification.users');
   Route::get('/operative/qualification/server','QualificationController@usersToServerSide')->name('serverside.qualification');
+  Route::get('/operative/qualification/users/{id}','QualificationController@usersToCancel')->name('qualification.users.cancel');
   // *Calificación del operador
   Route::get('/operative/qualification/operators', 'QualificationController@operatorsTo')->name('qualification.operators');
   // *Estadisticas
