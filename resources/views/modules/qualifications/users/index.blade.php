@@ -13,6 +13,7 @@
 					<th>COLABORADOR</th>
 					<th>ESTRELLAS</th>
 					<th>COMENTARIO</th>
+					<th>ACCIONES</th>
 				</thead>
 			</table>
 		</div>
@@ -39,20 +40,34 @@
 			},
 			columns: [{
 				data: 'type_service'
-			},{
-				data:'origin'
-			},{
-				data:'collaborator'
-			},{
-				data:'star'
-			},{
-				data:'comment'
+			}, {
+				data: 'origin'
+			}, {
+				data: 'collaborator'
+			}, {
+				data: 'star'
+			}, {
+				data: 'comment'
+			}, {
+				data: 'action',
+				render: function(data, type, full, meta) {
+					const base = `{{ route('qualification.users.cancel','') }}`;
+					const url = `${base}/${data.id}`;
+					return `<div class="btn-group" role="group">
+					<a href="javascript:void(0)" class="btn btn-light m-2 border border-dark" data-id="${data.id}" title="SOLICITAR CALIFICACION">
+					<i class="fas fa-star-half-alt"></i>
+					</a>
+					<a href="${url}" class="btn btn-dark m-2" data-id="${data.id}" title="OMITIR CALIFICACION">
+					<i class="fas fa-comment-slash"></i>
+					</a>
+					</div>`;
+				}
 			}],
-			language:{
+			language: {
 				"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
 			},
 			responsive: true,
-			pagingType:"full_numbers"
+			pagingType: "full_numbers"
 		});
 	})
 </script>
