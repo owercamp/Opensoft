@@ -76,7 +76,7 @@ class BouchersServicesController extends Controller
 		}catch(Throwable $th) {
 			$errors = $th->getMessage();
 			DB::rollBack();
-			return back()->with('Error', $errors);
+			return back()->with('Error', "Ha ocurrido un error al intentar realizar la LIQUIDACION DEL SERVICIO, contacte con el administrador");
 		}
 	}
 }

@@ -4,6 +4,7 @@ use App\Models\AccidentControlAndAnalysis;
 use App\Models\AnalysisMatrix;
 use App\Models\AutoMotiveFleet;
 use App\Models\BidirectionalCommunicationSystem;
+use App\Models\Client;
 use App\Models\Collaborator;
 use App\Models\Commitee;
 use App\Models\Configdocumentlogistic;
@@ -1350,3 +1351,13 @@ Route::get('apiContractorSpecial', function () {
     $query = Contractorespecial::all();
     return response()->json($query);
 })->name('apiContractorSpecial');
+
+// *envio de correo electronico al cliente unico
+Route::post('apiSend',function(Request $request){
+  $email = Client::where('cliNamereason','like','%'.$request->collaborator.'%')->value('cliEmail');
+  
+  return $email;
+})->name('apiSend');
+
+
+

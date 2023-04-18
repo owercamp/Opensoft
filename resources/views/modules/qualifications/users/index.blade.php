@@ -54,7 +54,7 @@
 					const base = `{{ route('qualification.users.cancel','') }}`;
 					const url = `${base}/${data.id}`;
 					return `<div class="btn-group" role="group">
-					<a href="javascript:void(0)" class="btn btn-light m-2 border border-dark" data-id="${data.id}" title="SOLICITAR CALIFICACION">
+					<a class="btn btn-light m-2 border border-dark questions-limk" data-id="${data.id}" data-collaborator="${data.collaborator}" data-destiny="${data.destiny}" data-type_service="${data.type_service}" data-origin="${data.origin}" title="SOLICITAR CALIFICACION">
 					<i class="fas fa-star-half-alt"></i>
 					</a>
 					<a href="${url}" class="btn btn-dark m-2" data-id="${data.id}" title="OMITIR CALIFICACION">
@@ -69,6 +69,31 @@
 			responsive: true,
 			pagingType: "full_numbers"
 		});
+
+	})
+
+
+	$(document).on('click', ".questions-limk",function(e) {
+		e.preventDefault();
+		let id, collaborator, destiny, service, origin;
+		id = $(this).data("id");
+		collaborator = $(this).data("collaborator");
+		destiny = $(this).data("destiny");
+		service = $(this).data("type_service");
+		origin = $(this).data("origin");
+
+		$.ajax({
+			"_token": "{{ csrf_token() }}",
+			url: "{{ route('apiSend') }}",
+			type: "POST",
+			dataType:"JSON",
+			data:{
+				collaborator: collaborator
+			},
+			success(response){
+				console.log(response);
+			}
+		})
 	})
 </script>
 @endsection
